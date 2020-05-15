@@ -4,6 +4,7 @@ import UnauthenticatedRoute from './components/UnAuthenticatedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import NotificationsPage from './pages/NotificationsPage';
 import ForgotPassword from './pages/ForgotPassword';
+import ProfilePage from './pages/ProfilePage';
 import ListingsPage from './pages/ListingsPage';
 import Dashboard from './pages/Dashboard';
 import SignUp from './pages/SignUp';
@@ -32,6 +33,9 @@ const Routes = () => {
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/profile">
+        <ProfilePage/>
       </AuthenticatedRoute>
     </Switch>
   );
