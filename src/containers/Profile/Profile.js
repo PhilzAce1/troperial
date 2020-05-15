@@ -4,21 +4,32 @@ import AppAside from '../../components/AppAside/AppAside';
 import AppMain from '../../components/AppMain/AppMain';
 import Container from '../../components/Container/Container';
 import NavBar from '../../components/NavBar/NavBar';
+import './Profile.css';
 const Profile = () => {
   return (
     <Container>
       <NavBar page="Profile" icon="fas fa-align-justify" />
+      <div className="listingsCustom__container">
       <AppAside />
       <AppMain>
         <Tabs>
           <TabList>
-            <Tab>All Listings</Tab>
-            <Tab>My Listings</Tab>
+            <div className="scrolling-wrapper">
+            <Tab>Account</Tab>
+            <Tab>History</Tab>
+            <Tab>Bank Accounts</Tab>
+            <Tab>Security &amp; Verification</Tab>
+            <Tab>Trusted Traders</Tab>
+            </div>
           </TabList>
           <TabPanel>All Listings</TabPanel>
           <TabPanel>My Listings</TabPanel>
+          <TabPanel>My Listings</TabPanel>
+          <TabPanel>My Listings</TabPanel>
+          <TabPanel>My Listings</TabPanel>
         </Tabs>
       </AppMain>
+      </div>
     </Container>
   );
 };
