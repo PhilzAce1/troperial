@@ -1,0 +1,57 @@
+.notification__title {
+	font-size: 1rem;
+	font-weight: bold;
+	margin-top: 15px;
+}
+.notification__message {
+	font-size: 0.9rem;
+	color: var(--dark-grey);
+	line-height: 1.6;
+}
+.notification__normal-btn,
+.notification__danger-btn {
+	box-sizing: border-box;
+	transition: 0.5s ease-in-out;
+	border: none;
+	border-radius: 8px;
+	outline: none;
+	color: var(--original-white);
+	font-weight: normal;
+	padding: 8px 13px;
+	font-size: 0.8rem;
+}
+.notification__normal-btn {
+	background: var(--troperial-blue);
+}
+.notification__danger-btn {
+	background: #ff3a44;
+	margin-left: 10px;
+}
+.notification__normal-btn:hover {
+	cursor: pointer;
+	background: rgb(3, 117, 211);
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.notification__container {
+	border-bottom: 1px solid var(--light-grey);
+	padding-bottom: 20px;
+}
+.notification__mobile-icon {
+	margin-right: 10px;
+}
+/* Make green color of icon, red and warning */
+.notification__mobile-icon i {
+	font-size: 1rem;
+	color: var(--troperial-green);
+}
+@media (min-width: 768px) {
+	.notification__text {
+		margin-left: 25px;
+	}
+	.notification__container {
+		width: 60%;
+	}
+	.notification__message {
+		width: 80%;
+	}
+}

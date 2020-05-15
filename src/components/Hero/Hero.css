@@ -1,0 +1,19 @@
+.heroHeader .heroHeader__introDiv {
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.heroHeader .heroHeader__introDiv h1 {
+    font-size: 2rem;
+}
+.heroHeader .heroHeader__introDiv h1 .troperial-green {
+    color: var(--troperial-green);
+}
+.heroHeader .heroHeader__introDiv p {
+   font-weight: bold;
+   line-height: 1.8;
+   color: var(--dark-grey);
+}
+.heroHeader .heroHeader__introDiv h1 img {
+    width: 2.2rem;
+    margin-bottom: -8px;
+}

@@ -1,0 +1,75 @@
+
+.hybridInput__container {
+    position: relative;
+    margin-top: 10px;
+}
+.hybridInput__label {
+    position: absolute;
+    top: -6px;
+    left: 15px;
+    font-size: 0.7rem;
+    background: #fff;
+    padding: 0 5px;
+}
+.hybridInput__optional-line {
+    height: 30px;
+    width: 1px;
+    background: var(--light-grey);
+    margin-left: 20px;
+}
+.custom__dropdown {
+    position: absolute;
+    border: 0.8px solid var(--light-grey);
+    background: #fff;
+    margin-top: 10px;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: visible;
+    overflow-x: hidden;
+    z-index: 10000;
+}
+
+.option {
+    border: 0.8px solid var(--light-grey);
+    padding: 8px 20px;
+}
+.option button {
+    background: transparent;
+    border: none;
+}
+
+.hybridInput__wrapper {
+    display: flex;
+
+}
+
+.hybridInput__custom-select, .hybridInput__textInput {
+    border: none;
+    background: #fff;
+    padding: 10px 14px;
+    box-sizing: border-box;
+}
+
+.hybridInput__textInput {
+    border: 0.8px solid var(--light-grey);
+    border-radius: 0px 10px 10px 0px;
+    outline-color: transparent;
+    font-size: 1rem;
+    color: var(--dark-grey);
+    width: 100%;
+    /* flex: 1; */
+}
+
+.hybridInput__custom-select {
+    border-radius: 10px 0 0 10px;
+    border-top: 0.8px solid var(--light-grey);
+    border-bottom: 0.8px solid var(--light-grey);
+    border-left: 0.8px solid var(--light-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hybridInput__custom-select i {
+  margin-left: 10px;
+  color: var(--dark-grey);
+}

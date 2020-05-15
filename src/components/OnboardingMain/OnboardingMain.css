@@ -1,0 +1,19 @@
+.onboardingContainer__main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.onboardingContainer__main div.onboardingContainer__main--header {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .onboardingContainer__main {
+    padding-top: 0;
+  }
+}
+@media (min-width: 1024px) {
+}
+
+@media (min-width: 1280px) {
+}

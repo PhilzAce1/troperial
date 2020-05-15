@@ -1,0 +1,11 @@
+.app__container {
+	background-color: var(--troperial-dim-blue);
+	overflow-x: hidden;
+}
+.maxHeight {
+	height: 100vh;
+	overflow-y: hidden;
+}
+.minHeight {
+	min-height: 100vh;
+}

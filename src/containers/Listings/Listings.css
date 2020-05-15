@@ -1,0 +1,153 @@
+.listingsCustom__container {
+	width: 100%;
+	margin: 0 auto;
+	padding-top: 45px;
+}
+.listings_spinner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+}
+.listing_pagination {
+	width: 100%;
+	margin-top: 20px;
+	height: auto;
+	display: flex;
+	justify-content: center;
+}
+.react-pagination-js-bootstrap ul {
+	display: none;
+}
+.listings_mobile_buttons button {
+	background: transparent;
+	color: var(--dark-grey);
+	border: 1px solid var(--light-grey);
+	margin: 0 10px;
+	border-radius: 8px;
+	padding: 10px 15px;
+	font-size: 0.9rem;
+	transition: ease-in 0.5s;
+	outline: transparent;
+}
+.listings_mobile_buttons button:hover {
+	background: transparent;
+	color: var(--dark-grey);
+	border: 1px solid var(--troperial-blue);
+}
+
+@media (min-width: 768px) {
+	.listings_mobile_buttons {
+		display: none;
+	}
+	.react-pagination-js-bootstrap ul {
+		display: block;
+		box-shadow: none;
+	}
+	.react-pagination-js-bootstrap .page {
+		margin: 0 10px !important;
+		border: none;
+		color: var(--dark-grey);
+	}
+	.react-pagination-js-bootstrap .page:first-child, .react-pagination-js-bootstrap  .page:last-child   {
+		border: 1px solid var(--light-grey);
+		border-radius: 10px;
+		
+	}
+	.react-pagination-js-bootstrap .page:hover {
+		color: var(--troperial-blue);
+	}
+	.react-pagination-js-bootstrap .is-active {
+		float: left;
+		padding: 0 14px;
+		line-height: 34px;
+		text-decoration: none;
+		border: 0.8px solid var(--light-grey);
+		color: var(--dark-grey);
+		background-color: #fff;
+		cursor: default;
+		border-radius: 8px;
+	 }
+	.react-pagination-js-bootstrap .page.active {
+		color: var(--troperial-blue);
+		cursor: default;
+	 }
+	.react-pagination-js-bootstrap .pageElli {
+		float: left;
+		padding: 0 14px;
+		line-height: 34px;
+		text-decoration: none;
+		border: none;
+		color: var(--dark-grey);
+		cursor: default;
+	  }
+	  
+	.post__listing-container {
+		width: 90%;
+		margin: 0 auto;
+	}
+	.listingsCustom__container {
+		width: 95%;
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+		grid-gap: 0px 22px;
+		padding-top: 95px;
+	}
+}
+
+@media (min-width: 1110px) {
+	.table-container {
+		margin-top: 20px;
+		width: 100%;
+		border: solid 1px var(--light-grey);
+		border-radius: 10px;
+	}
+	.listingsCustom__container {
+		grid-template-columns: 1fr 4.5fr;
+	}
+}
+
+.react-tabs {
+	margin-top: 6px;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.react-tabs__tab-list {
+	border-bottom: 1px solid var(--light-grey);
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+.react-tabs__tab {
+	display: inline-block;
+	list-style: none;
+	padding: 20px 0px;
+	cursor: pointer;
+	margin-right: 50px;
+}
+.react-tabs__tab--selected {
+	color: var(--troperial-blue);
+	border-bottom: 3px solid var(--troperial-blue);
+}
+.react-tabs__tab--disabled {
+	color: grey;
+	cursor: default;
+}
+.react-tabs__tab:focus {
+	outline: none;
+}
+.react-tabs__tab:focus:after {
+	content: "";
+	position: absolute;
+	height: 5px;
+	left: -4px;
+	right: -4px;
+	bottom: -5px;
+	background: #fff;
+}
+.react-tabs__tab-panel {
+	display: none;
+}
+.react-tabs__tab-panel--selected {
+	display: block;
+}

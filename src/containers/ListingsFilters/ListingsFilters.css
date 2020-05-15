@@ -1,0 +1,82 @@
+.listingsFilters {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 0px 1px;
+}
+.listings_show-number select, label {
+    border: none;
+    /* color: var(--dark-grey); */
+    font-size: 0.9rem;
+}
+.general-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
+    width:150px;
+    overflow: hidden;
+}
+.general-filter-btn span {
+   padding: 0 15px;
+   font-size: 0.9rem;
+}
+.general-filter-btn .fa-caret-down {
+    border-left: 1px solid var(--light-grey);
+    padding: 8px;
+}
+.general-filter-section {
+    position: relative;
+}
+.generalFilter__dropdown {
+    margin-top: 10px;
+    position: absolute;
+    background: #fff;
+    padding: 10px 20px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+}
+.have__and__need div select, .status select {
+    padding: 10px 20px;
+    border: 1px solid var(--light-grey);
+    border-radius: 8px;
+    color: var(--dark-grey);
+}
+.have__and__need div, .status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.exchange_icon {
+    text-align: center;
+    margin: 10px 0px;
+}
+.exchange_icon .exchange{
+    transform: rotate(90deg);
+    color: var(--dark-grey); 
+} 
+@media (min-width: 768px) {
+    .listingsFilters {
+        width: 40%;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-gap: 0px;
+    }
+     .listings_show-number {
+         margin-top: 6px;
+     }
+    .general-filter-btn {
+        width:150px;
+    }
+    .general-filter-btn span {
+       padding: 0 25px;
+    }
+    .general-filter-section {
+        position: relative;
+    }
+}

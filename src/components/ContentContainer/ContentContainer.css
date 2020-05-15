@@ -1,0 +1,35 @@
+.contentContainer img {
+  width: 120px;
+  margin: 0 0 20px 0;
+}
+.contentContainer h2 {
+  font-size: var(--custom-h5-rem);
+}
+.contentContainer p {
+  color: var(--dark-grey);
+  line-height: 1.5;
+  font-weight: 450;
+  font-size: 0.9rem;
+}
+.contentContainer .custom-cta {
+  color: var(--original-black);
+}
+.contentContainer a {
+  color: var(--troperial-blue);
+  text-decoration: none;
+}
+.contentContainer .troperial-green {
+  color: var(--troperial-green);
+}
+
+@media (min-width: 768px) {
+  .contentContainer img {
+    display: none;
+  }
+  .contentContainer h2 {
+    font-size: 24px;
+  }
+  .contentContainer p {
+    font-size: var(--custom-p-rem);
+  }
+}

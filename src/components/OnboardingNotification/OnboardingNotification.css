@@ -1,0 +1,20 @@
+.onboardingNotification_container {
+  width: 70%;
+  margin: 0 auto;
+}
+.onboardingNotification_container h2,
+p {
+  padding: 0;
+  margin: 8px 0;
+}
+
+.onboardingNotification_container p {
+  color: var(--dark-grey);
+}
+
+@media (min-width: 768px) {
+  .onboardingNotification_container {
+    width: 40%;
+    margin: 0 auto;
+  }
+}

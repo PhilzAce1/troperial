@@ -1,0 +1,21 @@
+.tableHead__container {
+ display: none;
+}
+
+@media (min-width: 1110px) {
+    .tableHead__container {
+        width: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        background: var(--troperial-dim-blue);
+        padding: 15px 0px 15px 15px;
+        border-radius: 10px 10px 0px 0px;
+    }
+}
+
+/* TABLET LANDSCAPE / DESKTOP */
+@media only screen and (min-width: 1024px) {
+
+
+}    

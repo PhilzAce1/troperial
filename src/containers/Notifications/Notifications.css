@@ -1,0 +1,78 @@
+.notications__container {
+	background-color: var(--troperial-dim-blue);
+}
+/* Back Drop Hack */
+.maxHeight {
+	max-height: 100vh;
+	overflow: hidden;
+}
+.minHeight {
+	min-height: 100vh;
+}
+.notificationsCustom__container {
+	width: 100%;
+	margin: 0 auto;
+	padding-top: 45px;
+}
+.backdrop {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	background: #fff;
+}
+.backdrop__form-container {
+	width: 90%;
+	position: relative;
+	margin: 0 auto;
+	top: 45px;
+}
+.backdrop__profile-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.backdrop__profile-heading h2 {
+	font-size: 1.4rem;
+}
+.backdrop__profile-heading img {
+	width: 100px;
+}
+.backdrop__form--grid-input {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 0 10px;
+}
+@media (min-width: 768px) {
+	.post__listing-container {
+		width: 90%;
+		margin: 0 auto;
+	}
+	.notificationsCustom__container {
+		width: 95%;
+		display: grid;
+		grid-template-columns: 1fr 4fr;
+		grid-gap: 10px 30px;
+		padding-top: 100px;
+	}
+	.backdrop {
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: flex-end;
+	}
+	.backdrop__background {
+		width: 70%;
+	}
+
+	.backdrop__form-container {
+		height: 100vh;
+		margin: 0;
+		width: 30%;
+		background: #fff;
+		top: 0;
+	}
+	.backdrop__form {
+		width: 80%;
+		margin: 0 auto;
+	}
+}

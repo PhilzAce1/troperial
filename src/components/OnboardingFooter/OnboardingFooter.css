@@ -1,0 +1,21 @@
+.onboarding__footer {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  bottom: -40px;
+}
+.onboarding__footer .onboarding__footer-paragraph {
+  color: var(--dark-grey);
+  padding: 10px 30px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+.onboarding__footer .onboarding__footer-paragraph a {
+  text-decoration: none;
+  color: var(--troperial-blue);
+}
+@media (min-width: 640px) {
+  .onboarding__footer {
+    bottom: -60px;
+  }
+}
