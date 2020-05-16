@@ -17,6 +17,26 @@
 	-webkit-tap-highlight-color: transparent;
 }
 
+/* Account Section Style */
+.profile_container {
+	margin-top: 30px;
+}
+.profile_container .headers {
+	margin-top: 30px;
+}
+.headers .profile__input-data-paragraph {
+	width: 90%;
+	color: var(--dark-grey);
+	line-height: 1.6;
+	font-size: 1rem;
+}
+.user-avatar-container .user-avatar {
+	height: 50px;
+	width: 50px;
+	border-radius: 100%;
+	border: 3px solid var(--light-grey);
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+}
 @media (min-width: 768px) {
 	.listingsCustom__container {
 		width: 95%;
@@ -30,5 +50,29 @@
 @media (min-width: 1110px) {
 	.listingsCustom__container {
 		grid-template-columns: 1fr 4.5fr;
+	}
+	.profile_container .headers {
+		margin-top: 10px;
+	}
+	.headers .profile__input-data-heading {
+		font-size: 1.05rem;
+	}
+	.headers .profile__input-data-paragraph {
+		width: 100%;
+	}
+	.profile_container {
+		width: 70%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 30px;
+		padding-bottom: 100px;
+	}
+	.input-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 10px;
+	}
+	.save-changes_btn {
+		margin-top: 30px;
 	}
 }

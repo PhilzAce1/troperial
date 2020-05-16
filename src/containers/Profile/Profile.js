@@ -4,6 +4,7 @@ import AppAside from '../../components/AppAside/AppAside';
 import AppMain from '../../components/AppMain/AppMain';
 import Container from '../../components/Container/Container';
 import NavBar from '../../components/NavBar/NavBar';
+import Account from './Account';
 import './Profile.css';
 const Profile = () => {
   return (
@@ -22,7 +23,9 @@ const Profile = () => {
             <Tab>Trusted Traders</Tab>
             </div>
           </TabList>
-          <TabPanel>All Listings</TabPanel>
+          <TabPanel>
+            <Account/>
+          </TabPanel>
           <TabPanel>My Listings</TabPanel>
           <TabPanel>My Listings</TabPanel>
           <TabPanel>My Listings</TabPanel>

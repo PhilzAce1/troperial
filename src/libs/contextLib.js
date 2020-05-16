@@ -15,7 +15,7 @@ export const AppProvider = ({ children }) => {
       userHasAuthenticated(true);
     } catch (e) {
       if (e !== 'No current user') {
-        alert(e);
+        console.log(e);
       }
     }
     setIsAuthenticating(false);
