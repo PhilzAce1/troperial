@@ -6,6 +6,7 @@ import Container from '../../components/Container/Container';
 import NavBar from '../../components/NavBar/NavBar';
 import Account from './Account';
 import History from './History';
+import BankAccount from './BankAccount';
 import './Profile.css';
 const Profile = () => {
   return (
@@ -30,7 +31,9 @@ const Profile = () => {
           <TabPanel>
             <History/>
           </TabPanel>
-          <TabPanel>My Listings</TabPanel>
+          <TabPanel>
+            <BankAccount/>
+          </TabPanel>
           <TabPanel>My Listings</TabPanel>
           <TabPanel>My Listings</TabPanel>
         </Tabs>

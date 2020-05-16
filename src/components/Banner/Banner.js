@@ -1,18 +1,30 @@
 import React from 'react';
 import './Banner.css';
-import icon from '../../assets/images/all-listings.PNG'
-const Banner = ({onClick}) => {
-    return (
-        <div className="banner__container">
-            <div className="banner__textContent">
-                <h3>Post a Listing</h3>
-                <p>The quick, fairer way to exchange currencies across borders</p>
-                <button onClick={onClick} className="banner__listing-btn">Post a listing</button>
-            </div>
-            <div className="banner__image">
-              <img src={icon} alt="banner"/>
-            </div>
+import icon from '../../assets/images/all-listings.PNG';
+const Banner = ({ onClick, title, message, buttonText, hideSvg }) => {
+  return (
+    <div className="banner__container">
+      <div className="banner__textContent">
+        <h3>{title}</h3>
+        <p>{message}</p>
+        <button onClick={onClick} className="banner__listing-btn">
+          {buttonText}
+        </button>
+      </div>
+      {hideSvg ? null : (
+        <div className="banner__image">
+          <img src={icon} alt="banner" />
         </div>
-    )
-}
-export default Banner
+      )}
+    </div>
+  );
+};
+
+Banner.defaultProps = {
+  title: 'Post a Listing',
+  message:
+    'The quick, fairer way to exchange currencies across borders',
+  buttonText: 'Post a listing',
+  hideSvg: false
+};
+export default Banner;
