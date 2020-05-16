@@ -5,6 +5,7 @@ import AppMain from '../../components/AppMain/AppMain';
 import Container from '../../components/Container/Container';
 import NavBar from '../../components/NavBar/NavBar';
 import Account from './Account';
+import History from './History';
 import './Profile.css';
 const Profile = () => {
   return (
@@ -26,7 +27,9 @@ const Profile = () => {
           <TabPanel>
             <Account/>
           </TabPanel>
-          <TabPanel>My Listings</TabPanel>
+          <TabPanel>
+            <History/>
+          </TabPanel>
           <TabPanel>My Listings</TabPanel>
           <TabPanel>My Listings</TabPanel>
           <TabPanel>My Listings</TabPanel>
