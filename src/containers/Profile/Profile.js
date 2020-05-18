@@ -7,6 +7,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import Account from './Account';
 import History from './History';
 import BankAccount from './BankAccount';
+import Verification from './Verification';
 import './Profile.css';
 const Profile = () => {
   return (
@@ -34,7 +35,9 @@ const Profile = () => {
           <TabPanel>
             <BankAccount/>
           </TabPanel>
-          <TabPanel>My Listings</TabPanel>
+          <TabPanel>
+            <Verification/>
+          </TabPanel>
           <TabPanel>My Listings</TabPanel>
         </Tabs>
       </AppMain>

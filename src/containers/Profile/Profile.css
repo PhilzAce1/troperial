@@ -4,13 +4,13 @@
 	padding-top: 45px;
 }
 .scrolling-wrapper {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
 }
 .scrolling-wrapper::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 .scrolling-wrapper .react-tabs {
 	margin-top: 6px;
@@ -40,7 +40,7 @@
 
 /* History styles */
 .conversations_started {
-	color:  var(--warning-yellow);
+	color: var(--warning-yellow);
 }
 .transactions_completed {
 	color: var(--troperial-green);
@@ -51,14 +51,69 @@
 	border-radius: 10px;
 	margin: 20px 0;
 }
-.stats-item .stats-figure  {
+.stats-item .stats-figure {
 	font-size: 1.8rem;
 	font-weight: bold;
 }
 .stats-item .stats-title {
 	margin: 0 8px;
 }
+/* Verification and security stylese */
+.title-section p {
+	color: var(--dark-grey);
+}
+
+.verification-confirmation-message {
+	border: 1px solid var(--light-grey);
+	box-sizing: border-box;
+	padding: 10px 15px;
+	border-radius: 10px;
+}
+.verification-confirmation-message img {
+  width: 50px;
+}
+.verification-confirmation-message .verificatin-message {
+	line-height: 1.6;
+    color: var(--dark-grey);
+}
+.verification-confirmation-message .heading {
+	margin:0;
+}
+/* end of Verification and security styles */
+
+
 @media (min-width: 768px) {
+	/* Verification and security stylese */
+	.verification-and-change-password-container {
+		width: 60%;
+	}
+	.change_password_section, .verification_section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 50px;
+	}
+	.change_password-title, .verify-title {
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #000;
+	}
+	.title-section {
+		margin-top: 10px;
+	}
+
+	.verification-confirmation-message {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.verification-confirmation-message img {
+		width: 80px;
+	  }
+	  .verification-confirmation-message .heading {
+		margin:0;
+		font-size: 1.3rem;
+	}
+	/* end of Verification and security styles */
 	.card_grids {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
@@ -66,14 +121,13 @@
 		grid-auto-flow: dense;
 		/* force height hack */
 		align-items: start;
-	} 
+	}
 	.listingsCustom__container {
 		width: 95%;
 		display: grid;
 		grid-template-columns: 1fr 3fr;
 		grid-gap: 0px 22px;
 		padding-top: 95px;
-
 	}
 
 	/* History styles */
@@ -91,7 +145,7 @@
 		min-height: 50px;
 		padding: 18px 10px;
 	}
-	.stats-item .stats-figure  {
+	.stats-item .stats-figure {
 		font-size: 2.3rem;
 	}
 	.stats-item .stats-title {
