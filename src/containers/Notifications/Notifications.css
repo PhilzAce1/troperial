@@ -14,6 +14,9 @@
 	margin: 0 auto;
 	padding-top: 45px;
 }
+.notifications-list .notification__container:last-child {
+	border: none;
+}
 .backdrop {
 	position: absolute;
 	width: 100%;

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './NavBar.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
-import profileImage from '../../assets/images/profile.png';
-
-const NavBar = ({ page, icon }) => {
+import Gravatar from 'react-gravatar'
+import {connect} from 'react-redux';
+const NavBar = ({ page, icon, userCognitoEmail}) => {
   const [menu, setMenu] = useState(false);
   const toggleMenu = () => {
     const menuState = menu;
@@ -22,25 +22,40 @@ const NavBar = ({ page, icon }) => {
           />
         </div>
         <div className="largeScreen-links">
-          <Link to="/listings">
-            <i className="fas fa-align-justify"></i> Listings
-          </Link>
-          <Link to="/messages">
-            <i className="fas fa-comment-alt"></i> messages
-          </Link>
-          <Link to="/notifications">
-            <i className="fas fa-bell"></i> notifications
-          </Link>
+          <NavLink
+            activeClassName="is-active"
+            className="nav-link"
+            to="/listings"
+          >
+             <span className="icon icon-listings"></span> Listings
+          </NavLink>
+          <NavLink
+            activeClassName="is-active"
+            className="nav-link"
+            to="/messages"
+          >
+            <span className="icon icon-messages"></span> messages
+          </NavLink>
+          <NavLink
+            activeClassName="is-active"
+            className="nav-link"
+            to="/notifications"
+          >
+             <span className="icon icon-notifications"></span> notifications
+          </NavLink>
         </div>
-        <div className="largeScreen__profileContainer">
-          <img
-            className="largeScreen__profile"
-            src={profileImage}
-            alt="profile"
-          />
-          <p>
-            Peter <i className="fas fa-caret-down"></i>
-          </p>
+        <div className="profile-container">
+        <NavLink
+            activeClassName="profile-is-active"
+            className="profile_nav-link"
+            to="/profile"
+          >
+             <Gravatar email={userCognitoEmail} size={22} rating="pg" default="monsterid" className="largeScreen__profile" />
+            <span>
+              Peter <i className="fas fa-caret-down"></i>
+            </span>
+          </NavLink>
+          <div className="border"></div>
         </div>
       </section>
       {/* small screen navbar */}
@@ -54,23 +69,46 @@ const NavBar = ({ page, icon }) => {
           <div className="smallScreen__pageTitle">
             <h4 className="title">
               {' '}
-              <i className={icon}></i> {page}
+              <span className={`icon ${icon}`}></span> {page}
             </h4>
           </div>
           <div className="smallScreen__profileContainer">
-            <img
-              className="smallScreen__profile"
-              src={profileImage}
-              alt="profile"
-            />
+    
+            <Gravatar email={userCognitoEmail === null ? 'null@null.com': userCognitoEmail} size={22} rating="pg" default="mp" className="smallScreen__profile" />
+  
           </div>
         </div>
         {/* navigation links */}
         {menu ? (
           <div className="smallScreen___linkContainer">
-            <Link to="/listings">Listings</Link>
-            <Link to="/messages">messages</Link>
-            <Link to="/notifications">notifiactions</Link>
+            <NavLink
+              activeClassName="is-active"
+              className="nav-link"
+              to="/listings"
+            >
+              Listings
+            </NavLink>
+            <NavLink
+              activeClassName="is-active"
+              className="nav-link"
+              to="/messages"
+            >
+              messages
+            </NavLink>
+            <NavLink
+              activeClassName="is-active"
+              className="nav-link"
+              to="/notifications"
+            >
+              notifications
+            </NavLink>
+            <NavLink
+              activeClassName="is-active"
+              className="nav-link"
+              to="/profile"
+            >
+              Profile
+            </NavLink>
           </div>
         ) : null}
       </section>
@@ -78,4 +116,7 @@ const NavBar = ({ page, icon }) => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+  userCognitoEmail: state.auth.userCognitoEmail
+});
+export default connect(mapStateToProps, null)(NavBar)

@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .delete__modal {
   position: relative;
@@ -21,7 +22,7 @@
   color: var(--danger-red-icon);
   margin-bottom: 40px;
 }
-.delete__modal img {
+.delete__modal .bin{
   width: 100px;
 }
 .delete__modal-confirm-message {
@@ -56,12 +57,9 @@
 
 .delete__modal-icon {
     position: absolute;
-    left: 90%;
+    left: 85%;
     top: 15px;
-}
-.delete__modal-icon i {
-    font-size: 1rem;
-    color: var(--troperial-blue);
+    width: 25px;
 }
 @media (min-width: 768px) {
     .delete__modal {
@@ -74,9 +72,6 @@
         font-size: 1.1rem;
         color: var(--danger-red-icon);
         margin-bottom: 40px;
-      }
-      .delete__modal img {
-        width: 100px;
       }
       .delete__modal-confirm-message {
         font-size: 1.2rem;
@@ -107,14 +102,9 @@
       .customButton:hover {
         cursor: pointer;
       }
-      
       .delete__modal-icon {
           position: absolute;
           left: 90%;
           top: 15px;
-      }
-      .delete__modal-icon i {
-          font-size: 1rem;
-          color: var(--troperial-blue);
       }
 }

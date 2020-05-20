@@ -1,162 +1,130 @@
 import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import TableContent from '../../components/TableContent/TableContent';
+import { connect } from 'react-redux';
+import 'react-pagination-js/dist/styles.css';
+import './Listings.css';
+/**
+ * COMPONENTS
+ */
+import PaddedContainer from '../../components/PaddedContainer/PaddedContainer';
+import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import Container from '../../components/Container/Container';
-import TableHead from '../../components/TableHead/TableHead';
 import AppAside from '../../components/AppAside/AppAside';
 import BackDrop from '../../components/BackDrop/BackDrop';
 import AppMain from '../../components/AppMain/AppMain';
-import ScaleLoader from 'react-spinners/ScaleLoader';
 import Banner from '../../components/Banner/Banner';
 import NavBar from '../../components/NavBar/NavBar';
+/**
+ * CONTAINERS
+ */
 import ListingsFilters from '../ListingsFilters/ListingsFilters';
-import Pagination from 'react-pagination-js';
-import { connect } from 'react-redux';
+import AllListings from './AllListings';
+import MyListings from './MyListings';
+/**
+ * ACTIONS
+ */
 import { getTransactions } from '../../actions/transactionActions';
-import { checkUserProfile } from '../../actions/authActions';
-import DeleteModal from '../../components/DeleteModal/DeleteModal';
-import 'react-pagination-js/dist/styles.css';
-import './Listings.css';
+import {
+  checkUserProfile,
+  getUserDetails,
+} from '../../actions/authActions';
 
-import { currency_symbols } from '../../constants/currency_symbols';
 const Listings = ({
   getTransactions,
-  transactionData,
   checkUserProfile,
+  notification
 }) => {
   const [showBackDrop, setShowBackDrop] = useState(false);
+  const [controlView, setControlView] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentSize, setCurrentSize] = useState(5);
   useEffect(() => {
     checkUserProfile();
-    getTransactions();
-  }, []);
-  const changeCurrentPage = (numPage) => {
-    setCurrentPage(numPage);
-    getTransactions(numPage);
+  }, [checkUserProfile]);
+  const handleBackDrop = () => {
+    const show = showBackDrop;
+    setShowBackDrop(!show);
+    setControlView(!controlView);
   };
 
-  const changePage = () => {
+  const handleDeleteModal = () => {
+    setShowDelete(!showDelete);
+    setControlView(!controlView);
+  };
+
+  const listSizeHandler = (value) => {
+    setCurrentPage(1);
+    setCurrentSize(value);
+    getTransactions(1, value);
+  };
+  const changeCurrentPage = (numPage) => {
+    setCurrentPage(numPage);
+    getTransactions(numPage, currentSize);
+  };
+
+  const nextPage = () => {
     const nextpage = currentPage + 1;
     setCurrentPage(nextpage);
     getTransactions(nextpage);
   };
-  const previous = () => {
+  const prevPage = () => {
     const prevPage = currentPage - 1;
     setCurrentPage(prevPage);
     getTransactions(prevPage);
   };
-  const handleBackDrop = () => {
-    const show = showBackDrop;
-    setShowBackDrop(!show);
-  };
 
   return (
-    <Container showBackDrop={showBackDrop}>
-      <NavBar page="Listings" icon="fas fa-align-justify" />
+    <Container showBackDrop={controlView}>
+      <NavBar page="Listings" icon="icon-listings" />
       {showBackDrop ? (
         <BackDrop handleBackDrop={handleBackDrop} />
       ) : null}
       {showDelete ? (
-        <DeleteModal handleClose={() => setShowDelete(!showDelete)} />
+        <DeleteModal handleClose={handleDeleteModal} />
       ) : null}
       <div className="listingsCustom__container">
         <AppAside />
         <AppMain>
-          <Banner onClick={handleBackDrop} />
-          <Tabs>
-            <TabList>
-              <Tab>All Listings</Tab>
-              <Tab>My Listings</Tab>
-            </TabList>
-
-            <TabPanel>
-              {/* <ListingsFilters/> */}
-              {transactionData === null ? (
-                <div className="listings_spinner">
-                  <ScaleLoader
-                    size={150}
-                    color={'#0383ef'}
-                    loading={true}
+          <PaddedContainer padding="25px">
+            <Banner onClick={handleBackDrop} />
+            <Tabs>
+              <TabList>
+                <Tab>All Listings</Tab>
+                <Tab>My Listings</Tab>
+              </TabList>
+              <TabPanel>
+                <ListingsFilters listSizeHandler={listSizeHandler} />
+                {notification ? (
+                  <h1>{notification}</h1>
+                ) : (
+                  <AllListings
+                    currentSize={currentSize}
+                    changeCurrentPage={changeCurrentPage}
+                    nextPage={nextPage}
+                    prevPage={prevPage}
+                    currentPage={currentPage}
                   />
-                </div>
-              ) : (
-                <div className="table-container">
-                  <TableHead userListing={false} />
-                  {transactionData.transactionBatchResponseList.map(
-                    (transaction) => (
-                      <TableContent
-                        have={`${
-                          currency_symbols[transaction.sourceCurrency]
-                        } ${transaction.sourceAmount}`}
-                        need={`${
-                          currency_symbols[
-                            transaction.destinationCurrency
-                          ]
-                        } ${transaction.destinationAmount}`}
-                        rate="1 USD > NGN 470"
-                        by={`@${transaction.userAlias}`}
-                        status={transaction.transactionState}
-                        userListings={false}
-                        key={transaction.transactionId}
-                      />
-                    ),
-                  )}
-                </div>
-              )}
-
-              <div className="listing_pagination">
-                <Pagination
-                  currentPage={currentPage}
-                  totalSize={21}
-                  sizePerPage={5}
-                  changeCurrentPage={changeCurrentPage}
-                  theme="bootstrap"
-                />
-                <div className="listings_mobile_buttons">
-                  {currentPage === 1 ? null : (
-                    <button
-                      className="listing_previous"
-                      onClick={() => previous()}
-                    >
-                      Previous
-                    </button>
-                  )}
-                  <button
-                    className="listing_showMore"
-                    onClick={(e) => changePage()}
-                  >
-                    Show More
-                  </button>
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-              <div className="table-container">
-                <TableHead userListing={true} />
-                <TableContent
-                  have="$1500"
-                  need="(NGN) Nigerian naira"
-                  rate="1 USD > NGN 470"
-                  status="Pending"
-                  userListings={true}
-                  onClick={() => setShowDelete(!showDelete)}
-                />
-              </div>
-            </TabPanel>
-          </Tabs>
+                )}
+              </TabPanel>
+              <TabPanel>
+                <MyListings handleDeleteModal={handleDeleteModal} />
+              </TabPanel>
+            </Tabs>
+          </PaddedContainer>
         </AppMain>
       </div>
     </Container>
   );
 };
 const mapStateToProps = (state) => ({
-  transactionData: state.transaction.transactions,
-  loading: state.transaction.loading,
+  sortedTransactions: state.transaction.sortedTransactions,
+  notification: state.transaction.notification,
+  userCognitoEmail: state.auth.userCognitoEmail,
 });
 
 export default connect(mapStateToProps, {
   getTransactions,
   checkUserProfile,
+  getUserDetails,
 })(Listings);

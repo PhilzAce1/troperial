@@ -1,7 +1,6 @@
 import {
   UPDATE_STEP,
   CREATE_TRANSACTION,
-  UPDATE_PROFILE,
 } from '../actions/types';
 const initialState = {
   step: CREATE_TRANSACTION,

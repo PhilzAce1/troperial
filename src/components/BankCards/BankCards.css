@@ -1,0 +1,43 @@
+.bank-card { 
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    padding: 15px 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+.horizontal-line {
+    height: 1px;
+    background: var(--light-grey);
+}
+.bank-card header {
+    padding-bottom: 10px;
+}
+.bank__details_grid-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.bank__details_grid-item .label {
+    color: var(--dark-grey);
+}
+.bank_button {
+    border: none;
+    width: 100%;
+    padding: 10px 10px;
+    color: var(--troperial-blue);
+    font-size: 1rem;
+    background: var(--troperial-banner-blue);
+    border-radius: 10px;
+    outline: transparent;
+}
+.bank_button:hover {
+   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .bank-card { 
+        width: 100%;
+        height: auto;
+    }
+}

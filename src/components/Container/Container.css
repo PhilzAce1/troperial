@@ -1,6 +1,6 @@
 .app__container {
-	background-color: var(--troperial-dim-blue);
 	overflow-x: hidden;
+	background: #fff;
 }
 .maxHeight {
 	height: 100vh;
@@ -8,4 +8,9 @@
 }
 .minHeight {
 	min-height: 100vh;
+}
+@media (min-width: 768px) {
+	.app__container {
+		background: var(--troperial-dim-blue);
+	}
 }

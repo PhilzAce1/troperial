@@ -1,30 +1,28 @@
 .listingsFilters {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-gap: 0px 1px;
+    margin-top: 15px !important;
 }
-.listings_show-number select, label {
+.listingsFilters .listings_show-number , .listingsFilters .general-filter-section{
+    display: inline-block;
+    margin-right: 10px;
+}
+.listings_show-number select {
     border: none;
-    /* color: var(--dark-grey); */
-    font-size: 0.9rem;
+    color: var(--dark-grey);
 }
 .general-filter-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     border: 1px solid var(--light-grey);
     border-radius: 10px;
-    width:150px;
+    padding: 5px 10px;
     overflow: hidden;
 }
+.general-filter-btn i {
+ padding-left: 5px;
+}
 .general-filter-btn span {
-   padding: 0 15px;
-   font-size: 0.9rem;
+    border-right: 1px solid var(--light-grey);
+    padding: 5px;
 }
-.general-filter-btn .fa-caret-down {
-    border-left: 1px solid var(--light-grey);
-    padding: 8px;
-}
+
 .general-filter-section {
     position: relative;
 }
@@ -51,7 +49,6 @@
     align-items: center;
     margin: 10px 0;
 }
-
 .exchange_icon {
     text-align: center;
     margin: 10px 0px;
@@ -60,23 +57,3 @@
     transform: rotate(90deg);
     color: var(--dark-grey); 
 } 
-@media (min-width: 768px) {
-    .listingsFilters {
-        width: 40%;
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        grid-gap: 0px;
-    }
-     .listings_show-number {
-         margin-top: 6px;
-     }
-    .general-filter-btn {
-        width:150px;
-    }
-    .general-filter-btn span {
-       padding: 0 25px;
-    }
-    .general-filter-section {
-        position: relative;
-    }
-}

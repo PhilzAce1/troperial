@@ -5,7 +5,9 @@ import BackDrop from '../../components/BackDrop/BackDrop';
 import AppAside from '../../components/AppAside/AppAside';
 import AppMain from '../../components/AppMain/AppMain';
 import NavBar from '../../components/NavBar/NavBar';
+
 import './Notifications.css';
+import PaddedContainer from '../../components/PaddedContainer/PaddedContainer';
 
 const Notifications = () => {
   const [showBackDrop, setShowBackDrop] = useState(false);
@@ -15,16 +17,20 @@ const Notifications = () => {
   };
   return (
     <Container showBackDrop={showBackDrop}>
-      <NavBar page="Notifications" icon="fas fa-bell"/>
+      <NavBar page="Notifications" icon="icon-notifications"/>
       {showBackDrop ? <BackDrop handleBackDrop={handleBackDrop}/> : null}
       <div className="notificationsCustom__container">
         <AppAside onClick={handleBackDrop}/>
         <AppMain>
-          <h2>Notifications</h2>
+         <PaddedContainer padding="25px">
+         <h2>Notifications</h2>
+          <div className="notifications-list">
           <Notification />
           <Notification />
           <Notification />
           <Notification />
+          </div>
+         </PaddedContainer>
         </AppMain>
       </div>
     </Container>

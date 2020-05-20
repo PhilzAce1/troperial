@@ -1,0 +1,213 @@
+.listingsCustom__container {
+	width: 100%;
+	margin: 0 auto;
+}
+.scrolling-wrapper {
+	padding: 0 20px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+}
+.scrolling-wrapper::-webkit-scrollbar {
+	display: none;
+}
+.scrolling-wrapper .react-tabs {
+	margin-top: 0;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Account Section Style */
+.profile_container {
+	margin-top: 30px;
+}
+.profile_container .headers {
+	margin-top: 30px;
+}
+.headers .profile__input-data-paragraph {
+	width: 90%;
+	color: var(--dark-grey);
+	line-height: 1.6;
+	font-size: 1rem;
+}
+.user-avatar-container .user-avatar {
+	height: 50px;
+	width: 50px;
+	border-radius: 100%;
+	border: 3px solid var(--light-grey);
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+}
+.CustomAvatar-image {
+	height: 50px;
+	width: 50px;
+	border-radius: 100%;
+	border: 3px solid var(--light-grey);
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+}
+
+
+/* History styles */
+.conversations_started {
+	color: var(--warning-yellow);
+}
+.transactions_completed {
+	color: var(--troperial-green);
+}
+.stats-item {
+	border: 1px solid var(--light-grey);
+	padding: 10px 10px;
+	border-radius: 10px;
+	margin: 20px 0;
+}
+.stats-item .stats-figure {
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+.stats-item .stats-title {
+	margin: 0 8px;
+}
+/* Verification and security stylese */
+.title-section p {
+	color: var(--dark-grey);
+}
+
+.verification-confirmation-message, .trusted_traders-info  {
+	border: 1px solid var(--light-grey);
+	box-sizing: border-box;
+	padding: 10px 15px;
+	border-radius: 10px;
+}
+.verification-confirmation-message img, .trusted_traders-info  img {
+  width: 50px;
+}
+.verification-confirmation-message .verificatin-message, .trusted_traders-info .trusted_traders-message {
+	line-height: 1.6;
+    color: var(--dark-grey);
+}
+.verification-confirmation-message .heading, .trusted_traders-info .heading{
+	margin:0;
+}
+/* end of Verification and security styles */
+
+
+@media (min-width: 768px) {
+	.tab_list-container {
+		padding: 0 25px;
+	}
+	.scrolling-wrapper {
+		padding: 0;
+	}
+	/* Verification and security stylese */
+	.verification-and-change-password-container {
+		width: 60%;
+	}
+	.change_password_section, .verification_section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 50px;
+	}
+	.change_password-title, .verify-title {
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #000;
+	}
+	.title-section {
+		margin-top: 10px;
+	}
+	/* Verification and trusted traders custom banneers */
+	.verification-confirmation-message {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.verification-confirmation-message img, .trusted_traders-info img {
+		width: 80px;
+	  }
+	  .verification-confirmation-message .heading, .trusted_traders-info .heading {
+		margin:0;
+		font-size: 1.3rem;
+	}
+/* Verification and trusted traders custom banneers */
+
+	/* end of Verification and security styles */
+	.card_grids {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 0 20px;
+		grid-auto-flow: dense;
+		/* force height hack */
+		align-items: start;
+	}
+	.listingsCustom__container {
+		width: 95%;
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+		grid-gap: 0px 22px;
+		padding-top: 95px;
+	}
+	/* trusted traders styles */
+	.trusted__traders {
+		width: 60%;
+	}
+	.trusted_traders-info {
+		display: flex;
+		align-items: center;
+	}
+	/* end of trusted traders styles */
+
+	/* History styles */
+	.stats {
+		margin-top: 10px;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 0 20px;
+	}
+	.stats-item {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 30px;
+		padding: 0px 0px;
+		min-height: 50px;
+		padding: 18px 10px;
+	}
+	.stats-item .stats-figure {
+		font-size: 2.3rem;
+	}
+	.stats-item .stats-title {
+		margin: 0 0;
+		grid-row: 1;
+	}
+	.history_container {
+		padding-bottom: 50px;
+	}
+}
+
+@media (min-width: 1110px) {
+	.listingsCustom__container {
+		grid-template-columns: 1fr 4.5fr;
+	}
+	.profile_container .headers {
+		margin-top: 10px;
+	}
+	.headers .profile__input-data-heading {
+		font-size: 1.05rem;
+	}
+	.headers .profile__input-data-paragraph {
+		width: 100%;
+	}
+	.profile_container {
+		width: 70%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 30px;
+		padding-bottom: 100px;
+	}
+	.input-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 10px;
+	}
+	.save-changes_btn {
+		margin-top: 30px;
+	}
+}

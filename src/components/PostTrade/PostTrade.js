@@ -2,7 +2,7 @@ import React from 'react';
 import './PostTrade.css';
 import HybridInput from '../HybridInput/HybridInput';
 import CustomButton from '../CustomButton/CustomButton';
-import InputError from '../InputError/InputError';
+// import InputError from '../InputError/InputError';
 const PostTrade = () => {
   return (
     <div className="post__listing-container">

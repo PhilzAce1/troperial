@@ -1,5 +1,4 @@
-.tableContent__container {
-
+.tableContent__container, .trustedTraders-content__container {
     display: flex;
     flex-wrap: wrap;
     border: solid 1px var(--light-grey);
@@ -9,13 +8,13 @@
     margin-top: 20px;
 }
 
-.tableContent__container div {
+.tableContent__container div, .trustedTraders-content__container div {
  flex: 1 0 40%;
 }
 .hide {
     visibility: hidden;
 }
-.tableContent__container .tableContent__mobile-title {
+.tableContent__container .tableContent__mobile-title, .trustedTraders-content__container .tableContent__mobile-title{
   margin: 0;
   padding: 0;
   color: var(--dark-grey);
@@ -76,7 +75,7 @@
         font-weight: medium !important;
         font-size: 14px;
     }
-    .tableContent__container .tableContent__mobile-title {
+    .tableContent__container .tableContent__mobile-title, .trustedTraders-content__container .tableContent__mobile-title{
         display: none;
     }
     .auxilliary__div-container {
@@ -86,10 +85,17 @@
         width: 100%;
         box-sizing: border-box;
         display: grid;
-        /* grid-template-columns: repeat(6, 1fr); */
-        /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-        padding: 10px 15px; */
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        padding: 15px 0px 15px 15px;
+        border-radius: 0;
+        margin-top: 0;
+        border: none;
+    }
+    .trustedTraders-content__container {
+        width: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
         padding: 15px 0px 15px 15px;
         border-radius: 0;
         margin-top: 0;
@@ -100,8 +106,6 @@
         background: transparent;
         outline: transparent;
         font-size: 14px;
-        /* margin-right: 5px; */
-        /* padding: 0; */
         padding: 15px 5px 0px 0px;
         box-sizing: border-box;
     }
