@@ -3,6 +3,13 @@
 	margin: 0 auto;
 	padding-top: 45px;
 }
+.scrolling-wrapper {
+	padding: 0 20px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+}
 .listings_spinner {
 	display: flex;
 	justify-content: center;
@@ -37,6 +44,12 @@
 }
 
 @media (min-width: 768px) {
+	.tab_list-container {
+		padding: 0 25px;
+	}
+	.scrolling-wrapper {
+		padding: 0;
+	}
 	.listings_mobile_buttons {
 		display: none;
 	}
@@ -49,10 +62,10 @@
 		border: none;
 		color: var(--dark-grey);
 	}
-	.react-pagination-js-bootstrap .page:first-child, .react-pagination-js-bootstrap  .page:last-child   {
+	.react-pagination-js-bootstrap .page:first-child,
+	.react-pagination-js-bootstrap .page:last-child {
 		border: 1px solid var(--light-grey);
 		border-radius: 10px;
-		
 	}
 	.react-pagination-js-bootstrap .page:hover {
 		color: var(--troperial-blue);
@@ -67,11 +80,11 @@
 		background-color: #fff;
 		cursor: default;
 		border-radius: 8px;
-	 }
+	}
 	.react-pagination-js-bootstrap .page.active {
 		color: var(--troperial-blue);
 		cursor: default;
-	 }
+	}
 	.react-pagination-js-bootstrap .pageElli {
 		float: left;
 		padding: 0 14px;
@@ -80,8 +93,8 @@
 		border: none;
 		color: var(--dark-grey);
 		cursor: default;
-	  }
-	  
+	}
+
 	.post__listing-container {
 		width: 90%;
 		margin: 0 auto;

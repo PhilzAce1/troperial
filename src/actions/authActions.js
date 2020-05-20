@@ -1,12 +1,14 @@
 import {
-  CREATE_USER,
   CONFIRM_PROFILE_UPDATE,
   CHECK_USER_PROFILE,
   UPDATE_PROFILE,
+  SET_USER_COGNITO_EMAIL,
+  SET_CURRENT_USER_DETAILS
 } from './types';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
 import { setStep } from './uiActions';
+
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 export const createUser = (
@@ -45,42 +47,72 @@ export const createUser = (
       userData,
     );
     const user = await Auth.currentAuthenticatedUser();
-    const result = await Auth.updateUserAttributes(user, {
+    await Auth.updateUserAttributes(user, {
       'custom:personId': response.data.personId,
-      'custom:firstName': response.data.firstName,
-      'custom:lastName': response.data.lastName,
       'custom:userName': response.data.userAlias,
-      //  'custom:phoneNumber': response.data.phoneNumbers[0].number
     });
-    console.log('result', result);
     dispatch({
       type: CHECK_USER_PROFILE,
       payload: true,
     });
     dispatch(setStep(CONFIRM_PROFILE_UPDATE));
-    console.log(response);
   } catch (e) {
     console.log(e);
   }
 };
+export const getUserDetails = () => async (dispatch) => {
+     try {
+       // get user personid from amplify
+       const currentUserInfo = await Auth.currentUserInfo();
+       let personId = currentUserInfo.attributes['custom:personId'];
+       if(!personId) {
+         return null;
+       }
+       const user = await axios.get(`https://persons.api.troperial.com/persons/${personId}`);
+       const {firstName, lastName, userAlias, phoneNumbers} = user.data;
+       const {number} = phoneNumbers[0]
+       dispatch({
+         type: SET_CURRENT_USER_DETAILS,
+         payload: {firstName, lastName, userAlias, number}
+       })
+     } catch (e) {
 
+     }
+}
 export const checkUserProfile = () => async (dispatch) => {
   try {
     const currentUserInfo = await Auth.currentUserInfo();
-    let personId = parseInt(
-      currentUserInfo.attributes['custom:personId'],
-    );
+    dispatch({
+      type: SET_USER_COGNITO_EMAIL,
+      payload: currentUserInfo.attributes.email
+    })
+    let personId = currentUserInfo.attributes['custom:personId']
+
     if (!personId) {
-      console.log('update profile');
       dispatch(setStep(UPDATE_PROFILE));
       dispatch({
         type: CHECK_USER_PROFILE,
         payload: false,
       });
     } else {
-      console.log('personId', personId);
+      console.log('Users profile is updated');
     }
   } catch (err) {
     console.log('error fetching user info: ', err);
   }
 };
+export const updateUserDetails = (data) => async (dispatch) => {
+  console.log(data);
+  const {firstname, lastname} = data;
+  try {
+    const response = await axios.post('https://persons.api.troperial.com/persons//name', {
+    firstName: firstname,
+    lastName: lastname
+  });
+  console.log(response);
+  } catch(e) {
+    console.log(e);
+  }
+};
+
+

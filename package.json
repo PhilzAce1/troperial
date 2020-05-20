@@ -12,6 +12,7 @@
     "react": "^16.13.1",
     "react-country-flag": "^2.0.1",
     "react-dom": "^16.13.1",
+    "react-gravatar": "^2.6.3",
     "react-hook-form": "^5.6.3",
     "react-pagination-js": "^2.0.0",
     "react-redux": "^7.2.0",

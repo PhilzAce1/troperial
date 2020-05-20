@@ -17,7 +17,7 @@ const Dashboard = ({checkUserProfile}) => {
       setUser(data.attributes.email);
     };
     getUserData();
-  }, []);
+  }, [checkUserProfile]);
 
   async function handleLogout() {
     await Auth.signOut();

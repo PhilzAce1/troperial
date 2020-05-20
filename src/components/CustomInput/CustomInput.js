@@ -11,6 +11,8 @@ const CustomInput = ({
   showError,
   register,
   hint,
+  value,
+  disabled
 }) => {
   return (
     <div className="customInputContainer">
@@ -26,6 +28,8 @@ const CustomInput = ({
           onChange={onChange}
           type={type}
           placeholder={placeholder}
+          value={value}
+          disabled={disabled}
         />
         {hint && (
           <div className="customInputContainer__input-hint">

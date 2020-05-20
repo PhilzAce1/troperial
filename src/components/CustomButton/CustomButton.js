@@ -3,7 +3,7 @@ import './CustomButton.css';
 import PulseLoader from 'react-spinners/PulseLoader';
 const CustomButton = ({
   children,
-  disable,
+  disabled,
   loading,
   onClickHandler,
   padding,
@@ -14,7 +14,7 @@ const CustomButton = ({
     <button
       onClick={onClickHandler}
       className="customButton"
-      disabled={disable}
+      disabled={disabled}
       style={{padding, fontSize, width}}
     >
       <PulseLoader size={10} color={'#fff'} loading={loading} />

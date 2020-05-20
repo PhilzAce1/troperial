@@ -1,9 +1,9 @@
 .listingsCustom__container {
 	width: 100%;
 	margin: 0 auto;
-	padding-top: 45px;
 }
 .scrolling-wrapper {
+	padding: 0 20px;
 	overflow-x: scroll;
 	overflow-y: hidden;
 	white-space: nowrap;
@@ -13,7 +13,7 @@
 	display: none;
 }
 .scrolling-wrapper .react-tabs {
-	margin-top: 6px;
+	margin-top: 0;
 	-webkit-tap-highlight-color: transparent;
 }
 
@@ -37,6 +37,14 @@
 	border: 3px solid var(--light-grey);
 	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
 }
+.CustomAvatar-image {
+	height: 50px;
+	width: 50px;
+	border-radius: 100%;
+	border: 3px solid var(--light-grey);
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+}
+
 
 /* History styles */
 .conversations_started {
@@ -63,26 +71,32 @@
 	color: var(--dark-grey);
 }
 
-.verification-confirmation-message {
+.verification-confirmation-message, .trusted_traders-info  {
 	border: 1px solid var(--light-grey);
 	box-sizing: border-box;
 	padding: 10px 15px;
 	border-radius: 10px;
 }
-.verification-confirmation-message img {
+.verification-confirmation-message img, .trusted_traders-info  img {
   width: 50px;
 }
-.verification-confirmation-message .verificatin-message {
+.verification-confirmation-message .verificatin-message, .trusted_traders-info .trusted_traders-message {
 	line-height: 1.6;
     color: var(--dark-grey);
 }
-.verification-confirmation-message .heading {
+.verification-confirmation-message .heading, .trusted_traders-info .heading{
 	margin:0;
 }
 /* end of Verification and security styles */
 
 
 @media (min-width: 768px) {
+	.tab_list-container {
+		padding: 0 25px;
+	}
+	.scrolling-wrapper {
+		padding: 0;
+	}
 	/* Verification and security stylese */
 	.verification-and-change-password-container {
 		width: 60%;
@@ -100,19 +114,21 @@
 	.title-section {
 		margin-top: 10px;
 	}
-
+	/* Verification and trusted traders custom banneers */
 	.verification-confirmation-message {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
-	.verification-confirmation-message img {
+	.verification-confirmation-message img, .trusted_traders-info img {
 		width: 80px;
 	  }
-	  .verification-confirmation-message .heading {
+	  .verification-confirmation-message .heading, .trusted_traders-info .heading {
 		margin:0;
 		font-size: 1.3rem;
 	}
+/* Verification and trusted traders custom banneers */
+
 	/* end of Verification and security styles */
 	.card_grids {
 		display: grid;
@@ -129,6 +145,15 @@
 		grid-gap: 0px 22px;
 		padding-top: 95px;
 	}
+	/* trusted traders styles */
+	.trusted__traders {
+		width: 60%;
+	}
+	.trusted_traders-info {
+		display: flex;
+		align-items: center;
+	}
+	/* end of trusted traders styles */
 
 	/* History styles */
 	.stats {
