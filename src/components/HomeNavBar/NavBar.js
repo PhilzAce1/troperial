@@ -13,40 +13,35 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbarContainer">
-        <div>
-          <Link to="/"><img src={logo} alt="logo" /></Link>
-        </div>
+          <Link to="/" className='troperial_home_logo'><img src={logo} alt="logo" /></Link>
+
+          <ul className="mainLinks hideOnMobile">
+            <li>
+              <Link className="link" to="/">How it works</Link>
+            </li>
+            <li>
+              <Link className="link" to="/">Market News</Link>
+            </li>
+            <li>
+              <Link className="link" to="/">Help</Link>
+            </li>
+            <li>
+              <Link className="link" to="/">About</Link>
+            </li>
+          </ul>
 
         <div>
-          <div className="mainLinks hideOnMobile">
-            <span>
-              <a href="">How it works</a>
-            </span>
-            <span>
-              <a href="">Market News</a>
-            </span>
-            <span>
-              <a href="">Help</a>
-            </span>
-            <span>
-              <a href="">About</a>
-            </span>
-          </div>
-        </div>
-
-        <div>
-          <div className="authLinks hideOnMobile">
-            <span>
-              <Link to="/signin">login</Link>
-            </span>
-            <span className="signUpDesktop">
-              <CustomButton loading={false} padding="10px" fontSize="0.9rem">
-              <Link to="/signup">create an account</Link>
-              </CustomButton>
-            </span>
-          </div>
+          <ul className="authLinks hideOnMobile">
+            <li>
+              <Link className="link" to="/signin">login</Link>
+            </li>
+            <li>
+              <Link to="/signup" className="sign-up-link"><button className="signUpDesktop">create an account</button></Link>
+            </li>
+          </ul>
           <i onClick={toggleMenu} className="hamburger fas fa-bars" />
         </div>
+        
       </div>
 
       {menu ? (

@@ -4,13 +4,13 @@ nav.navigationBar {
 	z-index: 1;
 }
 .icon-messages {
-	mask: url('../../assets/images/chat-svg.svg');
+	mask: url('../../assets/svgs/chat-svg.svg');
 }
 .icon-listings {
-	mask: url('../../assets/images/layout-horizontal-svg.svg');
+	mask: url('../../assets/svgs/layout-horizontal-svg.svg');
 }
 .icon-notifications {
-	mask: url('../../assets/images/notifications-svg.svg');
+	mask: url('../../assets/svgs/notifications-svg.svg');
 }
 /* .icon-profile {
 	mask: url('../../assets/images/profile-svg.svg');

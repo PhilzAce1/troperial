@@ -53,7 +53,7 @@
 .hybridInput__textInput {
     border: 0.8px solid var(--light-grey);
     border-radius: 0px 10px 10px 0px;
-    outline-color: transparent;
+    outline: transparent;
     font-size: 1rem;
     color: var(--dark-grey);
     width: 100%;

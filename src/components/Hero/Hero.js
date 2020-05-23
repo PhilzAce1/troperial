@@ -6,9 +6,7 @@ const Hero = () => {
     <header className="heroHeader">
       {/* text */}
       <div className="heroHeader__introDiv">
-        <h1>
-          Exhange <span className="troperial-green">money</span> <img src={img} alt="bag" />, wherever you are!
-        </h1>
+      
         <p>
           The quick, secure and fairer way to exchange currencies
           across borders

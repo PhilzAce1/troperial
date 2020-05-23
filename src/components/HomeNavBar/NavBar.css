@@ -1,26 +1,24 @@
-.navbar  {
-    position: sticky;
-}
+/* .navbar  {
+    position: fixed;
+} */
 .hideOnMobile {
      display: none;
 }
 .navbarContainer {
     width: 90%;
-    margin: 0 auto;
     display: flex;
+    margin: 0 auto;
     justify-content:space-between;
 }
-
 .hamburger {
     margin-top: 15px;
     font-size: 1.2rem;
 }
-
-img {
+.navbarContainer img {
  margin: 15px 0 0 0;
  width: 100px;
 }
-i {
+.navbarContainer i {
     font-size: 1.55rem;
     margin: 10px 0 0 0;
     color: var(--Gray);
@@ -50,60 +48,66 @@ i {
 .mobileNav .mobileNavContainer span a:visited {
     color:var(--Cyan);
 }
-/* .horizontal-line {
-    width: 100%;
-    height:1.5px;
-    background-color: var(--GrayishViolet);
-} */
 .signUpMobile {
     border-radius: 50px; 
     -moz-border-radius: 50px; 
     -webkit-border-radius: 50px;
 }
 /* Desktop Styles */
-@media screen and (min-width: 1440px) {
+@media (min-width: 768px) {
     .navbarContainer {
-        width: 80%;
+        width: 85%;
+    }
+    .navbar .navbarContainer * {
+        margin: 0;
+        padding: 0;
+    }
+    .navbar .navbarContainer{
+        margin-top: 30px;
+        box-sizing: border-box;
+    }
+    .navbarContainer .mainLinks, .authLinks{
+        list-style-type: none;
+    }
+    .navbarContainer .mainLinks li, .authLinks li{
+        display: inline;
+        margin: 0 20px;
+    }
+    .navbarContainer .mainLinks li .link, .authLinks li .link{
+        text-decoration: none;
+        text-transform: capitalize;
+        color: #000;
+    }
+    .navbarContainer .mainLinks li .link, .authLinks li .link{
+        text-decoration: none;
+        text-transform: capitalize;
+        transition: 0.6s ease 0s;
+    }
+    .navbarContainer .mainLinks li .link:hover, .authLinks li .link:hover{
+        color: var(--troperial-blue);
+    }
+    .hideOnMobile {
+        display: block;
     }
     .hamburger{
         display: none;
     }
-    .hideOnMobile { 
-       display: inline;
-    }
     .mobileNav {
         display: none;
     }
-    img {
-        margin: 0;
-    }
-    .navbarContainer div {
-        height: 60px;
-        display: flex;
-        align-items: center;
-    }
-  
-    .navbarContainer div .mainLinks  {
-      margin-left: 30px;
-    }
-  
-    .mainLinks span, .authLinks span {
-      margin: 0 30px 0 0;
-    }
-  
-    .mainLinks span a, .authLinks span a{
-      text-decoration:none;
-      text-transform: capitalize;
+    .sign-up-link {
+        margin-left: 10px !important;
     }
     .signUpDesktop {
-        padding: 10px 20px;
-        border-radius: 50px; 
-    -moz-border-radius: 50px; 
-    -webkit-border-radius: 50px;
+        margin: 0;
+        background: var(--troperial-blue);
+        color: #fff;
+        border: none;
+        text-transform: capitalize;
+        padding: 6px 10px !important;
+        border-radius: 8px;
     }
-    .signUpDesktop a {
-        color:var(--pureWhite) !important;
-    }
+
 }
 
 
