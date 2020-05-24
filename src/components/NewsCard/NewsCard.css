@@ -1,0 +1,16 @@
+.newsCard .thumbnail-image {
+    width: 100%;
+}
+.newsCard .card-content{
+  font-size: 1.2rem;
+}
+
+@media (min-width: 641px) {
+    .newsCard .card-content{
+        font-size: 1.4rem;
+      }
+ }
+
+@media (min-width: 968px) {}
+
+@media (min-width: 1800px) {}

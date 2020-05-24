@@ -5,6 +5,9 @@ import React, { Fragment } from 'react';
 import HybridInput from '../../components/HybridInput/HybridInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import PostTrade from '../../components/PostTrade/PostTrade';
+import NewsCard from '../../components/NewsCard/NewsCard';
+import AppFooter from '../../components/Footer/Footer';
+
 /**
  * THIRD PARTY PACKAGES
  */
@@ -44,7 +47,7 @@ const Hero = () => {
           <div className="home-trade-section-container">
             <div className="home-dotted-bg"></div>
             <div className="post-trade">
-              <PostTrade/>
+              <PostTrade />
             </div>
           </div>
         </main>
@@ -167,7 +170,9 @@ const Hero = () => {
             With Troperial you get to negotiate and get the best
             exchange rates and deals in the FX market.
           </p>
-          <Link className="get-started-btn">Get started</Link>
+          <Link className="get-started-btn" to="/signup">
+            Get started
+          </Link>
         </div>
         <div className="convince-plaform-interface-container">
           <div className="convince-plaform-interface-dotted-bg"></div>
@@ -234,6 +239,24 @@ const Hero = () => {
           </div>
         </div>
       </section>
+      <section className="news_section">
+        <div className="header">
+          <h1>The Latest market news</h1>
+          <p>
+            Get the latest and hottest market news about currency and
+            other things on Troperial
+          </p>
+          <Link className="get-learn-more" to="/news">
+            Learn More
+          </Link>
+        </div>
+        <div className="news_container">
+          <NewsCard />
+          <NewsCard />
+          <NewsCard />
+        </div>
+      </section>
+      <AppFooter/>
     </Fragment>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './NavBar.css';
-import {Link} from 'react-router-dom';
-import CustomButton from '../CustomButton/CustomButton';
+import {Link, NavLink} from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
 
 const NavBar = () => {
@@ -17,16 +16,16 @@ const NavBar = () => {
 
           <ul className="mainLinks hideOnMobile">
             <li>
-              <Link className="link" to="/">How it works</Link>
+              <Link className="link" to="/how">How it works</Link>
             </li>
             <li>
-              <Link className="link" to="/">Market News</Link>
+              <Link className="link" to="/news">Market News</Link>
             </li>
             <li>
-              <Link className="link" to="/">Help</Link>
+              <Link className="link" to="/help">Help</Link>
             </li>
             <li>
-              <Link className="link" to="/">About</Link>
+              <Link className="link" to="/about">About</Link>
             </li>
           </ul>
 
@@ -39,7 +38,8 @@ const NavBar = () => {
               <Link to="/signup" className="sign-up-link"><button className="signUpDesktop">create an account</button></Link>
             </li>
           </ul>
-          <i onClick={toggleMenu} className="hamburger fas fa-bars" />
+    <span onClick={toggleMenu} className="home-hamburger-icon"></span>
+          
         </div>
         
       </div>
@@ -47,25 +47,23 @@ const NavBar = () => {
       {menu ? (
         <div className="mobileNav">
           <div className="mobileNavContainer">
-            <span>
-              <a href="">How it works</a>
-            </span>
-            <span>
-              <a href="">Market News</a>
-            </span>
-            <span>
-              <a href="">Help</a>
-            </span>
-            <span>
-              <a href="">About</a>
-            </span>
-            <div className="horizontal-line" />
-            <span>
-            <Link to="/signin">login</Link>
-            </span>
-            <span className="signUpMobile">
-            <Link to="/signup">create an account</Link>
-            </span>
+
+              <NavLink activeClassName="home-active-link" to="/about" className="home-link">How it works</NavLink>
+
+
+            <NavLink activeClassName="home-active-link" to="/news" className="home-link">Market News</NavLink>
+
+   
+            <NavLink activeClassName="home-active-link" to="/help" className="home-link">Help</NavLink>
+
+
+            <NavLink activeClassName="home-active-link" to="/about" className="home-link">About</NavLink>
+
+            <div className="mobile_screen-horizonal-line" />
+ 
+            <NavLink activeClassName="home-active-link" to="/signin" className="home-link">login</NavLink>
+   
+            <button className="sign-up_btn"><Link className="home-sign-up" to="/signup">create an account</Link></button>
           </div>
         </div>
       ) : null}

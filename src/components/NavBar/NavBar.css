@@ -3,6 +3,22 @@ nav.navigationBar {
 	position: fixed;
 	z-index: 1;
 }
+.navigation-logout-btn {
+	background: var(--troperial-blue);
+	color: #fff;
+	border: none;
+	font-size: 1.1rem;
+	padding: 10px 15px;
+	border-radius: 10px;
+	width: 90%;
+	margin: 20px auto;
+}
+.small_screen-horizonal-line {
+	width: 90%;
+	height: 1px;
+	background: var(--light-grey);
+	margin: 0 auto;
+}
 .icon-messages {
 	mask: url('../../assets/svgs/chat-svg.svg');
 }
@@ -12,9 +28,9 @@ nav.navigationBar {
 .icon-notifications {
 	mask: url('../../assets/svgs/notifications-svg.svg');
 }
-/* .icon-profile {
-	mask: url('../../assets/images/profile-svg.svg');
-} */
+.icon-profile {
+	mask: url('../../assets/svgs/profile-page-svg.svg');
+}
 .icon {
 	display: inline-block;
 	width: 18px;

@@ -30,7 +30,8 @@
 .trending__market__rate {
     position: absolute;
      bottom: -10px;
-     left: 50px;
+     font-size: 0.9rem;
+     left: 30px;
 
 }
 .summary {

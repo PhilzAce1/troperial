@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './NavBar.css';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
 import Gravatar from 'react-gravatar'
 import {connect} from 'react-redux';
+import { AppContext } from '../../libs/contextLib';
+import { useHistory } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 const NavBar = ({ page, icon, userCognitoEmail}) => {
+  const history = useHistory();
+  const { userHasAuthenticated } = useContext(AppContext);
   const [menu, setMenu] = useState(false);
   const toggleMenu = () => {
     const menuState = menu;
     setMenu(!menuState);
   };
+  async function handleLogout() {
+    await Auth.signOut();
+    userHasAuthenticated(false);
+    history.push('/');
+  }
   return (
     <nav className="navigationBar">
       {/* large screen nav bar */}
@@ -109,6 +119,13 @@ const NavBar = ({ page, icon, userCognitoEmail}) => {
             >
               Profile
             </NavLink>
+          <div className="small_screen-horizonal-line"></div>
+            <button
+             onClick={handleLogout}
+             className="navigation-logout-btn"
+            >
+              Logout
+            </button>
           </div>
         ) : null}
       </section>

@@ -1,4 +1,9 @@
-
+input[type=text] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
+}
 .hybridInput__container {
     position: relative;
     margin-top: 10px;
@@ -42,6 +47,7 @@
     display: flex;
 
 }
+
 
 .hybridInput__custom-select, .hybridInput__textInput {
     border: none;
