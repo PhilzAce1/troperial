@@ -32,7 +32,7 @@ const Hero = () => {
         <div className="intro">
           <div className="flex_wrapper">
             <h1>
-              Exhange <span className="troperial-green">money</span>{' '}
+              Exchange <span className="troperial-green">money</span>{' '}
               <img src={img} className="home-money-icon" alt="bag" />,
               <br />
               wherever you are!
