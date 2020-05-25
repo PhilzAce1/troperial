@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
         <div className="social-link-group">
             <h3>Stay in touch</h3>
-            <a href="#" className="social-link-email">hello@troperial.com</a>
+            <a href="/#" className="social-link-email">hello@troperial.com</a>
        <div className="social-icons-group">
        <a href="/twitter"><img src={twitter} alt="twitter"/></a>
             <a href="/facebook"><img src={facebook} alt="facebiook"/></a>
