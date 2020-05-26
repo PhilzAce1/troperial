@@ -12,6 +12,7 @@ import LogIn from './pages/Login';
 import Home from './pages/Home';
 import {connect} from 'react-redux';
 import { checkUserProfile } from './actions/authActions';
+import ChatPage from './pages/ChatPage';
 
 const Routes = ({checkUserProfile}) => {
   useEffect(() => {
@@ -43,6 +44,9 @@ const Routes = ({checkUserProfile}) => {
       <AuthenticatedRoute exact path="/profile">
         <ProfilePage/>
       </AuthenticatedRoute>
+      <UnauthenticatedRoute exact path="/messages">
+        <ChatPage/>
+      </UnauthenticatedRoute>
     </Switch>
   );
 };
