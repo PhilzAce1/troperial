@@ -41,6 +41,7 @@ const Routes = ({checkUserProfile}) => {
       <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
       </AuthenticatedRoute>
+      
       <AuthenticatedRoute exact path="/messages">
       <ChatPage/>
       </AuthenticatedRoute>
