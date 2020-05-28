@@ -14,18 +14,18 @@ import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bo
 const ChatMessageView = () => {
     const scrollToBottom = useScrollToBottom();
   const [sticky] = useSticky();
-    const userheaderTitle = () => {
+    const userheaderTitle = (username) => {
         return (
             <button className="user__header-title">
                 <img className="user__header-temporary-dp" src={dp} alt="display picture"/>
-                <span className="user__header-username">@runo</span>
+        <span className="user__header-username">@{username}</span>
             </button>
         )
     }
     return (
         <section className="message__view">
             <header className="message__view--header">
-                {userheaderTitle()}
+                {userheaderTitle('username')}
             </header>
             <main className="chat-feed">
        
