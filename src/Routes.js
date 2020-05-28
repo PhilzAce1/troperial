@@ -41,15 +41,15 @@ const Routes = ({checkUserProfile}) => {
       <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
       </AuthenticatedRoute>
-      {/* <AuthenticatedRoute exact path="/messages">
+      <AuthenticatedRoute exact path="/messages">
       <ChatPage/>
-      </AuthenticatedRoute> */}
+      </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/profile">
         <ProfilePage/>
       </AuthenticatedRoute>
-      <UnauthenticatedRoute exact path="/messages">
+      {/* <UnauthenticatedRoute exact path="/messages">
       <ChatPage/>
-      </UnauthenticatedRoute>
+      </UnauthenticatedRoute> */}
     </Switch>
   );
 };
