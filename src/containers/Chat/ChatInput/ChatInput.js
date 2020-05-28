@@ -17,14 +17,14 @@ const ChatInput = () => {
         {/* mobile quick actions */}
         <div className="mobile-quick-actions">
           <button className="quick-actions-btn">Quick actions</button>
-          {/* <div className="quick-actions-options">
+          <div className="quick-actions-options">
             <button className="share-account-details">
               Share account details
             </button>
             <button className="update-listing-status">
               Update listing status
             </button>
-          </div> */}
+          </div>
         </div>
 
         {/* desktop quick actions */}

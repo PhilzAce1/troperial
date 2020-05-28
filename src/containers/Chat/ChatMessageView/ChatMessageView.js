@@ -85,4 +85,4 @@ const ChatMessageView = () => {
     )
 }
 
-export default ChatMessageView
+export default ChatMessageView;

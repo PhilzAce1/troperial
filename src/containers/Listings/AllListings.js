@@ -51,6 +51,7 @@ const AllListings = ({
               status={transactionState}
               userListings={false}
               key={transactionId}
+              
             />
           );
         })}
