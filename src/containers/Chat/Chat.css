@@ -1,7 +1,9 @@
 .chat-grid-container {
-    /* position: relative; */
-    /* width: 100%; */
-    /* padding-top: 45px; */
+ display: flex;
+ flex-wrap: nowrap;
+ overflow-x: auto;
+ height: 100vh;
+ overflow-y: hidden;
 }
 
 .chat-main-container {
