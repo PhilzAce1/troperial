@@ -1,0 +1,31 @@
+.user-convo-btn {
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+    margin: 10px 0;
+    background: #fff;
+}
+.active-chat {
+    background: var(--from-contact);
+}
+.user-convo-btn .username {
+   font-size: 1.3rem;
+   margin: 0 5px;
+}
+.user-convo-btn .user-profile-picture {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    border:3px solid #fff;
+}
+.user-convo-btn .unread-messages {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: var(--troperial-blue);
+  position: relative;
+}

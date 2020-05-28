@@ -1,0 +1,55 @@
+.user__profile {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    padding-top: 50px;
+}
+.user__profile .user__profile-temporary-dp {
+   width: 80px;
+   height: 80px;
+   border: 2px solid #fff;
+   border-radius: 100%;
+   margin: 0 auto;
+   display: block;
+   text-align: center;
+}
+
+.user__profile .user__profile-username {
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+.user__profile  .user__profile-trade-count {
+    color: var(--dark-grey);
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+.user__profile-trusted-trader-btn {
+    background: var(--troperial-banner-blue);
+    border: none;
+    font-size: 1rem;
+    color: var(--troperial-blue);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 10px;
+    outline: transparent;
+}
+.user__profile-trusted-trader-btn:hover {
+  cursor: pointer;
+}
+.user__profile-join-date, .user__profile-report-btn {
+    font-size: 1.1rem;
+    color: var(--dark-grey);
+    margin: 10px;
+}
+.user__profile-report-btn {
+    background:transparent;
+    border: none;
+    
+}
+
+.user__profile-horizontal-line {
+    height: 1px;
+    width:70%;
+    margin: 20px auto;
+    background: var(--light-grey);
+}

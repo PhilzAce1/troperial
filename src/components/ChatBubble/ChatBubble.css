@@ -1,0 +1,43 @@
+.chat-bubble {
+    font-size: 1.2rem;
+      text-align: left;
+      height: auto;
+      padding: 20px;
+      max-width: 50%;
+      min-width: 30%;
+      display: block;
+        white-space: normal;
+      word-wrap: break-word;
+}
+
+.chat-bubble-container {
+   margin: 10px 10px;
+    
+}
+.time {
+    display: flex;
+    color: var(--dark-grey);
+}
+ .from_me-time {
+   justify-content: flex-end;
+}
+ .from_me {
+   background: var(--from-me);
+   margin-left: auto;
+   border-radius: 10px 10px 0px 10px;
+   color: #fff;
+
+
+}
+.from_contact {
+     background: var(--from-contact);
+        margin-right: auto;
+   border-radius: 10px 10px 10px 0;
+}
+ 
+@media (min-width: 900px) {
+    .chat-bubble {
+      max-width: 30%;
+    }
+}
+ 

@@ -1,0 +1,115 @@
+.chat__input {
+    width: 100%;
+    border: solid 1px var(--light-grey);
+    box-sizing: border-box;
+    background: #fff;
+}
+.chat__input-field-container {
+ display: flex;
+ border: solid 1px var(--light-grey);
+ padding: 0 10px;
+ box-sizing: border-box;
+}
+.chat__input-field-container .chat__input-field {
+    padding: 20px 5px;
+    flex:3;
+    border: none;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    outline: transparent;
+}
+.chat__input-field-container .send-message-btn {
+   background: transparent;
+   border: none;
+}
+
+.mobile-quick-actions {
+    position: relative;
+}
+.mobile-quick-actions .quick-actions-options {
+    width: 70%;
+    margin: 10px auto;
+    border: solid 1px var(--light-grey);
+    padding: 5px;
+    border-radius: 10px;
+
+}
+.mobile-quick-actions .quick-actions-options .share-account-details, .mobile-quick-actions .quick-actions-options .update-listing-status {
+  background: transparent;
+  outline: transparent;
+  border: none;
+  display: block;
+  font-size: 1.2rem;
+  color: var(--troperial-blue);
+  margin: 10px 0;
+}
+.mobile-quick-actions .quick-actions-btn  {
+    background: transparent;
+    outline: transparent;
+    border: none;
+    color: var(--dark-grey);
+    font-size: 1rem;
+    padding: 20px 15px;
+}
+
+.large-screen-send {
+    display: none;
+}
+
+.chat__input .chat__input-listing {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.largescreen-quick-actions {
+    display: none;
+}
+@media (min-width: 900px) {
+    .mobile-quick-actions {
+        display: none;
+    }
+    .largescreen-quick-actions {
+    display: block;
+}
+
+.largescreen-quick-actions {
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    align-items: center;
+}
+.largescreen-quick-actions .quick-actions-btn {
+    font-size: 1.1rem;
+    color: var(--dark-grey);
+}
+    
+.largescreen-quick-actions .vertical-line {
+    width: 1px;
+    background: var(--light-grey);
+    height: 40px;
+    margin: 0 10px;
+}
+    
+    .largescreen-quick-actions .quick-actions-options button {
+       background: transparent;
+       border: none;
+       margin: 0 5px;
+       font-size: 1rem;
+       color: var(--troperial-blue);
+    }
+    .chat__input {
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        border: solid 1px var(--light-grey);
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 20px;
+
+    }
+    .chat__input .chat__input-listing {
+     padding: 20px;
+    border-radius: 20px;
+}
+
+}

@@ -1,0 +1,34 @@
+.conversation__list {
+    padding: 8px 10px;
+    overflow-y: scroll;
+    width: 100%;
+    height: 90vh;
+    box-sizing: border-box;
+}
+.conversation__list::-webkit-scrollbar {
+	display: none;
+}
+.conversation__list h2 {
+    margin: 0;
+}
+.conversation__list .conversation__list--search-bar {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+
+}
+
+@media (min-width: 900px) {
+    .conversation__list {
+    padding: 8px 10px;
+    height: 100%;
+    overflow-y: scroll;
+    height: 85vh;
+    width: auto;
+}
+}

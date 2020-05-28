@@ -1,0 +1,34 @@
+.chat-grid-container {
+    /* position: relative; */
+    /* width: 100%; */
+    /* padding-top: 45px; */
+}
+
+.chat-main-container {
+    width: 100%;
+    padding-top: 45px;
+}
+.chat-grid-container::-webkit-scrollbar, .chat-main-container::-webkit-scrollbar {
+	display: none !important;
+}
+
+@media (min-width: 900px) {
+    .chat-main-container {
+        background: var(--troperial-dim-blue);
+        height: 100vh;
+        overflow: hidden !important;
+        padding-top: 0px;
+    }
+    .chat-grid-container {
+        border-radius: 10px;
+        background: #fff;
+        position: relative;
+        top: 85px;
+        width: 95%;
+        height: 85vh;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 20% 55% 25%;
+    }
+    
+}
