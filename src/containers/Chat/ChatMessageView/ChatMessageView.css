@@ -1,4 +1,6 @@
 .message__view {
+    flex: 0 0 auto;
+    width: 100%;
     background: var(--chat-feed);
     height: 93vh;
      display: flex;

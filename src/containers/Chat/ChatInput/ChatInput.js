@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import './ChatInput.css';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 
 import sendIcon from '../../../assets/svgs/send-icon.svg';
 const ChatInput = ({ onMessageSubmitted }) => {
+  const [showOptions, setShowOptions] = useState(false);
+
   const [shareAccountDetails, setShareAccountDetails] = useState(
     false,
   );
@@ -21,6 +23,24 @@ const ChatInput = ({ onMessageSubmitted }) => {
     <div className="chat__input">
       <div className="chat__input-listing">
         {shareAccountDetails && <ListingCard />}
+
+        {/* listings card */}
+        {/* UNCOMMENT TO USE AND MANIPULATE */}
+        {/* <div className="chat__input-listing">
+          <ListingCard have="NGN200" need="US Dollars" by="Runo" />
+      </div> */}
+        {/* end of listings card */}
+      </div>
+      <div className="chat__input-field-container">
+        <input
+          type="text"
+          placeholder="send messsage to @gidigbi"
+          className="chat__input-field"
+        />
+        <button className="send-message-btn">
+          <span className="large-screen-send">send</span>{' '}
+          <img src={sendIcon} alt="send icon" />
+        </button>
       </div>
       {/* <div className="chat__input-field-container"> */}
       <form
@@ -43,15 +63,25 @@ const ChatInput = ({ onMessageSubmitted }) => {
       <div>
         {/* mobile quick actions */}
         <div className="mobile-quick-actions">
-          <button className="quick-actions-btn">Quick actions</button>
-          {/* <div className="quick-actions-options">
-            <button className="share-account-details">
-              Share account details
-            </button>
-            <button className="update-listing-status">
-              Update listing status
-            </button>
-          </div> */}
+          <button
+            className="quick-actions-btn"
+            onClick={() => setShowOptions(!showOptions)}
+          >
+            Quick actions
+          </button>
+
+          {showOptions && (
+            <Fragment>
+              <div className="quick-actions-options">
+                <button className="share-account-details">
+                  Share account details
+                </button>
+                <button className="update-listing-status">
+                  Update listing status
+                </button>
+              </div>
+            </Fragment>
+          )}
         </div>
 
         {/* desktop quick actions */}

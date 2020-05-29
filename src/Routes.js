@@ -50,6 +50,9 @@ const Routes = ({ checkUserProfile }) => {
       <AuthenticatedRoute exact path="/profile">
         <ProfilePage />
       </AuthenticatedRoute>
+      {/* <UnauthenticatedRoute exact path="/messages">
+      <ChatPage/>
+      </UnauthenticatedRoute> */}
     </Switch>
   );
 };

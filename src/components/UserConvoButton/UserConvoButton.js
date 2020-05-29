@@ -13,7 +13,7 @@ const UserConvoButton = ({
   }
   return (
     <button
-      className={btnClass}
+      className={`user-convo-btn ${isActive && 'active-chat'}`}
       onClick={() => onConversationItemSelected(conversation.id)}
     >
       <span>
@@ -30,3 +30,10 @@ const UserConvoButton = ({
 };
 
 export default UserConvoButton;
+
+// UserConvoButton.defaultProps = {
+//   username: 'username',
+//   unread: false,
+//   active: false,
+// };
+// export default UserConvoButton;

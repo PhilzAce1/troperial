@@ -13,6 +13,7 @@ const TableContent = ({
   username,
   totalTransactions,
   action,
+  handleMessage
 }) => {
   return (
     <Fragment>
@@ -104,7 +105,7 @@ const TableContent = ({
             ) : null}
 
             {userListings === true ? null : (
-              <button className="send__message__btn">
+              <button className="send__message__btn" onClick={handleMessage}>
                 Send Message
               </button>
             )}
