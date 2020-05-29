@@ -1,32 +1,46 @@
 .listing-card {
-    width: 100%;
-    border: 2px solid var(--troperial-blue);
-    padding: 10px;
-    border-radius: 10px;
-    box-sizing: border-box;
+  width: 100%;
+  border: 2px solid var(--troperial-blue);
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  animation-name: anit;
+  animation-duration: 4s;
+  animation-iteration-count: 2;
+  animation-direction: normal;
 }
-.listing-card .have-block, .listing-card .need-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.listing-card .have-block,
+.listing-card .need-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.listing-card .have-block .label, .listing-card .need-block .label, .preferred-rate .label, .preferred-rate .by {
-    color: var(--dark-grey);
-    font-size: 1.1rem;
+.listing-card .have-block .label,
+.listing-card .need-block .label,
+.preferred-rate .label,
+.preferred-rate .by {
+  color: var(--dark-grey);
+  font-size: 1.1rem;
 }
 .listing-card-horizontal-line {
-    height: 1px;
-    width: 100%;
-    background: var(--light-grey);
-    margin: 10px 0;
+  height: 1px;
+  width: 100%;
+  background: var(--light-grey);
+  margin: 10px 0;
 }
 .preferred-rate .username {
   color: var(--troperial-blue) !important;
 }
 @media (min-width: 900px) {
-.listing-card {
+  .listing-card {
     width: 40%;
-    
+  }
 }
-
+@keyframes anit {
+  from {
+    background: red;
+  }
+  to {
+    background-color: blue;
+  }
 }
