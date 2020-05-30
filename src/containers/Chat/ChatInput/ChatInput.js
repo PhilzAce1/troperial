@@ -3,7 +3,9 @@ import './ChatInput.css';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 
 import sendIcon from '../../../assets/svgs/send-icon.svg';
-const ChatInput = ({ onMessageSubmitted }) => {
+const ChatInput = ({ onMessageSubmitted, user }) => {
+  const [showOptions, setShowOptions] = useState(false);
+
   const [shareAccountDetails, setShareAccountDetails] = useState(
     false,
   );
@@ -21,7 +23,25 @@ const ChatInput = ({ onMessageSubmitted }) => {
     <div className="chat__input">
       <div className="chat__input-listing">
         {shareAccountDetails && <ListingCard />}
+
+        {/* listings card */}
+        {/* UNCOMMENT TO USE AND MANIPULATE */}
+        {/* <div className="chat__input-listing">
+          <ListingCard have="NGN200" need="US Dollars" by="Runo" />
+      </div> */}
+        {/* end of listings card */}
       </div>
+      {/* <div className="chat__input-field-container">
+        <input
+          type="text"
+          placeholder="send messsage to @gidigbi"
+          className="chat__input-field"
+        />
+        <button className="send-message-btn">
+          <span className="large-screen-send">send</span>{' '}
+          <img src={sendIcon} alt="send icon" />
+        </button>
+      </div> */}
       {/* <div className="chat__input-field-container"> */}
       <form
         className="chat__input-field-container"
@@ -29,13 +49,13 @@ const ChatInput = ({ onMessageSubmitted }) => {
       >
         <input
           type="text"
-          placeholder="send messsage to @gidigbi"
+          placeholder={`send messsage to ${user}`}
           className="chat__input-field"
           onChange={handleChange}
           value={textMessage}
         />
         <button className="send-message-btn">
-          <span className="large-screen-send">send</span>{' '}
+          <span className="large-screen-send">send</span>{' '}  
           <img src={sendIcon} alt="send icon" />
         </button>
       </form>

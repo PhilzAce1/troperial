@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import SendMessageBtn from '../SendMessageBtn/SendMessageBtn';
 import './TableContent.css';
 
 const TableContent = ({
@@ -13,8 +14,9 @@ const TableContent = ({
   username,
   totalTransactions,
   action,
-  handleMessage
+  handleMessage,
 }) => {
+  console.log(by);
   return (
     <Fragment>
       {trustedTraders === true ? (
@@ -105,9 +107,13 @@ const TableContent = ({
             ) : null}
 
             {userListings === true ? null : (
-              <button className="send__message__btn" onClick={handleMessage}>
-                Send Message
-              </button>
+              <SendMessageBtn
+                have={have}
+                need={need}
+                rate={rate}
+                by={by}
+                status={status}
+              />
             )}
           </div>
         </div>

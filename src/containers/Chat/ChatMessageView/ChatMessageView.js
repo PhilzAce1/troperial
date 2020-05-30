@@ -5,10 +5,7 @@ import dp from '../../../assets/images/profile-picture.png';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ChatBubble from '../../../components/ChatBubble/ChatBubble';
 
-import ScrollToBottom, {
-  useScrollToBottom,
-  useSticky,
-} from 'react-scroll-to-bottom';
+import ScrollToBottom from 'react-scroll-to-bottom'; // } //   useSticky, //   useScrollToBottom, // , {
 
 const ChatMessageView = ({
   messages,
@@ -17,16 +14,20 @@ const ChatMessageView = ({
 }) => {
   const lastMessage = useRef(null);
   const scrollToBottom = () => {
-    lastMessage.current.scrollIntoView({ behavior: 'smooth' });
+    lastMessage.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'start',
+    });
   };
   // const scrollToBottom = useScrollToBottom();
-  const [sticky] = useSticky();
+  // const [sticky] = useSticky();
   // map messageList
   useEffect(() => {
-    // scrollToBottom();
+    scrollToBottom();
   });
   const messageList = messages.map((message, i) => (
-    <ChatBubble fromMe={message.isMyMessage}>
+    <ChatBubble key={i} fromMe={message.isMyMessage}>
       {message.messageText}
     </ChatBubble>
   ));
@@ -59,12 +60,16 @@ const ChatMessageView = ({
           <ScrollToBottom mode="bottom">
             {/* Chat feed */}
             {messageList}
-            <div ref={lastMessage} />
           </ScrollToBottom>
+          {/* for scrollToBottom */}
+          <div ref={lastMessage} />
         </Scrollbars>
       </main>
       <section className="message__view--input-container">
-        <ChatInput onMessageSubmitted={onMessageSubmitted} />
+        <ChatInput
+          onMessageSubmitted={onMessageSubmitted}
+          user={selectedConversation.title}
+        />
       </section>
     </section>
   );

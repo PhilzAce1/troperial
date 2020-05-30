@@ -3,11 +3,8 @@
   border: 2px solid var(--troperial-blue);
   padding: 10px;
   border-radius: 10px;
+  animation: anit 1s linear 0s 1 normal forwards;
   box-sizing: border-box;
-  animation-name: anit;
-  animation-duration: 4s;
-  animation-iteration-count: 2;
-  animation-direction: normal;
 }
 .listing-card .have-block,
 .listing-card .need-block {
@@ -38,9 +35,11 @@
 }
 @keyframes anit {
   from {
-    background: red;
+    opacity: 0;
+    margin-left: 50%;
   }
   to {
-    background-color: blue;
+    opacity: 1;
+    margin-left: initial;
   }
 }

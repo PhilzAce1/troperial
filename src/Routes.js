@@ -37,9 +37,9 @@ const Routes = ({ checkUserProfile }) => {
       <UnauthenticatedRoute exact path="/signup">
         <SignUp />
       </UnauthenticatedRoute>
-      <UnauthenticatedRoute exact path="/messages">
+      {/* <UnauthenticatedRoute exact path="/messages">
         <ChatPage />
-      </UnauthenticatedRoute>
+      </UnauthenticatedRoute> */}
       <UnauthenticatedRoute exact path="/forgotpassword">
         <ForgotPassword />
       </UnauthenticatedRoute>
