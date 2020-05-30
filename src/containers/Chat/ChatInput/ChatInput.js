@@ -3,7 +3,7 @@ import './ChatInput.css';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 
 import sendIcon from '../../../assets/svgs/send-icon.svg';
-const ChatInput = ({ onMessageSubmitted }) => {
+const ChatInput = ({ onMessageSubmitted, user }) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const [shareAccountDetails, setShareAccountDetails] = useState(
@@ -31,7 +31,7 @@ const ChatInput = ({ onMessageSubmitted }) => {
       </div> */}
         {/* end of listings card */}
       </div>
-      <div className="chat__input-field-container">
+      {/* <div className="chat__input-field-container">
         <input
           type="text"
           placeholder="send messsage to @gidigbi"
@@ -41,7 +41,7 @@ const ChatInput = ({ onMessageSubmitted }) => {
           <span className="large-screen-send">send</span>{' '}
           <img src={sendIcon} alt="send icon" />
         </button>
-      </div>
+      </div> */}
       {/* <div className="chat__input-field-container"> */}
       <form
         className="chat__input-field-container"
@@ -49,13 +49,13 @@ const ChatInput = ({ onMessageSubmitted }) => {
       >
         <input
           type="text"
-          placeholder="send messsage to @gidigbi"
+          placeholder={`send messsage to ${user}`}
           className="chat__input-field"
           onChange={handleChange}
           value={textMessage}
         />
         <button className="send-message-btn">
-          <span className="large-screen-send">send</span>{' '}
+          <span className="large-screen-send">send</span>{' '}  
           <img src={sendIcon} alt="send icon" />
         </button>
       </form>

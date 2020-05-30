@@ -7,10 +7,6 @@ const UserConvoButton = ({
   isActive,
   onConversationItemSelected,
 }) => {
-  let btnClass = 'user-convo-btn';
-  if (isActive) {
-    btnClass += ' active-chat';
-  }
   return (
     <button
       className={`user-convo-btn ${isActive && 'active-chat'}`}
