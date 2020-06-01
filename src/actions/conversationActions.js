@@ -9,12 +9,13 @@ export const newMessageAdded = (textMessage) => ({
   type: 'NEW_MESSAGE_ADDED',
   textMessage,
 });
+export const listingDetailsChanged = (data) => ({});
 export const getMessage = (conversationId) => async (dispatch) => {};
 export const createUser = () => async (dispatch) => {};
 export const createConversation = () => async (dispatch) => {};
 export const newConversationFromListing = (data) => (dispatch) => {
-  // check if user exist : create user
-  // check if conversation with user exist : createConversation
-  // change the Selected Conversation
-  // change listing details
+  dispatch({
+    type: 'NEW_CONVERSATION_FROM_LISTING',
+    data,
+  });
 };
