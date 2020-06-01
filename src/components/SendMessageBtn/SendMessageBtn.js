@@ -1,9 +1,37 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-function SendMessageBtn(props) {
+import {
+  newConversationFromListing,
+  createConversation,
+  createUser as CreateCurrentUser,
+} from '../../actions/conversationActions';
+import {
+  createUser,
+  conversationExist,
+} from '../../libs/conversationHelpers';
+
+function SendMessageBtn(
+  props,
+  //   {
+  //   by,
+  //   have,
+  //   need,
+  //   newConversationFromListing,
+  //   rate,
+  //   conversations,
+  //   selectedConversation,
+  // }
+) {
+  async function onClick() {
+    // let currentUser = conversations.userId
+    //   ? conversations.userid
+    //   : await createUser(by);
+    // check if conversation with user exist : createConversation
+    // change the Selected Conversation
+    // change listing details
+  }
   console.log(props);
-  // console.log(have, need, rate, by);
   return (
     <Fragment>
       <button
@@ -16,7 +44,15 @@ function SendMessageBtn(props) {
   );
 }
 const mapStateToProps = (state) => {
-  return { state };
+  return {
+    conversations: state.conversation.conversations,
+    selectedConversation: state.conversation.selectedConversation,
+    state,
+  };
 };
 
-export default connect(mapStateToProps)(SendMessageBtn);
+export default connect(mapStateToProps, {
+  newConversationFromListing,
+  createConversation,
+  CreateCurrentUser,
+})(SendMessageBtn);

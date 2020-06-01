@@ -1,7 +1,7 @@
 import data from '../containers/Chat/data';
 let initialState = data;
 initialState.selectedConversation = initialState.conversations[1];
-
+initialState.currentUsername = 'philz';
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'SELECTED_CONVERSATION_CHANGED': {
