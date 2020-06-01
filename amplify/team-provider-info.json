@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-troperial-dev-175138-authRole",
+            "UnauthRoleArn": "arn:aws:iam::381335768416:role/amplify-troperial-dev-175138-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::381335768416:role/amplify-troperial-dev-175138-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-troperial-dev-175138-deployment",
+            "UnauthRoleName": "amplify-troperial-dev-175138-unauthRole",
+            "StackName": "amplify-troperial-dev-175138",
+            "StackId": "arn:aws:cloudformation:us-west-2:381335768416:stack/amplify-troperial-dev-175138/2fd61db0-a428-11ea-bb62-0a053a875a00",
+            "AmplifyAppId": "d2hkabqtw2rss6"
+        },
+        "categories": {
+            "auth": {
+                "troperial311da2fc": {}
+            }
+        }
+    }
+}
