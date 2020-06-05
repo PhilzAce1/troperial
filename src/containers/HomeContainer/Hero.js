@@ -135,7 +135,7 @@ const Hero = () => {
       {/**************HERO SECTION END HERE****************/}
 
       <section className="convince-visitor-section">
-        <div className="convice-visitor-header">
+      <div className="convice-visitor-header">
           <h1>Design and Built just for you.</h1>
           <p>
             No matter the FX need you have, Troperial was designed to

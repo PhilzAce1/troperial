@@ -4,12 +4,18 @@ import UnauthenticatedRoute from './components/UnAuthenticatedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import NotificationsPage from './pages/NotificationsPage';
 import ForgotPassword from './pages/ForgotPassword';
+import HowItWorksPage from './pages/HowItWorksPage';
 import ProfilePage from './pages/ProfilePage';
+import LandingPage from './pages/LandingPage';
 import ListingsPage from './pages/ListingsPage';
 import Dashboard from './pages/Dashboard';
+import HelpPage from './pages/HelpPage';
+import AboutPage from './pages/AboutPage';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/Login';
 import Home from './pages/Home';
+
+
 import {connect} from 'react-redux';
 import { checkUserProfile } from './actions/authActions';
 import ChatPage from './pages/ChatPage';
@@ -51,6 +57,18 @@ const Routes = ({checkUserProfile}) => {
       {/* <UnauthenticatedRoute exact path="/messages">
       <ChatPage/>
       </UnauthenticatedRoute> */}
+      <UnauthenticatedRoute exact path="/how-it-works">
+      <HowItWorksPage/>
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/help">
+      <HelpPage/>
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/about">
+      <AboutPage/>
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="//">
+      <LandingPage/>
+      </UnauthenticatedRoute>
     </Switch>
   );
 };
