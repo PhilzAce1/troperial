@@ -1,9 +1,9 @@
 import React from 'react'
 import './SecondSection.css';
 
-import person1 from '../../../assets/svgs/testimonial-1.svg';
-import person2 from '../../../assets/svgs/testimonial-2.svg';
-import person3 from '../../../assets/svgs/testimonial-3.svg';
+import person1 from '../../../assets/images/person1.png';
+import person2 from '../../../assets/images/person2.png';
+import person3 from '../../../assets/images/person3.png';
 const SecondSection = () => {
     return (
         <section className="secondSection">
