@@ -20,6 +20,7 @@ type Conversation
     @connection(name: "ConvoMsgs", sortField: "createdAt")
   associated: [ConvoLink] @connection(name: "AssociatedLinks")
   name: String!
+
   members: [String!]!
   createdAt: String
   updatedAt: String
@@ -30,6 +31,11 @@ type Message @model(subscriptions: null, queries: null) {
   id: ID!
   author: User @connection(name: "UserMessages", keyField: "authorId")
   authorId: String
+  isListing: Boolean!
+  by: String!
+  have: String!
+  rate: String!
+  need: String!
   content: String!
   conversation: Conversation @connection(name: "ConvoMsgs")
   messageConversationId: ID!

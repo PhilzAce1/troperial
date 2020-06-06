@@ -20,6 +20,11 @@ export const getUser = /* GraphQL */ `
         items {
           id
           authorId
+          isListing
+          by
+          have
+          rate
+          need
           content
           messageConversationId
           createdAt
@@ -63,6 +68,11 @@ export const getConvo = /* GraphQL */ `
         items {
           id
           authorId
+          isListing
+          by
+          have
+          rate
+          need
           content
           messageConversationId
           createdAt

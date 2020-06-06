@@ -1,11 +1,4 @@
 {
-	"auth": {
-		"troperial311da2fc": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
 	"api": {
 		"troperialchat": {
 			"service": "AppSync",
@@ -14,9 +7,10 @@
 				"authConfig": {
 					"additionalAuthenticationProviders": [],
 					"defaultAuthentication": {
-						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
-						"userPoolConfig": {
-							"userPoolId": "authtroperial311da2fc"
+						"authenticationType": "API_KEY",
+						"apiKeyConfig": {
+							"description": "",
+							"apiKeyExpirationDays": "365"
 						}
 					}
 				}

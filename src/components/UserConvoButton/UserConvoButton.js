@@ -9,15 +9,15 @@ const UserConvoButton = ({
 }) => {
   return (
     <button
-      className={btnClass}
-      onClick={() => onConversationItemSelected(conversation.id)}
+      className={`user-convo-btn ${isActive && 'active-chat'}`}
+      onClick={() => {
+        return onConversationItemSelected(conversation.id);
+      }}
     >
       <span>
         <img className="user-profile-picture" src={dp} alt="dp" />
       </span>
-      <span className="username">
-        @{conversation.title.split(' ')[0]}
-      </span>
+      <span className="username">@{conversation.title}</span>
       {conversation.messages.some(
         (message) => message.seen === false,
       ) && <span className="unread-messages"></span>}

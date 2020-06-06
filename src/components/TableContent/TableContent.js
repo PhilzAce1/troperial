@@ -16,7 +16,6 @@ const TableContent = ({
   action,
   handleMessage,
 }) => {
-  console.log(by);
   return (
     <Fragment>
       {trustedTraders === true ? (

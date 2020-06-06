@@ -50,7 +50,6 @@ const SignUp = () => {
           email, // optional
         },
       });
-      console.log(newUser);
       setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {

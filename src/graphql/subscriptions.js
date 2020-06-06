@@ -54,6 +54,11 @@ export const onCreateMessage = /* GraphQL */ `
         updatedAt
       }
       authorId
+      isListing
+      by
+      have
+      rate
+      need
       content
       conversation {
         id
@@ -82,6 +87,11 @@ export const onCreateConversation = /* GraphQL */ `
         items {
           id
           authorId
+          isListing
+          by
+          have
+          rate
+          need
           content
           messageConversationId
           createdAt
@@ -125,6 +135,11 @@ export const onCreateUser = /* GraphQL */ `
         items {
           id
           authorId
+          isListing
+          by
+          have
+          rate
+          need
           content
           messageConversationId
           createdAt
@@ -156,6 +171,11 @@ export const onUpdateUser = /* GraphQL */ `
         items {
           id
           authorId
+          isListing
+          by
+          have
+          rate
+          need
           content
           messageConversationId
           createdAt
@@ -187,6 +207,11 @@ export const onDeleteUser = /* GraphQL */ `
         items {
           id
           authorId
+          isListing
+          by
+          have
+          rate
+          need
           content
           messageConversationId
           createdAt
