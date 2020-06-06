@@ -1,6 +1,5 @@
-.post__listing-container  {
-    /* width: 100%;
-    overflow-x: hidden; */
+.post__listing-container .title  {
+    font-size: 1.1rem;
 }
 
 .exchange-desktop {

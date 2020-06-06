@@ -5,9 +5,7 @@ import { AppProvider } from './libs/contextLib';
 import awsExports from './aws-exports';
 import Amplify from 'aws-amplify';
 import App from './App';
-import './index.css';
 Amplify.configure(awsExports);
-
 ReactDOM.render(
     <AppProvider>
       <App />

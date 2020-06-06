@@ -16,7 +16,7 @@ const NavBar = () => {
 
           <ul className="mainLinks hideOnMobile">
             <li>
-              <Link className="link" to="/how">How it works</Link>
+              <Link className="link" to="/how-it-works">How it works</Link>
             </li>
             <li>
               <Link className="link" to="/news">Market News</Link>
@@ -48,7 +48,7 @@ const NavBar = () => {
         <div className="mobileNav">
           <div className="mobileNavContainer">
 
-              <NavLink activeClassName="home-active-link" to="/about" className="home-link">How it works</NavLink>
+              <NavLink activeClassName="home-active-link" to="/how-it-works" className="home-link">How it works</NavLink>
 
 
             <NavLink activeClassName="home-active-link" to="/news" className="home-link">Market News</NavLink>

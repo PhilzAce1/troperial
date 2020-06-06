@@ -4,6 +4,7 @@ import { AppContext } from '../libs/contextLib';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import Fade from 'react-reveal/Fade';
 /**Images */
 import SignInSvg from '../assets/images/troperial-sign-in-svg.PNG';
 import img from './../assets/images/Logo.png';
@@ -43,7 +44,7 @@ const SignIn = () => {
       <OnboardingMain>
         <OnboardingFormContainer>
           <ContentContainer>
-            <img src={img} alt="troperial logo" />
+          <Link to="/"><img src={img} alt="troperial logo" /></Link>
             <h2>
               Sign In to{' '}
               <span className="troperial-green">Troperial</span>
@@ -59,39 +60,50 @@ const SignIn = () => {
               />
             )}
           </ContentContainer>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {errors.email?.type === 'required' && (
-              <InputError>Your email is required</InputError>
-            )}
-            {errors.email?.type === 'pattern' && (
-              <InputError>
-                Please provide a valid email address
-              </InputError>
-            )}
-            <CustomInput
-              showError={errors.email ? true : false}
-              register={register({
-                required: true,
-                pattern: emailRegex,
-              })}
-              type="text"
-              name="email"
-              label="Email"
-              placeholder="Email"
-            />
-            {errors.password?.type === 'required' && (
-              <InputError>Your password is required</InputError>
-            )}
-            <CustomInput
-              showError={errors.password ? true : false}
-              register={register({ required: true })}
-              name="password"
-              type="password"
-              label="Password"
-              placeholder="Password"
-            />
-            <CustomButton loading={isLoading}>Sign In</CustomButton>
-          </form>
+          <Fade cascade bottom>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                {errors.email?.type === 'required' && (
+                  <InputError>Your email is required</InputError>
+                )}
+                {errors.email?.type === 'pattern' && (
+                  <InputError>
+                    Please provide a valid email address
+                  </InputError>
+                )}
+                <CustomInput
+                  showError={errors.email ? true : false}
+                  register={register({
+                    required: true,
+                    pattern: emailRegex,
+                  })}
+                  type="text"
+                  name="email"
+                  label="Email"
+                  placeholder="Email"
+                />
+              </div>
+
+              <div>
+                {errors.password?.type === 'required' && (
+                  <InputError>Your password is required</InputError>
+                )}
+                <CustomInput
+                  showError={errors.password ? true : false}
+                  register={register({ required: true })}
+                  name="password"
+                  type="password"
+                  label="Password"
+                  placeholder="Password"
+                />
+              </div>
+              <div>
+                <CustomButton loading={isLoading}>
+                  Sign In
+                </CustomButton>
+              </div>
+            </form>
+          </Fade>
           <ContentContainer>
             <p className="custom-cta">
               Forgot Your Password?{' '}

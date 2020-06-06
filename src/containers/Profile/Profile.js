@@ -13,12 +13,16 @@ import './Profile.css';
 import PaddedContainer from '../../components/PaddedContainer/PaddedContainer';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
+import BackDrop from '../../components/BackDrop/BackDrop';
+
 const Profile = () => {
   useEffect(() => {
     getUserDetails();
   }, []);
 
   const [fetched, setFetched] = useState(false);
+  const [controlView, setControlView] = useState(false);
+  const [showBackDrop, setShowBackDrop] = useState(false);
   const [defaultValues, setDefaultValues] = useState({
     firstname: '',
     lastname: '',
@@ -61,9 +65,17 @@ const Profile = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleBackDrop = () => {
+    setShowBackDrop(!showBackDrop)
+    setControlView(!controlView);
+  };
   return (
-    <Container>
+    <Container showBackDrop={controlView}>
       <NavBar page="Profile" icon="icon-profile" />
+      {showBackDrop ? (
+        <BackDrop renderBankAccoutForm={true} handleBackDrop={handleBackDrop} />
+      ) : null}
       <div className="listingsCustom__container">
         <AppAside />
         <AppMain>
@@ -95,7 +107,7 @@ const Profile = () => {
             </TabPanel>
             <TabPanel>
               <PaddedContainer padding="0 25px 25px 25px">
-                <BankAccount />
+                <BankAccount handleBackDrop={handleBackDrop}/>
               </PaddedContainer>
             </TabPanel>
             <TabPanel>

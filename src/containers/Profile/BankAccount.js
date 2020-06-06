@@ -6,7 +6,7 @@ const title = 'Add Your Bank Account Details';
 const message =
   'Add your bank accounts to troperial to make quicker and faster trades. Make sure the account name matches whats on your Verification ID.';
 const buttonText = 'Add a new bank';
-const BankAccount = () => {
+const BankAccount = ({handleBackDrop}) => {
   return (
     <section className="profile-container">
       <Banner
@@ -14,6 +14,7 @@ const BankAccount = () => {
         title={title}
         message={message}
         buttonText={buttonText}
+        onClick={handleBackDrop}
       />
       <div className="card_grids">
         <BankCards />

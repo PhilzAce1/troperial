@@ -1,0 +1,288 @@
+.howItWorks__container {
+ overflow-x: hidden;
+} 
+.howItWorks__header {
+    background: var(--mobile-verfied);
+    min-height: 50vh;
+    margin-top: 0 !important;
+}
+.howItWorks__header .page-introduction-title {
+    display: flex;
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 90%; 
+    margin: 0 auto;
+}
+.howItWorks__header .page-introduction-title h1 {
+    text-transform: capitalize;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+.howItWorks__header .page-introduction-title p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+.howItWorks__header .page-introduction-title .howItWorks_signup--btn {
+    position: relative;
+    top: 10px;
+    text-decoration: none;
+    color: #fff;
+    background: var(--troperial-blue);
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.howItWorks__info-section {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 200px 0;
+}
+.howItWorks__info-section .howItWorks__desktop-images {
+    display: none;
+}
+
+.app_guide-section .timeline .item .timeline-icon {
+    display: none;
+}
+.app_guide-section .timeline {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.app_guide-section .timeline .item .content h1 {
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  margin-bottom: 5px;
+} 
+
+.app_guide-section .timeline .item .content p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+color: var(--dark-grey);
+} 
+.app_guide-section .timeline .item .content .platform-card{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 10px;
+} 
+.app_guide-section .timeline .item .content .platform-card img{
+  width: 100%;
+} 
+.app_guide-section .timeline .item .content .card-1{
+  background: var(--warning-yellow);
+} 
+.app_guide-section .timeline .item .content .card-2{
+    background: var(--troperial-blue);
+} 
+.app_guide-section .timeline .item .content .card-3{
+    background: #fafafa
+} 
+
+@media (min-width: 768px) {
+.howItWorks__header {
+    min-height: 30vh;
+}
+.howItWorks__header .page-introduction-title {
+    height: 20vh;
+}
+.howItWorks__header .page-introduction-title h1 {
+    font-size: 2.5rem;
+}
+.howItWorks__header .page-introduction-title p {
+    font-size: 1.5rem;
+    width: 60%;
+    margin: auto;
+}
+.howItWorks__header .page-introduction-title .howItWorks_signup--btn {
+    position: relative;
+    top: 20px;
+    font-size: 1.5rem;
+}
+
+.howItWorks__info-section {
+    width: 75%;
+}
+.app_guide-section .timeline .item .content h1 {
+  font-size: 1.8rem;
+} 
+
+.app_guide-section .timeline .item .content p {
+  font-size: 1.5rem;
+} 
+.app_guide-section .timeline .item .content .platform-card{
+  padding: 20px;
+  margin-top: 30px;
+} 
+}
+
+@media (min-width: 1000px) {
+    .howItWorks__info-section .howItWorks__desktop-images {
+        display: block;
+    }
+    .app_guide-section .timeline .item .timeline-icon {
+        display: block;
+    }
+    .app_guide-section .timeline .item .content .platform-card{
+      display: none;
+      } 
+
+      .howItWorks__header {
+        min-height: 45vh;
+    }
+    .howItWorks__header .page-introduction-title {
+        height: 25vh;
+    }
+    .howItWorks__header .page-introduction-title h1 {
+        font-size: 2.4rem;
+    }
+    .howItWorks__header .page-introduction-title p {
+        font-size: 1.2rem;
+    }
+    .howItWorks__header .page-introduction-title .howItWorks_signup--btn {
+        top: 20px;
+        font-size: 1.2rem;
+    }
+
+    
+    .howItWorks__info-section {
+        width: 70%;
+        margin: 0 auto;
+        padding: 150px 0 200px 0;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    .app_guide-section .timeline {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .app_guide-section .timeline li {
+      position: relative;
+    }
+    .app_guide-section .timeline li .item {
+      position: relative;
+      min-height: 200px;
+      padding: 0 20px 20px 60px;
+      margin-left: 20px;
+      border-left: 2px solid var(--light-grey);
+    }
+    .app_guide-section .timeline li:first-child .item {
+      border-left: 2px solid var(--troperial-green);
+    }
+    .app_guide-section .timeline li:last-child .item {
+      border-left: 2px solid transparent;
+    }
+    .app_guide-section .timeline li .item .timeline-icon {
+       position: absolute;
+       top: -8px;
+       left: -20px;
+       width: 35px;
+       height: 35px;
+       line-height: 50px;
+       text-align: center;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       background: #fff;
+       border-radius: 100%;
+       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .app_guide-section .timeline li .item .green-check {
+        width: 40px;
+        height: 40px;
+        box-shadow: none;
+        border: 2px solid var(--troperial-green);
+        left: -25px;
+    }
+      .app_guide-section .timeline li .item .content h1,
+      .app_guide-section .timeline .item .content p {
+        margin: 0;
+        padding: 0;
+      }
+
+    .app_guide-section .timeline .item .content h1 {
+      font-size: 1.5rem;
+      position: relative;
+      top: -10px;
+      text-transform: capitalize;
+    } 
+    
+    .app_guide-section .timeline .item .content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    color: var(--dark-grey);
+    } 
+    .howItWorks__desktop-images .platform-card {
+        width: 60%;
+        box-sizing: border-box;
+        margin: 0 auto 20px auto;
+        padding: 30px;
+        border-radius: 10px;
+        position: relative;
+        left: 30px;
+    }
+   .howItWorks__desktop-images .platform-card img{
+      width: 100%;
+    } 
+    .howItWorks__desktop-images .card-1{
+      background: var(--warning-yellow);
+      top: -20px;
+    } 
+    .howItWorks__desktop-images .card-2{
+        background: var(--troperial-blue);
+        top: 50px;
+    } 
+    .howItWorks__desktop-images .card-3{
+        background: #fafafa;
+        top: 150px;
+    } 
+    
+}
+
+@media (min-width: 1800px) { 
+
+      .howItWorks__header {
+        min-height: 40vh;
+    }
+    .howItWorks__header .page-introduction-title {
+        height: 25vh;
+    }
+    .howItWorks__header .page-introduction-title h1 {
+        font-size: 3rem;
+    }
+ 
+    .howItWorks__info-section {
+        width: 80%;
+        padding: 150px 0 200px 0;
+    }
+    .app_guide-section .timeline li .item {
+      min-height: 300px;
+      padding: 0 20px 20px 90px;
+    }
+    .app_guide-section .timeline li .item .timeline-icon {
+       width: 35px;
+       height: 35px;
+      }
+      .app_guide-section .timeline li .item .green-check {
+        width: 45px;
+        height: 45px;
+    }
+
+    .app_guide-section .timeline .item .content h1 {
+      font-size: 2rem;
+      top: -10px;
+    }  
+    .app_guide-section .timeline .item .content p {
+      font-size: 1.8rem;
+    } 
+    .howItWorks__desktop-images .platform-card {
+        width: 60%;
+        left: 50px;
+    }
+    
+}

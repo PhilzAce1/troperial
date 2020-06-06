@@ -1,0 +1,161 @@
+/*************** DETAILS SECTION STYLES *************/
+.desktop-group {
+	display: none;
+}
+.details-section {
+	position: relative;
+	z-index: -1;
+	background: var(--troperial-dim-blue);
+	padding: 5% 5% 10% 5%;
+}
+.mobile-group {
+	display: flex;
+	flex-direction: column;
+}
+.exchange-troperial-logo {
+	width: 180px;
+	align-self: flex-end;
+}
+.chat-user {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+.mobile-group-card-1,
+.mobile-group-card-2 {
+	position: relative;
+	background: #fff;
+	width: 50%;
+	padding: 10px;
+	margin: 12% 0;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.bypass {
+	position: absolute;
+	height: 90%;
+}
+.bypass-2 {
+	top: 44%;
+	left: 94%;
+}
+.bypass-1 {
+	bottom: 42%;
+	left: 94%;
+}
+.mobile-group-card-2 {
+	align-self: center;
+}
+.details-section .header h1 {
+	width: 80%;
+	margin-bottom: 0;
+}
+.details-section .header p {
+	color: var(--dark-grey);
+	font-size: 1.1rem;
+	line-height: 1.6;
+	width: 90%;
+}
+.details-section .header .learn__more {
+	color: var(--troperial-blue);
+	text-decoration: none;
+	font-size: 1.09rem;
+}
+.info-grid .grid p {
+	color: var(--dark-grey);
+	font-size: 1.09rem;
+	line-height: 1.6;
+	width: 85%;
+}
+@media (min-width: 500px) {
+	.mobile-group {
+		display: none;
+	}
+	.desktop-group {
+		display: block;
+		width: 100%;
+	}
+}
+
+@media (min-width: 700px) {
+    /*************** DETAILS MEDIA QUERY *************/
+	.desktop-group {
+		display: block;
+	}
+	.mobile-group {
+		display: none;
+	}
+	.details-section {
+		padding: 100px 10% 100px 10%;
+	}
+	.details-section .header {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	.details-section .header h1 {
+	    margin: 0 auto;
+		font-size: 2rem;
+	}
+	.details-section .header p{
+		font-size: 1.4rem;
+		margin: 10px auto;
+	}
+	.details-section .header .learn__more {
+		font-size: 1.2rem;
+	}
+	.info-grid .grid p {
+		color: var(--dark-grey);
+		font-size: 1.09rem;
+		line-height: 1.6;
+		width: 85%;
+	}
+	.info-grid .grid p {
+		font-size: 1.1rem;
+		line-height: 1.5;
+		width: 100%;
+	}
+	.info-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 10px;
+	}
+	.info-grid .grid {
+		text-align: center;
+	}
+	/*************** END OF DETAILS SECTION STYLES *************/
+}
+
+@media (min-width: 1200px) {
+    	/* details */
+	.details-section .header {
+		text-align: center;
+		padding: 10px 0;
+	}
+	.details-section .header h1 {
+		width: 30%;
+		margin: 0 auto;
+		font-size: 1.8rem;
+	}
+	.details-section .header p {
+		font-size: 1.2rem;
+		width: 40%;
+		margin: 10px auto;
+	}
+	.details-section .header .learn__more {
+		font-size: 1.2rem;
+	}
+	.info-grid .grid h1 {
+		font-size: 1.5rem;
+		width: 100%;
+	}
+	.info-grid {
+		grid-gap: 50px 100px;
+	}
+}
+
+@media (min-width: 1800px) {
+    .info-grid p {
+		font-size: 1.5rem;
+	}
+	
+}

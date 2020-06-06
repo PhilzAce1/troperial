@@ -92,7 +92,7 @@ const ForgotPassword = () => {
     return (
       <OnboardingFormContainer>
         <ContentContainer>
-          <img src={img} alt="troperial-logo" />
+        <Link to="/"><img src={img} alt="troperial logo" /></Link>
           <h2>Forgot Your Password</h2>
           <p>
             Enter your Troperial email address and we'll

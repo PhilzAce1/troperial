@@ -1,0 +1,123 @@
+.help__header {
+    background: var(--mobile-verfied);
+    min-height: 40vh;
+    margin-top: 0 !important;
+}
+.help__header .page-introduction-title {
+    display: flex;
+    height: 25vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.help-title {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    padding: 0 5%;
+}
+.help__search--form {
+    width: 80%;
+    margin: 0 auto;
+    border: none;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    outline: transparent;
+}
+
+.faq__section {
+    padding: 10% 0% 150px 0%;
+    width: 90%;
+    margin: 0 auto;
+}
+.send__email--section p {
+    color: var(--dark-grey);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+.send__email--section {
+    text-align: center;
+}
+.send_email-button {
+    border: 1px solid var(--troperial-green);
+    padding: 40px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.send_email-button button {
+   background: transparent;
+   outline: none;
+   cursor: pointer;
+   border: none;
+   font-size: 1.2rem;
+   color:var(--troperial-blue)
+}
+
+.accordion-group {
+    margin-bottom: 100px;
+}
+@media (min-width: 768px) {
+    .faq__section {
+        padding: 2.5% 0% 150px 0%;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .help__header {
+        min-height: 30vh;
+
+    }
+    .help__header .page-introduction-title {
+        height: 20vh;
+    
+    }
+    .help-title {
+        font-size: 2.5rem;
+    }
+    .send_email-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        margin: 0 auto;
+        padding: 50px;
+   
+    }
+    .send_email-button button {
+       font-size: 1.5rem;
+      margin: 0 10px;
+    }
+    }
+    @media (min-width: 1000px) {
+    
+    
+        .help__header {
+            min-height: 45vh;
+           
+    
+        }
+        .help__header .page-introduction-title {
+            height: 30vh;
+        }
+        .help-title {
+            font-size: 2.2rem;
+            padding: 0;
+        }
+        .help__search--form {
+            font-size: 1rem;
+            padding: 20px 15px;
+            position: relative;
+            top: 20px;
+        }
+        
+    }
+    
+    @media (min-width: 1800px) { 
+
+        .help-title {
+            font-size: 2.5rem;
+            padding: 0;
+        }
+    }

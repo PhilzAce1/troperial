@@ -3,10 +3,10 @@ import './PostTrade.css';
 import HybridInput from '../HybridInput/HybridInput';
 import CustomButton from '../CustomButton/CustomButton';
 // import InputError from '../InputError/InputError';
-const PostTrade = () => {
+const PostTrade = ({title}) => {
   return (
     <div className="post__listing-container">
-      <h2 className="title">Post a Listing</h2>
+      <h2 className="title">{title}</h2>
       <div className="first__form__group">
         <HybridInput line={true} />
         <HybridInput line={true} />
@@ -34,4 +34,7 @@ const PostTrade = () => {
   );
 };
 
+PostTrade.defaultProps = {
+  title: 'Post a listing'
+}
 export default PostTrade;
