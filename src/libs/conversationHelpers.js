@@ -29,7 +29,6 @@ export const createUser = async (username) => {
         filter: { username: { eq: newUser } },
       }),
     );
-    console.log(items);
     if (items.length > 0) return { success: true, payload: items[0] };
     const {
       data: { createUser: item },
@@ -65,7 +64,6 @@ export const conversationExist = async (user1, user2) => {
         },
       },
     } = await API.graphql(graphqlOperation(getUser, { id: user2 }));
-    console.log(user1, user2, conversations, otherUserConversations);
     if (conversations.length < 1 || otherUserConversations < 1)
       return { result };
     for (let x = 0; x < conversations.length; x++) {
