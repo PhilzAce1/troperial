@@ -20,7 +20,6 @@ export default function (state = State, action) {
       return newState;
     }
     case 'SET_USER_CONVERSATIONS': {
-      console.log(action.payload);
       const newState = { ...state };
       if (action.payload.items.length < 1) return newState;
       newState.conversations = [];
@@ -125,6 +124,7 @@ export default function (state = State, action) {
         id: action.payload.id,
         title: action.payload.members,
         messages: [],
+        stack: [],
       });
       return newState;
     }
@@ -136,6 +136,7 @@ export default function (state = State, action) {
           conversation.id === action.payload.conversationId,
       );
       if (!convo) return newState;
+
       convo.stack.push(action.payload.stackNumber);
       convo.messages.push({
         imageUrl: null,
@@ -151,7 +152,6 @@ export default function (state = State, action) {
         isSending: true,
         stackId: action.payload.stackNumber,
       });
-      console.log(newState);
 
       return newState;
     }
@@ -176,7 +176,6 @@ export default function (state = State, action) {
         convo.stack,
         action.payload.stackNumber,
       );
-      console.log(newState);
       return newState;
     }
     default:

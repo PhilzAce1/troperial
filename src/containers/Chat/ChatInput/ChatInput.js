@@ -90,7 +90,6 @@ const ChatInput = ({
       textMessage,
       conversation.user.id,
     );
-    console.log(msg);
     return updateMessageStack(
       selectedConversation.id,
       msg.stackId,

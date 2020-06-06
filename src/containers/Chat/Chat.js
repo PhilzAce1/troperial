@@ -51,8 +51,6 @@ const Chat = ({
               conversations: { items: conversations },
             },
           } = a;
-          console.log('someog', a);
-          console.log(username);
           userDetails(id, username);
           return userConversations(conversations, username);
         } else {
@@ -62,7 +60,6 @@ const Chat = ({
         console.log(e);
       }
     }
-    return console.log('done');
   }
   useEffect(() => {
     getUserData();
@@ -87,18 +84,17 @@ const Chat = ({
           } = eventData.value.data.onCreateMessage;
 
           if (conversation.user.id === authorId)
-            return console.log('got it ');
-          newExternalMessage(
-            messageConversationId,
-            content,
-            createdAt,
-            isListing,
-            authorId,
-            by,
-            have,
-            need,
-            rate,
-          );
+            newExternalMessage(
+              messageConversationId,
+              content,
+              createdAt,
+              isListing,
+              authorId,
+              by,
+              have,
+              need,
+              rate,
+            );
         },
       });
 

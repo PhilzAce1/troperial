@@ -42,7 +42,6 @@ function SendMessageBtn({
         conversations: { items: conversations },
       },
     } = await createUser(user.username);
-    console.log(conversations);
     userDetails(id, username);
     userConversations(conversations, username);
   }
@@ -50,7 +49,6 @@ function SendMessageBtn({
     // if (!user.username) return alert('please update you Profile');
     setLoading(true);
     const convo = finders(conversation.conversations, by);
-    // return console.log(convo)
     if (convo.exist) {
       conversationChanged(convo.conversation.id);
       listingChanged(true, by, have, need, rate);
@@ -58,7 +56,6 @@ function SendMessageBtn({
       return history.push('/messages');
     }
     // TODO ...if conversation on the Local state exist with that user ...simply go there
-    console.log(conversation);
     try {
       if (
         conversation.user.username === undefined ||

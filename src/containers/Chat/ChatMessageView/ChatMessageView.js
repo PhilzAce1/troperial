@@ -33,7 +33,6 @@ const ChatMessageView = ({
   };
 
   useEffect(() => {
-    console.log(selectedConversation);
     if (
       selectedConversation &&
       selectedConversation.messages &&
