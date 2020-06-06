@@ -1,20 +1,15 @@
 {
     "dev": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-troperial-dev-175138-authRole",
-            "UnauthRoleArn": "arn:aws:iam::381335768416:role/amplify-troperial-dev-175138-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::381335768416:role/amplify-troperial-dev-175138-authRole",
-            "Region": "us-west-2",
-            "DeploymentBucketName": "amplify-troperial-dev-175138-deployment",
-            "UnauthRoleName": "amplify-troperial-dev-175138-unauthRole",
-            "StackName": "amplify-troperial-dev-175138",
-            "StackId": "arn:aws:cloudformation:us-west-2:381335768416:stack/amplify-troperial-dev-175138/2fd61db0-a428-11ea-bb62-0a053a875a00",
-            "AmplifyAppId": "d2hkabqtw2rss6"
-        },
-        "categories": {
-            "auth": {
-                "troperial311da2fc": {}
-            }
+            "AuthRoleName": "amplify-troperial-dev-173652-authRole",
+            "UnauthRoleArn": "arn:aws:iam::180152031566:role/amplify-troperial-dev-173652-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::180152031566:role/amplify-troperial-dev-173652-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-troperial-dev-173652-deployment",
+            "UnauthRoleName": "amplify-troperial-dev-173652-unauthRole",
+            "StackName": "amplify-troperial-dev-173652",
+            "StackId": "arn:aws:cloudformation:us-east-1:180152031566:stack/amplify-troperial-dev-173652/ca5a5e80-a74a-11ea-840e-0a05dbc7583b",
+            "AmplifyAppId": "d2l111c56w181c"
         }
     }
 }

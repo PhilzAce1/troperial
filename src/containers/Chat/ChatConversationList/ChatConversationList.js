@@ -7,14 +7,19 @@ const ChatConversationList = ({
   selectedConversationId,
   onConversationItemSelected,
 }) => {
-  const conversationList = conversations.map((conversation, i) => (
-    <UserConvoButton
-      key={conversation.id}
-      isActive={conversation.id === selectedConversationId}
-      conversation={conversation}
-      onConversationItemSelected={onConversationItemSelected}
-    />
-  ));
+  let conversationList;
+  if (conversations && conversations.length > 0) {
+    conversationList = conversations.map((conversation, i) => (
+      <UserConvoButton
+        key={conversation.id}
+        isActive={conversation.id === selectedConversationId}
+        conversation={conversation}
+        onConversationItemSelected={onConversationItemSelected}
+      />
+    ));
+  } else {
+    conversationList = 'something';
+  }
   return (
     <section className="conversation__list">
       <Scrollbars
