@@ -1,11 +1,12 @@
 import React from 'react';
 import './ThirdSection.css';
-import desktopSvg from '../../../assets/svgs/Group.svg';
+import desktopSvg from '../../../assets/svgs/platform-summary-group.svg';
 import boyUser from '../../../assets/images/path-image-1.png';
 import girlUser from '../../../assets/images/path-image-2.png';
 import bypass1 from '../../../assets/svgs/bypass-1.svg';
 import bypass2 from '../../../assets/svgs/bypass-2.svg';
 import exchangeLogo from '../../../assets/svgs/exchange-troperial-logo.png';
+import Slide from 'react-reveal/Slide';
 import {Link} from 'react-router-dom';
 const ThirdSection = () => {
     return (
@@ -63,6 +64,7 @@ const ThirdSection = () => {
         </div>
         {/* END OF MOBILE SVG GROUP MARKUP */}
         <div className="info-grid">
+        <Slide right>
           <div className="grid">
             <h1>Buyer</h1>
             <p>
@@ -70,6 +72,8 @@ const ThirdSection = () => {
               conversation that leads to an exchange
             </p>
           </div>
+          </Slide>
+          <Slide right>
           <div className="grid">
             <h1>Platform</h1>
             <p>
@@ -77,6 +81,8 @@ const ThirdSection = () => {
               conversation that leads to an exchange
             </p>
           </div>
+          </Slide>
+          <Slide right>
           <div className="grid">
             <h1>FX Trader</h1>
             <p>
@@ -84,6 +90,7 @@ const ThirdSection = () => {
               conversation that leads to an exchange
             </p>
           </div>
+          </Slide>
         </div>
       </section>
     )

@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'GT Walsheim';
+    src: url('./assets/fonts/gt-walsheim-web.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GT Walsheim';
+    src: url('./assets/fonts/gt-walsheim-medium-web.ttf')
+      format('truetype');
+    font-weight: medium;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GT Walsheim';
+    src: url('./assets/fonts/gt-walsheim-bold-web.ttf')
+      format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GT Walsheim';
+    src: url('./assets/fonts/gt-walsheim-light-web.ttf')
+      format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+  }
+  
+  :root {
+    /* Colors */
+    --original-black: #000000;
+    --original-white: #ffffff;
+    --troperial-banner-blue: #e1f6ff;
+    --troperial-banner-border: #99cef9;
+
+    --chat-feed: #fafafa;
+    --from-contact: #e9e9e9;
+    --from-me: #0a92ef;
+
+    --dark-grey: #737a91;
+    --light-grey: #e8e8e8;
+    --mobile-verfied: #bdf6dc;
+    --troperial-green: #00d569;
+    --troperial-blue: #0383ef;
+    --troperial-dim-blue: #f3f8ff;
+    --warning-yellow: #f2c94c;
+    --danger-red: #f8e8e9;
+    --danger-red-icon: #e53e3e;
+    --error-color: #ff9ca1;
+    --success-green: #38a169;
+    /* Font */
+    --general-font: 'GT Walsheim';
+    --normal-font-weight: medium;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--general-font);
+    font-weight: var(--normal-font-weight);
+  }
+  

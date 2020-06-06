@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './Help.css';
 
 import HomeNavBar from '../../components/HomeNavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
-import check from '../../assets/svgs/green-check.svg';
+import check from '../../assets/svgs/email-icon.svg';
+import Accordion from '../../components/Accordion/Accordion';
+
+
 const Help = () => {
   return (
     <section className="help__container">
@@ -19,7 +22,13 @@ const Help = () => {
         </div>
       </header>
       <section className="faq__section">
-
+     <div className="accordion-group">
+     <Accordion/>
+        <Accordion/>
+        <Accordion/>
+        <Accordion/>
+        <Accordion/>
+     </div>
 
          <div className="send__email--section">
              <p>Don't see your question here?</p>

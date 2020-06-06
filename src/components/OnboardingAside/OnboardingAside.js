@@ -1,17 +1,21 @@
 import React from 'react';
 import img from '../../assets/images/money-bag.png';
 import troperialLogo from '../../assets/images/Logo.png';
+import {Link} from 'react-router-dom';
 import './OnboardingAside.css';
 
 const OnboardingAside = ({ illustration }) => {
   return (
     <aside className="onboardingContainer__aside">
       <div className="onboardingContainer__aside-top">
-        <img
+      <Link to="/">
+      <img
           className="onboardingContainer__troperialLogo"
           src={troperialLogo}
           alt="troperial logo"
         />
+      </Link>
+       
         <h3 className="intro">
           Exchange money <img className="moneyBag" src={img} alt="money-bag" />,<br />
           no matter where you are.

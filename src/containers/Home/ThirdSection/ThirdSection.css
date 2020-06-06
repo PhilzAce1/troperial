@@ -6,7 +6,7 @@
 	position: relative;
 	z-index: -1;
 	background: var(--troperial-dim-blue);
-	padding: 500px 5% 10% 5%;
+	padding: 5% 5% 10% 5%;
 }
 .mobile-group {
 	display: flex;
@@ -17,7 +17,9 @@
 	align-self: flex-end;
 }
 .chat-user {
-	width: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
 }
 .mobile-group-card-1,
 .mobile-group-card-2 {
@@ -50,14 +52,14 @@
 }
 .details-section .header p {
 	color: var(--dark-grey);
-	font-size: 1.09rem;
+	font-size: 1.1rem;
 	line-height: 1.6;
-	width: 85%;
+	width: 90%;
 }
 .details-section .header .learn__more {
 	color: var(--troperial-blue);
 	text-decoration: none;
-	font-size: 1rem;
+	font-size: 1.09rem;
 }
 .info-grid .grid p {
 	color: var(--dark-grey);
@@ -84,7 +86,7 @@
 		display: none;
 	}
 	.details-section {
-		padding: 250px 5% 10% 5%;
+		padding: 100px 10% 100px 10%;
 	}
 	.details-section .header {
 		text-align: center;
@@ -127,7 +129,7 @@
     	/* details */
 	.details-section .header {
 		text-align: center;
-		padding: 50px 0;
+		padding: 10px 0;
 	}
 	.details-section .header h1 {
 		width: 30%;
@@ -135,8 +137,8 @@
 		font-size: 1.8rem;
 	}
 	.details-section .header p {
-		font-size: 1rem;
-		width: 35%;
+		font-size: 1.2rem;
+		width: 40%;
 		margin: 10px auto;
 	}
 	.details-section .header .learn__more {
@@ -147,10 +149,13 @@
 		width: 100%;
 	}
 	.info-grid {
-		grid-gap: 100px;
+		grid-gap: 50px 100px;
 	}
 }
 
 @media (min-width: 1800px) {
-    
+    .info-grid p {
+		font-size: 1.5rem;
+	}
+	
 }

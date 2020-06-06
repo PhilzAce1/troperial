@@ -8,7 +8,7 @@
    margin: 25px 0;
 }
 .secondSection .header p{
-   font-size: 1.2rem;
+   font-size: 1.1rem;
    width: 90%;
    line-height: 1.6;
 }
@@ -49,7 +49,7 @@
     bottom: -15px;
 }
 .card-3__img {
-    width: 70%;
+    width: 200px;
     position: relative;
     left: 55px;
     bottom: 0px;
@@ -69,7 +69,7 @@
 
 @media (min-width: 768px) {
     .secondSection {
-        margin-top: 10%;
+        margin-top: 5%;
     }
     .secondSection .header p{
        font-size: 1.3rem;
@@ -77,18 +77,21 @@
     .users__showcase .horizontal__scroll--container .card {
         width: 40%;
     }
+    .card-3__img {
+        width: 70%;
+    }
 
 }
 
 @media (min-width: 1200px) {
     .secondSection {
-        margin: 5% auto 5% auto;
+        margin: 80px auto 80px auto;
         width: 80%;
     }
     .secondSection .header {
        padding: 0 0;
        text-align: center;
-       margin: 25px auto;
+       margin: 0px auto 25px auto;
     }
     .secondSection .header p{
        font-size: 1.2rem;

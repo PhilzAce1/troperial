@@ -4,7 +4,7 @@ import dp from '../../../assets/images/profile-picture.png';
 const ChatUserProfile = ({username, tradeCount}) => {
     return (
         <section className="user__profile">
-            <img className="user__profile-temporary-dp" src={dp} alt="display picture"/>
+            <img className="user__profile-temporary-dp" src={dp} alt="user dp"/>
             <p className="user__profile-username">@{username}</p>
     <p className="user__profile-trade-count">{tradeCount} successful trades</p>
             <button className="user__profile-trusted-trader-btn">Mark as trusted trader</button>

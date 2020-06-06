@@ -6,19 +6,20 @@ input[type=text], input[type=password] {
 .customInputContainer__input-group input {
   display: block;
   width: 100%;
-  padding: 13px 13px;
+  padding: 14px 14px;
   box-sizing: border-box;
   margin: 18px 0;
   transition: 0.5s ease-in-out;
-  border: 1.1px solid var(--light-grey);
   border-radius: 10px;
   font-size: medium;
   outline: none;
   color: var(--dark-grey);
+  border: 1.6px solid var(--light-grey);
 }
 .customInputContainer__input-group input:focus,
 .customInputContainer__input-group input:hover {
-  border: 1.3px solid var(--troperial-blue);
+  border-color: var(--troperial-blue);
+  transition: 0.5s ease-in;
 }
 .customInputContainer__input-group input:focus::placeholder {
   color: transparent;
@@ -41,7 +42,7 @@ input[type=text], input[type=password] {
   display: block;
 }
 .customInputContainer__input-group input.error {
-  border: 1.1px solid var(--error-color);
+  border-color: var(--error-color);
 }
 .customInputContainer__input-hint {
   display: none;
@@ -53,4 +54,10 @@ input[type=text], input[type=password] {
 .customInputContainer__input-group:focus-within
   .customInputContainer__input-hint {
   display: block;
+}
+@media  (min-width: 768px) {
+  .customInputContainer__input-group input {
+    padding: 15px 15px;
+    border: 1.8px solid var(--light-grey);
+  }
 }

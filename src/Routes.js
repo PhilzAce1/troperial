@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import UnauthenticatedRoute from './components/UnAuthenticatedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
@@ -13,21 +13,24 @@ import HelpPage from './pages/HelpPage';
 import AboutPage from './pages/AboutPage';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/Login';
-import Home from './pages/Home';
 
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { checkUserProfile } from './actions/authActions';
 import ChatPage from './pages/ChatPage';
+import NewsPage from './pages/NewsPage';
 
-const Routes = ({checkUserProfile}) => {
+const Routes = ({ checkUserProfile }) => {
   useEffect(() => {
     checkUserProfile();
   }, [checkUserProfile]);
   return (
     <Switch>
       <UnauthenticatedRoute exact path="/">
-        <Home />
+        <LandingPage />
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/news">
+        <NewsPage/>
       </UnauthenticatedRoute>
       <UnauthenticatedRoute exact path="/signin">
         <LogIn />
@@ -47,29 +50,25 @@ const Routes = ({checkUserProfile}) => {
       <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
       </AuthenticatedRoute>
-      
       <AuthenticatedRoute exact path="/messages">
-      <ChatPage/>
+        <ChatPage />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/profile">
-        <ProfilePage/>
+        <ProfilePage />
       </AuthenticatedRoute>
       {/* <UnauthenticatedRoute exact path="/messages">
       <ChatPage/>
       </UnauthenticatedRoute> */}
       <UnauthenticatedRoute exact path="/how-it-works">
-      <HowItWorksPage/>
+        <HowItWorksPage />
       </UnauthenticatedRoute>
       <UnauthenticatedRoute exact path="/help">
-      <HelpPage/>
+        <HelpPage />
       </UnauthenticatedRoute>
       <UnauthenticatedRoute exact path="/about">
-      <AboutPage/>
-      </UnauthenticatedRoute>
-      <UnauthenticatedRoute exact path="//">
-      <LandingPage/>
+        <AboutPage />
       </UnauthenticatedRoute>
     </Switch>
   );
 };
-export default connect(null, {checkUserProfile})(Routes);
+export default connect(null, { checkUserProfile })(Routes);

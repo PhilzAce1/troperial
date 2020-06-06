@@ -1,0 +1,41 @@
+.fouthSection {
+    width: 90%;
+    margin: 50px auto;
+}
+.fouthSection .grid {
+    margin: 20px 0;
+}
+.fouthSection .grid .grid-item img{
+ width: 30px
+}
+.fouthSection .grid .grid-item h1{
+
+ margin: 5px 0;
+
+}
+.fouthSection .grid .grid-item p{
+line-height: 1.6;
+font-size: 1.1rem;
+
+}
+
+@media (min-width: 800px) {
+    .fouthSection {
+        width: 50%;
+        margin: 50px auto;
+    }
+    .fouthSection h1.heading {
+        text-align: center;
+    }
+    .fouthSection .grid {
+        margin: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 50px 50px;
+    }
+    .fouthSection .grid .grid-item p{
+    line-height: 1.6;
+    font-size: 1.09rem;
+    
+    }
+}

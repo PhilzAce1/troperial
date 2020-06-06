@@ -1,3 +1,6 @@
+.howItWorks__container {
+ overflow-x: hidden;
+} 
 .howItWorks__header {
     background: var(--mobile-verfied);
     min-height: 50vh;

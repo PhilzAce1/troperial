@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import validator from 'validator';
+import Fade from 'react-reveal/Fade';
 /**Components*/
 import OnboardingFormContainer from '../components/OnboardingFormContainer/OnboardingFormContainer';
 import OnboardingNotification from '../components/OnboardingNotification/OnboardingNotification';
@@ -83,7 +84,7 @@ const SignUp = () => {
     return (
       <OnboardingFormContainer>
         <ContentContainer>
-          <img src={img} alt="troperial logo" />
+        <Link to="/"><img src={img} alt="troperial logo" /></Link>
           <h2>
             Create a{' '}
             <span className="troperial-green">Troperial</span> Account
@@ -99,71 +100,92 @@ const SignUp = () => {
             />
           )}
         </ContentContainer>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {errors.email?.type === 'required' && (
-            <InputError>Your email is required</InputError>
-          )}
-          {errors.email?.type === 'pattern' && (
-            <InputError>
-              Please provide a valid email address
-            </InputError>
-          )}
-          <CustomInput
-            showError={errors.email ? true : false}
-            register={register({
-              required: true,
-              pattern: emailRegex,
-            })}
-            type="text"
-            name="email"
-            label="Email"
-            placeholder="Email"
-          />
-          {errors.password?.type === 'required' && (
-            <InputError>Your input is required</InputError>
-          )}
-          {errors.password?.type === 'pattern' && (
-            <InputError>
-              Password must have 6 to 30 characters
-            </InputError>
-          )}
-          <CustomInput
-            hint="Password must be between 6 - 20 characters and must include atleast 1 Uppercase letter, 1 Lowercase letter, 1 numeric value and one special character."
-            showError={errors.password ? true : false}
-            register={register({
-              required: true,
-              pattern: passwordRegex,
-            })}
-            name="password"
-            type="password"
-            onChange={(e) => checkPasswordStrength(e.target.value)}
-            label="Password"
-            placeholder="Password"
-          />
-          {errors.password_repeat && (
-            <div>{errors.password_repeat.message}</div>
-          )}
-          <CustomInput
-            showError={errors.password_repeat ? true : false}
-            register={register({
-              required: true,
-              validate: (value) =>
-                value === password.current || (
-                  <InputError>The passwords do not match</InputError>
-                ),
-            })}
-            name="password_repeat"
-            type="password"
-            label="Confirm Password"
-            placeholder="Confirm Password"
-          />
-          {showPasswordQuality === true ? (
-            <ProgressBar grade={passwordQuality} />
-          ) : null}
-          <CustomButton loading={isLoading}>
-            Create An Account
-          </CustomButton>
-        </form>
+        <Fade bottom cascade>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              {errors.email?.type === 'required' && (
+                <InputError>Your email is required</InputError>
+              )}
+              {errors.email?.type === 'pattern' && (
+                <InputError>
+                  Please provide a valid email address
+                </InputError>
+              )}
+
+              <CustomInput
+                showError={errors.email ? true : false}
+                register={register({
+                  required: true,
+                  pattern: emailRegex,
+                })}
+                type="text"
+                name="email"
+                label="Email"
+                placeholder="Email"
+              />
+            </div>
+
+            <div>
+              {errors.password?.type === 'required' && (
+                <InputError>Your input is required</InputError>
+              )}
+              {errors.password?.type === 'pattern' && (
+                <InputError>
+                  Password must have 6 to 30 characters
+                </InputError>
+              )}
+
+              <CustomInput
+                hint="Password must be between 6 - 20 characters and must include atleast 1 Uppercase letter, 1 Lowercase letter, 1 numeric value and one special character."
+                showError={errors.password ? true : false}
+                register={register({
+                  required: true,
+                  pattern: passwordRegex,
+                })}
+                name="password"
+                type="password"
+                onChange={(e) =>
+                  checkPasswordStrength(e.target.value)
+                }
+                label="Password"
+                placeholder="Password"
+              />
+            </div>
+
+            <div>
+              {errors.password_repeat && (
+                <div>{errors.password_repeat.message}</div>
+              )}
+
+              <CustomInput
+                showError={errors.password_repeat ? true : false}
+                register={register({
+                  required: true,
+                  validate: (value) =>
+                    value === password.current || (
+                      <InputError>
+                        The passwords do not match
+                      </InputError>
+                    ),
+                })}
+                name="password_repeat"
+                type="password"
+                label="Confirm Password"
+                placeholder="Confirm Password"
+              />
+            </div>
+
+            <div>
+              {showPasswordQuality === true ? (
+                <ProgressBar grade={passwordQuality} />
+              ) : null}
+              <CustomButton loading={isLoading}>
+                Create An Account
+              </CustomButton>
+            </div>
+          </form>
+        </Fade>
+
         <ContentContainer>
           <p className="custom-cta">
             already got an account? <Link to="/signin">Sign In</Link>

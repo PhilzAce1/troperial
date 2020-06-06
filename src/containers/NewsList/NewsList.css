@@ -1,0 +1,21 @@
+
+.news_container {
+ margin-top: 15px;
+ margin-bottom: 50%;
+}
+
+@media (min-width:768px) {
+    .news_container {
+        margin-top: 15px;
+        margin-bottom: 20%;
+    }
+}
+
+@media (min-width: 900px) {
+   .news_container {
+		margin-bottom: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 50px;
+	}
+}
