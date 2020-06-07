@@ -20,7 +20,7 @@ const ListingCard = ({ listing }) => {
         <span className="label">preferred rate</span>
         <p className="value">{listing.rate || null}</p>
         <p className="by">
-          by <span className="username">@{listing.by || null}</span>
+          by <span className="username">{listing.by || null}</span>
         </p>
       </div>
     </div>

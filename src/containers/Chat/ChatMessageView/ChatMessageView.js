@@ -8,6 +8,8 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import { connect } from 'react-redux';
 import { getMessages } from '../../../libs/conversationHelpers';
 // import ListingCard from '../../../components/ListingCard';
+import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 import { loadMessages } from '../../../actions/conversationActions';
 const ChatMessageView = ({
@@ -45,15 +47,16 @@ const ChatMessageView = ({
   let messageList;
   if (messages && messages.length > 0) {
     messageList = messages.map((message, i) => {
-      const listing = {
-        by: message.by,
-        have: message.have,
-        need: message.need,
-        rate: message.rate,
-      };
       return (
         <div key={i}>
-          {message.isListing && <ListingCard listing={listing} />}
+          {message.isListing && (
+            <ListingChatBubble
+              have={message.have}
+              by={message.by}
+              need={message.need}
+              fromMe={message.isMyMessage}
+            />
+          )}
           <ChatBubble fromMe={message.isMyMessage}>
             {message.messageText}
           </ChatBubble>
@@ -61,7 +64,21 @@ const ChatMessageView = ({
       );
     });
   } else {
-    messageList = <h1>Something </h1>;
+    messageList = (
+      <div>
+        <div
+          style={{
+            position: 'relative',
+            display: 'flex',
+            flexFlow: 'column nowrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <ScaleLoader loading={true} />;
+        </div>
+      </div>
+    );
   }
   const userheaderTitle = () => {
     return (
@@ -72,7 +89,9 @@ const ChatMessageView = ({
           alt="dp"
         />
         <span className="user__header-username">
-          @{selectedConversation.title}
+          {selectedConversation.title
+            ? `${selectedConversation.title}`
+            : ''}
         </span>
       </button>
     );

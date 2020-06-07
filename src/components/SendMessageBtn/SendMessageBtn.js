@@ -34,6 +34,7 @@ function SendMessageBtn({
 
   const history = useHistory();
   async function getUserData() {
+    console.log(user);
     user.username = 'philz';
     let {
       payload: {
