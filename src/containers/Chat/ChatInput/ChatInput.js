@@ -99,17 +99,18 @@ const ChatInput = ({
 
   return (
     <div className="chat__input">
-      <div className="chat__input-listing">
-        {listing !== undefined && listing.open && (
+      {listing !== undefined && listing.open && (
+        <div className="chat__input-listing">
           <ListingCard listing={listing} />
-        )}
-        {/* listings card */}
-        {/* UNCOMMENT TO USE AND MANIPULATE */}
-        {/* <div className="chat__input-listing">
+          {/* listings card */}
+          {/* UNCOMMENT TO USE AND MANIPULATE */}
+          {/* <div className="chat__input-listing">
           <ListingCard have="NGN200" need="US Dollars" by="Runo" />
       </div> */}
-        {/* end of listings card */}
-      </div>
+          {/* end of listings card */}
+        </div>
+      )}
+
       {/* <div className="chat__input-field-container">
         <input
           type="text"
@@ -142,19 +143,25 @@ const ChatInput = ({
       <div>
         {/* mobile quick actions */}
         <div className="mobile-quick-actions">
-          <button className="quick-actions-btn" onClick={() => setShowOptions(!showOptions)}>Quick actions</button>
-         
-          {showOptions && <Fragment>
-            <div className="quick-actions-options">
-            <button className="share-account-details">
-              Share account details
-            </button>
-            <button className="update-listing-status">
-              Update listing status
-            </button>
-            </div>
-            </Fragment>}
-     
+          <button
+            className="quick-actions-btn"
+            onClick={() => setShowOptions(!showOptions)}
+          >
+            Quick actions
+          </button>
+
+          {showOptions && (
+            <Fragment>
+              <div className="quick-actions-options">
+                <button className="share-account-details">
+                  Share account details
+                </button>
+                <button className="update-listing-status">
+                  Update listing status
+                </button>
+              </div>
+            </Fragment>
+          )}
         </div>
 
         {/* desktop quick actions */}
