@@ -7,7 +7,6 @@ import ChatBubble from '../../../components/ChatBubble/ChatBubble';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { connect } from 'react-redux';
 import { getMessages } from '../../../libs/conversationHelpers';
-// import ListingCard from '../../../components/ListingCard';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 import { loadMessages } from '../../../actions/conversationActions';
 const ChatMessageView = ({

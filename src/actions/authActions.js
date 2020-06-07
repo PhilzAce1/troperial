@@ -82,7 +82,9 @@ export const getUserDetails = () => async (dispatch) => {
       type: SET_CURRENT_USER_DETAILS,
       payload: { firstName, lastName, userAlias, number },
     });
-  } catch (e) {}
+  } catch (e) {
+    console.log(e)
+  }
 };
 export const checkUserProfile = () => async (dispatch) => {
   try {
