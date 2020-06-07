@@ -2,21 +2,27 @@ import React from 'react';
 import dp from '../../assets/images/profile-picture.png';
 import './UserConvoButton.css';
 
-const UserConvoButton = ({username, unread, active}) => {
-    return (
-        <button className={`user-convo-btn ${active && 'active-chat'}`}>
-            <span>
-            <img className="user-profile-picture" src={dp} alt="user dp"/>
-            </span>
-    <span className="username">@{username}</span>
-            {unread && <span className="unread-messages"></span>}
-        </button>
-    )
-}
+const UserConvoButton = ({
+  conversation,
+  isActive,
+  onConversationItemSelected,
+}) => {
+  return (
+    <button
+      className={`user-convo-btn ${isActive && 'active-chat'}`}
+      onClick={() => {
+        return onConversationItemSelected(conversation.id);
+      }}
+    >
+      <span>
+        <img className="user-profile-picture" src={dp} alt="dp" />
+      </span>
+      <span className="username">@{conversation.title}</span>
+      {conversation.messages.some(
+        (message) => message.seen === false,
+      ) && <span className="unread-messages"></span>}
+    </button>
+  );
+};
 
-UserConvoButton.defaultProps = {
- username: 'username',
- unread: false,
- active: false
-}
-export default UserConvoButton
+export default UserConvoButton;

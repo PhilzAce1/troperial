@@ -46,6 +46,9 @@ const SignUp = () => {
       const newUser = await Auth.signUp({
         username: email,
         password,
+        attributes: {
+          email, // optional
+        },
       });
       setIsLoading(false);
       setNewUser(newUser);
