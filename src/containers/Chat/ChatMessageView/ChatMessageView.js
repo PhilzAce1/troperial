@@ -11,7 +11,6 @@ import { getMessages } from '../../../libs/conversationHelpers';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
-import ListingCard from '../../../components/ListingCard/ListingCard';
 import { loadMessages } from '../../../actions/conversationActions';
 const ChatMessageView = ({
   messages,

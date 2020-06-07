@@ -1,5 +1,4 @@
 import data from '../containers/Chat/data';
-import { actionIcon } from 'aws-amplify';
 import { removeStack } from '../containers/Chat/helpers';
 let initialState = data;
 let State = {
