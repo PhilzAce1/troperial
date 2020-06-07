@@ -48,6 +48,7 @@ const ChatMessageView = ({
   let messageList;
   if (messages && messages.length > 0) {
     messageList = messages.map((message, i) => {
+      console.log(message.createdAt);
       return (
         <div key={i}>
           {message.isListing && (
