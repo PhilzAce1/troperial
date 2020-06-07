@@ -2,6 +2,7 @@ import React from 'react';
 import './ListingChatBubble.css';
 
 const ListingChatBubble = ({ have, need, by, fromMe }) => {
+  console.log(have, need, by, fromMe);
   return (
     <div
       className={`listing-chat-bubble ${
