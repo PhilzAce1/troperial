@@ -16,7 +16,7 @@ const AllListings = ({
   currentPage,
   prevPage,
   nextPage,
-  currentSize
+  currentSize,
 }) => {
   useEffect(() => {
     getTransactions();
@@ -51,7 +51,6 @@ const AllListings = ({
               status={transactionState}
               userListings={false}
               key={transactionId}
-              
             />
           );
         })}
@@ -91,7 +90,7 @@ const mapStateToProps = (state) => ({
   totalElements: state.transaction.totalElements,
   totalPages: state.transaction.totalPages,
   loading: state.transaction.loading,
-  size: state.transaction.size
+  size: state.transaction.size,
 });
 
 export default connect(mapStateToProps, {

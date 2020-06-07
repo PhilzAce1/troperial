@@ -13,8 +13,6 @@ import HelpPage from './pages/HelpPage';
 import AboutPage from './pages/AboutPage';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/Login';
-
-
 import { connect } from 'react-redux';
 import { checkUserProfile } from './actions/authActions';
 import ChatPage from './pages/ChatPage';
@@ -38,6 +36,9 @@ const Routes = ({ checkUserProfile }) => {
       <UnauthenticatedRoute exact path="/signup">
         <SignUp />
       </UnauthenticatedRoute>
+      {/* <UnauthenticatedRoute exact path="/messages">
+        <ChatPage />
+      </UnauthenticatedRoute> */}
       <UnauthenticatedRoute exact path="/forgotpassword">
         <ForgotPassword />
       </UnauthenticatedRoute>
