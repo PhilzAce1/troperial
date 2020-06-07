@@ -55,7 +55,7 @@ const Chat = ({
           userDetails(id, username);
           return userConversations(conversations, username);
         } else {
-          return console.log('somethg');
+          return;
         }
       } catch (e) {
         console.log(e);

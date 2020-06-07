@@ -33,6 +33,7 @@ export default function (state = State, action) {
           stack: [],
         });
       });
+      newState.selectedConversation = newState.conversations[0];
       return newState;
     }
     case 'LOAD_NEW_MESSAGES': {
@@ -52,7 +53,7 @@ export default function (state = State, action) {
           need: message.need,
           imageAlt: null,
           messageText: message.content,
-          createdAt: message.createAt,
+          createdAt: message.createdAt,
           isMyMessage: message.authorId === newState.user.id,
         });
       });
