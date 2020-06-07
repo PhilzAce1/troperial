@@ -18,7 +18,6 @@ import { createUser } from '../../libs/conversationHelpers';
 import './Chat.css';
 
 import NavBar from '../../components/NavBar/NavBar';
-import EmptyChatView from '../../components/EmptyChatView/EmptyChatView';
 const Chat = ({
   conversations,
   selectedConversation,
@@ -40,12 +39,7 @@ const Chat = ({
         alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
       }
     }
-    // const x = await Auth.currentAuthenticatedUser();
-    // console.log(x.attributes['custom:userName']);
-    // console.log(user);
-    // user.username = 'philz';
-
-    if (!user.username) return alert('please complete your profile');
+    // if (!user.username) return alert('please complete your profile');
     if (
       conversation.user.username === undefined ||
       conversation.user.username === '' ||
