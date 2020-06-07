@@ -31,8 +31,9 @@ const Chat = ({
   user,
 }) => {
   async function getUserData() {
-    // user.username = 'runo';
-    user.username = 'philz';
+    user.username = 'runo';
+    console.log(user);
+    // user.username = 'philz';
 
     if (!user.username) return alert('please complete your profile');
     if (
