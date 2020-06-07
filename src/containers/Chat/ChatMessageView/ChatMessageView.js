@@ -48,6 +48,7 @@ const ChatMessageView = ({
   let messageList;
   if (messages && messages.length > 0) {
     messageList = messages.map((message, i) => {
+      console.log(message.createdAt);
       return (
         <div key={i}>
           {message.isListing && (
@@ -58,7 +59,10 @@ const ChatMessageView = ({
               fromMe={message.isMyMessage}
             />
           )}
-          <ChatBubble fromMe={message.isMyMessage}>
+          <ChatBubble
+            fromMe={message.isMyMessage}
+            createdAt={message.createdAt}
+          >
             {message.messageText}
           </ChatBubble>
         </div>
