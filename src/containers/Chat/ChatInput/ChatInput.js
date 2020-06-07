@@ -15,11 +15,12 @@ const ChatInput = ({
   listing,
   listingChanged,
   conversation,
-  onMessageSubmitted,
   currentUserMessage,
   selectedConversation,
+  scrollToBottom,
   newExternalMessage,
   user,
+  updateMessageStack,
   state,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -29,11 +30,14 @@ const ChatInput = ({
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    scrollToBottom();
+
     setTextMessage('');
     const stackId = getStack(selectedConversation.stack);
     if (textMessage === '') return;
     const listings = listing === undefined ? false : listing.open;
     if (listings) {
+      scrollToBottom();
       currentUserMessage(
         selectedConversation.id,
         textMessage,
@@ -45,6 +49,8 @@ const ChatInput = ({
         listing.need,
         listing.rate,
       );
+      scrollToBottom();
+
       listingChanged(false);
       const msg = await createMessage(
         stackId,
@@ -57,6 +63,7 @@ const ChatInput = ({
         listing.need,
         listing.rate,
       );
+      scrollToBottom();
 
       return updateMessageStack(
         selectedConversation.id,
@@ -83,6 +90,12 @@ const ChatInput = ({
       false,
       conversation.user.id,
     );
+    scrollToBottom();
+    scrollToBottom();
+    scrollToBottom();
+    setTimeout(() => {
+      return scrollToBottom();
+    }, 1000);
     const msg = await createMessage(
       stackId,
       false,
@@ -90,6 +103,8 @@ const ChatInput = ({
       textMessage,
       conversation.user.id,
     );
+    scrollToBottom();
+
     return updateMessageStack(
       selectedConversation.id,
       msg.stackId,
@@ -224,8 +239,10 @@ const mapDispatchToProps = (dispatch) => ({
   listingChanged: (status, by, have, need, rate) =>
     dispatch(listingChanged(status, by, have, need, rate)),
 
-  updateMessageStack: (conversationId, stackNUmber) =>
-    dispatch(updateMessageStack(conversationId, stackNUmber)),
+  updateMessageStack: (conversationId, stackNUmber, createdAt) =>
+    dispatch(
+      updateMessageStack(conversationId, stackNUmber, createdAt),
+    ),
   newExternalMessage: (
     conversationId,
     textMessage,

@@ -10,6 +10,7 @@ import { getMessages } from '../../../libs/conversationHelpers';
 // import ListingCard from '../../../components/ListingCard';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 import { loadMessages } from '../../../actions/conversationActions';
 const ChatMessageView = ({
@@ -33,6 +34,7 @@ const ChatMessageView = ({
     if (!Array.isArray(message))
       return alert('could not get Message');
     loadMessages(message, selectedConversation.id);
+    scrollToBottom();
   };
 
   useEffect(() => {
@@ -43,12 +45,10 @@ const ChatMessageView = ({
     ) {
       messageLoader();
     }
-    scrollToBottom();
   }, [selectedConversation.id]);
   let messageList;
   if (messages && messages.length > 0) {
     messageList = messages.map((message, i) => {
-      console.log(message.createdAt);
       return (
         <div key={i}>
           {message.isListing && (
@@ -101,7 +101,13 @@ const ChatMessageView = ({
       </button>
     );
   };
-
+  if (
+    !selectedConversation ||
+    selectedConversation === {} ||
+    !selectedConversation.id
+  ) {
+    return <EmptyChatView />;
+  }
   return (
     <section className="message__view">
       <header className="message__view--header">
@@ -126,6 +132,7 @@ const ChatMessageView = ({
         <ChatInput
           onMessageSubmitted={onMessageSubmitted}
           user={selectedConversation.title}
+          scrollToBottom={scrollToBottom}
         />
       </section>
     </section>

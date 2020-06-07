@@ -1,6 +1,7 @@
 import React from 'react';
 import './ChatBubble.css';
 import moment from 'moment';
+import PulseLoader from 'react-spinners/PulseLoader';
 const ChatBubble = ({ fromMe, children, isLoading, createdAt }) => {
   createdAt = parseInt(createdAt);
   return (
@@ -15,7 +16,11 @@ const ChatBubble = ({ fromMe, children, isLoading, createdAt }) => {
       <div
         className={`time ${fromMe === true ? 'from_me-time' : ''}`}
       >
-        {moment(createdAt).format('LT')}
+        {createdAt ? (
+          moment(createdAt).format('LT')
+        ) : (
+          <PulseLoader size={5} />
+        )}
       </div>
     </div>
   );
