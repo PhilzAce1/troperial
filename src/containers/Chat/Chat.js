@@ -31,9 +31,8 @@ const Chat = ({
   user,
 }) => {
   async function getUserData() {
-    user.username = 'runo';
-    console.log(user);
-    // user.username = 'philz';
+    // user.username = 'runo';
+    user.username = 'philz';
 
     if (!user.username) return alert('please complete your profile');
     if (
@@ -56,7 +55,7 @@ const Chat = ({
           userDetails(id, username);
           return userConversations(conversations, username);
         } else {
-          return console.log('somethg');
+          return;
         }
       } catch (e) {
         console.log(e);

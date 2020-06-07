@@ -2,7 +2,6 @@ import React from 'react';
 import './ListingChatBubble.css';
 
 const ListingChatBubble = ({ have, need, by, fromMe }) => {
-  console.log(have, need, by, fromMe);
   return (
     <div
       className={`listing-chat-bubble ${
@@ -24,7 +23,7 @@ const ListingChatBubble = ({ have, need, by, fromMe }) => {
         <span className="label">preferred rate</span>
         <p className="value">1 USD (NGN) > (NGN) 467</p>
         <p className="by">
-          by <span className="username">@{by}</span>
+          by <span className="username">{by}</span>
         </p>
       </div>
     </div>
