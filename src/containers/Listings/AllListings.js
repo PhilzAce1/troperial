@@ -17,6 +17,7 @@ const AllListings = ({
   prevPage,
   nextPage,
   currentSize,
+  handleBackDrop
 }) => {
   useEffect(() => {
     getTransactions();
@@ -51,6 +52,7 @@ const AllListings = ({
               status={transactionState}
               userListings={false}
               key={transactionId}
+              handleBackDrop={handleBackDrop}
             />
           );
         })}

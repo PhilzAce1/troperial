@@ -1,0 +1,17 @@
+.emptyChatView_container {
+    width: 80vh;
+    margin: 0 auto;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.emptyChatView_btn {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    background: var(--troperial-blue);
+    padding: 10px 15px;
+
+    border-radius: 10px;
+}

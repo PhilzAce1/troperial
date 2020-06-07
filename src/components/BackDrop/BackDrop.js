@@ -12,12 +12,20 @@ import {
 } from '../../actions/types';
 import AddBankAccount from '../../containers/AddBankAccout/AddBankAccount';
 
-const BackDrop = ({ handleBackDrop, step, setStep, renderBankAccoutForm}) => {
+const BackDrop = ({
+  handleBackDrop,
+  step,
+  setStep,
+  renderBankAccoutForm,
+  profileUpdatedForChat,
+}) => {
   const renderView = (step) => {
     if (step === UPDATE_PROFILE) {
       return <UpdateProfile />;
     } else if (step === CONFIRM_PROFILE_UPDATE) {
-      return (
+      return profileUpdatedForChat === false ? (
+        <VerifiedNotification message="You can now proceed to start a conversation from your prefered listing" btnMessage="go to listings" onClick={handleBackDrop} />
+      ) : (
         <VerifiedNotification
           onClick={() => setStep(CREATE_TRANSACTION)}
         />
@@ -39,7 +47,11 @@ const BackDrop = ({ handleBackDrop, step, setStep, renderBankAccoutForm}) => {
           </button>
         </div>
         <div>
-        {renderBankAccoutForm === true ? <AddBankAccount/> : renderView(step)}
+          {renderBankAccoutForm === true ? (
+            <AddBankAccount />
+          ) : (
+            renderView(step)
+          )}
         </div>
       </div>
     </div>
@@ -47,9 +59,10 @@ const BackDrop = ({ handleBackDrop, step, setStep, renderBankAccoutForm}) => {
 };
 const mapStateToProps = (state) => ({
   step: state.ui.step,
+  profileUpdatedForChat: state.auxState.profileUpdatedForChat,
 });
 
 BackDrop.defaultProps = {
-  renderBankAccoutForm: false
-}
+  renderBankAccoutForm: false,
+};
 export default connect(mapStateToProps, { setStep })(BackDrop);

@@ -104,6 +104,7 @@ const Listings = ({
                     nextPage={nextPage}
                     prevPage={prevPage}
                     currentPage={currentPage}
+                    handleBackDrop={handleBackDrop}
                   />
                 )}
               </TabPanel>

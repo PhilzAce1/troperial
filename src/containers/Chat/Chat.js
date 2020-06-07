@@ -18,6 +18,7 @@ import { createUser } from '../../libs/conversationHelpers';
 import './Chat.css';
 
 import NavBar from '../../components/NavBar/NavBar';
+import EmptyChatView from '../../components/EmptyChatView/EmptyChatView';
 const Chat = ({
   conversations,
   selectedConversation,
@@ -103,7 +104,11 @@ const Chat = ({
   }, []);
   return (
     <React.Fragment>
+           
       <NavBar page="Messages" icon="icon-messages" />
+      {/* *********The empty chat view componet************* */}
+      {/* <EmptyChatView/> */}
+          {/* *********The empty chat view componet************* */}
       <div className="chat-main-container">
         <section className="chat__container">
           <div className="chat-grid-container">
