@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "libphonenumber-js": "^1.7.51",
+    "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-country-flag": "^2.0.1",
     "react-custom-scrollbars": "^4.2.1",

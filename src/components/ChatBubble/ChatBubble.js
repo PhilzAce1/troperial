@@ -1,7 +1,8 @@
 import React from 'react';
 import './ChatBubble.css';
-
-const ChatBubble = ({ fromMe, children, isLoading }) => {
+import moment from 'moment';
+const ChatBubble = ({ fromMe, children, isLoading, createdAt }) => {
+  createdAt = parseInt(createdAt);
   return (
     <div className="chat-bubble-container">
       <div
@@ -14,7 +15,7 @@ const ChatBubble = ({ fromMe, children, isLoading }) => {
       <div
         className={`time ${fromMe === true ? 'from_me-time' : ''}`}
       >
-        12:33 PM
+        {moment(createdAt).format('LT')}
       </div>
     </div>
   );
