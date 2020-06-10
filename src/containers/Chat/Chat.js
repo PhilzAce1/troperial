@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onCreateMessage as OnCreateMessage } from '../../libs/graphql';
 // import { API, graphqlOperation } from 'aws-amplify';
-
+import { Auth } from 'aws-amplify';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
 import ChatMessageView from './ChatMessageView/ChatMessageView';
 import ChatUserProfile from './ChatUserProfile/ChatUserProfile';
@@ -18,7 +18,6 @@ import { createUser } from '../../libs/conversationHelpers';
 import './Chat.css';
 
 import NavBar from '../../components/NavBar/NavBar';
-import EmptyChatView from '../../components/EmptyChatView/EmptyChatView';
 const Chat = ({
   conversations,
   selectedConversation,
@@ -32,9 +31,15 @@ const Chat = ({
 }) => {
   async function getUserData() {
     // user.username = 'runo';
-    user.username = 'philz';
-
-    if (!user.username) return alert('please complete your profile');
+    if (!user || !user.username || user.username === '') {
+      const authUsername = await Auth.currentAuthenticatedUser();
+      if (authUsername.attributes['custom:userName']) {
+        user.username = authUsername.attributes['custom:userName'];
+      } else {
+        alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
+      }
+    }
+    // if (!user.username) return alert('please complete your profile');
     if (
       conversation.user.username === undefined ||
       conversation.user.username === '' ||
@@ -104,11 +109,10 @@ const Chat = ({
   }, []);
   return (
     <React.Fragment>
-           
       <NavBar page="Messages" icon="icon-messages" />
       {/* *********The empty chat view componet************* */}
       {/* <EmptyChatView/> */}
-          {/* *********The empty chat view componet************* */}
+      {/* *********The empty chat view componet************* */}
       <div className="chat-main-container">
         <section className="chat__container">
           <div className="chat-grid-container">

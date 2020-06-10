@@ -1,5 +1,4 @@
 import data from '../containers/Chat/data';
-import { actionIcon } from 'aws-amplify';
 import { removeStack } from '../containers/Chat/helpers';
 let initialState = data;
 let State = {
@@ -147,7 +146,6 @@ export default function (state = State, action) {
         have: action.payload.have,
         rate: action.payload.rate,
         need: action.payload.need,
-
         messageText: action.payload.textMessage,
         isMyMessage: true,
         isSending: true,
@@ -158,25 +156,30 @@ export default function (state = State, action) {
     }
     case 'UPDATE_MESSAGE_STACK': {
       const newState = { ...state };
-
+      console.log('we reached here', action.payload);
       const convo = newState.conversations.find(
         (conversation) =>
           conversation.id === action.payload.conversationId,
       );
       if (!convo) return newState;
       // update Message
+      console.log(convo.stack);
       const pendingMessage = convo.messages.find(
         (message) => message.stackId === action.payload.stackNumber,
       );
-      pendingMessage.createdAt = action.payload.createAt;
+      console.log('former pending message', pendingMessage);
+      pendingMessage.createdAt = action.payload.createdAt;
 
       delete pendingMessage.isSending;
       delete pendingMessage.stackId;
+      console.log('after pending message', pendingMessage);
 
       convo.stack = removeStack(
         convo.stack,
         action.payload.stackNumber,
       );
+      console.log('After action Stack', convo.stack);
+
       return newState;
     }
     default:
