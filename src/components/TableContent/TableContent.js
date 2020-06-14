@@ -15,6 +15,7 @@ const TableContent = ({
   totalTransactions,
   action,
   handleMessage,
+  handleBackDrop
 }) => {
   return (
     <Fragment>
@@ -112,6 +113,7 @@ const TableContent = ({
                 rate={rate}
                 by={by}
                 status={status}
+                handleBackDrop={handleBackDrop}
               />
             )}
           </div>

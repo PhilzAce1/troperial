@@ -2,6 +2,8 @@ import React from 'react';
 import './ChatConversationList.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import UserConvoButton from '../../../components/UserConvoButton/UserConvoButton';
+import ScaleLoader from 'react-spinners/ScaleLoader';
+
 const ChatConversationList = ({
   conversations,
   selectedConversationId,
@@ -18,7 +20,19 @@ const ChatConversationList = ({
       />
     ));
   } else {
-    conversationList = 'something';
+    conversationList = (
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexFlow: 'column nowrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <ScaleLoader loading={true} />;
+      </div>
+    );
   }
   return (
     <section className="conversation__list">

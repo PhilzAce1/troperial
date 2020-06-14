@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { useHistory } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 import {
   conversationChanged,
   listingChanged,
@@ -9,6 +10,7 @@ import {
   newConversation,
   userConversations,
 } from '../../actions/conversationActions';
+import { confirmProfileUpdateForChat } from '../../actions/auxActions';
 import {
   createUser,
   conversationExist,
@@ -29,12 +31,22 @@ function SendMessageBtn({
   userDetails,
   state,
   userConversations,
+  handleBackDrop,
+  profileUpdated,
+  confirmProfileUpdateForChat,
 }) {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
   async function getUserData() {
-    user.username = 'philz';
+    if (!user || !user.username || user.username === '') {
+      const authUsername = await Auth.currentAuthenticatedUser();
+      if (authUsername.attributes['custom:userName']) {
+        user.username = authUsername.attributes['custom:userName'];
+      } else {
+        alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
+      }
+    }
     let {
       payload: {
         id,
@@ -46,6 +58,13 @@ function SendMessageBtn({
     userConversations(conversations, username);
   }
   async function clicked() {
+    if (!profileUpdated) {
+      confirmProfileUpdateForChat(false);
+      return handleBackDrop();
+    }
+
+    confirmProfileUpdateForChat(true);
+
     // if (!user.username) return alert('please update you Profile');
     setLoading(true);
     const convo = finders(conversation.conversations, by);
@@ -125,9 +144,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(newConversation(id, members)),
   userDetails: (userId, username) =>
     dispatch(userDetails(userId, username)),
+  confirmProfileUpdateForChat: (payload) =>
+    dispatch(confirmProfileUpdateForChat(payload)),
 });
 const mapStateToProps = (state) => {
   return {
+    profileUpdated: state.auth.profileUpdated,
     conversation: state.conversation,
     step: state.ui.step,
     user: state.auth,
