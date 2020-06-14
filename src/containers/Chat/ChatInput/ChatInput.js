@@ -5,9 +5,9 @@ import './ChatInput.css';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 import {
   listingChanged,
-  newExternalMessage,
   updateMessageStack,
   currentUserMessage,
+  sortConversation,
 } from '../../../actions/conversationActions';
 import sendIcon from '../../../assets/svgs/send-icon.svg';
 import { getStack } from '../helpers';
@@ -18,9 +18,9 @@ const ChatInput = ({
   currentUserMessage,
   selectedConversation,
   scrollToBottom,
-  newExternalMessage,
   user,
   updateMessageStack,
+  sortConversation,
   state,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -65,22 +65,14 @@ const ChatInput = ({
       );
       scrollToBottom();
 
-      return updateMessageStack(
+      updateMessageStack(
         selectedConversation.id,
         msg.stackId,
         msg.newMessage.data.createMessage.createdAt,
       );
-      // return newExternalMessage(
-      //   selectedConversation.id,
-      //   newMessage.data.createMessage.content,
-      //   newMessage.data.createMessage.createdAt,
-      //   true,
-      //   newMessage.data.createMessage.authorId,
-      //   listing.by,
-      //   listing.have,
-      //   listing.need,
-      //   listing.rate,
-      // );
+      return setTimeout(() => {
+        sortConversation();
+      }, 1000);
     }
 
     currentUserMessage(
@@ -90,9 +82,6 @@ const ChatInput = ({
       false,
       conversation.user.id,
     );
-    scrollToBottom();
-    scrollToBottom();
-    scrollToBottom();
     setTimeout(() => {
       return scrollToBottom();
     }, 1000);
@@ -105,11 +94,14 @@ const ChatInput = ({
     );
     scrollToBottom();
 
-    return updateMessageStack(
+    updateMessageStack(
       selectedConversation.id,
       msg.stackId,
       msg.newMessage.data.createMessage.createdAt,
     );
+    return setTimeout(() => {
+      sortConversation();
+    }, 1000);
   };
 
   return (
@@ -187,7 +179,7 @@ const ChatInput = ({
             <button
               className="share-account-details"
               onClick={
-                () => console.log('workingin')
+                () => console.log('working')
                 // setShareAccountDetails((state) => !state)
               }
             >
@@ -243,28 +235,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
       updateMessageStack(conversationId, stackNUmber, createdAt),
     ),
-  newExternalMessage: (
-    conversationId,
-    textMessage,
-    createdAt,
-    isListing,
-    by,
-    have,
-    need,
-    rate,
-  ) =>
-    dispatch(
-      newExternalMessage(
-        conversationId,
-        textMessage,
-        createdAt,
-        isListing,
-        by,
-        have,
-        need,
-        rate,
-      ),
-    ),
+  sortConversation: () => dispatch(sortConversation()),
 });
 export default connect(
   mapStateToProps,

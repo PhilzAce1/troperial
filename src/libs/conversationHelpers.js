@@ -146,7 +146,6 @@ export const createMessage = async (
     return { stackId, newMessage };
   } catch (e) {
     console.log(e);
-    throw new Error(e);
   }
 };
 export const getMessages = async (conversationId) => {
@@ -169,6 +168,5 @@ export const getMessages = async (conversationId) => {
     return items;
   } catch (e) {
     console.log(e);
-    throw new Error(e);
   }
 };

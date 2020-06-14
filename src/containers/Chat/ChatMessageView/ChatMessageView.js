@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ChatMessageView.css';
 import ChatInput from '../ChatInput/ChatInput';
 import dp from '../../../assets/images/profile-picture.png';
@@ -11,15 +11,18 @@ import { getMessages } from '../../../libs/conversationHelpers';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
-import { loadMessages } from '../../../actions/conversationActions';
+import {
+  loadMessages,
+  sortConversation,
+} from '../../../actions/conversationActions';
 const ChatMessageView = ({
   messages,
   selectedConversation,
   onMessageSubmitted,
   loadMessages,
-  state,
 }) => {
   const lastMessage = useRef(null);
+  const [loading, setLoading] = useState(false);
   const scrollToBottom = () => {
     lastMessage.current.scrollIntoView({
       behavior: 'smooth',
@@ -28,12 +31,15 @@ const ChatMessageView = ({
     });
   };
   const messageLoader = async () => {
+    setLoading(true);
     const message = await getMessages(selectedConversation.id);
-
+    setLoading(false);
     if (!Array.isArray(message))
       return alert('could not get Message');
     loadMessages(message, selectedConversation.id);
-    scrollToBottom();
+    setTimeout(() => {
+      scrollToBottom();
+    }, 400);
   };
 
   useEffect(() => {
@@ -67,7 +73,7 @@ const ChatMessageView = ({
         </div>
       );
     });
-  } else {
+  } else if (loading) {
     messageList = (
       <div>
         <div
@@ -81,6 +87,20 @@ const ChatMessageView = ({
         >
           <ScaleLoader loading={true} />;
         </div>
+      </div>
+    );
+  } else if (!loading) {
+    messageList = (
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexFlow: 'column nowrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <h3>This is the begining of this conversation</h3>
       </div>
     );
   }
@@ -150,6 +170,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   loadMessages: (message, conversationId) =>
     dispatch(loadMessages(message, conversationId)),
+  sortConversation,
 });
 
 export default connect(
