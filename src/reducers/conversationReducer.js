@@ -165,12 +165,14 @@ export default function (state = State, action) {
     }
     case 'UPDATE_MESSAGE_STACK': {
       const newState = { ...state };
+      console.log('we reached here', action.payload);
       const convo = newState.conversations.find(
         (conversation) =>
           conversation.id === action.payload.conversationId,
       );
       if (!convo) return newState;
       // update Message
+      console.log(convo.stack);
       const pendingMessage = convo.messages.find(
         (message) => message.stackId === action.payload.stackNumber,
       );
@@ -178,6 +180,7 @@ export default function (state = State, action) {
 
       delete pendingMessage.isSending;
       delete pendingMessage.stackId;
+      console.log('after pending message', pendingMessage);
 
       convo.stack = removeStack(
         convo.stack,

@@ -11,10 +11,14 @@ import { getMessages } from '../../../libs/conversationHelpers';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
+<<<<<<< HEAD
 import {
   loadMessages,
   sortConversation,
 } from '../../../actions/conversationActions';
+=======
+import { loadMessages } from '../../../actions/conversationActions';
+>>>>>>> 468b65271bbc5c9e15ff857ecf9ec695edd5bed1
 const ChatMessageView = ({
   messages,
   selectedConversation,
@@ -37,9 +41,13 @@ const ChatMessageView = ({
     if (!Array.isArray(message))
       return alert('could not get Message');
     loadMessages(message, selectedConversation.id);
+<<<<<<< HEAD
     setTimeout(() => {
       scrollToBottom();
     }, 400);
+=======
+    scrollToBottom();
+>>>>>>> 468b65271bbc5c9e15ff857ecf9ec695edd5bed1
   };
 
   useEffect(() => {
