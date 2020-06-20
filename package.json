@@ -9,10 +9,12 @@
     "aws-amplify": "^3.0.10",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "currency-flags": "^2.1.2",
     "libphonenumber-js": "^1.7.51",
     "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-country-flag": "^2.0.1",
+    "react-currency-flags": "^0.1.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-gravatar": "^2.6.3",
@@ -29,6 +31,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1",
     "validator": "^13.0.0"
   },
   "scripts": {

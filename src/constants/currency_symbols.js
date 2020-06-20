@@ -14,4 +14,5 @@ export const currency_symbols = {
   THB: '฿', // Thai Baht
   UAH: '₴', // Ukrainian Hryvnia
   VND: '₫', // Vietnamese Dong
+  CAD: '$'
 };

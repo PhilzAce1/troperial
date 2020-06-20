@@ -60,7 +60,7 @@ position: relative;
             width: 40px;
         }
         .landing__page--intro h1{
-            font-size: 2.5rem;
+            font-size: 2.45rem;
         }
         .landing__page--intro p{
             font-size: 1.5rem;
@@ -90,15 +90,18 @@ position: relative;
 
             margin-top: 20px;
             text-align: left;
+            
         }
 
         .landing__page--intro .moneyBagIcon {
             width: 40px;
+            top: 1px;
         }
         .landing__page--intro h1{
             font-size:3.5rem;
             margin-bottom: 10px;
         }
+
         .landing__page--intro p{
             width:68%;
             margin: 0 0;
@@ -128,6 +131,7 @@ position: relative;
         }
         .landing__page--intro .moneyBagIcon {
             width: 70px;
+           
         }
         .landing__page--intro h1{
             font-size:4rem;

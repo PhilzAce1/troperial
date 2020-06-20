@@ -3,6 +3,7 @@ import {
   SET_LOADING,
   APPLY_FILTER,
   NOTIFY_USER,
+  GET_ALL_RATES,
 } from '../actions/types';
 const initialState = {
   transactions: [],
@@ -11,9 +12,15 @@ const initialState = {
   totalPages: null,
   loading: false,
   notification: false,
+  rates: [],
 };
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_RATES:
+      return {
+        ...state,
+        rates: action.payload
+      }
     case APPLY_FILTER:
       return {
         ...state,

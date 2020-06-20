@@ -18,7 +18,7 @@ import { checkUserProfile } from './actions/authActions';
 import ChatPage from './pages/ChatPage';
 import NewsPage from './pages/NewsPage';
 
-const Routes = ({ checkUserProfile }) => {
+const Routes = ({ checkUserProfile, getAllRates }) => {
   useEffect(() => {
     checkUserProfile();
   }, [checkUserProfile]);
