@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import './ChatMessageView.css';
 import ChatInput from '../ChatInput/ChatInput';
 import dp from '../../../assets/images/profile-picture.png';
@@ -30,7 +35,7 @@ const ChatMessageView = ({
       inline: 'start',
     });
   };
-  const messageLoader = async () => {
+  const messageLoader = useCallback(async () => {
     setLoading(true);
     const message = await getMessages(selectedConversation.id);
     setLoading(false);
@@ -40,9 +45,10 @@ const ChatMessageView = ({
     setTimeout(() => {
       scrollToBottom();
     }, 400);
-  };
+  }, [loadMessages, selectedConversation.id]);
 
   useEffect(() => {
+    console.log('hello');
     if (
       selectedConversation &&
       selectedConversation.messages &&
@@ -50,7 +56,21 @@ const ChatMessageView = ({
     ) {
       messageLoader();
     }
-  }, [selectedConversation.id]);
+    if (
+      selectedConversation &&
+      selectedConversation.messages &&
+      selectedConversation.messages.length > 1
+    ) {
+      // console.log('thank you');
+      setTimeout(() => scrollToBottom(), 1000);
+    }
+  }, [
+    selectedConversation.id,
+    messageLoader,
+    selectedConversation,
+    selectedConversation.lastMessage,
+    messages,
+  ]);
   let messageList;
   if (messages && messages.length > 0) {
     messageList = messages.map((message, i) => {

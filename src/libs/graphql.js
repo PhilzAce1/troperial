@@ -66,27 +66,26 @@ export const createMessage = /* GraphQL */ `
       #   updatedAt
       # }
       authorId
-      content
       isListing
       by
       have
       rate
       need
       content
-      # conversation {
-      #   id
-      #   messages {
-      #     nextToken
-      #   }
-      #   associated {
-      #     nextToken
-      #   }
-      #   name
-      #   members
-      #   createdAt
-      #   updatedAt
-      # }
-      # messageConversationId
+      conversation {
+        id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
+        name
+        members
+        createdAt
+        updatedAt
+      }
+      messageConversationId
       createdAt
       updatedAt
     }
