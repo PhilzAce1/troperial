@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import dp from '../../assets/images/profile-picture.png';
 import './UserConvoButton.css';
 
@@ -7,6 +7,7 @@ const UserConvoButton = ({
   isActive,
   onConversationItemSelected,
 }) => {
+  useEffect(() => {}, [conversation.messages]);
   return (
     <button
       className={`user-convo-btn ${isActive && 'active-chat'}`}

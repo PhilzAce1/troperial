@@ -10,18 +10,23 @@ let State = {
   listing: {},
   search: [],
 };
-initialState.selectedConversation = initialState.conversations[1];
+if (initialState.conversations.length > 0) {
+  initialState.selectedConversation = initialState.conversations[1];
+}
 export default function (state = State, action) {
   switch (action.type) {
     case 'SET_USER_DETAILS': {
       const newState = { ...state };
-      newState.user.id = action.payload.userId;
-      newState.user.username = action.payload.username;
+      if (action.payload.userId && action.payload.username) {
+        newState.user.id = action.payload.userId;
+        newState.user.username = action.payload.username;
+      }
       return newState;
     }
     case 'SET_USER_CONVERSATIONS': {
       const newState = { ...state };
-      if (action.payload.items.length < 1) return newState;
+      if (action.payload.items.length < 0) return newState;
+
       newState.conversations = [];
       action.payload.items.forEach((conversation) => {
         return newState.conversations.push({
@@ -43,7 +48,9 @@ export default function (state = State, action) {
         (conversation) =>
           conversation.id === action.payload.conversationId,
       );
+
       if (!convo) return newState;
+      if (action.payload.messages.length < 0) return newState;
       action.payload.messages.forEach((message) => {
         convo.messages.push({
           isListing: message.isListing,
@@ -102,12 +109,13 @@ export default function (state = State, action) {
     }
     case 'NEW_EXTERNAL_MESSAGE': {
       const newState = { ...state };
-
       const convo = newState.conversations.find(
         (conversation) =>
           conversation.id === action.payload.conversationId,
       );
       if (!convo) return newState;
+      if (action.payload.authorId === newState.user.id)
+        return newState;
       convo.messages.push({
         imageUrl: null,
         imageAlt: null,
@@ -119,7 +127,7 @@ export default function (state = State, action) {
         messageText: action.payload.textMessage,
         createdAt: action.payload.createdAt,
         read: false,
-        isMyMessage: action.payload.authorId === newState.user.id,
+        isMyMessage: false,
       });
       convo.lastMessage = convo.messages[convo.messages.length - 1];
 
@@ -164,6 +172,7 @@ export default function (state = State, action) {
       return newState;
     }
     case 'UPDATE_MESSAGE_STACK': {
+      console.log('UPDATE_MESSAGE_STACK', action.payload);
       const newState = { ...state };
       const convo = newState.conversations.find(
         (conversation) =>

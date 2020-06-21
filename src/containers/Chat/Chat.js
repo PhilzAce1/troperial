@@ -75,49 +75,48 @@ const Chat = ({
   ]);
   useEffect(() => {
     getUserData();
-    if (selectedConversation && selectedConversation.id) {
-      const subscription = API.graphql(
-        graphqlOperation(OnCreateMessage, {
-          messageConversationId: selectedConversation.id,
-        }),
-      ).subscribe({
-        next: (eventData) => {
-          const {
-            // id,
-            authorId,
-            content,
-            messageConversationId,
-            isListing,
-            have,
-            by,
-            need,
-            rate,
-            createdAt,
-          } = eventData.value.data.onCreateMessage;
+    // if (selectedConversation && selectedConversation.id) {
+    const subscription = API.graphql(
+      graphqlOperation(OnCreateMessage, {
+        messageConversationId: selectedConversation.id,
+      }),
+    ).subscribe({
+      next: (eventData) => {
+        const {
+          // id,
+          authorId,
+          content,
+          messageConversationId,
+          isListing,
+          have,
+          by,
+          need,
+          rate,
+          createdAt,
+        } = eventData.value.data.onCreateMessage;
+        // if (conversation.user.id === authorId)
+        newExternalMessage(
+          messageConversationId,
+          content,
+          createdAt,
+          isListing,
+          authorId,
+          by,
+          have,
+          need,
+          rate,
+        );
+      },
+    });
 
-          if (conversation.user.id === authorId)
-            newExternalMessage(
-              messageConversationId,
-              content,
-              createdAt,
-              isListing,
-              authorId,
-              by,
-              have,
-              need,
-              rate,
-            );
-        },
-      });
-
-      return () => subscription.unsubscribe();
-    }
+    return () => subscription.unsubscribe();
   }, [
     conversation.user.id,
     getUserData,
     newExternalMessage,
     selectedConversation,
   ]);
+
   return (
     <React.Fragment>
       <NavBar page="Messages" icon="icon-messages" />
@@ -164,6 +163,11 @@ const mapDispatchToProps = (dispatch) => ({
     textMessage,
     createdAt,
     isListing,
+    authorId,
+    by,
+    have,
+    need,
+    rate,
   ) => {
     dispatch(
       newExternalMessage(
@@ -171,6 +175,11 @@ const mapDispatchToProps = (dispatch) => ({
         textMessage,
         createdAt,
         isListing,
+        authorId,
+        by,
+        have,
+        need,
+        rate,
       ),
     );
   },
