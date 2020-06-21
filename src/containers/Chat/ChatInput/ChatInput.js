@@ -1,6 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { createMessage } from '../../../libs/conversationHelpers';
+// import { onCreateMessage as OnCreateMessage } from '../../../libs/graphql';
+// import { createMessage as CreateMessage } from '../../../graphql/mutations';
+// import { API, graphqlOperation } from 'aws-amplify';
 import './ChatInput.css';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 import {
@@ -85,6 +88,7 @@ const ChatInput = ({
     setTimeout(() => {
       return scrollToBottom();
     }, 1000);
+
     const msg = await createMessage(
       stackId,
       false,
@@ -93,7 +97,7 @@ const ChatInput = ({
       conversation.user.id,
     );
     scrollToBottom();
-
+    console.log(msg);
     updateMessageStack(
       selectedConversation.id,
       msg.stackId,
