@@ -9,7 +9,7 @@ import InputError from '../InputError/InputError';
 import { getTransactions } from '../../actions/transactionActions';
 import {Auth} from 'aws-amplify';
 import axios from 'axios';
-import {history} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import { AppContext } from '../../libs/contextLib';
 
 
@@ -23,6 +23,7 @@ const currency_title = {
 };
 // THIS RATES COMMES FROM THE MAIN RATES IN REDUX
 const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
+  const history = useHistory();
   const { isAuthenticated } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [conversionRates, setConversionRates] = useState(null);
@@ -44,13 +45,22 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
   const [convertedSourceAmount, setConvertedSourceAmount] = useState(null);
 
   useEffect(() => {
-    const fetchRates = async () => {
-      const fetchedRates = await getAllRates();
-      //SET CHOPES
-      console.log(fetchedRates)
-      filterRatesByCurrency(currency.have, fetchedRates);
-    };
-    fetchRates();
+    if(localStorage.getItem('unAuthenticatedUserListing')) {
+      const unAuthenticatedUserListing = JSON.parse(localStorage.getItem('unAuthenticatedUserListing'));
+
+     postListing(unAuthenticatedUserListing);
+      
+    } else {
+      console.log('NO unAuthenticatedUserListing')
+      const fetchRates = async () => {
+        const fetchedRates = await getAllRates();
+        //SET CHOPES
+        console.log(fetchedRates)
+        filterRatesByCurrency(currency.have, fetchedRates);
+      };
+      fetchRates();
+    }
+
 
   }, [getAllRates, currency.have]);
 
@@ -132,11 +142,17 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
   }
 
   const handleSubmit = async (e) => {
-    
-    e.preventDefault()
-    // if(!isAuthenticated){
-    //   return history.push('/signin')
-    // }
+     e.preventDefault();
+    if(!isAuthenticated){
+      localStorage.setItem('unAuthenticatedUserListing',JSON.stringify({
+        sourceAmount: sourceAmount,
+        sourceCurrency: currency.have,
+        destinationAmount: convertedSourceAmount,
+        destinationCurrency: currency.need,
+        exchangeRate: calculatedRate,
+      }));
+      return history.push('/signin');
+    }
  
     console.log(currency.have, currency.need, sourceAmount, calculatedRate, convertedSourceAmount);
     const currentUserInfo = await Auth.currentUserInfo();
@@ -160,7 +176,20 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
         console.log(`ERROR: ${e}`)
         setLoading(false);
     }
-   
+  } 
+
+  const postListing = async (data) => {
+    const currentUserInfo = await Auth.currentUserInfo();
+    let personId = currentUserInfo.attributes['custom:personId'];
+    console.log(data);
+    try {
+    
+      const response = await axios.post(`https://transactions.api.troperial.com/accounts/${personId}/transactions`, {...data, personId})
+      console.log(response);
+    } catch(e) {
+        console.log(`ERROR: ${e}`)
+        setLoading(false);
+    }
   }
   const { have, need } = currency;
   const { haveRate, needRate } = currencyRate;
