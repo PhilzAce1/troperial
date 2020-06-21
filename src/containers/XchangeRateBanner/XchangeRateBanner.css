@@ -1,0 +1,113 @@
+.banner__container-xchange {
+    position: relative;
+    z-index: 10000000;
+    width: 100%;
+}
+.exchangeRate__banner {
+    background: black;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.exchangeRate__banner::-webkit-scrollbar {
+	display: none;
+}
+
+.rateCard__container {
+    display: flex;
+    flex: 0 0 auto;
+    min-height: 30px;
+    align-items: center;
+    justify-content: space-between;
+    width: 73%;
+    background: transparent;
+    padding: 2px 10px;
+}
+.buy__container .title, .sell__container .title {
+    display: none;
+}
+.currency_symbol {
+    background: #fff;
+    height:20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+.currency_symbol img{
+   width: 6px;
+}
+.rates__container {
+    margin: 0 10px;
+ display: flex;
+}
+.buy__container {
+    margin-right: 15px;
+}
+.buy__container .rates, .sell__container .rates {
+    color: #fff;
+    font-size: 0.8rem;
+}
+.banner-caret {
+    margin: 0 5px;
+}
+.banner-caret i {
+    color: var(--dark-grey);
+}
+
+@media (min-width: 768px) {
+    
+.exchangeRate__banner {
+    width: 80%;
+    margin: 10px auto;
+    height: auto;
+    border-radius: 10px;
+    padding: 6px 5px;
+
+}
+
+.rateCard__container {
+    display: flex;
+    min-height: 10px;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 270px !important;
+    background: transparent;
+    padding: 0px 10px;
+    border-right: 1px solid var(--light-grey);
+}
+.buy__container .title, .sell__container .title {
+    display: block;
+    color: var(--dark-grey);
+    text-align: center;
+    font-size: 0.8rem;
+}
+.currency_symbol {
+    height:25px;
+    width: 25px;
+}
+.currency_symbol img{
+   width: 7px;
+}
+.rates__container {
+    margin: 0 10px;
+}
+.buy__container {
+    margin-right: 15px;
+}
+.buy__container .rates, .sell__container .rates {
+    color: #fff;
+    font-size: 0.8rem;
+}
+.banner-caret {
+    margin: 0 5px;
+}
+.banner-caret i {
+    color: var(--dark-grey);
+}
+
+}

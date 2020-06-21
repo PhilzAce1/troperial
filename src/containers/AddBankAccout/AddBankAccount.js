@@ -1,5 +1,4 @@
 import React from 'react';
-import HybridInput from '../../components/HybridInput/HybridInput';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Select from 'react-select';
@@ -21,9 +20,8 @@ const AddBankAccount = () => {
       };
     return (
         <div className="addBank">
-            <h1 className="title">Add a New Bank</h1>
+        <h1 className="title">Add a New Bank</h1>
            <form>
-             <HybridInput/>
            <Select styles={customStyles} options={options} placeholder="Select Bank" />
             <CustomInput placeholder="Account Number"/>
             <CustomInput placeholder="ABA/ACH routing code"/>

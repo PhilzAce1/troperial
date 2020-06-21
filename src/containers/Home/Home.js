@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import FourthSection from './FourthSection/FourthSection';
 import RemarkSection from './RemarkSection/RemarkSection';
@@ -9,15 +9,15 @@ import Footer from '../../components/Footer/Footer';
 import Hero from './Hero/Hero';
 const Home = () => {
   return (
-    <Fragment>
-      <Hero />
+    <div>
+      <Hero/>
       <SecondSection />
       <ThirdSection />
       <FourthSection />
       <RemarkSection />
       <FifthSection />
       <Footer />
-    </Fragment>
+    </div>
   );
 };
 

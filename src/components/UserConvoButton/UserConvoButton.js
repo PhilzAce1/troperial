@@ -10,6 +10,9 @@ const UserConvoButton = ({
   return (
     <button
       className={`user-convo-btn ${isActive && 'active-chat'}`}
+      style={{
+        outline: 'none',
+      }}
       onClick={() => {
         return onConversationItemSelected(conversation.id);
       }}
@@ -19,7 +22,7 @@ const UserConvoButton = ({
       </span>
       <span className="username">@{conversation.title}</span>
       {conversation.messages.some(
-        (message) => message.seen === false,
+        (message) => message.read === false,
       ) && <span className="unread-messages"></span>}
     </button>
   );
