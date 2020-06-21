@@ -209,11 +209,11 @@ export default function (state = State, action) {
       const newState = { ...state };
       const sortedConvo = [...newState.conversations].sort((a, b) => {
         var dateA =
-          a.lastMessage.createdAt !== undefined
+          !a.lastMessage || a.lastMessage.createdAt !== undefined
             ? Math.floor(a.lastMessage.createdAt)
             : 1591904532746;
         var dateB =
-          b.lastMessage.createdAt !== undefined
+          !a.lastMessage || b.lastMessage.createdAt !== undefined
             ? Math.floor(b.lastMessage.createdAt)
             : 1591904532746;
         return dateB - dateA;

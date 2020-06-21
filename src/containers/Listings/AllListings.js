@@ -18,7 +18,7 @@ const AllListings = ({
   prevPage,
   nextPage,
   currentSize,
-  handleBackDrop
+  handleBackDrop,
 }) => {
   useEffect(() => {
     getTransactions();
@@ -37,7 +37,6 @@ const AllListings = ({
         {sortedTransactions.map((transaction) => {
           const {
             sourceAmount,
-            destinationAmount,
             userAlias,
             sourceCurrency,
             destinationCurrency,

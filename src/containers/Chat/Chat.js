@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onCreateMessage as OnCreateMessage } from '../../libs/graphql';
@@ -29,7 +29,7 @@ const Chat = ({
   userConversations,
   user,
 }) => {
-  async function getUserData() {
+  const getUserData = useCallback(async () => {
     // user.username = 'runo';
     if (!user || !user.username || user.username === '') {
       const authUsername = await Auth.currentAuthenticatedUser();
@@ -66,7 +66,13 @@ const Chat = ({
         console.log(e);
       }
     }
-  }
+  }, [
+    conversation.conversations.length,
+    conversation.user,
+    user,
+    userConversations,
+    userDetails,
+  ]);
   useEffect(() => {
     getUserData();
     if (selectedConversation && selectedConversation.id) {
@@ -106,7 +112,12 @@ const Chat = ({
 
       return () => subscription.unsubscribe();
     }
-  }, [conversation.user.id, getUserData, newExternalMessage, selectedConversation]);
+  }, [
+    conversation.user.id,
+    getUserData,
+    newExternalMessage,
+    selectedConversation,
+  ]);
   return (
     <React.Fragment>
       <NavBar page="Messages" icon="icon-messages" />
