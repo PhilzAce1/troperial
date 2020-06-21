@@ -197,6 +197,7 @@ export default function (state = State, action) {
       const unSeenMessages = convo.filter((message) => {
         if (message && message.hasOwnProperty('read'))
           return message.read === false;
+        return true;
       });
       console.log(unSeenMessages);
       unSeenMessages.forEach((message) => {
