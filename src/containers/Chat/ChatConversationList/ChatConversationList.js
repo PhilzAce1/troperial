@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './ChatConversationList.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { API, graphqlOperation } from 'aws-amplify';

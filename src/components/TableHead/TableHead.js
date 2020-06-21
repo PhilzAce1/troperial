@@ -13,7 +13,7 @@ const TableHead = ({ userListing, trustedTraders }) => {
       ) : (
         <div className="tableHead__container">
           <div>
-            Home <i className="fas fa-caret-down"></i>
+            Have <i className="fas fa-caret-down"></i>
           </div>
           <div>
             Need <i className="fas fa-caret-down"></i>
