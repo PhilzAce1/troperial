@@ -48,7 +48,7 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
   );
 
   useEffect(() => {
-    if(localStorage.getItem('unAuthenticatedUserListing')) {
+    if(localStorage.getItem('unAuthenticatedUserListing') && isAuthenticated) {
       const unAuthenticatedUserListing = JSON.parse(localStorage.getItem('unAuthenticatedUserListing'));
 
      postListing(unAuthenticatedUserListing);
