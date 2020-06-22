@@ -106,13 +106,10 @@ const Chat = ({
 
       return () => subscription.unsubscribe();
     }
-  }, []);
+  }, [conversation.user.id, getUserData, newExternalMessage, selectedConversation]);
   return (
     <React.Fragment>
       <NavBar page="Messages" icon="icon-messages" />
-      {/* *********The empty chat view componet************* */}
-      {/* <EmptyChatView/> */}
-      {/* *********The empty chat view componet************* */}
       <div className="chat-main-container">
         <section className="chat__container">
           <div className="chat-grid-container">

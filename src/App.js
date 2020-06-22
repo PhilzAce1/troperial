@@ -6,11 +6,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 const App = () => {
   return (
-      <Provider store={store}>
-        <Router>
-          <Routes />
-        </Router>
-      </Provider>
+    <Provider store={store}>
+      <Router>
+        <Routes />
+      </Router>
+    </Provider>
   );
 };
 export default App;

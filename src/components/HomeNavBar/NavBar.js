@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './NavBar.css';
 import {Link, NavLink} from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
-import XchangeRateBanner from '../../containers/XchangeRateBanner/XchangeRateBanner';
 
 const NavBar = () => {
   const [menu, setMenu] = useState(false);

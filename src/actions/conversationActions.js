@@ -114,3 +114,29 @@ export const updateMessageStack = (
     },
   };
 };
+export const sortConversation = (conversationId) => {
+  return {
+    type: 'SORT_CONVERSATION',
+    payload: {
+      conversationId,
+    },
+  };
+};
+
+export const updateSeen = (conversationId) => {
+  return {
+    type: 'UPDATE_SEEN_MESSAGES',
+    payload: { conversationId },
+  };
+};
+export const searchFilter = (input) => {
+  return {
+    type: 'SEARCH_FILTER',
+    payload: {
+      input,
+    },
+  };
+};
+export const clearFilter = () => ({
+  type: 'CLEAR_SEARCH_FILTER',
+});

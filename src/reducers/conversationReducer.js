@@ -8,6 +8,7 @@ let State = {
     stack: [],
   },
   listing: {},
+  search: [],
 };
 initialState.selectedConversation = initialState.conversations[1];
 export default function (state = State, action) {
@@ -30,6 +31,7 @@ export default function (state = State, action) {
             .join(''),
           messages: [],
           stack: [],
+          lastMessage: {},
         });
       });
       newState.selectedConversation = newState.conversations[0];
@@ -52,10 +54,12 @@ export default function (state = State, action) {
           need: message.need,
           imageAlt: null,
           messageText: message.content,
+          read: true,
           createdAt: message.createdAt,
           isMyMessage: message.authorId === newState.user.id,
         });
       });
+      convo.lastMessage = convo.messages[convo.messages.length - 1];
       return newState;
     }
     case 'SELECTED_CONVERSATION_CHANGED': {
@@ -113,9 +117,12 @@ export default function (state = State, action) {
         rate: action.payload.rate,
         need: action.payload.need,
         messageText: action.payload.textMessage,
-        createdAt: action.payload.createAt,
+        createdAt: action.payload.createdAt,
+        read: false,
         isMyMessage: action.payload.authorId === newState.user.id,
       });
+      convo.lastMessage = convo.messages[convo.messages.length - 1];
+
       return newState;
     }
     case 'NEW_CONVERSATION': {
@@ -152,34 +159,88 @@ export default function (state = State, action) {
         stackId: action.payload.stackNumber,
       });
 
+      convo.lastMessage = convo.messages[convo.messages.length - 1];
+
       return newState;
     }
     case 'UPDATE_MESSAGE_STACK': {
       const newState = { ...state };
-      console.log('we reached here', action.payload);
       const convo = newState.conversations.find(
         (conversation) =>
           conversation.id === action.payload.conversationId,
       );
       if (!convo) return newState;
       // update Message
-      console.log(convo.stack);
       const pendingMessage = convo.messages.find(
         (message) => message.stackId === action.payload.stackNumber,
       );
-      console.log('former pending message', pendingMessage);
       pendingMessage.createdAt = action.payload.createdAt;
 
       delete pendingMessage.isSending;
       delete pendingMessage.stackId;
-      console.log('after pending message', pendingMessage);
 
       convo.stack = removeStack(
         convo.stack,
         action.payload.stackNumber,
       );
-      console.log('After action Stack', convo.stack);
+      convo.lastMessage = convo.messages[convo.messages.length - 1];
 
+      return newState;
+    }
+    case 'UPDATE_SEEN_MESSAGE': {
+      const newState = { ...state };
+      const convo = newState.conversations.find(
+        (conversation) =>
+          conversation.id === action.payload.conversationId,
+      );
+      if (!convo) return newState;
+      const unSeenMessages = convo.filter((message) => {
+        if (message && message.hasOwnProperty('read'))
+          return message.read === false;
+      });
+      console.log(unSeenMessages);
+      unSeenMessages.forEach((message) => {
+        return (message.read = true);
+      });
+      return newState;
+    }
+    case 'SORT_CONVERSATION': {
+      const newState = { ...state };
+      const sortedConvo = [...newState.conversations].sort((a, b) => {
+        var dateA =
+          a.lastMessage.createdAt !== undefined
+            ? Math.floor(a.lastMessage.createdAt)
+            : 1591904532746;
+        var dateB =
+          b.lastMessage.createdAt !== undefined
+            ? Math.floor(b.lastMessage.createdAt)
+            : 1591904532746;
+        return dateB - dateA;
+      });
+      newState.conversations = sortedConvo;
+      return newState;
+    }
+    case 'SEARCH_FILTER': {
+      const newState = { ...state };
+      const regex = new RegExp(`^${action.payload.input}`, 'gi');
+      const filteredConvo = [...newState.conversations].filter(
+        (a) => {
+          return regex.test(a.title);
+        },
+      );
+      newState.search = filteredConvo;
+      if (
+        !action.payload.input ||
+        (action.payload.input && action.payload.input.length < 0)
+      ) {
+        newState.search = [];
+      }
+      console.log(newState.search);
+      return newState;
+    }
+    case 'CLEAR_SEARCH_FILTER': {
+      const newState = { ...state };
+      newState.search = [];
       return newState;
     }
     default:

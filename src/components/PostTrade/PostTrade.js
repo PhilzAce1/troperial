@@ -52,7 +52,7 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
     };
     fetchRates();
 
-  }, [getAllRates]);
+  }, [getAllRates, currency.have]);
 
 
   const filterRatesByCurrency = (currency, rates) => {
@@ -228,7 +228,9 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
         !convertedSourceAmount ? null : (
           <p className="summary">
           At this rate i'd get{' '}
-          <span className="price__summary">{`${currency_symbols[need]}${convertedSourceAmount}`}</span>
+          <span className="price__summary">
+            {`${currency_symbols[need]}${(convertedSourceAmount).toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
+            </span>
         </p>
         )
       }

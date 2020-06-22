@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import TableContent from '../../components/TableContent/TableContent';
 import TableHead from '../../components/TableHead/TableHead';
 import { currency_symbols } from '../../constants/currency_symbols';
+import { currency_titles } from '../../constants/currency_titles';
 import { getTransactions } from '../../actions/transactionActions';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import Pagination from 'react-pagination-js';
@@ -46,8 +47,8 @@ const AllListings = ({
           return (
             <TableContent
               have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
-              need={`${currency_symbols[destinationCurrency]} ${destinationAmount}`}
-              rate="1 USD > NGN 470"
+              need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
+              rate={`USD 1 > NGN 470`}
               by={`@${userAlias}`}
               status={transactionState}
               userListings={false}
