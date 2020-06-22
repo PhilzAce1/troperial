@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment, useContext} from 'react';
 import './PostTrade.css';
 import HybridInput from '../HybridInput/HybridInput';
 import CustomButton from '../CustomButton/CustomButton';
@@ -12,7 +12,7 @@ import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import { AppContext } from '../../libs/contextLib';
 
-
+import check from '../../assets/images/troperial-verified.PNG';
 
 const currency_title = {
   USD: 'United States Dollar',
@@ -24,6 +24,7 @@ const currency_title = {
 // THIS RATES COMMES FROM THE MAIN RATES IN REDUX
 const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
   const history = useHistory();
+  const [successful, setSuccessful] = useState(false);
   const { isAuthenticated } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [conversionRates, setConversionRates] = useState(null);
@@ -33,11 +34,11 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
   });
 
   const [currencyRate, setCurrencyRate] = useState({
-    haveRate: 'NGN',
+    haveRate: 'USD',
     needRate: 'NGN',
   });
   const [currency, setCurrency] = useState({
-    have: 'NGN',
+    have: 'USD',
     need: 'NGN',
   });
   const [sourceAmount, setSourceAmount] = useState('');
@@ -171,6 +172,7 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
           personId: personId,
         },
       );
+      setSuccessful(true);
       setLoading(false);
       getTransactions();
       console.log(response, calculatedRate);
@@ -185,9 +187,10 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
     let personId = currentUserInfo.attributes['custom:personId'];
     console.log(data);
     try {
-    
       const response = await axios.post(`https://transactions.api.troperial.com/accounts/${personId}/transactions`, {...data, personId})
       console.log(response);
+      setSuccessful(true);
+      localStorage.removeItem('unAuthenticatedUserListing');
     } catch(e) {
         console.log(`ERROR: ${e}`)
         setLoading(false);
@@ -196,81 +199,96 @@ const PostTrade = ({ title, rates, getAllRates, getTransactions }) => {
   const { have, need } = currency;
   const { haveRate, needRate } = currencyRate;
   return (
-    <form className="post__listing-container" onSubmit={handleSubmit}>
-      <h2 className="title">{title}</h2>
-      <div className="first__form__group">
-        <HybridInput
-          currency={have}
-          changeCurrencyHandler={changeUserHave}
-          line={true}
-          onChange={handleSourceAmountChange}
-          value={sourceAmount}
-          label="I have"
-        />
-        <HybridInput
-          currency={need}
-          changeCurrencyHandler={changeUserNeed}
-          line={true}
-          value={currency_title[need]}
-          readOnly={true}
-          label="I need"
-        />
-        {conversionRates === null ? null : (
-          <p className="trending__market__rate summary">
-            Trending market rate{' '}
+   <Fragment>
+     {successful === true ? (
+       <div style={{
+         width: "80%",
+         margin: '0 auto',
+         paddingTop: "50px",
+         textAlign:'center'
+       }}>
+         <img src={check} alt="check"/>
+         <p style={{fontSize: '1.2rem'}}>Your Listing was successfully Posted.</p>
+         <CustomButton loading={false} onClickHandler={() => setSuccessful(!successful)}>Post New Listing</CustomButton>
+       </div>
+     ) : (
+        <form className="post__listing-container" onSubmit={handleSubmit}>
+        <h2 className="title">{title}</h2>
+        <div className="first__form__group">
+          <HybridInput
+            currency={have}
+            changeCurrencyHandler={changeUserHave}
+            line={true}
+            onChange={handleSourceAmountChange}
+            value={sourceAmount}
+            label="I have"
+          />
+          <HybridInput
+            currency={need}
+            changeCurrencyHandler={changeUserNeed}
+            line={true}
+            value={currency_title[need]}
+            readOnly={true}
+            label="I need"
+          />
+          {conversionRates === null ? null : (
+            <p className="trending__market__rate summary">
+              Trending market rate{' '}
+              <span className="price__summary">
+                -{' '}
+                {`${currency_symbols[have]}${conversionRates[have]} = ${
+                  currency_symbols[need]
+                }${
+                  have === 'NGN'
+                    ? (
+                        conversionRates[have] / conversionRates[need]
+                      ).toFixed(4)
+                    : conversionRates[need]
+                }`}
+              </span>
+            </p>
+          )}
+        </div>
+        <h4 className="subtitle">Preffered exchange rate</h4>
+        <div className="inline_hybridInput">
+          <HybridInput
+            value={prefferedRate.have}
+            currency={haveRate}
+            changeCurrencyHandler={changeUserHaveRate}
+            readOnly={false}
+            onChange={handlePrefferedRateForHave}
+            name="have"
+          />
+          <i className="exchange-desktop fas fa-exchange-alt"></i>
+          <HybridInput
+            value={prefferedRate.need}
+            currency={needRate}
+            changeCurrencyHandler={changeUserNeedRate}
+            readOnly={false}
+            onChange={handlePrefferedRateForNeed}
+            name="need"
+          />
+        </div>
+        {!convertedSourceAmount ? null : (
+          <p className="summary">
+            At this rate i'd get{' '}
             <span className="price__summary">
-              -{' '}
-              {`${currency_symbols[have]}${conversionRates[have]} = ${
+              {`${
                 currency_symbols[need]
-              }${
-                have === 'NGN'
-                  ? (
-                      conversionRates[have] / conversionRates[need]
-                    ).toFixed(4)
-                  : conversionRates[need]
-              }`}
+              }${convertedSourceAmount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+              })}`}
             </span>
           </p>
         )}
-      </div>
-      <h4 className="subtitle">Preffered exchange rate</h4>
-      <div className="inline_hybridInput">
-        <HybridInput
-          value={prefferedRate.have}
-          currency={haveRate}
-          changeCurrencyHandler={changeUserHaveRate}
-          readOnly={false}
-          onChange={handlePrefferedRateForHave}
-          name="have"
-        />
-        <i className="exchange-desktop fas fa-exchange-alt"></i>
-        <HybridInput
-          value={prefferedRate.need}
-          currency={needRate}
-          changeCurrencyHandler={changeUserNeedRate}
-          readOnly={false}
-          onChange={handlePrefferedRateForNeed}
-          name="need"
-        />
-      </div>
-      {!convertedSourceAmount ? null : (
-        <p className="summary">
-          At this rate i'd get{' '}
-          <span className="price__summary">
-            {`${
-              currency_symbols[need]
-            }${convertedSourceAmount.toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-            })}`}
-          </span>
-        </p>
-      )}
-      <div className="checkbox__area">
-        <input type="checkbox" />
-        <p>Show to only trusted traders</p>
-      </div>
-      <CustomButton loading={loading}>Post this Trade</CustomButton>
-    </form>
+        <div className="checkbox__area">
+          <input type="checkbox" />
+          <p>Show to only trusted traders</p>
+        </div>
+        <CustomButton loading={loading}>Post this Trade</CustomButton>
+      </form>
+     )}
+   </Fragment>
   );
 };
 

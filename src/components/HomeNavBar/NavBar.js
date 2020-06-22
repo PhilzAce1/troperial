@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 import {Link, NavLink} from 'react-router-dom';
-import logo from '../../assets/images/Logo.png';
+//import logo from '../../assets/images/Logo.png';
+import logo from '../../assets/svgs/Logo.svg';
 
 const NavBar = () => {
   const [menu, setMenu] = useState(false);
@@ -32,7 +33,7 @@ const NavBar = () => {
         <div>
           <ul className="authLinks hideOnMobile">
             <li>
-              <Link className="link" to="/signin">login</Link>
+              <Link className="link" to="/signin">Sign In</Link>
             </li>
             <li>
               <Link to="/signup" className="sign-up-link"><button className="signUpDesktop">create an account</button></Link>
@@ -61,7 +62,7 @@ const NavBar = () => {
 
             <div className="mobile_screen-horizonal-line" />
  
-            <NavLink activeClassName="home-active-link" to="/signin" className="home-link">login</NavLink>
+            <NavLink activeClassName="home-active-link" to="/signin" className="home-link">Sign In</NavLink>
    
             <button className="sign-up_btn"><Link className="home-sign-up" to="/signup">create an account</Link></button>
           </div>
