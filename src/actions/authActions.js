@@ -40,17 +40,29 @@ export const createUser = (
         'https://persons.api.troperial.com/persons',
         userData,
       );
-      console.log(response)
+      const {
+        personId,
+        firstName,
+        lastName,
+        userAlias,
+        phoneNumbers,
+        verified
+      } = response.data;
+      const { number } = phoneNumbers[0];
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, {
-        'custom:personId': response.data.personId,
-        'custom:userName': response.data.userAlias,
+        'custom:personId': personId,
+        'custom:userName': userAlias,
       });
       dispatch({
         type: CHECK_USER_PROFILE,
         payload: true,
       });
       dispatch(setStep(CONFIRM_PROFILE_UPDATE));
+      dispatch({
+        type: SET_CURRENT_USER_DETAILS,
+        payload: { firstName, lastName, userAlias, number, verified },
+      });
     } catch (e) {
       console.log(e);
     }
@@ -58,14 +70,8 @@ export const createUser = (
     console.log(e);
   }
 };
-export const getUserDetails = () => async (dispatch) => {
+const getUserDetails = (personId) => async (dispatch) => {
   try {
-    // get user personid from amplify
-    const currentUserInfo = await Auth.currentUserInfo();
-    let personId = currentUserInfo.attributes['custom:personId'];
-    if (!personId) {
-      return null;
-    }
     const user = await axios.get(
       `https://persons.api.troperial.com/persons/${personId}`,
     );
@@ -74,11 +80,12 @@ export const getUserDetails = () => async (dispatch) => {
       lastName,
       userAlias,
       phoneNumbers,
+      verified
     } = user.data;
     const { number } = phoneNumbers[0];
     dispatch({
       type: SET_CURRENT_USER_DETAILS,
-      payload: { firstName, lastName, userAlias, number },
+      payload: { firstName, lastName, userAlias, number, verified },
     });
   } catch (e) {
     console.log(e);
@@ -100,12 +107,14 @@ export const checkUserProfile = () => async (dispatch) => {
         payload: false,
       });
     } else {
+      dispatch(getUserDetails(personId));
       console.log('Users profile is updated');
     }
   } catch (err) {
     console.log('error fetching user info: ', err);
   }
 };
+
 export const updateUserDetails = (data) => async (dispatch) => {
   console.log(data);
   const { firstname, lastname } = data;

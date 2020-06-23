@@ -26,7 +26,6 @@ import MyListings from './MyListings';
 import { getTransactions } from '../../actions/transactionActions';
 import {
   checkUserProfile,
-  getUserDetails,
 } from '../../actions/authActions';
 
 const Listings = ({
@@ -130,5 +129,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getTransactions,
   checkUserProfile,
-  getUserDetails,
 })(Listings);

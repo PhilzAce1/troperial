@@ -9,18 +9,19 @@ const initialState = {
   userName:'',
   password:'',
   phoneNumber:'',
-  userVerified: null
+  verified: null
 };
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER_DETAILS: 
-    const {firstName, lastName, userAlias, number} = action.payload;
+    const {firstName, lastName, userAlias, number, verified} = action.payload;
     return {
       ...state,
       firstName,
       lastName,
       userName: userAlias,
-      phoneNumber: number
+      phoneNumber: number,
+      verified
     }
     case CREATE_USER:
       return {
