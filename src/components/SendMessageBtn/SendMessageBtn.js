@@ -10,14 +10,15 @@ import {
   newConversation,
   userConversations,
 } from '../../actions/conversationActions';
-import { confirmProfileUpdateForChat } from '../../actions/auxActions';
 import {
   createUser,
   conversationExist,
   createConversation,
 } from '../../libs/conversationHelpers';
 import { finders } from './helpers/finders';
-
+import {
+  UPDATE_PROFILE,
+} from '../../actions/types';
 function SendMessageBtn({
   by,
   have,
@@ -32,8 +33,7 @@ function SendMessageBtn({
   state,
   userConversations,
   handleBackDrop,
-  profileUpdated,
-  confirmProfileUpdateForChat,
+  step,
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -58,14 +58,9 @@ function SendMessageBtn({
     userConversations(conversations, username);
   }
   async function clicked() {
-    if (!profileUpdated) {
-      confirmProfileUpdateForChat(false);
+    if (step === UPDATE_PROFILE) {
       return handleBackDrop();
     }
-
-    confirmProfileUpdateForChat(true);
-
-    // if (!user.username) return alert('please update you Profile');
     setLoading(true);
     const convo = finders(conversation.conversations, by);
     if (convo.exist) {
@@ -144,12 +139,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(newConversation(id, members)),
   userDetails: (userId, username) =>
     dispatch(userDetails(userId, username)),
-  confirmProfileUpdateForChat: (payload) =>
-    dispatch(confirmProfileUpdateForChat(payload)),
 });
 const mapStateToProps = (state) => {
   return {
-    profileUpdated: state.auth.profileUpdated,
     conversation: state.conversation,
     step: state.ui.step,
     user: state.auth,

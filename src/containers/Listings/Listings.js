@@ -39,10 +39,11 @@ const Listings = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSize, setCurrentSize] = useState(5);
   useEffect(() => {
+    checkUserProfile();
     if(localStorage.getItem('unAuthenticatedUserListing')) {
       handleBackDrop();
     }
-    checkUserProfile();
+
   }, [checkUserProfile]);
   const handleBackDrop = () => {
     const show = showBackDrop;

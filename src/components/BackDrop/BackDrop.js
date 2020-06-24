@@ -17,21 +17,19 @@ const BackDrop = ({
   step,
   setStep,
   renderBankAccoutForm,
-  profileUpdatedForChat,
 }) => {
   const renderView = (step) => {
     if (step === UPDATE_PROFILE) {
       return <UpdateProfile />;
-    } else if (step === CONFIRM_PROFILE_UPDATE) {
-      return profileUpdatedForChat === false ? (
-        <VerifiedNotification message="You can now proceed to start a conversation from your prefered listing" btnMessage="go to listings" onClick={handleBackDrop} />
-      ) : (
-        <VerifiedNotification
-          onClick={() => setStep(CREATE_TRANSACTION)}
-        />
-      );
-    } else {
+    } else if (localStorage.getItem('unAuthenticatedUserListing')){
       return <PostTrade />;
+    }
+    else if (step === CONFIRM_PROFILE_UPDATE) {
+      return <VerifiedNotification message="You can now proceed to start a conversation from your prefered listing or click the button to Post A Listing" btnMessage="Post A Listing" onClick={() => setStep(CREATE_TRANSACTION)} />
+    } else if (step === CREATE_TRANSACTION) {
+      return <PostTrade />;
+    } else {
+      return null;
     }
   };
   return (
@@ -59,7 +57,6 @@ const BackDrop = ({
 };
 const mapStateToProps = (state) => ({
   step: state.ui.step,
-  profileUpdatedForChat: state.auxState.profileUpdatedForChat,
 });
 
 BackDrop.defaultProps = {

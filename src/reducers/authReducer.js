@@ -2,7 +2,7 @@ import { CREATE_USER, CHECK_USER_PROFILE, SET_USER_COGNITO_EMAIL, SET_CURRENT_US
 
 const initialState = {
   currentUser: null,
-  profileUpdated: true,
+  profileUpdated: null,
   userCognitoEmail: null,
   firstName: '',
   lastName: '',

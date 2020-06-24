@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import './HybridInput.css';
 import CurrencyFlag from 'react-currency-flags';
 import { supported_countries } from '../../constants/supported_currencies';
-const HybridInput = ({label, line, changeCurrencyHandler, currency, value, readOnly, onChange, name}) => {
+import {currency_titles} from '../../constants/currency_titles';
+const HybridInput = ({label, line, changeCurrencyHandler, currency, value, readOnly, onChange, name, type}) => {
   const [dropdown, setDropdown] = useState(false);
-
-  const showDropdown = () => {
-    const state = dropdown;
-    setDropdown(!state);
-  };
+  const showDropdown = () => setDropdown(!dropdown);
   const onChangeCurrency = (currency) => {
     changeCurrencyHandler(currency);
     showDropdown()
@@ -26,20 +23,21 @@ const HybridInput = ({label, line, changeCurrencyHandler, currency, value, readO
         <span
           className="hybridInput__custom-select"
           name="country"
-          onClick={showDropdown}
+      
         >
           <CurrencyFlag currency={currency} size="md" />
-          {'  '}
-          <i className="fas fa-angle-down"></i>
+          {changeCurrencyHandler === null ? null : <i className="fas fa-angle-down" onClick={showDropdown}></i>}
+        
         </span>
-        <input name={name} onChange={onChange} className="hybridInput__textInput" value={value} type="text" readOnly={readOnly}/>
+        {/* <span className="currencySign">$</span> */}
+      <input className="hybridInput__textInput" name={name} onChange={onChange} value={value} type={type} readOnly={readOnly}/>
       </div>
 
       {dropdown === false ? null : (
         <section className="custom__dropdown">
           <div className="option">
             {supported_countries.map((country) => (
-              <div key={country.id} onClick={() => onChangeCurrency(country.currency)} className="item"><CurrencyFlag currency={country.currency} size="lg" /></div>
+              <div className="select-currency-btn" key={country.id} onClick={() => onChangeCurrency(country.currency)}><CurrencyFlag currency={country.currency} size="md" />{`  (${country.currency})`} {currency_titles[country.currency]}</div>
             ))}
           </div>
         </section>
@@ -55,5 +53,10 @@ HybridInput.defaultProps = {
   line: false,
   selectWidth: '20%',
   inputWidth: '100%',
+  currency: 'USD',
+  changeCurrencyHandler: null,
+  readOnly: false,
+  type: 'text'
+
 };
 export default HybridInput;

@@ -1,9 +1,8 @@
 import {
-  UPDATE_STEP,
-  CREATE_TRANSACTION,
+  UPDATE_STEP
 } from '../actions/types';
 const initialState = {
-  step: CREATE_TRANSACTION,
+  step: null,
 };
 export default function (state = initialState, action) {
   switch (action.type) {

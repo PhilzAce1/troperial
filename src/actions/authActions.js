@@ -4,6 +4,7 @@ import {
   UPDATE_PROFILE,
   SET_USER_COGNITO_EMAIL,
   SET_CURRENT_USER_DETAILS,
+  CREATE_TRANSACTION,
 } from './types';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
@@ -107,6 +108,11 @@ export const checkUserProfile = () => async (dispatch) => {
         payload: false,
       });
     } else {
+      dispatch({
+        type: CHECK_USER_PROFILE,
+        payload: true,
+      });
+      dispatch(setStep(CREATE_TRANSACTION));
       dispatch(getUserDetails(personId));
       console.log('Users profile is updated');
     }
