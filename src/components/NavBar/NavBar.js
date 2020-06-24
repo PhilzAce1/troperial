@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
 import './NavBar.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
 import Gravatar from 'react-gravatar'
 import {connect} from 'react-redux';
 import { AppContext } from '../../libs/contextLib';
 import { useHistory } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-const NavBar = ({ page, icon, userCognitoEmail}) => {
+const NavBar = ({ page, icon, userCognitoEmail, username}) => {
   const history = useHistory();
   const { userHasAuthenticated } = useContext(AppContext);
   const [menu, setMenu] = useState(false);
@@ -25,11 +25,13 @@ const NavBar = ({ page, icon, userCognitoEmail}) => {
       {/* large screen nav bar */}
       <section className="largeScreen__container">
         <div className="largeScreen__logoContainer">
-          <img
+        <Link to="/listings">
+        <img
             className="largeScreen__logo"
             src={logo}
             alt="troperial logo"
           />
+        </Link>
         </div>
         <div className="largeScreen-links">
           <NavLink
@@ -62,7 +64,7 @@ const NavBar = ({ page, icon, userCognitoEmail}) => {
           >
              <Gravatar email={userCognitoEmail} size={22} rating="pg" default="monsterid" className="largeScreen__profile" />
             <span>
-              Peter <i className="fas fa-caret-down"></i>
+              {username &&  <span className="navbar-username">{username} <i className="fas fa-caret-down"></i></span>}
             </span>
           </NavLink>
           <div className="border"></div>
@@ -134,6 +136,7 @@ const NavBar = ({ page, icon, userCognitoEmail}) => {
 };
 
 const mapStateToProps = (state) => ({
-  userCognitoEmail: state.auth.userCognitoEmail
+  userCognitoEmail: state.auth.userCognitoEmail,
+  username: state.auth.userName
 });
 export default connect(mapStateToProps, null)(NavBar)

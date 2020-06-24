@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './BackDrop.css';
 import VerifiedNotification from '../VerifiedNotification/VerifiedNotification';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
@@ -9,6 +9,7 @@ import {
   CREATE_TRANSACTION,
   UPDATE_PROFILE,
   CONFIRM_PROFILE_UPDATE,
+  CONFIRM_POST_LISTING
 } from '../../actions/types';
 import AddBankAccount from '../../containers/AddBankAccout/AddBankAccount';
 
@@ -17,19 +18,29 @@ const BackDrop = ({
   step,
   setStep,
   renderBankAccoutForm,
+  verified,
 }) => {
+
+  useEffect(()=> {
+    if(localStorage.getItem('unAuthenticatedUserListing')) {
+      if(verified === null) {
+        setStep(UPDATE_PROFILE)
+      } else {
+        setStep(CREATE_TRANSACTION)
+      }
+    }
+  }, [])
   const renderView = (step) => {
     if (step === UPDATE_PROFILE) {
       return <UpdateProfile />;
-    } else if (localStorage.getItem('unAuthenticatedUserListing')){
-      return <PostTrade />;
-    }
-    else if (step === CONFIRM_PROFILE_UPDATE) {
-      return <VerifiedNotification message="You can now proceed to start a conversation from your prefered listing or click the button to Post A Listing" btnMessage="Post A Listing" onClick={() => setStep(CREATE_TRANSACTION)} />
+    } else if (step === CONFIRM_PROFILE_UPDATE) {
+      return <VerifiedNotification message="You can now proceed to start a conversation from your preferred listing or click the button to Post A Listing" btnMessage="Post A Listing" onClick={() => setStep(CREATE_TRANSACTION)} />
     } else if (step === CREATE_TRANSACTION) {
       return <PostTrade />;
+    } else if(step === CONFIRM_POST_LISTING) {
+      return <VerifiedNotification title="Your Listing was successfully Posted" message="You can now proceed to start a conversation from your preferred listing or click the button to Post another Listing" btnMessage="Post A Listing" onClick={() => setStep(CREATE_TRANSACTION)}/>
     } else {
-      return null;
+      return <h1>loading</h1>;
     }
   };
   return (
@@ -57,6 +68,7 @@ const BackDrop = ({
 };
 const mapStateToProps = (state) => ({
   step: state.ui.step,
+  verified: state.auth.verified
 });
 
 BackDrop.defaultProps = {

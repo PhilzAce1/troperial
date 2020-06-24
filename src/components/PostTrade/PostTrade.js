@@ -19,9 +19,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../libs/contextLib';
 
-// import { setStep } from '../../actions/uiActions';
-// import { CREATE_TRANSACTION } from '../../actions/types';
-import VerifiedNotification from '../VerifiedNotification/VerifiedNotification';
+import { setStep } from '../../actions/uiActions';
+import { CONFIRM_POST_LISTING} from '../../actions/types';
 const currency_title = {
   USD: 'United States Dollar',
   NGN: 'Nigerian Naira',
@@ -35,10 +34,10 @@ const PostTrade = ({
   rates,
   getAllRates,
   getTransactions,
-  verified
+  verified,
+  setStep
 }) => {
   const history = useHistory();
-  const [successful, setSuccessful] = useState(false);
   const { isAuthenticated } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('')
@@ -103,7 +102,7 @@ const PostTrade = ({
   }, [getAllRates, currency.have]);
 
   const filterRatesByCurrency = (currency, rates) => {
-    if (!rates || rates.length === 0) return null;
+    if (!rates || rates.length === 0) {return null};
     const { conversionRates } = rates.filter(
       (rate) => rate.baseCurrency === currency,
     )[0];
@@ -210,7 +209,7 @@ const PostTrade = ({
             personId: personId,
           },
         );
-      setSuccessful(true);
+      setStep(CONFIRM_POST_LISTING)
       setLoading(false);
       getTransactions();
       console.log(response, calculatedRate);
@@ -232,7 +231,7 @@ const PostTrade = ({
         { ...data, personId, verifiedPerson: verified },
       );
       
-      setSuccessful(true);
+      setStep(CONFIRM_POST_LISTING);
     } catch (e) {
       console.log(`ERROR: ${e}`);
       setError('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
@@ -242,14 +241,10 @@ const PostTrade = ({
   const { have, need } = currency;
   return (
     <Fragment>
-      {successful === true ? (
-       <VerifiedNotification title="Your Listing has been successfully created" btnMessage="Create new Listing" message="You can now go back to start a new conversation with a fellow trader or simply Post a new trade"/>
-      ) : (
         <form
           className="post__listing-container"
           onSubmit={handleSubmit}
         >
-         
           <h2 className="title">{title}</h2>
           {error ? <CustomAlert message={error} onClick={() => setError('')}/> : null}
           <div className="first__form__group">
@@ -331,7 +326,6 @@ const PostTrade = ({
             Post this Trade
           </CustomButton>
         </form>
-      )}
     </Fragment>
   );
 };
@@ -346,4 +340,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAllRates,
   getTransactions,
+  setStep
 })(PostTrade);

@@ -11,7 +11,7 @@ const Hero = () => {
       <header className="landing__page-header">
         <div className="lightblue-overlay"></div>
 
-        <XchangeRateBanner />
+        
 
         <HomeNavBar />
         <div className="landing__page--main">
