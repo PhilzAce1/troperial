@@ -24,7 +24,6 @@ const ProgressBar = ({ value }) => {
         {value && (
           <Fragment>
               <p className="progressBar__title">Password Strength</p>
-            {value}
             <progress
               className={`${grade.quality}`}
               max="100"
