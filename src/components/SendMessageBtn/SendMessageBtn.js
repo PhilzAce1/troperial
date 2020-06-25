@@ -54,12 +54,8 @@ function SendMessageBtn({
           conversations: { items: conversations },
         },
       } = await createUser(user.username);
-      // update stor with user details
       userDetails(id, username);
-      // update store with the conversations of the user
-      setTimeout(() => {
-        userConversations(conversations, username);
-      }, 1500);
+      userConversations(conversations, username);
     } catch (e) {
       console.log(e);
     }

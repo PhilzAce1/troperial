@@ -57,16 +57,13 @@ const ChatMessageView = ({
   // const messageRead = useCallback((arr, cb) => {}, []);
 
   useEffect(() => {
-    updateSeen(selectedConversation.id, true);
-
     if (
       selectedConversation &&
       selectedConversation.messages &&
       !selectedConversation.messageLoaded &&
-      selectedConversation.messages.length <= 0 &&
-      selectedConversation.id
+      selectedConversation.messages.length <= 0
     ) {
-      // console.log(selectedConversation.messageLoaded);
+      console.log(selectedConversation.messageLoaded);
       messageLoader(loadMessages, selectedConversation.id);
     }
 
@@ -77,8 +74,6 @@ const ChatMessageView = ({
     ) {
       setTimeout(() => scrollToBottom(), 3000);
     }
-    // if (selectedConversation.messages.some((x) => x.read === false)) {
-    // }
     // check if there are unread messages
     // change the unread messages to read
     // messageRead();
@@ -88,11 +83,6 @@ const ChatMessageView = ({
     selectedConversation,
     messageLoader,
     loadMessages,
-    selectedConversation.messages,
-    conversation.conversations,
-    // conversation,
-    // updateSeen,
-    // state,
   ]);
   let messageList;
   if (messages && messages.length > 0) {
