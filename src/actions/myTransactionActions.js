@@ -17,14 +17,13 @@ import {
     dispatch,
   ) => {
     dispatch(setLoading(true));
-    const currentUserInfo = await Auth.currentUserInfo();
-    let personId = currentUserInfo.attributes['custom:personId'];
-    try {
-      const response = await axios.get(
-        `https://transactions.api.troperial.com/accounts/${personId}/transactions`,
-      );
 
-      console.log(response.data.lenght);
+    try {
+      const currentUserInfo = await Auth.currentUserInfo();
+      let accountId = currentUserInfo.attributes['custom:accountId'];
+      const response = await axios.get(
+        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+      );
       dispatch({
       type:SET_USER_TOTAL_LISTING,
       payload: response.data.length

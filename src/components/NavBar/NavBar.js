@@ -18,6 +18,7 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
   async function handleLogout() {
     await Auth.signOut();
     userHasAuthenticated(false);
+    localStorage.removeItem('authToken');
     history.push('/');
   }
   return (

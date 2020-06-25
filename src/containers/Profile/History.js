@@ -28,9 +28,8 @@ const History = ({handleDeleteModal, totalListingsPosted}) => {
       <div>
         <h2>Your Listings</h2>
       </div>
-      <div className="table-container">
+  
       <MyListings handleDeleteModal={handleDeleteModal}/>
-      </div>
     </section>
   );
 };

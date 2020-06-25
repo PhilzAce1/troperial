@@ -45,11 +45,13 @@ const Listings = ({
   };
 
   useEffect(() => {
-    checkUserProfile();
     if(localStorage.getItem('unAuthenticatedUserListing')) {
-      handleBackDrop();
+      setShowBackDrop(true);
+      setControlView(true);
     }
-  }, [checkUserProfile, handleBackDrop]);
+    checkUserProfile();
+  }, [checkUserProfile]);
+
  
   const handleDeleteModal = () => {
     setShowDelete(!showDelete);

@@ -50,10 +50,21 @@ export const createUser = (
         verified
       } = response.data;
       const { number } = phoneNumbers[0];
+      console.log(response.data);
+      // const account = await axios.post('https://persons.api.troperial.com/accounts', {
+      //   personId: personId,
+      //   accountType: "PERSONAL"
+      // }, {
+      //   headers: {
+      //     Authorization: localStorage.getItem('authToken')
+      //   }
+      // })
+      // console.log(account);
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, {
         'custom:personId': personId,
         'custom:userName': userAlias,
+        // 'custom:accountId': accountId
       });
       dispatch({
         type: CHECK_USER_PROFILE,
@@ -100,7 +111,7 @@ export const checkUserProfile = () => async (dispatch) => {
       payload: currentUserInfo.attributes.email,
     });
     let personId = currentUserInfo.attributes['custom:personId'];
-
+    
     if (!personId) {
       dispatch(setStep(UPDATE_PROFILE));
       dispatch({

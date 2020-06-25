@@ -1,3 +1,5 @@
+
+
 .post__listing-container .title  {
     font-size: 1.1rem;
 }
@@ -40,21 +42,12 @@
 .price__summary {
     color: var(--troperial-blue);
 }
-.prefferedRate-errors-largeScreen {
-   display: none;
-}
 @media (min-width: 768px) {
-
-    .prefferedRate-errors-largeScreen {
-        display: block;
-     }
-     .prefferedRate-errors-smallScreen {
-        display: none;
-     }
     .inline_hybridInput {
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
     .exchange-desktop {
         margin: 0 15px;

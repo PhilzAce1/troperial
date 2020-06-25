@@ -272,8 +272,8 @@ const PostTrade = ({
               readOnly={true}
               label="I need"
             />
-          {conversionRates && (
-                <p className="trending__market__rate summary">
+            {conversionRates === null ? null : (
+              <p className="trending__market__rate summary">
                 Trending market rate{' '}
                 <span className="price__summary">
                   -{' '}
@@ -289,7 +289,7 @@ const PostTrade = ({
                   }`}
                 </span>
               </p>
-          )}
+            )}
           </div>
           <h4 className="subtitle">Preffered exchange rate</h4>
           <div className="inline_hybridInput">
