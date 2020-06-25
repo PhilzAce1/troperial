@@ -151,7 +151,7 @@ export const createMessage = async (
 export const getMessages = async (conversationId) => {
   // return console.log('Hello', conversationId);
   if (typeof conversationId !== 'string')
-    return alert('Unknown Error please reload');
+    return console.log(conversationId, ' is not a string');
   try {
     const {
       data: {
@@ -164,7 +164,7 @@ export const getMessages = async (conversationId) => {
       graphqlOperation(getConvo, { id: conversationId }),
     );
     if (!members && members.length < 1)
-      return alert('Invalid conversatation Link');
+      return console.log('Invalid conversatation Link');
     return items;
   } catch (e) {
     console.log(e);

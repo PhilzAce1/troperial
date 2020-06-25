@@ -33,79 +33,84 @@ const ChatInput = ({
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    scrollToBottom();
-
-    setTextMessage('');
-    const stackId = getStack(selectedConversation.stack);
-    if (textMessage === '') return;
-    const listings = listing === undefined ? false : listing.open;
-    if (listings) {
+    try {
       scrollToBottom();
+
+      setTextMessage('');
+      const stackId = getStack(selectedConversation.stack);
+      if (textMessage === '') return;
+      const listings = listing === undefined ? false : listing.open;
+      if (listings) {
+        scrollToBottom();
+        currentUserMessage(
+          selectedConversation.id,
+          textMessage,
+          stackId,
+          true,
+          conversation.user.id,
+          listing.by,
+          listing.have,
+          listing.need,
+          listing.rate,
+        );
+        scrollToBottom();
+
+        listingChanged(false);
+        const msg = await createMessage(
+          stackId,
+          true,
+          selectedConversation.id,
+          textMessage,
+          conversation.user.id,
+          listing.by,
+          listing.have,
+          listing.need,
+          listing.rate,
+        );
+        scrollToBottom();
+        if (msg.newMessage.data.createMessage.createdAt) {
+          updateMessageStack(
+            selectedConversation.id,
+            msg.stackId,
+            msg.newMessage.data.createMessage.createdAt,
+            msg.newMessage.data.createMessage.id,
+          );
+          return setTimeout(() => {
+            sortConversation();
+          }, 1000);
+        }
+      }
+
       currentUserMessage(
         selectedConversation.id,
         textMessage,
         stackId,
-        true,
+        false,
         conversation.user.id,
-        listing.by,
-        listing.have,
-        listing.need,
-        listing.rate,
       );
-      scrollToBottom();
+      setTimeout(() => {
+        return scrollToBottom();
+      }, 1000);
 
-      listingChanged(false);
       const msg = await createMessage(
         stackId,
-        true,
+        false,
         selectedConversation.id,
         textMessage,
         conversation.user.id,
-        listing.by,
-        listing.have,
-        listing.need,
-        listing.rate,
       );
       scrollToBottom();
-
+      console.log(msg);
       updateMessageStack(
         selectedConversation.id,
         msg.stackId,
         msg.newMessage.data.createMessage.createdAt,
+        msg.newMessage.data.createMessage.id,
       );
-      return setTimeout(() => {
-        sortConversation();
-      }, 1000);
-    }
-
-    currentUserMessage(
-      selectedConversation.id,
-      textMessage,
-      stackId,
-      false,
-      conversation.user.id,
-    );
-    setTimeout(() => {
-      return scrollToBottom();
-    }, 1000);
-
-    const msg = await createMessage(
-      stackId,
-      false,
-      selectedConversation.id,
-      textMessage,
-      conversation.user.id,
-    );
-    scrollToBottom();
-    console.log(msg);
-    updateMessageStack(
-      selectedConversation.id,
-      msg.stackId,
-      msg.newMessage.data.createMessage.createdAt,
-    );
-    return setTimeout(() => {
-      sortConversation();
-    }, 1000);
+      setTimeout(() => {
+        return sortConversation();
+      }, 2500);
+    } catch (error) {}
   };
 
   return (
@@ -235,9 +240,9 @@ const mapDispatchToProps = (dispatch) => ({
   listingChanged: (status, by, have, need, rate) =>
     dispatch(listingChanged(status, by, have, need, rate)),
 
-  updateMessageStack: (conversationId, stackNUmber, createdAt) =>
+  updateMessageStack: (conversationId, stackNUmber, createdAt, id) =>
     dispatch(
-      updateMessageStack(conversationId, stackNUmber, createdAt),
+      updateMessageStack(conversationId, stackNUmber, createdAt, id),
     ),
   sortConversation: () => dispatch(sortConversation()),
 });
