@@ -65,10 +65,7 @@ input[type=text] {
 
 
 .hybridInput__custom-select, .hybridInput__textInput {
-    border: none;
-    background: #fff;
-    padding: 10px 14px;
-    box-sizing: border-box;
+
 }
 .hybridInput__container:hover .hybridInput__textInput {
     border: 1.2px solid var(--troperial-blue) !important;
@@ -88,11 +85,13 @@ input[type=text] {
     color: #000;
     font-weight: 600;
     width: 100%;
-    padding: 10px 20px;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
     background-clip: padding-box !important;
+    background: #fff;
+    padding: 10px 14px;
+    box-sizing: border-box;
 }
 
 .hybridInput__textInput::-webkit-outer-spin-button,
@@ -108,6 +107,9 @@ margin:0;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #fff;
+    padding: 10px 14px;
+    box-sizing: border-box;
 }
 .hybridInput__custom-select i {
   margin-left: 10px;
