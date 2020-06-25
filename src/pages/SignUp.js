@@ -173,8 +173,8 @@ const SignUp = () => {
       <div>
         <OnboardingNotification
           notificationIcon={notificationIcon}
-          title="Check your email"
-          message="click the link on the email we sent to you to verify your account and come back here to click Sign in"
+          title="Check your email!"
+          message="We sent you a link, Click the link on the email we sent to you to verify your account, if you don't see the mail then please wait for it for a few minutes or check your Spam and come back here to click Sign in."
         >
           <Link to="/signin" style={{ textDecoration: 'none' }}>
             <CustomButton loading={false}>Sign In</CustomButton>
