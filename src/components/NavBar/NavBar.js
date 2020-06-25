@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import { AppContext } from '../../libs/contextLib';
 import { useHistory } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-const NavBar = ({ page, icon, userCognitoEmail, username}) => {
+const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
   const history = useHistory();
   const { userHasAuthenticated } = useContext(AppContext);
   const [menu, setMenu] = useState(false);
@@ -41,13 +41,15 @@ const NavBar = ({ page, icon, userCognitoEmail, username}) => {
           >
              <span className="icon icon-listings"></span> Listings
           </NavLink>
-          <NavLink
+         {profileUpdated && (
+            <NavLink
             activeClassName="is-active"
             className="nav-link"
             to="/messages"
           >
             <span className="icon icon-messages"></span> messages
           </NavLink>
+         )}
           <NavLink
             activeClassName="is-active"
             className="nav-link"
@@ -64,7 +66,7 @@ const NavBar = ({ page, icon, userCognitoEmail, username}) => {
           >
              <Gravatar email={userCognitoEmail} size={22} rating="pg" default="monsterid" className="largeScreen__profile" />
             <span>
-              {username &&  <span className="navbar-username">{username} <i className="fas fa-caret-down"></i></span>}
+              {username &&  <span className="navbar-username">{username}</span>}<i className="fas fa-caret-down"></i>
             </span>
           </NavLink>
           <div className="border"></div>
@@ -100,13 +102,15 @@ const NavBar = ({ page, icon, userCognitoEmail, username}) => {
             >
               Listings
             </NavLink>
-            <NavLink
-              activeClassName="is-active"
-              className="nav-link"
-              to="/messages"
-            >
-              messages
-            </NavLink>
+           {profileUpdated && (
+               <NavLink
+               activeClassName="is-active"
+               className="nav-link"
+               to="/messages"
+             >
+               messages
+             </NavLink>
+           )}
             <NavLink
               activeClassName="is-active"
               className="nav-link"
@@ -137,6 +141,7 @@ const NavBar = ({ page, icon, userCognitoEmail, username}) => {
 
 const mapStateToProps = (state) => ({
   userCognitoEmail: state.auth.userCognitoEmail,
-  username: state.auth.userName
+  username: state.auth.userName,
+  profileUpdated: state.auth.profileUpdated
 });
 export default connect(mapStateToProps, null)(NavBar)

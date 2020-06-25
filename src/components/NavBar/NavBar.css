@@ -175,6 +175,7 @@ nav.navigationBar {
 		justify-content: center;
 		align-items: center;
 		color: var(--dark-grey);
+		margin-right: 15px;
 	}
 	.largeScreen__profile {
 		width: 22px;

@@ -12,9 +12,9 @@ import { setStep } from './uiActions';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 export const createUser = (
-  username,
   firstname,
   lastname,
+  username,
   phone,
 ) => async (dispatch) => {
   const phoneDetails = parsePhoneNumberFromString(phone);
