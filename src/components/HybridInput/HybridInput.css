@@ -63,10 +63,6 @@ input[type=text] {
 
 }
 
-
-.hybridInput__custom-select, .hybridInput__textInput {
-
-}
 .hybridInput__container:hover .hybridInput__textInput {
     border: 1.2px solid var(--troperial-blue) !important;
 }
@@ -90,7 +86,7 @@ input[type=text] {
     appearance: none !important;
     background-clip: padding-box !important;
     background: #fff;
-    padding: 10px 14px;
+    padding: 12px 14px;
     box-sizing: border-box;
 }
 
