@@ -5,7 +5,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 
 import { AppContext } from '../libs/contextLib';
 import { getMessages } from '../libs/conversationHelpers';
-import { pushNotification } from '../libs/pushNotification';
 import { onCreateMessage as OnCreateMessage } from '../libs/graphql';
 import {
   newExternalMessage,
@@ -21,11 +20,10 @@ function AuthenticatedRoute({
 }) {
   const messageLoad = useCallback(
     async (convoId) => {
-      console.log('what is going');
       try {
         const message = await getMessages(convoId);
         if (!Array.isArray(message))
-          return console.log('could not get Message');
+          return alert('could not get Message');
         loadMessages(message, convoId);
       } catch (e) {
         console.log(e);
@@ -34,6 +32,7 @@ function AuthenticatedRoute({
     [loadMessages],
   );
   useEffect(() => {
+    console.log('there is something going on');
     if (
       conversation &&
       conversation.conversations.length > 0 &&
@@ -48,7 +47,7 @@ function AuthenticatedRoute({
             }),
           ).subscribe({
             next: (eventData) => {
-              // console.log(eventData);
+              console.log(eventData);
               const {
                 id,
                 authorId,
@@ -65,14 +64,19 @@ function AuthenticatedRoute({
                 conversation.conversations,
                 messageConversationId,
               );
+              console.log(convers);
+              console.log(conversation.conversations);
               if (convers.convoExist) {
-                // if (
-                //   !convers.messageLoaded &&
-                //   convers.convo.messages.length <= 0
-                // ) {
-                messageLoad(messageConversationId);
-                // }
-                pushNotification(content);
+                console.log('conversation exist');
+                // if (conversation.user.id === authorId)
+                if (
+                  !convers.messageLoaded &&
+                  convers.convo.messages.length <= 0
+                ) {
+                  console.log('loading message ...');
+                  console.log(convers.convo);
+                  messageLoad(messageConversationId);
+                }
                 newExternalMessage(
                   messageConversationId,
                   content,
@@ -94,8 +98,10 @@ function AuthenticatedRoute({
     }
     // eslint-disable-next-line
   }, [
+    conversation.selectedConversation,
     newExternalMessage,
-    conversation.conversations.length,
+    // conversation,
+    // conversation.conversations,
     messageLoad,
   ]);
   const { pathname, search } = useLocation();

@@ -52,12 +52,11 @@ export default function (state = State, action) {
           conversation.id === action.payload.conversationId,
       );
       if (!convo) return newState;
-      if (convo.messageLoaded) {
+      if (convo.messageLoaded || convo.messages.length > 0) {
         convo.lastMessage = convo.messages[convo.messages.length - 1];
         return newState;
       }
       convo.messageLoaded = true;
-      convo.messages = [];
       if (action.payload.messages.length < 0) return newState;
       action.payload.messages.forEach((message) => {
         convo.messages.push({
@@ -134,6 +133,8 @@ export default function (state = State, action) {
         return x.id === action.payload.id;
       });
 
+      // convo.messages > 0 &&
+      console.log(msgExist);
       if (msgExist) {
         return newState;
       }
@@ -151,6 +152,8 @@ export default function (state = State, action) {
         read: false,
         isMyMessage: false,
       });
+      // const filteredMsg = filterDup(convo.messages, (it) => it.id);
+      // convo.messages = filteredMsg;
       convo.lastMessage = convo.messages[convo.messages.length - 1];
 
       return newState;
