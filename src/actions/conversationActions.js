@@ -55,6 +55,7 @@ export const newExternalMessage = (
   createdAt,
   isListing = false,
   authorId,
+  id,
   by = 'none',
   have = 'none',
   need = 'none',
@@ -72,6 +73,7 @@ export const newExternalMessage = (
       need,
       rate,
       authorId,
+      id,
     },
   };
 };
@@ -104,6 +106,7 @@ export const updateMessageStack = (
   conversationId,
   stackNumber,
   createdAt,
+  id,
 ) => {
   return {
     type: 'UPDATE_MESSAGE_STACK',
@@ -111,6 +114,7 @@ export const updateMessageStack = (
       conversationId,
       stackNumber,
       createdAt,
+      id,
     },
   };
 };

@@ -29,6 +29,14 @@
   progress[value].Strong::-webkit-progress-value {
   background-color: var(--success-green);
 }
+.progressBar__container
+  progress[value].Weak::-webkit-progress-value {
+  background-color: red;
+}
+.progressBar__container
+  progress[value].Invalid::-webkit-progress-value {
+  background-color: var(--light-grey);
+}
 .progressBar__container progress[value].Medium::-moz-progress-value {
   background-color: var(--warning-yellow);
 }

@@ -3,11 +3,13 @@ import {
     SET_LOADING,
     APPLY_MY_FILTER,
     NOTIFY_USER,
+    SET_USER_TOTAL_LISTING
   } from '../actions/types';
   const initialState = {
     myTransactions: [],
     mySortedTransactions: [],
     notification: false,
+    totalListingsPosted: 0
   };
   export default function (state = initialState, action) {
     switch (action.type) {
@@ -15,6 +17,11 @@ import {
         return {
           ...state,
           mySortedTransactions: action.payload,
+        };
+      case SET_USER_TOTAL_LISTING:
+        return {
+          ...state,
+          totalListingsPosted: action.payload,
         };
       case NOTIFY_USER:
         return {

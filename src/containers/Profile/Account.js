@@ -20,7 +20,7 @@ const Account = ({
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => updateUserDetails(data);
   return (
-    <form action="" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <section className="profile_container">
         <div className="grid-item headers">
           <h3 className="profile__input-data-heading">
@@ -107,7 +107,10 @@ const Account = ({
             type="text"
             label="Email Address"
             placeholder="e.g johndoe@gmail.com"
+            value={defaultValues.email}
             register={register}
+            onChange={(e) => onChangeHandler(e)}
+            disabled={!fetched ? true : false}
           />
         </div>
         <div className="grid-item headers">

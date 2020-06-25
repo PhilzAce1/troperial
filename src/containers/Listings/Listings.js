@@ -26,7 +26,6 @@ import MyListings from './MyListings';
 import { getTransactions } from '../../actions/transactionActions';
 import {
   checkUserProfile,
-  getUserDetails,
 } from '../../actions/authActions';
 
 const Listings = ({
@@ -39,18 +38,19 @@ const Listings = ({
   const [showDelete, setShowDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSize, setCurrentSize] = useState(5);
-  useEffect(() => {
-    if(localStorage.getItem('unAuthenticatedUserListing')) {
-      handleBackDrop();
-    }
-    checkUserProfile();
-  }, [checkUserProfile]);
   const handleBackDrop = () => {
     const show = showBackDrop;
     setShowBackDrop(!show);
     setControlView(!controlView);
   };
 
+  useEffect(() => {
+    checkUserProfile();
+    if(localStorage.getItem('unAuthenticatedUserListing')) {
+      handleBackDrop();
+    }
+  }, [checkUserProfile, handleBackDrop]);
+ 
   const handleDeleteModal = () => {
     setShowDelete(!showDelete);
     setControlView(!controlView);
@@ -130,5 +130,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getTransactions,
   checkUserProfile,
-  getUserDetails,
 })(Listings);

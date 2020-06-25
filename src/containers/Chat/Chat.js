@@ -31,13 +31,17 @@ const Chat = ({
 }) => {
   const getUserData = useCallback(async () => {
     // user.username = 'runo';
-    if (!user || !user.username || user.username === '') {
-      const authUsername = await Auth.currentAuthenticatedUser();
-      if (authUsername.attributes['custom:userName']) {
-        user.username = authUsername.attributes['custom:userName'];
-      } else {
-        alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
+    try {
+      if (!user || !user.username || user.username === '') {
+        const authUsername = await Auth.currentAuthenticatedUser();
+        if (authUsername.attributes['custom:userName']) {
+          user.username = authUsername.attributes['custom:userName'];
+        } else {
+          alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
+        }
       }
+    } catch (e) {
+      console.log(e);
     }
     // if (!user.username) return alert('please complete your profile');
     if (
@@ -58,7 +62,11 @@ const Chat = ({
             },
           } = a;
           userDetails(id, username);
-          return userConversations(conversations, username);
+
+          return setTimeout(
+            () => userConversations(conversations, username),
+            1000,
+          );
         } else {
           return;
         }
@@ -82,30 +90,30 @@ const Chat = ({
       }),
     ).subscribe({
       next: (eventData) => {
-        const {
-          // id,
-          authorId,
-          content,
-          messageConversationId,
-          isListing,
-          have,
-          by,
-          need,
-          rate,
-          createdAt,
-        } = eventData.value.data.onCreateMessage;
+        // const {
+        //   id,
+        //   authorId,
+        //   content,
+        //   messageConversationId,
+        //   isListing,
+        //   have,
+        //   by,
+        //   need,
+        //   rate,
+        //   createdAt,
+        // } = eventData.value.data.onCreateMessage;
         // if (conversation.user.id === authorId)
-        newExternalMessage(
-          messageConversationId,
-          content,
-          createdAt,
-          isListing,
-          authorId,
-          by,
-          have,
-          need,
-          rate,
-        );
+        // newExternalMessage(
+        //   messageConversationId,
+        //   content,
+        //   createdAt,
+        //   isListing,
+        //   authorId,
+        //   by,
+        //   have,
+        //   need,
+        //   rate,
+        // );
       },
     });
 

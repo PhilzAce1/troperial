@@ -97,11 +97,11 @@ const ListingsFilters = ({
               </div>
               <div className="preffered__rate">
                 <div>
-                  <HybridInput />
+                  {/* <HybridInput /> */}
                   <div className="exchange_icon">
                     <i className="exchange fas fa-exchange-alt"></i>
                   </div>
-                  <HybridInput />
+                  {/* <HybridInput /> */}
                 </div>
               </div>
               <div className="status">

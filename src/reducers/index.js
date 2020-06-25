@@ -4,13 +4,10 @@ import myTransactionReducer from './myTransactionReducer';
 import authReducer from './authReducer';
 import uiReducer from './uiReducer';
 import conversationReducer from './conversationReducer';
-
-import auxReducer from './auxReducer';
 export default combineReducers({
   transaction: transactionReducer,
   myTransaction: myTransactionReducer,
   auth: authReducer,
   ui: uiReducer,
   conversation: conversationReducer,
-  auxState: auxReducer,
 });

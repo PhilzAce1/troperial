@@ -2,24 +2,26 @@ import { CREATE_USER, CHECK_USER_PROFILE, SET_USER_COGNITO_EMAIL, SET_CURRENT_US
 
 const initialState = {
   currentUser: null,
-  profileUpdated: true,
+  profileUpdated: null,
   userCognitoEmail: null,
   firstName: '',
   lastName: '',
   userName:'',
   password:'',
-  phoneNumber:''
+  phoneNumber:'',
+  verified: null
 };
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER_DETAILS: 
-    const {firstName, lastName, userAlias, number} = action.payload;
+    const {firstName, lastName, userAlias, number, verified} = action.payload;
     return {
       ...state,
       firstName,
       lastName,
       userName: userAlias,
-      phoneNumber: number
+      phoneNumber: number,
+      verified
     }
     case CREATE_USER:
       return {

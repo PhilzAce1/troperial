@@ -14,3 +14,31 @@ export const removeStack = (arr, ...value) => {
   if (!value) return arr;
   return arr.filter((x) => !value.includes(x));
 };
+// function to filter the convo
+export const filterDup = (arr, key) => {
+  return [...new Map(arr.map((x) => [key(x), x])).values()];
+};
+
+export const findConvo = (arr, convoId) => {
+  if (typeof convoId !== 'string')
+    return {
+      error: 'Invalid Input',
+      convoExist: false,
+      convo: {},
+      messageLoaded: false,
+    };
+  convoId = convoId.trim();
+
+  // return c0nc;
+  const convo = arr.find((convo) => convo.id === convoId);
+  return {
+    convoExist: convo ? true : false,
+    convo: convo ? convo : {},
+    messageLoaded:
+      convo &&
+      convo.hasOwnProperty('messageLoaded') &&
+      convo.messageLoaded === true
+        ? true
+        : false,
+  };
+};
