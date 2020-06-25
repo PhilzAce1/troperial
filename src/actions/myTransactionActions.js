@@ -2,7 +2,8 @@ import {
     SET_LOADING,
     APPLY_MY_FILTER,
     NOTIFY_USER,
-    GET_MY_TRANSACTIONS
+    GET_MY_TRANSACTIONS,
+    SET_USER_TOTAL_LISTING
   } from './types';
   import axios from 'axios';
   import { Auth } from 'aws-amplify';
@@ -23,7 +24,11 @@ import {
         `https://transactions.api.troperial.com/accounts/${personId}/transactions`,
       );
 
-      console.log(response);
+      console.log(response.data.lenght);
+      dispatch({
+      type:SET_USER_TOTAL_LISTING,
+      payload: response.data.length
+      })
       dispatch({
         type: GET_MY_TRANSACTIONS,
         payload: response.data,

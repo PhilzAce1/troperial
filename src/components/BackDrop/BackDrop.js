@@ -29,7 +29,7 @@ const BackDrop = ({
         setStep(CREATE_TRANSACTION)
       }
     }
-  }, [])
+  }, [setStep, verified])
   const renderView = (step) => {
     if (step === UPDATE_PROFILE) {
       return <UpdateProfile />;

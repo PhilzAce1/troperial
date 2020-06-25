@@ -3,6 +3,7 @@ import React, {
   useEffect,
   Fragment,
   useContext,
+  useCallback
 } from 'react';
 import './PostTrade.css';
 import HybridInput from '../HybridInput/HybridInput';
@@ -82,37 +83,36 @@ const PostTrade = ({
   const [convertedSourceAmount, setConvertedSourceAmount] = useState(
     null,
   );
+  const { have, need } = currency;
 
-  useEffect(() => {
-    if (
-      localStorage.getItem('unAuthenticatedUserListing') &&
-      isAuthenticated
-    ) {
-      const unAuthenticatedUserListing = JSON.parse(
-        localStorage.getItem('unAuthenticatedUserListing'),
-      );
-      postListing(unAuthenticatedUserListing);
-    } else {
-      const fetchRates = async () => {
-        const fetchedRates = await getAllRates();
-        filterRatesByCurrency(currency.have, fetchedRates);
-      };
-      fetchRates();
+
+  const calculateRate = useCallback( (have, need) => {
+    need = parseFloat(need);
+    have = parseFloat(have);
+    const rate = need * have;
+    setCalculatedRate(rate);
+    if (!sourceAmount) {
+      return;
     }
-  }, [getAllRates, currency.have]);
-
-  const filterRatesByCurrency = (currency, rates) => {
+    const expectedValue = parseFloat(sourceAmount) * rate;
+    setConvertedSourceAmount(expectedValue);
+  }, [sourceAmount])
+  const filterRatesByCurrency = useCallback((currency, rates) => {
     if (!rates || rates.length === 0) {return null};
-    const { conversionRates } = rates.filter(
-      (rate) => rate.baseCurrency === currency,
-    )[0];
-    setPrefferedRate({
-      have: conversionRates[have],
-      need: conversionRates[need],
-    })
-    calculateRate(conversionRates[have], conversionRates[need])
-    setConversionRates(conversionRates);
-  };
+    try {
+      const { conversionRates } = rates.filter(
+        (rate) => rate.baseCurrency === currency,
+      )[0];
+      setPrefferedRate({
+        have: conversionRates[have],
+        need: conversionRates[need],
+      })
+      calculateRate(conversionRates[have], conversionRates[need])
+      setConversionRates(conversionRates);
+    }catch(e) {
+      alert('Internal System error, chech back in a 10minutes')
+    }
+  }, [calculateRate, have, need])
 
   const changeUserHave = (data) => {
     setCurrency({ ...currency, have: data });
@@ -140,17 +140,7 @@ const PostTrade = ({
     setConvertedSourceAmount(expectedValue);
   };
 
-  const calculateRate = (have, need) => {
-    need = parseFloat(need);
-    have = parseFloat(have);
-    const rate = need * have;
-    setCalculatedRate(rate);
-    if (!sourceAmount) {
-      return;
-    }
-    const expectedValue = parseFloat(sourceAmount) * rate;
-    setConvertedSourceAmount(expectedValue);
-  };
+
   const handlePrefferedRateForHave = (e) => {
     setPrefferedRate({
       ...prefferedRate,
@@ -220,7 +210,7 @@ const PostTrade = ({
     }
   };
 
-  const postListing = async (data) => {
+  const postListing = useCallback(async (data) => {
     localStorage.removeItem('unAuthenticatedUserListing');
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
@@ -230,15 +220,32 @@ const PostTrade = ({
         `https://transactions.api.troperial.com/accounts/${personId}/transactions`,
         { ...data, personId, verifiedPerson: verified },
       );
-      
       setStep(CONFIRM_POST_LISTING);
     } catch (e) {
       console.log(`ERROR: ${e}`);
       setError('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
       setLoading(false);
     }
-  };
-  const { have, need } = currency;
+  }, [setStep, verified])
+  useEffect(() => {
+    if (
+      localStorage.getItem('unAuthenticatedUserListing') &&
+      isAuthenticated
+    ) {
+      const unAuthenticatedUserListing = JSON.parse(
+        localStorage.getItem('unAuthenticatedUserListing'),
+      );
+      postListing(unAuthenticatedUserListing);
+    } else {
+      const fetchRates = async () => {
+        const fetchedRates = await getAllRates();
+        console.log(fetchedRates);
+        filterRatesByCurrency(currency.have, fetchedRates);
+      };
+      fetchRates();
+    }
+  }, [getAllRates, currency.have, filterRatesByCurrency, isAuthenticated, postListing]);
+
   return (
     <Fragment>
         <form

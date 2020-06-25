@@ -38,19 +38,19 @@ const Listings = ({
   const [showDelete, setShowDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSize, setCurrentSize] = useState(5);
-  useEffect(() => {
-    checkUserProfile();
-    if(localStorage.getItem('unAuthenticatedUserListing')) {
-      handleBackDrop();
-    }
-
-  }, [checkUserProfile]);
   const handleBackDrop = () => {
     const show = showBackDrop;
     setShowBackDrop(!show);
     setControlView(!controlView);
   };
 
+  useEffect(() => {
+    checkUserProfile();
+    if(localStorage.getItem('unAuthenticatedUserListing')) {
+      handleBackDrop();
+    }
+  }, [checkUserProfile, handleBackDrop]);
+ 
   const handleDeleteModal = () => {
     setShowDelete(!showDelete);
     setControlView(!controlView);

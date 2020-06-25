@@ -123,15 +123,28 @@ export const checkUserProfile = () => async (dispatch) => {
 
 export const updateUserDetails = (data) => async (dispatch) => {
   console.log(data);
-  const { firstname, lastname } = data;
+  // dispatch({
+  //   type: SET_CURRENT_USER_DETAILS,
+  //   payload: { firstName, lastName, userAlias, number, verified },
+  // });
+  //const { firstname, lastname, username, email, phone } = data;
+  const { firstname, lastname, username } = data;
   try {
+    const currentUserInfo = await Auth.currentUserInfo();
+    let personId = currentUserInfo.attributes['custom:personId'];
     const response = await axios.post(
-      'https://persons.api.troperial.com/persons//name',
+      `https://persons.api.troperial.com//persons/${personId}/name`,
       {
         firstName: firstname,
         lastName: lastname,
+        userAlias: username
       },
     );
+    const user = await Auth.currentAuthenticatedUser();
+    await Auth.updateUserAttributes(user, {
+      'custom:userName': username,
+    });
+
     console.log(response);
   } catch (e) {
     console.log(e);
