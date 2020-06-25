@@ -51,12 +51,13 @@ const SignUp = () => {
     }
   };
 
-
   const renderForm = () => {
     return (
       <OnboardingFormContainer>
         <ContentContainer>
-        <Link to="/"><img src={img} alt="troperial logo" /></Link>
+          <Link to="/">
+            <img src={img} alt="troperial logo" />
+          </Link>
           <h2>
             Create a{' '}
             <span className="troperial-green">Troperial</span> Account
@@ -99,11 +100,15 @@ const SignUp = () => {
 
             <div>
               {errors.password?.type === 'required' && (
-                <InputError>Please provide a valid password</InputError>
+                <InputError>
+                  Please provide a valid password
+                </InputError>
               )}
               {errors.password?.type === 'pattern' && (
                 <InputError>
-                  Password must be between 6 - 20 characters and must include atleast 1 Uppercase letter, 1 Lowercase letter, 1 numeric value and one special character.
+                  Password must be between 6 - 20 characters and must
+                  include atleast 1 Uppercase letter, 1 Lowercase
+                  letter, 1 numeric value and one special character.
                 </InputError>
               )}
 
@@ -116,9 +121,7 @@ const SignUp = () => {
                 })}
                 name="password"
                 type="password"
-                onChange={(e) =>
-                  setPasswordTrack(e.target.value)
-                }
+                onChange={(e) => setPasswordTrack(e.target.value)}
                 label="Password"
                 placeholder="Password"
               />
@@ -171,8 +174,12 @@ const SignUp = () => {
         <OnboardingNotification
           notificationIcon={notificationIcon}
           title="Check your email"
-          message="click the link on the email we sent to you to verify your account"
-        />
+          message="click the link on the email we sent to you to verify your account and come back here to click Sign in"
+        >
+          <Link to="/signin" style={{ textDecoration: 'none' }}>
+            <CustomButton loading={false}>Sign In</CustomButton>
+          </Link>
+        </OnboardingNotification>
       </div>
     );
   };
