@@ -1,11 +1,13 @@
 import data from '../containers/Chat/data';
-import { removeStack } from '../containers/Chat/helpers';
+import { removeStack, filterDup } from '../containers/Chat/helpers';
 let initialState = data;
 let State = {
   user: {},
   conversations: [],
   selectedConversation: {
     stack: [],
+    id: '',
+    messageLoaded: false,
   },
   listing: {},
   search: [],
@@ -34,6 +36,7 @@ export default function (state = State, action) {
           title: conversation.conversation.members
             .filter((user) => user !== action.payload.username)
             .join(''),
+          messageLoaded: false,
           messages: [],
           stack: [],
           lastMessage: {},
@@ -48,11 +51,16 @@ export default function (state = State, action) {
         (conversation) =>
           conversation.id === action.payload.conversationId,
       );
-
       if (!convo) return newState;
+      if (convo.messageLoaded || convo.messages.length > 0) {
+        convo.lastMessage = convo.messages[convo.messages.length - 1];
+        return newState;
+      }
+      convo.messageLoaded = true;
       if (action.payload.messages.length < 0) return newState;
       action.payload.messages.forEach((message) => {
         convo.messages.push({
+          id: message.id,
           isListing: message.isListing,
           authorId: message.authorId,
           by: message.by,
@@ -71,6 +79,11 @@ export default function (state = State, action) {
     }
     case 'SELECTED_CONVERSATION_CHANGED': {
       const newState = { ...state };
+      const filteredConvo = filterDup(
+        newState.conversations,
+        (it) => it.id,
+      );
+      newState.conversations = filteredConvo;
       newState.selectedConversation = newState.conversations.find(
         (conversation) => conversation.id === action.conversationId,
       );
@@ -116,7 +129,17 @@ export default function (state = State, action) {
       if (!convo) return newState;
       if (action.payload.authorId === newState.user.id)
         return newState;
+      const msgExist = convo.messages.find((x) => {
+        return x.id === action.payload.id;
+      });
+
+      // convo.messages > 0 &&
+      console.log(msgExist);
+      if (msgExist) {
+        return newState;
+      }
       convo.messages.push({
+        id: action.payload.id,
         imageUrl: null,
         imageAlt: null,
         isListing: action.payload.isListing,
@@ -129,6 +152,8 @@ export default function (state = State, action) {
         read: false,
         isMyMessage: false,
       });
+      // const filteredMsg = filterDup(convo.messages, (it) => it.id);
+      // convo.messages = filteredMsg;
       convo.lastMessage = convo.messages[convo.messages.length - 1];
 
       return newState;
@@ -165,6 +190,7 @@ export default function (state = State, action) {
         isMyMessage: true,
         isSending: true,
         stackId: action.payload.stackNumber,
+        createdAt: 1591904532746,
       });
 
       convo.lastMessage = convo.messages[convo.messages.length - 1];
@@ -172,7 +198,6 @@ export default function (state = State, action) {
       return newState;
     }
     case 'UPDATE_MESSAGE_STACK': {
-      console.log('UPDATE_MESSAGE_STACK', action.payload);
       const newState = { ...state };
       const convo = newState.conversations.find(
         (conversation) =>
@@ -184,6 +209,7 @@ export default function (state = State, action) {
         (message) => message.stackId === action.payload.stackNumber,
       );
       pendingMessage.createdAt = action.payload.createdAt;
+      pendingMessage.id = action.payload.id;
 
       delete pendingMessage.isSending;
       delete pendingMessage.stackId;
@@ -208,7 +234,6 @@ export default function (state = State, action) {
           return message.read === false;
         return true;
       });
-      console.log(unSeenMessages);
       unSeenMessages.forEach((message) => {
         return (message.read = true);
       });
@@ -218,11 +243,11 @@ export default function (state = State, action) {
       const newState = { ...state };
       const sortedConvo = [...newState.conversations].sort((a, b) => {
         var dateA =
-          !a.lastMessage || a.lastMessage.createdAt !== undefined
+          a.lastMessage && a.lastMessage.createdAt
             ? Math.floor(a.lastMessage.createdAt)
             : 1591904532746;
         var dateB =
-          !a.lastMessage || b.lastMessage.createdAt !== undefined
+          b.lastMessage && b.lastMessage.createdAt
             ? Math.floor(b.lastMessage.createdAt)
             : 1591904532746;
         return dateB - dateA;
@@ -245,7 +270,6 @@ export default function (state = State, action) {
       ) {
         newState.search = [];
       }
-      console.log(newState.search);
       return newState;
     }
     case 'CLEAR_SEARCH_FILTER': {

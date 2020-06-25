@@ -35,41 +35,50 @@ const ChatMessageView = ({
       inline: 'start',
     });
   };
-  const messageLoader = useCallback(async () => {
-    setLoading(true);
-    const message = await getMessages(selectedConversation.id);
-    setLoading(false);
-    if (!Array.isArray(message))
-      return alert('could not get Message');
-    loadMessages(message, selectedConversation.id);
-    setTimeout(() => {
-      scrollToBottom();
-    }, 400);
-  }, [loadMessages, selectedConversation.id]);
+  const messageLoader = useCallback(async (fn1, id) => {
+    try {
+      setLoading(true);
+      const message = await getMessages(id);
+      setLoading(false);
+      if (!Array.isArray(message))
+        return alert('could not get Message');
+      fn1(message, id);
+      setTimeout(() => {
+        scrollToBottom();
+      }, 400);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+  // const messageRead = useCallback((arr, cb) => {}, []);
 
   useEffect(() => {
-    console.log('hello');
     if (
       selectedConversation &&
       selectedConversation.messages &&
-      selectedConversation.messages.length < 1
+      !selectedConversation.messageLoaded &&
+      selectedConversation.messages.length <= 0
     ) {
-      messageLoader();
+      console.log(selectedConversation.messageLoaded);
+      messageLoader(loadMessages, selectedConversation.id);
     }
+
     if (
       selectedConversation &&
       selectedConversation.messages &&
       selectedConversation.messages.length > 1
     ) {
-      // console.log('thank you');
-      setTimeout(() => scrollToBottom(), 1000);
+      setTimeout(() => scrollToBottom(), 3000);
     }
+    // check if there are unread messages
+    // change the unread messages to read
+    // messageRead();
+    // eslint-disable-next-line
   }, [
     selectedConversation.id,
-    messageLoader,
     selectedConversation,
-    selectedConversation.lastMessage,
-    messages,
+    messageLoader,
+    loadMessages,
   ]);
   let messageList;
   if (messages && messages.length > 0) {

@@ -39,23 +39,27 @@ function SendMessageBtn({
 
   const history = useHistory();
   async function getUserData() {
-    if (!user || !user.username || user.username === '') {
-      const authUsername = await Auth.currentAuthenticatedUser();
-      if (authUsername.attributes['custom:userName']) {
-        user.username = authUsername.attributes['custom:userName'];
-      } else {
-        alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
+    try {
+      if (!user || !user.username || user.username === '') {
+        const authUsername = await Auth.currentAuthenticatedUser();
+        if (authUsername.attributes['custom:userName']) {
+          user.username = authUsername.attributes['custom:userName'];
+        } else {
+          alert('PLEASE UPDATE YOUR PROFILE NOW !!!');
+        }
       }
+      let {
+        payload: {
+          id,
+          username,
+          conversations: { items: conversations },
+        },
+      } = await createUser(user.username);
+      userDetails(id, username);
+      userConversations(conversations, username);
+    } catch (e) {
+      console.log(e);
     }
-    let {
-      payload: {
-        id,
-        username,
-        conversations: { items: conversations },
-      },
-    } = await createUser(user.username);
-    userDetails(id, username);
-    userConversations(conversations, username);
   }
   async function clicked() {
     if (step === UPDATE_PROFILE) {
