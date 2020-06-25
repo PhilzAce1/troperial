@@ -55,12 +55,6 @@ input[type=text] {
 
 }
 
-.hybridInput__textInput::-webkit-outer-spin-button,
-.hybridInput__textInput::-webkit-inner-spin-button{
- -webkit-appearance: none;
-margin:0;
-}
-
 .hybridInput__custom-select, .hybridInput__textInput {
     border: none;
     background: #fff;

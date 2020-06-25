@@ -262,7 +262,6 @@ const PostTrade = ({
               onChange={handleSourceAmountChange}
               value={sourceAmount}
               label="I have"
-              type="number"
             />
             <HybridInput
               currency={need}
@@ -299,7 +298,6 @@ const PostTrade = ({
               currency={have}
               onChange={handlePrefferedRateForHave}
               name="have"
-              type="number"
             />
           </div>
             <i className="exchange-desktop fas fa-exchange-alt"></i>
@@ -310,7 +308,6 @@ const PostTrade = ({
               currency={need}
               onChange={handlePrefferedRateForNeed}
               name="need"
-              type="number"
             />
           </div>
           {!convertedSourceAmount ? null : (
