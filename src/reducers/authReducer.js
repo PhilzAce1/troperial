@@ -9,7 +9,8 @@ const initialState = {
   userName:'',
   password:'',
   phoneNumber:'',
-  verified: null
+  verified: null,
+  accountId:''
 };
 export default function (state = initialState, action) {
   switch (action.type) {

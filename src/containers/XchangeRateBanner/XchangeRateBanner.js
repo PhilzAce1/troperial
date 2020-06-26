@@ -1,9 +1,9 @@
 import React from 'react'
 import './XchangeRateBanner.css';
 import RateCard from './RateCard';
-const XchangeRateBanner = () => {
+const XchangeRateBanner = ({position}) => {
     return (
-       <div className="banner__container-xchange">
+       <div className="banner__container-xchange" style={{position: position}}>
             <div className="exchangeRate__banner">
             <RateCard/>
             <RateCard/>
@@ -18,6 +18,10 @@ const XchangeRateBanner = () => {
         </div>
        </div>
     )
+}
+
+XchangeRateBanner.defaultProps = {
+    position: 'relative'
 }
 
 export default XchangeRateBanner

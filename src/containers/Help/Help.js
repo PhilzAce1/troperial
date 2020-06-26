@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Help.css';
 
 import HomeNavBar from '../../components/HomeNavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import check from '../../assets/svgs/email-icon.svg';
 import Accordion from '../../components/Accordion/Accordion';
-
+import XchangeRateBanner from '../XchangeRateBanner/XchangeRateBanner';
 
 const Help = () => {
+  const [visible, setVisible] = useState(false)
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    return currentScrollPos > 0 ? setVisible(true) :setVisible(false);
+    
+  };
+  useEffect(()=> {
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  })
   return (
     <section className="help__container">
       <header className="help__header">
+      {visible ? <XchangeRateBanner position="fixed"/>: null}
         <HomeNavBar />
         <div className="page-introduction-title">
           <div>

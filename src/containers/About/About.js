@@ -2,10 +2,13 @@ import React from 'react'
 import './About.css';
 import HomeNavBar from '../../components/HomeNavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
+import XchangeRateBanner from '../XchangeRateBanner/XchangeRateBanner';
+
 const About = () => {
     return (
         <section className="about__container">
         <header className="about__header">
+          <XchangeRateBanner/>
           <HomeNavBar />
           <div className="page-introduction-title">
             <div className="flex-container">
