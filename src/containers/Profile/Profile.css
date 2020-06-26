@@ -87,6 +87,9 @@
 .verification-confirmation-message .heading, .trusted_traders-info .heading{
 	margin:0;
 }
+.change_password_section {
+	margin-top: 20px;
+}
 /* end of Verification and security styles */
 
 

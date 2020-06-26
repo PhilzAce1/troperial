@@ -21,21 +21,14 @@ import { passwordRegex, emailRegex } from '../constants/regex';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import validator from 'validator';
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState(false);
+  const [passwordTrack, setPasswordTrack] = useState('');
   const { register, handleSubmit, errors, watch } = useForm();
-  const [showPasswordQuality, setShowPasswordQuality] = useState(
-    false,
-  );
-  const [passwordQuality, setPasswordQuality] = useState({
-    quality: '',
-    percentage: '',
-  });
   const password = useRef({});
   password.current = watch('password', '');
 
@@ -68,25 +61,6 @@ const ForgotPassword = () => {
     }
   };
 
-  const match = (password, reg = passwordRegex) =>
-    validator.matches(password, reg);
-
-  const checkPasswordStrength = (password) => {
-    if (match(password) && password.length === 6) {
-      setShowPasswordQuality(true);
-      setPasswordQuality({
-        quality: 'Medium',
-        percentage: '50',
-      });
-    }
-    if (password.length > 6 && match(password)) {
-      setShowPasswordQuality(true);
-      setPasswordQuality({
-        quality: 'Strong',
-        percentage: '80',
-      });
-    }
-  };
 
   const renderEmailForm = () => {
     return (
@@ -182,12 +156,12 @@ const ForgotPassword = () => {
             })}
             name="password"
             type="password"
-            onChange={(e) => checkPasswordStrength(e.target.value)}
+            onChange={(e) => setPasswordTrack(e.target.value)}
             label="Password"
             placeholder="Password"
           />
           {errors.password_repeat && (
-            <p>{errors.password_repeat.message}</p>
+              <span>{errors.password_repeat.message}</span>
           )}
           <CustomInput
             showError={errors.password_repeat ? true : false}
@@ -203,9 +177,7 @@ const ForgotPassword = () => {
             label="Confirm Password"
             placeholder="Confirm Password"
           />
-          {showPasswordQuality === true ? (
-            <ProgressBar grade={passwordQuality} />
-          ) : null}
+            <ProgressBar value={passwordTrack} />
           <CustomButton loading={isLoading}>
             Set Password
           </CustomButton>

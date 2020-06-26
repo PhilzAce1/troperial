@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Select from 'react-select';
-const Verification = () => {
+import { Auth } from 'aws-amplify';
+import { useForm } from 'react-hook-form';
+import InputError from '../../components/InputError/InputError';
+import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import CustomAlert from '../../components/CustomAlert/CustomAlert';
+import { passwordRegex } from '../../constants/regex';
+import verifyIcon from '../../assets/images/troperial-verified.PNG';
+import { connect } from 'react-redux';
+const Verification = ({ userCognitoEmail }) => {
+  const { register, handleSubmit, errors, watch } = useForm();
+  const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState(false);
+  const [passwordTrack, setPasswordTrack] = useState('');
+  const password = useRef({});
+  password.current = watch('password', '');
+
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
@@ -15,6 +31,166 @@ const Verification = () => {
       marginTop: '10px',
       padding: '4px 0',
     }),
+  };
+
+  const handleResetPassword = async (data) => {
+    const { code } = data;
+    console.log(userCognitoEmail, code, passwordTrack);
+    setIsLoading(true);
+    try {
+      await Auth.forgotPasswordSubmit(userCognitoEmail, code, passwordTrack);
+      setIsLoading(false);
+      setStep(3);
+      setTimeout(() => {
+        setStep(1);
+        setPasswordTrack('')
+      }, 2000);
+    } catch (e) {
+      console.log(e);
+      setIsLoading(false);
+      setAuthError(e.message);
+    }
+  };
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      await Auth.forgotPassword(userCognitoEmail);
+      setIsLoading(false);
+      setStep(2);
+    } catch (e) {
+      console.log(e);
+      setIsLoading(false);
+    }
+    const { password } = data;
+    setPasswordTrack(password);
+    setStep(2);
+  };
+  const renderPasswordForm = () => {
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="title-section">
+          <h3 className="change_password-title">
+            Change Your Password
+          </h3>
+          <p>Need to change your password? do it here.</p>
+        </div>
+        <div>
+          {errors.password?.type === 'required' && (
+            <InputError>Please provide a valid password</InputError>
+          )}
+          {errors.password?.type === 'pattern' && (
+            <InputError>
+              Password must be between 6 - 20 characters and must
+              include atleast 1 Uppercase letter, 1 Lowercase letter,
+              1 numeric value and one special character.
+            </InputError>
+          )}
+
+          <CustomInput
+            hint="Password must be between 6 - 20 characters and must include atleast 1 Uppercase letter, 1 Lowercase letter, 1 numeric value and one special character."
+            showError={errors.password ? true : false}
+            register={register({
+              required: true,
+              pattern: passwordRegex,
+            })}
+            name="password"
+            type="password"
+            onChange={(e) => setPasswordTrack(e.target.value)}
+            label="Password"
+            placeholder="New Password"
+          />
+        </div>
+
+        <div>
+          {errors.password_repeat && (
+            <div>{errors.password_repeat.message}</div>
+          )}
+
+          <CustomInput
+            showError={errors.password_repeat ? true : false}
+            register={register({
+              required: true,
+              validate: (value) =>
+                value === password.current || (
+                  <InputError>The passwords do not match</InputError>
+                ),
+            })}
+            name="password_repeat"
+            type="password"
+            label="Confirm Password"
+            placeholder="Confirm Password"
+          />
+        </div>
+
+        <div>
+          <ProgressBar value={passwordTrack} />
+          <CustomButton loading={isLoading}>Change Password</CustomButton>
+        </div>
+      </form>
+    );
+  };
+  const renderConfirmation = () => {
+    return (
+      <div className="verification-confirmation-message">
+        <img src={verifyIcon} alt="verified" />
+        <div>
+          <h2 className="heading">Password Changed!</h2>
+          <p className="verificatin-message">
+            Your Password was successfully changed.henceforth when you
+            must use your new password to log in.
+          </p>
+        </div>
+      </div>
+    );
+  };
+  const renderCodeForm = () => {
+    return (
+      <form onSubmit={handleSubmit(handleResetPassword)}>
+        <div className="title-section">
+          <h3 className="change_password-title">
+            We sent you a mail!
+          </h3>
+          <p>
+            Please check your mail to copy the code sent to you to
+            complete your password reset
+          </p>
+        </div>
+        {authError && (
+            <CustomAlert
+              message={authError}
+              onClick={() => setAuthError(false)}
+            />
+          )}
+        <div className="input-section">
+          {errors.code?.type === 'required' && (
+            <InputError>
+              Please provide the code sent to your email
+            </InputError>
+          )}
+          <CustomInput
+            name="code"
+            type="text"
+            showError={errors.code ? true : false}
+            register={register({ required: true })}
+            label="Verfication Code"
+            placeholder="Verification Code"
+          />
+          <CustomButton loading={isLoading}>
+            Complete Password reset
+          </CustomButton>
+        </div>
+      </form>
+    );
+  };
+
+  const renderStep = (step) => {
+    if (step === 1) {
+      return renderPasswordForm();
+    } else if (step === 2) {
+      return renderCodeForm();
+    } else {
+      return renderConfirmation();
+    }
   };
   return (
     <section className="verification-and-change-password-container">
@@ -49,39 +225,12 @@ const Verification = () => {
       </div>
       <div className="horizontal-line"></div>
       <div className="change_password_section">
-        <div className="title-section">
-          <h3 className="change_password-title">
-            Change Your Password
-          </h3>
-          <p>Need to change your password? do it here.</p>
-        </div>
-        <div className="input-section">
-          <form action="">
-            <CustomInput
-              name="oldpassword"
-              type="password"
-              label="Old Password"
-              placeholder="*********"
-            />
-            <CustomInput
-              name="newpassword"
-              type="password"
-              label="New Password"
-              placeholder="New Password"
-            />
-            <CustomInput
-              name="confirmpassword"
-              type="password"
-              label="Confirm Password"
-              placeholder="Re-type new password"
-            />
-            <CustomButton loading={false}>
-              Change Password
-            </CustomButton>
-          </form>
-        </div>
+        {renderStep(step)}
       </div>
     </section>
   );
 };
-export default Verification;
+const mapStateToProps = (state) => ({
+  userCognitoEmail: state.auth.userCognitoEmail,
+});
+export default connect(mapStateToProps, null)(Verification);
