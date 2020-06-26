@@ -24,7 +24,8 @@ input[type=text] {
 }
 .custom__dropdown {
     position: absolute;
-    border: 0.8px solid var(--light-grey);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background: #fff;
     margin-top: 10px;
     border-radius: 10px;
@@ -33,21 +34,26 @@ input[type=text] {
     overflow-x: hidden;
     z-index: 10000;
 }
-
-.option {
-    border: 0.8px solid var(--light-grey);
-    padding: 8px 20px;
-}
-.option button {
+.select-currency-btn {
     background: transparent;
-    border: none;
+    border-bottom: 1px solid var(--light-grey);
+    display: flex;
+    height: 40px;
+    padding: 0 10px;
+    justify-content: left;
+    align-items: center;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
+.option:last-child {
+    border-bottom: none !important;
+}
+
 
 .hybridInput__wrapper {
     display: flex;
 
 }
-
 
 .hybridInput__custom-select, .hybridInput__textInput {
     border: none;
@@ -57,20 +63,20 @@ input[type=text] {
 }
 
 .hybridInput__textInput {
-    border: 0.8px solid var(--light-grey);
+    border: 1px solid var(--light-grey);
     border-radius: 0px 10px 10px 0px;
     outline: transparent;
     font-size: 1rem;
-    color: var(--dark-grey);
+    font-weight: 600;
+    color: #000;
     width: 100%;
-    /* flex: 1; */
 }
 
 .hybridInput__custom-select {
     border-radius: 10px 0 0 10px;
-    border-top: 0.8px solid var(--light-grey);
-    border-bottom: 0.8px solid var(--light-grey);
-    border-left: 0.8px solid var(--light-grey);
+    border-top: 1px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey);
+    border-left: 1px solid var(--light-grey);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,3 +85,4 @@ input[type=text] {
   margin-left: 10px;
   color: var(--dark-grey);
 }
+

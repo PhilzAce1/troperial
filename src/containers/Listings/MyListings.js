@@ -5,13 +5,11 @@ import { currency_symbols } from '../../constants/currency_symbols';
 import { currency_titles } from '../../constants/currency_titles';
 import { getMyTransactions } from '../../actions/myTransactionActions';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-import Pagination from 'react-pagination-js';
 import { connect } from 'react-redux';
 const MyListings = ({
   getMyTransactions,
   mySortedTransactions,
   loading,
-  handleBackDrop,
   handleDeleteModal 
 }) => {
   useEffect(() => {
@@ -27,12 +25,10 @@ const MyListings = ({
   return (
     <Fragment>
       <div className="table-container">
-        <TableHead userListing={false} />
+        <TableHead userListing={true} />
         {mySortedTransactions.map((transaction) => {
           const {
             sourceAmount,
-            destinationAmount,
-            userAlias,
             sourceCurrency,
             destinationCurrency,
             transactionState,

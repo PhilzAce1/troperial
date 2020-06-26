@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './HowItWorks.css';
 import HomeNavBar from '../../components/HomeNavBar/NavBar';
 import signUpUiSvg from '../../assets/svgs/create-account.svg';
@@ -8,14 +8,27 @@ import check from '../../assets/svgs/green-check.svg';
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import Slide from 'react-reveal/Slide';
-import Fade from 'react-reveal/Fade';
+import Fade from 'react-reveal/Fade'
+import XchangeRateBanner from '../XchangeRateBanner/XchangeRateBanner';
 const HowItWorks = () => {
+  const [visible, setVisible] = useState(false)
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    return currentScrollPos > 0 ? setVisible(true) :setVisible(false);
+    
+  };
+  useEffect(()=> {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  })
   return (
     <section className="howItWorks__container">
       <header className="howItWorks__header">
+      {visible ? <XchangeRateBanner position="fixed"/>: null}
         <HomeNavBar />
         <div className="page-introduction-title">
-        
           <div>
           <Fade bottom>
             <h1>how troperial works</h1>

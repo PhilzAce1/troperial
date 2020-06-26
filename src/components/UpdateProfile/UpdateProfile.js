@@ -7,10 +7,12 @@ import InputError from '../InputError/InputError';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/authActions';
+import {phoneRegex} from '../../constants/regex';
 
 const UpdateProfile = ({ onClick, createUser }) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, } = useForm();
   const onSubmit = async (data) => {
+
     const { firstname, lastname, username, phone } = data;
     createUser(firstname, lastname, username, phone);
   };
@@ -27,10 +29,14 @@ const UpdateProfile = ({ onClick, createUser }) => {
             {errors.firstname?.type === 'required' && (
               <InputError>Your first name is required</InputError>
             )}
+            {errors.firstname?.type === 'pattern' && (
+              <InputError>First name should consist of only alphabets</InputError>
+            )}
             <CustomInput
               showError={errors.firstname ? true : false}
               register={register({
                 required: true,
+                pattern: /^[a-zA-Z\-]+$/
               })}
               name="firstname"
               type="text"
@@ -42,6 +48,11 @@ const UpdateProfile = ({ onClick, createUser }) => {
             {errors.lastname?.type === 'required' && (
               <InputError>Your last name is required</InputError>
             )}
+            {errors.lastname?.type === 'pattern' && (
+              <InputError>Last name should consist of only alphabets</InputError>
+            )}
+         
+           
             <CustomInput
               name="lastname"
               type="text"
@@ -50,6 +61,8 @@ const UpdateProfile = ({ onClick, createUser }) => {
               showError={errors.lastname ? true : false}
               register={register({
                 required: true,
+                pattern: /^[a-zA-Z\-]+$/,
+              
               })}
             />
           </div>
@@ -61,6 +74,10 @@ const UpdateProfile = ({ onClick, createUser }) => {
         {errors.username?.type === 'required' && (
           <InputError>Your username is required</InputError>
         )}
+        {errors.username?.type === 'pattern' && (
+          <InputError>Usernames must be 4 to 8 characters long and contain only letters</InputError>
+        )}
+     
         <CustomInput
           name="username"
           type="text"
@@ -70,12 +87,20 @@ const UpdateProfile = ({ onClick, createUser }) => {
           showError={errors.username ? true : false}
           register={register({
             required: true,
+            pattern:/^[a-zA-Z\-].{3,10}$/,
+       
           })}
         />
         {errors.phone?.type === 'required' && (
           <InputError>Your Phone number is required</InputError>
         )}
-        <CustomInput
+           {errors.phone?.type === 'pattern' && (
+                <InputError>
+                  Please ensure that you include your country code e.g +1****
+                </InputError>
+              )}
+
+           <CustomInput
           name="phone"
           type="text"
           label="Phone Number"
@@ -83,6 +108,7 @@ const UpdateProfile = ({ onClick, createUser }) => {
           showError={errors.phone ? true : false}
           register={register({
             required: true,
+            pattern: phoneRegex
           })}
         />
         <CustomButton loading={false}>Update Profile</CustomButton>
@@ -90,8 +116,6 @@ const UpdateProfile = ({ onClick, createUser }) => {
     </form>
   );
 };
-const mapStateToProps = (state) => ({});
-
-export default connect(mapStateToProps, { createUser })(
+export default connect(null, { createUser })(
   UpdateProfile,
 );

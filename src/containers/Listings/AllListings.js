@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import TableContent from '../../components/TableContent/TableContent';
 import TableHead from '../../components/TableHead/TableHead';
 import { currency_symbols } from '../../constants/currency_symbols';
@@ -6,6 +6,7 @@ import { currency_titles } from '../../constants/currency_titles';
 import { getTransactions } from '../../actions/transactionActions';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import Pagination from 'react-pagination-js';
+import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
 const AllListings = ({
   getTransactions,
@@ -20,9 +21,22 @@ const AllListings = ({
   currentSize,
   handleBackDrop,
 }) => {
+  const [personId, setPersonId] = useState('');
   useEffect(() => {
+    getUserPersonId();
     getTransactions();
   }, [getTransactions]);
+
+  const getUserPersonId = async () => {
+    const currentUserInfo = await Auth.currentUserInfo();
+    try {
+      let personId = currentUserInfo.attributes['custom:personId'];
+        setPersonId(personId);
+    }catch(e){
+      setPersonId('');
+        console.log(e)
+    }
+  };
   if (loading) {
     return (
       <div className="listings_spinner">
@@ -34,28 +48,30 @@ const AllListings = ({
     <Fragment>
       <div className="table-container">
         <TableHead userListing={false} />
-        {sortedTransactions.map((transaction) => {
-          const {
-            sourceAmount,
-            userAlias,
-            sourceCurrency,
-            destinationCurrency,
-            transactionState,
-            transactionId,
-          } = transaction;
-          return (
-            <TableContent
-              have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
-              need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
-              rate={`USD 1 > NGN 470`}
-              by={`@${userAlias}`}
-              status={transactionState}
-              userListings={false}
-              key={transactionId}
-              handleBackDrop={handleBackDrop}
-            />
-          );
-        })}
+        {sortedTransactions
+          .filter((transaction) => transaction.personId !== personId)
+          .map((transaction) => {
+            const {
+              sourceAmount,
+              userAlias,
+              sourceCurrency,
+              destinationCurrency,
+              transactionState,
+              transactionId,
+            } = transaction;
+            return (
+              <TableContent
+                have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
+                need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
+                rate={`USD 1 > NGN 470`}
+                by={`@${userAlias}`}
+                status={transactionState}
+                userListings={false}
+                key={transactionId}
+                handleBackDrop={handleBackDrop}
+              />
+            );
+          })}
       </div>
       <div className="listing_pagination">
         <Pagination

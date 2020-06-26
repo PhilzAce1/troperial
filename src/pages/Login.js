@@ -20,7 +20,11 @@ import CustomInput from '../components/CustomInput/CustomInput';
 import CustomAlert from '../components/CustomAlert/CustomAlert';
 import InputError from '../components/InputError/InputError';
 
-const SignIn = () => {
+import {connect} from 'react-redux';
+
+import {checkUserProfile} from '../actions/authActions';
+
+const SignIn = ({checkUserProfile}) => {
   useEffect(() => {}, []);
   const { register, handleSubmit, errors } = useForm();
   const { userHasAuthenticated } = useContext(AppContext);
@@ -33,6 +37,8 @@ const SignIn = () => {
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
+      const accessToken = await Auth.currentSession();
+      localStorage.setItem('authToken', accessToken.accessToken.jwtToken);
     } catch (e) {
       setAuthError(e.message);
       setIsLoading(false);
@@ -120,4 +126,6 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default connect(null, {
+  checkUserProfile,
+})(SignIn);

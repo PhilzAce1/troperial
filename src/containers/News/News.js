@@ -1,12 +1,14 @@
 import React from 'react'
 import Footer from '../../components/Footer/Footer';
 import HomeNavBar from '../../components/HomeNavBar/NavBar';
+import XchangeRateBanner from '../XchangeRateBanner/XchangeRateBanner';
 import './News.css';
 import BlogCard from './BlogCard/BlogCard';
 const News = () => {
     return (
         <section className="news__container">
         <header className="news__header">
+          <XchangeRateBanner/>
           <HomeNavBar />
           <div className="page-introduction-title">
             <div>

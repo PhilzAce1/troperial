@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import validator from 'validator';
 import Fade from 'react-reveal/Fade';
 /**Components*/
 import OnboardingFormContainer from '../components/OnboardingFormContainer/OnboardingFormContainer';
@@ -29,13 +28,7 @@ const SignUp = () => {
   const [newUser, setNewUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState(false);
-  const [showPasswordQuality, setShowPasswordQuality] = useState(
-    false,
-  );
-  const [passwordQuality, setPasswordQuality] = useState({
-    quality: '',
-    percentage: '',
-  });
+  const [passwordTrack, setPasswordTrack] = useState('');
   const password = useRef({});
   password.current = watch('password', '');
 
@@ -54,32 +47,7 @@ const SignUp = () => {
       setNewUser(newUser);
     } catch (e) {
       setAuthError(e.message);
-      console.log(e);
       setIsLoading(false);
-    }
-  };
-
-  const match = (password, reg = passwordRegex) =>
-    validator.matches(password, reg);
-
-  const checkPasswordStrength = (password) => {
-    if (password.length === 0) {
-      setShowPasswordQuality(false);
-    }
-    if (match(password) && password.length === 6) {
-      setShowPasswordQuality(true);
-      setPasswordQuality({
-        quality: 'Medium',
-        percentage: '50',
-      });
-    }
-
-    if (password.length > 6 && match(password)) {
-      setShowPasswordQuality(true);
-      setPasswordQuality({
-        quality: 'Strong',
-        percentage: '80',
-      });
     }
   };
 
@@ -87,7 +55,9 @@ const SignUp = () => {
     return (
       <OnboardingFormContainer>
         <ContentContainer>
-        <Link to="/"><img src={img} alt="troperial logo" /></Link>
+          <Link to="/">
+            <img src={img} alt="troperial logo" />
+          </Link>
           <h2>
             Create a{' '}
             <span className="troperial-green">Troperial</span> Account
@@ -130,11 +100,15 @@ const SignUp = () => {
 
             <div>
               {errors.password?.type === 'required' && (
-                <InputError>Your input is required</InputError>
+                <InputError>
+                  Please provide a valid password
+                </InputError>
               )}
               {errors.password?.type === 'pattern' && (
                 <InputError>
-                  Password must have 6 to 30 characters
+                  Password must be between 6 - 20 characters and must
+                  include atleast 1 Uppercase letter, 1 Lowercase
+                  letter, 1 numeric value and one special character.
                 </InputError>
               )}
 
@@ -147,9 +121,7 @@ const SignUp = () => {
                 })}
                 name="password"
                 type="password"
-                onChange={(e) =>
-                  checkPasswordStrength(e.target.value)
-                }
+                onChange={(e) => setPasswordTrack(e.target.value)}
                 label="Password"
                 placeholder="Password"
               />
@@ -179,9 +151,7 @@ const SignUp = () => {
             </div>
 
             <div>
-              {showPasswordQuality === true ? (
-                <ProgressBar grade={passwordQuality} />
-              ) : null}
+              <ProgressBar value={passwordTrack} />
               <CustomButton loading={isLoading}>
                 Create An Account
               </CustomButton>
@@ -203,9 +173,13 @@ const SignUp = () => {
       <div>
         <OnboardingNotification
           notificationIcon={notificationIcon}
-          title="Check your email"
-          message="click the link on the email we sent to you to verify your account"
-        />
+          title="Check your email!"
+          message="We sent you a link, Click the link on the email we sent to you to verify your account, if you don't see the mail then please wait for it for a few minutes or check your Spam and come back here to click Sign in."
+        >
+          <Link to="/signin" style={{ textDecoration: 'none' }}>
+            <CustomButton loading={false}>Sign In</CustomButton>
+          </Link>
+        </OnboardingNotification>
       </div>
     );
   };

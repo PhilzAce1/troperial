@@ -1,5 +1,4 @@
 .banner__container-xchange {
-    position: relative;
     z-index: 10000000;
     width: 100%;
 }
@@ -60,10 +59,12 @@
 }
 
 @media (min-width: 768px) {
-    
+    .banner__container-xchange {
+       padding: 10px 0;
+    }
 .exchangeRate__banner {
     width: 80%;
-    margin: 10px auto;
+    margin: 0px auto;
     height: auto;
     border-radius: 10px;
     padding: 6px 5px;

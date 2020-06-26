@@ -14,6 +14,7 @@ import PaddedContainer from '../../components/PaddedContainer/PaddedContainer';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
 import BackDrop from '../../components/BackDrop/BackDrop';
+import DeleteModal from '../../components/DeleteModal/DeleteModal';
 
 const Profile = () => {
   useEffect(() => {
@@ -22,12 +23,14 @@ const Profile = () => {
 
   const [fetched, setFetched] = useState(false);
   const [controlView, setControlView] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [showBackDrop, setShowBackDrop] = useState(false);
   const [defaultValues, setDefaultValues] = useState({
     firstname: '',
     lastname: '',
     username: '',
     phone: '',
+    email: ''
   });
 
   const getUserDetails = async () => {
@@ -37,6 +40,7 @@ const Profile = () => {
       if (!personId) {
         return null;
       }
+      console.log(personId)
       const user = await axios.get(
         `https://persons.api.troperial.com/persons/${personId}`,
       );
@@ -45,13 +49,16 @@ const Profile = () => {
         lastName,
         userAlias,
         phoneNumbers,
+        emailAddresses
       } = user.data;
       const { number } = phoneNumbers[0];
+      const { email } = emailAddresses[0];
       setDefaultValues({
         firstname: firstName,
         lastname: lastName,
         username: userAlias,
         phone: number,
+        email,
       });
       setFetched(true);
     } catch (e) {
@@ -70,11 +77,19 @@ const Profile = () => {
     setShowBackDrop(!showBackDrop)
     setControlView(!controlView);
   };
+  const handleDeleteModal = () => {
+    setShowDelete(!showDelete);
+    setControlView(!controlView);
+  };
+
   return (
     <Container showBackDrop={controlView}>
       <NavBar page="Profile" icon="icon-profile" />
-      {showBackDrop ? (
+            {showBackDrop ? (
         <BackDrop renderBankAccoutForm={true} handleBackDrop={handleBackDrop} />
+      ) : null}
+      {showDelete ? (
+        <DeleteModal handleClose={handleDeleteModal} />
       ) : null}
       <div className="listingsCustom__container">
         <AppAside />
@@ -102,7 +117,7 @@ const Profile = () => {
             </TabPanel>
             <TabPanel>
               <PaddedContainer padding="0 25px 25px 25px">
-                <History />
+                <History handleDeleteModal={handleDeleteModal}/>
               </PaddedContainer>
             </TabPanel>
             <TabPanel>

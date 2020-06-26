@@ -1,6 +1,6 @@
 .news__header {
     background: var(--mobile-verfied);
-    min-height: 30vh;
+    min-height: 35vh;
     margin-top: 0 !important;
 }
 .news__header .page-introduction-title {
@@ -28,7 +28,7 @@
 }
 @media (min-width: 768px) {
     .news__header {
-        min-height: 40vh;
+        min-height: 55vh;
     }
     .news__header .page-introduction-title {
         height: 25vh;

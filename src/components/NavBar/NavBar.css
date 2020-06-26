@@ -3,6 +3,13 @@ nav.navigationBar {
 	position: fixed;
 	z-index: 1;
 }
+.navbar-username {
+	text-transform: capitalize;
+	padding: 0 3px;
+	font-size: 1.1rem;
+	position: relative;
+	bottom: -2px;
+}
 .navigation-logout-btn {
 	background: var(--troperial-blue);
 	color: #fff;
@@ -168,6 +175,7 @@ nav.navigationBar {
 		justify-content: center;
 		align-items: center;
 		color: var(--dark-grey);
+		margin-right: 15px;
 	}
 	.largeScreen__profile {
 		width: 22px;
