@@ -127,10 +127,10 @@ export const sortConversation = (conversationId) => {
   };
 };
 
-export const updateSeen = (conversationId) => {
+export const updateSeen = (conversationId, toSeen = false) => {
   return {
-    type: 'UPDATE_SEEN_MESSAGES',
-    payload: { conversationId },
+    type: 'UPDATE_SEEN_MESSAGE',
+    payload: { conversationId, toSeen },
   };
 };
 export const searchFilter = (input) => {
