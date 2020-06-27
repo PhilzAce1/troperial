@@ -34,7 +34,7 @@ const HybridInput = ({
           <CurrencyFlag currency={currency} width={19} />
           {changeCurrencyHandler === null ? null : (
             <i
-              className="fas fa-angle-down"
+              className="country-dropdown fas fa-angle-down"
               onClick={showDropdown}
             ></i>
           )}
