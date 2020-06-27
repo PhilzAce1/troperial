@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Select from 'react-select';
@@ -14,7 +14,7 @@ const Verification = ({ userCognitoEmail }) => {
   const { register, handleSubmit, errors, watch } = useForm();
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [authError, setAuthError] = useState(false);
+  const [authError, setAuthError] = useState('');
   const [passwordTrack, setPasswordTrack] = useState('');
   const password = useRef({});
   password.current = watch('password', '');
@@ -35,7 +35,6 @@ const Verification = ({ userCognitoEmail }) => {
 
   const handleResetPassword = async (data) => {
     const { code } = data;
-    console.log(userCognitoEmail, code, passwordTrack);
     setIsLoading(true);
     try {
       await Auth.forgotPasswordSubmit(userCognitoEmail, code, passwordTrack);
@@ -46,35 +45,40 @@ const Verification = ({ userCognitoEmail }) => {
         setPasswordTrack('')
       }, 2000);
     } catch (e) {
-      console.log(e);
       setIsLoading(false);
       setAuthError(e.message);
     }
   };
   const onSubmit = async (data) => {
     setIsLoading(true);
+    const { password } = data;
     try {
       await Auth.forgotPassword(userCognitoEmail);
+      setPasswordTrack(password);
       setIsLoading(false);
       setStep(2);
     } catch (e) {
-      console.log(e);
       setIsLoading(false);
+      setAuthError(e.message)
     }
-    const { password } = data;
-    setPasswordTrack(password);
-    setStep(2);
   };
   const renderPasswordForm = () => {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="change_password_section">
         <div className="title-section">
           <h3 className="change_password-title">
             Change Your Password
           </h3>
           <p>Need to change your password? do it here.</p>
         </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <div>
+        {authError === '' ?  null:(
+            <CustomAlert
+              message={authError}
+              onClick={() => setAuthError('')}
+            />
+          )}
           {errors.password?.type === 'required' && (
             <InputError>Please provide a valid password</InputError>
           )}
@@ -127,11 +131,12 @@ const Verification = ({ userCognitoEmail }) => {
           <CustomButton loading={isLoading}>Change Password</CustomButton>
         </div>
       </form>
+     </div>
     );
   };
   const renderConfirmation = () => {
     return (
-      <div className="verification-confirmation-message">
+      <div style={{marginTop:"10px"}} className="verification-confirmation-message">
         <img src={verifyIcon} alt="verified" />
         <div>
           <h2 className="heading">Password Changed!</h2>
@@ -145,7 +150,7 @@ const Verification = ({ userCognitoEmail }) => {
   };
   const renderCodeForm = () => {
     return (
-      <form onSubmit={handleSubmit(handleResetPassword)}>
+      <div className="change_password_section">
         <div className="title-section">
           <h3 className="change_password-title">
             We sent you a mail!
@@ -155,13 +160,14 @@ const Verification = ({ userCognitoEmail }) => {
             complete your password reset
           </p>
         </div>
-        {authError && (
+        <form onSubmit={handleSubmit(handleResetPassword)}>
+        <div className="input-section">
+        {authError === '' ?  null:(
             <CustomAlert
               message={authError}
-              onClick={() => setAuthError(false)}
+              onClick={() => setAuthError('')}
             />
           )}
-        <div className="input-section">
           {errors.code?.type === 'required' && (
             <InputError>
               Please provide the code sent to your email
@@ -180,6 +186,7 @@ const Verification = ({ userCognitoEmail }) => {
           </CustomButton>
         </div>
       </form>
+    </div>
     );
   };
 
@@ -224,9 +231,7 @@ const Verification = ({ userCognitoEmail }) => {
         </div>
       </div>
       <div className="horizontal-line"></div>
-      <div className="change_password_section">
         {renderStep(step)}
-      </div>
     </section>
   );
 };
