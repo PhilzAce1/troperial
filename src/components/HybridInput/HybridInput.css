@@ -85,6 +85,7 @@ input[type=text] {
     border-left: 1px solid var(--light-grey);
     display: flex;
     justify-content: center;
+    overflow: hidden;
     align-items: center;
 }
 .hybridInput__custom-select i {
