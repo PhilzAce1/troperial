@@ -47,7 +47,8 @@ export const createUser = (
         lastName,
         userAlias,
         phoneNumbers,
-        verified
+        verified,
+        accountId
       } = response.data;
       const { number } = phoneNumbers[0];
       console.log(response.data);
@@ -64,7 +65,7 @@ export const createUser = (
       await Auth.updateUserAttributes(user, {
         'custom:personId': personId,
         'custom:userName': userAlias,
-        // 'custom:accountId': accountId
+        'custom:accountId': accountId
       });
       dispatch({
         type: CHECK_USER_PROFILE,
@@ -73,7 +74,7 @@ export const createUser = (
       dispatch(setStep(CONFIRM_PROFILE_UPDATE));
       dispatch({
         type: SET_CURRENT_USER_DETAILS,
-        payload: { firstName, lastName, userAlias, number, verified },
+        payload: { firstName, lastName, userAlias, number, verified, accountId},
       });
     } catch (e) {
       console.log(e);
@@ -92,12 +93,13 @@ const getUserDetails = (personId) => async (dispatch) => {
       lastName,
       userAlias,
       phoneNumbers,
-      verified
+      verified,
+      accountId
     } = user.data;
     const { number } = phoneNumbers[0];
     dispatch({
       type: SET_CURRENT_USER_DETAILS,
-      payload: { firstName, lastName, userAlias, number, verified },
+      payload: { firstName, lastName, userAlias, number, verified, accountId },
     });
   } catch (e) {
     console.log(e);
@@ -133,17 +135,11 @@ export const checkUserProfile = () => async (dispatch) => {
 };
 
 export const updateUserDetails = (data) => async (dispatch) => {
-  console.log(data);
-  // dispatch({
-  //   type: SET_CURRENT_USER_DETAILS,
-  //   payload: { firstName, lastName, userAlias, number, verified },
-  // });
-  //const { firstname, lastname, username, email, phone } = data;
   const { firstname, lastname, username } = data;
   try {
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
-    const response = await axios.post(
+    await axios.post(
       `https://persons.api.troperial.com//persons/${personId}/name`,
       {
         firstName: firstname,
@@ -155,8 +151,6 @@ export const updateUserDetails = (data) => async (dispatch) => {
     await Auth.updateUserAttributes(user, {
       'custom:userName': username,
     });
-
-    console.log(response);
   } catch (e) {
     console.log(e);
   }
