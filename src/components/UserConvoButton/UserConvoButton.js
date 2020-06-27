@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import dp from '../../assets/images/profile-picture.png';
 import './UserConvoButton.css';
+import { connect } from 'react-redux';
 
 const UserConvoButton = ({
   conversation,
   isActive,
   onConversationItemSelected,
+  conversations,
+  state,
 }) => {
-  useEffect(() => {}, [conversation.messages]);
+  useEffect(() => {}, [conversation.messages, conversations, state]);
   return (
     <button
       className={`user-convo-btn ${isActive && 'active-chat'}`}
@@ -28,5 +31,9 @@ const UserConvoButton = ({
     </button>
   );
 };
+const mapStateToProps = (state) => ({
+  conversations: state.conversation.conversations,
+  state,
+});
 
-export default UserConvoButton;
+export default connect(mapStateToProps)(UserConvoButton);

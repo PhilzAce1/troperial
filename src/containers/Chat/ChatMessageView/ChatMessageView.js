@@ -18,6 +18,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
 import {
   loadMessages,
+  updateSeen,
   sortConversation,
 } from '../../../actions/conversationActions';
 const ChatMessageView = ({
@@ -25,6 +26,9 @@ const ChatMessageView = ({
   selectedConversation,
   onMessageSubmitted,
   loadMessages,
+  conversation,
+  updateSeen,
+  state,
 }) => {
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -53,13 +57,15 @@ const ChatMessageView = ({
   // const messageRead = useCallback((arr, cb) => {}, []);
 
   useEffect(() => {
+    updateSeen(selectedConversation.id, true);
+
     if (
       selectedConversation &&
       selectedConversation.messages &&
       !selectedConversation.messageLoaded &&
       selectedConversation.messages.length <= 0
     ) {
-      console.log(selectedConversation.messageLoaded);
+      // console.log(selectedConversation.messageLoaded);
       messageLoader(loadMessages, selectedConversation.id);
     }
 
@@ -70,6 +76,8 @@ const ChatMessageView = ({
     ) {
       setTimeout(() => scrollToBottom(), 3000);
     }
+    // if (selectedConversation.messages.some((x) => x.read === false)) {
+    // }
     // check if there are unread messages
     // change the unread messages to read
     // messageRead();
@@ -79,6 +87,11 @@ const ChatMessageView = ({
     selectedConversation,
     messageLoader,
     loadMessages,
+    selectedConversation.messages,
+    conversation.conversations,
+    // conversation,
+    // updateSeen,
+    // state,
   ]);
   let messageList;
   if (messages && messages.length > 0) {
@@ -199,6 +212,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   loadMessages: (message, conversationId) =>
     dispatch(loadMessages(message, conversationId)),
+  updateSeen: (convoId, seen) => dispatch(updateSeen(convoId, seen)),
   sortConversation,
 });
 
