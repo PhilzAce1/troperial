@@ -58,16 +58,13 @@ input[type=text] {
 
 }
 
-.hybridInput__textInput {
+.hybridInput__custom-select, .hybridInput__textInput {
     border: none;
     background: #fff;
     padding: 10px 14px;
     box-sizing: border-box;
 }
 
-.hybridInput__custom-select {
-    padding: 0px 14px;
-}
 .hybridInput__textInput {
     border: 1px solid var(--light-grey);
     border-radius: 0px 10px 10px 0px;
@@ -85,11 +82,10 @@ input[type=text] {
     border-left: 1px solid var(--light-grey);
     display: flex;
     justify-content: center;
-    height: 10px !important;
     align-items: center;
 }
 .hybridInput__custom-select i {
   margin-left: 10px;
   color: var(--dark-grey);
-} 
+}
 
