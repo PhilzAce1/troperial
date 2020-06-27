@@ -100,7 +100,6 @@ const ChatInput = ({
         conversation.user.id,
       );
       scrollToBottom();
-      console.log(msg);
       updateMessageStack(
         selectedConversation.id,
         msg.stackId,
