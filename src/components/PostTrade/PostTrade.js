@@ -184,11 +184,12 @@ const PostTrade = ({
     }
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
+    let accountId = currentUserInfo.attributes['custom:accountId']
 
     setLoading(true);
     try {
         const response = await axios.post(
-          `https://transactions.api.troperial.com/accounts/${personId}/transactions`,
+          `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
           {
             verifiedPerson: verified,
             sourceAmount: sourceAmount,
@@ -214,10 +215,11 @@ const PostTrade = ({
     localStorage.removeItem('unAuthenticatedUserListing');
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
-    console.log({ ...data, personId, verifiedPerson: verified });
+    let accountId = currentUserInfo.attributes['custom:accountId']
+    console.log({ ...data, personId, verifiedPerson: verified, accountId });
     try {
-      const response = await axios.post(
-        `https://transactions.api.troperial.com/accounts/${personId}/transactions`,
+     await axios.post(
+        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
         { ...data, personId, verifiedPerson: verified },
       );
       setStep(CONFIRM_POST_LISTING);
