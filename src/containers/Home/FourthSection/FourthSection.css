@@ -2,8 +2,14 @@
     width: 90%;
     margin: 50px auto;
 }
+.fouthSection .heading {
+    margin-bottom: 50px;
+}
 .fouthSection .grid {
     margin: 20px 0;
+}
+.fouthSection .grid .grid-item  {
+    margin-bottom: 10px;
 }
 .fouthSection .grid .grid-item img{
  width: 30px
@@ -21,6 +27,7 @@ font-size: 1.1rem;
 
 @media (min-width: 800px) {
     .fouthSection {
+        padding: 20px 0 20px 0;
         width: 50%;
         margin: 50px auto;
     }
