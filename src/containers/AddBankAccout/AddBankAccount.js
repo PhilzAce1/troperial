@@ -18,10 +18,12 @@ const AddBankAccount = ({accountId}) => {
   };
 
   const submitNGNAccount = async (data) => {
+    const authToken = localStorage.getItem('authToken');
     const {bvnNumber,
     accountNumber,
     primaryBank,
     } = data; 
+
    try {
     const response = await axios.post(`https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/ngn`, {
       bvnNumber,
@@ -30,7 +32,7 @@ const AddBankAccount = ({accountId}) => {
       externalAccountSubType: 'CURRENT'
     }, {
         headers: {
-          Authorization: localStorage.getItem('authToken')
+          Authorization: authToken
         }
       });
     console.log(response)
@@ -39,8 +41,53 @@ const AddBankAccount = ({accountId}) => {
    }
 
   };
-  const submitUSDAccount = () => {};
-  const submitUKAccount = () => {};
+  const submitUSDAccount = async (data) => {
+    const authToken = localStorage.getItem('authToken');
+    const {routingNumber,
+    accountNumber,
+    primaryBank,
+    } = data; 
+
+   try {
+    const response = await axios.post(`https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/us`, {
+      routingNumber,
+      accountNumber,
+      primaryBank,
+      externalAccountSubType: 'CURRENT'
+    }, {
+        headers: {
+          Authorization: authToken
+        }
+      });
+    console.log(response)
+   } catch (e) {
+     console.log(e)
+   }
+  };
+  const submitUKAccount = async (data) => {
+
+    const authToken = localStorage.getItem('authToken');
+    const {customerAccountNumber,
+  sortCode,
+    primaryBank,
+    } = data; 
+
+   try {
+    const response = await axios.post(`https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/uk`, {
+      customerAccountNumber,
+  sortCode,
+    primaryBank,
+      externalAccountSubType: 'CURRENT'
+    }, {
+        headers: {
+          Authorization: authToken
+        }
+      });
+    console.log(response)
+   } catch (e) {
+     console.log(e)
+   }
+  };
 
   const renderNGN = () => {
     return (
@@ -99,21 +146,99 @@ const AddBankAccount = ({accountId}) => {
   };
   const renderUK = () => {
     return (
-      <form>
-        <CustomInput placeholder="Account Number" />
-        <CustomInput placeholder="sort code" />
-        <CustomInput placeholder="Bank Name" />
+      <form onSubmit={handleSubmit(submitUKAccount)}>
+               {errors.customerAccountNumber?.type === 'required' && (
+          <InputError>Your account number is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Account Number"
+          showError={errors.customerAccountNumber ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="customerAccountNumber"
+          label="Account Number"
+        />
+                     {errors.sortCode?.type === 'required' && (
+          <InputError>Your sort code is required</InputError>
+        )}
+           <CustomInput 
+        placeholder="sort code"
+        showError={errors.sortCode? true : false}
+        register={register({
+          required: true,
+        })}
+        name="sortCode"
+        label="sort code"
+        />
+
+        {errors.primaryBank?.type === 'required' && (
+          <InputError>Your primary bank name is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Bank Name"
+          showError={errors.primaryBank ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="primaryBank"
+          label="Bank Name"
+        />
         <CustomButton loading={false}>Add Bank</CustomButton>
       </form>
     );
   };
   const renderUS = () => {
     return (
-      <form>
-        <CustomInput placeholder="Account Number" />
-        <CustomInput placeholder="ABA/ACH routing code" />
-        <CustomInput placeholder="Account Name" />
-        <CustomInput placeholder="Bank Name" />
+      <form onSubmit={handleSubmit(submitUSDAccount)}>
+           {errors.routingNumber?.type === 'required' && (
+          <InputError>Your routing code is required</InputError>
+        )}
+        <CustomInput 
+        placeholder="ABA/ACH routing code"
+        showError={errors.routingNumber? true : false}
+        register={register({
+          required: true,
+        })}
+        name="routingNumber"
+        label="Routing Number"
+        />
+          {errors.accountNumber?.type === 'required' && (
+          <InputError>Your account number is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Account Number"
+          showError={errors.accountNumber ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="accountNumber"
+          label="Account Number"
+        />
+          {errors.accountName?.type === 'required' && (
+          <InputError>Your account name is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Account Name"
+          showError={errors.accountName ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="accountName"
+          label="Account Name"
+        />
+        {errors.primaryBank?.type === 'required' && (
+          <InputError>Your bank name is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Bank Name"
+          showError={errors.primaryBank ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="primaryBank"
+          label="Bank Name"
+        />
         <CustomButton loading={false}>Add Bank</CustomButton>
       </form>
     );
