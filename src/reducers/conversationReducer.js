@@ -8,6 +8,8 @@ let State = {
     stack: [],
     id: '',
     messageLoaded: false,
+    messages: [],
+    lastMessage: '',
   },
   listing: {},
   search: [],
