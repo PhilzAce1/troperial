@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^7.1.2",
     "aws-amplify": "^3.0.10",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
     "currency-flags": "^2.1.2",
     "libphonenumber-js": "^1.7.51",
     "moment": "^2.26.0",

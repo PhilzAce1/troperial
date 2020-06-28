@@ -8,6 +8,9 @@ input[type=text] {
     position: relative;
     margin-top: 10px;
 }
+.country-dropdown {
+    cursor: pointer;
+}
 .hybridInput__label {
     position: absolute;
     top: -6px;

@@ -37,8 +37,8 @@ const SignIn = ({checkUserProfile}) => {
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
-      const accessToken = await Auth.currentSession();
-      localStorage.setItem('authToken', accessToken.accessToken.jwtToken);
+      const idToken = await Auth.currentSession();
+      localStorage.setItem('authToken', idToken.idToken.jwtToken);
     } catch (e) {
       setAuthError(e.message);
       setIsLoading(false);

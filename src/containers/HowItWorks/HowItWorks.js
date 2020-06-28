@@ -190,10 +190,10 @@ const HowItWorks = () => {
                     Troperial account with your name, email, and
                     location. For Added security we also require a
                     phone number for two-factor authentication.
+                    </p>
                     <div className="card-3 platform-card">
                       <img src={chatUiSvg} alt="chat platform" />
                     </div>
-                  </p>
                 </div>
                 </Fade>
               </div>

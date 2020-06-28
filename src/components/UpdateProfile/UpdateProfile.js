@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './UpdateProfile.css';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomButton from '../CustomButton/CustomButton';
@@ -12,9 +12,10 @@ import {phoneRegex} from '../../constants/regex';
 const UpdateProfile = ({ onClick, createUser }) => {
   const { register, handleSubmit, errors, } = useForm();
   const onSubmit = async (data) => {
-
     const { firstname, lastname, username, phone } = data;
-    createUser(firstname, lastname, username, phone);
+     createUser(firstname, lastname, username, phone);
+
+  
   };
 
   return (

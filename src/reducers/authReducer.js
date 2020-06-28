@@ -1,4 +1,4 @@
-import { CREATE_USER, CHECK_USER_PROFILE, SET_USER_COGNITO_EMAIL, SET_CURRENT_USER_DETAILS } from '../actions/types';
+import { CREATE_USER, CHECK_USER_PROFILE, SET_USER_COGNITO_EMAIL, SET_CURRENT_USER_DETAILS, GET_ALL_ACCOUNTS } from '../actions/types';
 
 const initialState = {
   currentUser: null,
@@ -10,19 +10,26 @@ const initialState = {
   password:'',
   phoneNumber:'',
   verified: null,
-  accountId:''
+  accountId:'',
+  accounts: null
 };
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_ACCOUNTS:
+      return {
+        ...state,
+        accounts: action.payload
+      }
     case SET_CURRENT_USER_DETAILS: 
-    const {firstName, lastName, userAlias, number, verified} = action.payload;
+    const {firstName, lastName, userAlias, number, verified, accountId} = action.payload;
     return {
       ...state,
       firstName,
       lastName,
       userName: userAlias,
       phoneNumber: number,
-      verified
+      verified,
+      accountId
     }
     case CREATE_USER:
       return {

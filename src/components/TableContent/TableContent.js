@@ -96,9 +96,9 @@ const TableContent = ({
             </p>
             {userListings === true ? (
               <div className="action_btns">
-                <button className="show__matches__btn">
+                {/* <button className="show__matches__btn">
                   Show Matches
-                </button>
+                </button> */}
                 <button className="edit__btn">Edit</button>
                 <button className="delete__btn" onClick={onClick}>
                   Delete

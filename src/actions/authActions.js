@@ -5,6 +5,7 @@ import {
   SET_USER_COGNITO_EMAIL,
   SET_CURRENT_USER_DETAILS,
   CREATE_TRANSACTION,
+  GET_ALL_ACCOUNTS
 } from './types';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
@@ -23,9 +24,9 @@ export const createUser = (
     let { sub: cognitoUserId, email } = currentUserInfo.attributes;
     const userData = {
       cognitoUserId,
-      userAlias: username,
-      firstName: firstname,
-      lastName: lastname,
+      userAlias: username.toLowerCase(),
+      firstName: firstname.toLowerCase(),
+      lastName: lastname.toLowerCase(),
       dateOfBirth: '1986-05-01',
       emailAddress: {
         email,
@@ -47,7 +48,8 @@ export const createUser = (
         lastName,
         userAlias,
         phoneNumbers,
-        verified
+        verified,
+        accountId
       } = response.data;
       const { number } = phoneNumbers[0];
       console.log(response.data);
@@ -64,7 +66,7 @@ export const createUser = (
       await Auth.updateUserAttributes(user, {
         'custom:personId': personId,
         'custom:userName': userAlias,
-        // 'custom:accountId': accountId
+        'custom:accountId': accountId
       });
       dispatch({
         type: CHECK_USER_PROFILE,
@@ -73,13 +75,16 @@ export const createUser = (
       dispatch(setStep(CONFIRM_PROFILE_UPDATE));
       dispatch({
         type: SET_CURRENT_USER_DETAILS,
-        payload: { firstName, lastName, userAlias, number, verified },
+        payload: { firstName, lastName, userAlias, number, verified, accountId},
       });
+      return false;
     } catch (e) {
       console.log(e);
+      return false;
     }
   } catch (e) {
     console.log(e);
+    return false;
   }
 };
 const getUserDetails = (personId) => async (dispatch) => {
@@ -92,12 +97,13 @@ const getUserDetails = (personId) => async (dispatch) => {
       lastName,
       userAlias,
       phoneNumbers,
-      verified
+      verified,
+      accountId
     } = user.data;
     const { number } = phoneNumbers[0];
     dispatch({
       type: SET_CURRENT_USER_DETAILS,
-      payload: { firstName, lastName, userAlias, number, verified },
+      payload: { firstName, lastName, userAlias, number, verified, accountId },
     });
   } catch (e) {
     console.log(e);
@@ -133,30 +139,68 @@ export const checkUserProfile = () => async (dispatch) => {
 };
 
 export const updateUserDetails = (data) => async (dispatch) => {
-  console.log(data);
-  // dispatch({
-  //   type: SET_CURRENT_USER_DETAILS,
-  //   payload: { firstName, lastName, userAlias, number, verified },
-  // });
-  //const { firstname, lastname, username, email, phone } = data;
   const { firstname, lastname, username } = data;
+  const authToken = localStorage.getItem('authToken');
   try {
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
-    const response = await axios.post(
-      `https://persons.api.troperial.com//persons/${personId}/name`,
+    const response = await axios.patch(
+      `https://persons.api.troperial.com/persons//name`,
       {
         firstName: firstname,
         lastName: lastname,
         userAlias: username
       },
+      {
+          headers: {
+            Authorization: authToken
+          }
+        }
     );
-    const user = await Auth.currentAuthenticatedUser();
-    await Auth.updateUserAttributes(user, {
-      'custom:userName': username,
-    });
+    // const user = await Auth.currentAuthenticatedUser();
+    // await Auth.updateUserAttributes(user, {
+    //   'custom:userName': username,
+    // });
 
-    console.log(response);
+    console.log(response)
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAccount = (accountId) => async (dispatch) => {
+  const authToken = localStorage.getItem('authToken');
+  let accountList = [];
+  console.log(accountId)
+  try {
+    const response = await axios.get(
+      `https://accounts.api.troperial.com/accounts/${accountId}`,
+      {
+          headers: {
+            Authorization: authToken
+          }
+        }
+    );
+    const {ngnAccounts, usAccounts, ukAccounts} = response.data.externalAccounts
+    if(Object.keys(response.data.externalAccounts).length === 0) {
+     accountList = [];
+    } 
+    if(ngnAccounts) {
+      accountList = [...accountList, ...ngnAccounts];
+    }
+    if (usAccounts) {
+      accountList = [...accountList, ...usAccounts];
+    } 
+    if(ukAccounts){
+      accountList = [...accountList, ...ukAccounts]
+    }
+  
+    //const externalAccounts
+    dispatch({
+      type: GET_ALL_ACCOUNTS,
+      payload: accountList
+    })
+    console.log(accountList)
   } catch (e) {
     console.log(e);
   }
