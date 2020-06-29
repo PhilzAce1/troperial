@@ -6,7 +6,10 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { AppContext } from '../libs/contextLib';
 import { getMessages } from '../libs/conversationHelpers';
 import { pushNotification } from '../libs/pushNotification';
-import { onCreateMessage as OnCreateMessage } from '../libs/graphql';
+import {
+  onCreateMessage as OnCreateMessage,
+  // onCreateConvoLink,
+} from '../libs/graphql';
 import {
   newExternalMessage,
   loadMessages,
@@ -71,8 +74,10 @@ function AuthenticatedRoute({
                 //   convers.convo.messages.length <= 0
                 // ) {
                 messageLoad(messageConversationId);
-                // }
-                pushNotification(content);
+                // }\
+                if (!conversation.user.id === authorId) {
+                  pushNotification(content);
+                }
                 newExternalMessage(
                   messageConversationId,
                   content,
@@ -92,6 +97,18 @@ function AuthenticatedRoute({
         }
       });
     }
+    // if (conversation.user && conversation.user.id) {
+    //        const subscription = API.graphql(
+    //   graphqlOperation(OnCreateConvoLink, {
+    //     convoLinkUserId: conversation.user.id,
+    //   }),
+    // ).subscribe({
+    //   next: (eventData) => {
+    //     console.log(eventData);
+    //   },
+    // });
+    // return () => subscription.unsubscribe();
+    // }
     // eslint-disable-next-line
   }, [
     newExternalMessage,

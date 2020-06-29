@@ -13,6 +13,7 @@ let State = {
   },
   listing: {},
   search: [],
+  conversationLength: 0,
 };
 if (initialState.conversations.length > 0) {
   initialState.selectedConversation = initialState.conversations[1];
@@ -29,15 +30,17 @@ export default function (state = State, action) {
     }
     case 'SET_USER_CONVERSATIONS': {
       const newState = { ...state };
-      if (action.payload.items.length < 0) return newState;
+      if (action.payload.items.length <= 0) return newState;
 
       newState.conversations = [];
+      console.log(newState.user);
       action.payload.items.forEach((conversation) => {
+        const userTitle = conversation.conversation.members
+          .filter((user) => user !== action.payload.username)
+          .join('');
         return newState.conversations.push({
           id: conversation.conversation.id,
-          title: conversation.conversation.members
-            .filter((user) => user !== action.payload.username)
-            .join(''),
+          title: userTitle,
           messageLoaded: false,
           messages: [],
           stack: [],
@@ -45,6 +48,7 @@ export default function (state = State, action) {
         });
       });
       newState.selectedConversation = newState.conversations[0];
+      newState.conversationLength = newState.conversations.length;
       return newState;
     }
     case 'LOAD_NEW_MESSAGES': {
@@ -165,6 +169,8 @@ export default function (state = State, action) {
         messages: [],
         stack: [],
       });
+      newState.conversationLength = newState.conversations.length;
+
       return newState;
     }
 

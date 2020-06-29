@@ -66,6 +66,8 @@ const ChatConversationList = ({
       </div>
     );
   } else {
+    // let x = <ScaleLoader loading={true} />;
+
     conversationList = (
       <div
         style={{
@@ -77,7 +79,7 @@ const ChatConversationList = ({
           borderRadius: '20px',
         }}
       >
-        <ScaleLoader loading={true} />;
+        <h1>No Conversation</h1>
       </div>
     );
   }
