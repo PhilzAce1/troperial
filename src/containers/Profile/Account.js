@@ -9,16 +9,20 @@ import {
 import { useForm } from 'react-hook-form';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
-
+import InputError from '../../components/InputError/InputError';
+import { nameRegex, phoneRegex, emailRegex } from '../../constants/regex';
 const Account = ({
   userCognitoEmail,
   defaultValues,
-  onChangeHandler,
   fetched,
   updateUserDetails,
+  getUserDetails
 }) => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => updateUserDetails(data);
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
+    updateUserDetails(data);
+    getUserDetails();
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <section className="profile_container">
@@ -50,15 +54,22 @@ const Account = ({
           </p>
         </div>
         <div className="grid-item">
+        {errors.username && (
+          <InputError>Usernames must be 6 to 8 characters long and contain only letters</InputError>
+        )}
           <CustomInput
             name="username"
             type="text"
             label="Username"
             placeholder="Username"
-            register={register}
-            value={defaultValues.username}
-            onChange={(e) => onChangeHandler(e)}
-            disabled={!fetched ? true : false}
+            showError={errors.username ? true : false}
+            register={register({
+              required: true,
+              minLength: 6,
+              maxLength: 8
+           })}
+           disabled={!fetched ? true : false}
+           defaultValue={defaultValues.username}
           />
         </div>
         <div className="grid-item headers">
@@ -69,26 +80,45 @@ const Account = ({
         </div>
         <div className="grid-item input-grid">
           <div>
+          {errors.firstname?.type === 'required' && (
+              <InputError>Your first name is required</InputError>
+          )}
+            {errors.firstname?.type === 'pattern' && (
+              <InputError>First name should consist of only alphabets</InputError>
+            )}
             <CustomInput
               name="firstname"
               type="text"
               label="firstname"
               placeholder="firstname"
-              register={register}
-              value={defaultValues.firstname}
-              onChange={(e) => onChangeHandler(e)}
+              showError={errors.firstname ? true : false}
+              register={register({
+                required: true,
+                pattern: nameRegex
+              })}
+              defaultValue={defaultValues.firstname}
               disabled={!fetched ? true : false}
             />
           </div>
           <div>
+          {errors.lastname?.type === 'required' && (
+              <InputError>Your last name is required</InputError>
+            )}
+            {errors.lastname?.type === 'pattern' && (
+              <InputError>Last name should consist of only alphabets</InputError>
+            )}
             <CustomInput
               name="lastname"
               type="text"
               label="Lastname"
               placeholder="lastname"
-              register={register}
-              value={defaultValues.lastname}
-              onChange={(e) => onChangeHandler(e)}
+              showError={errors.lastname ? true : false}
+              register={register({
+                required: true,
+                pattern: nameRegex,
+              
+              })}
+              defaultValue={defaultValues.lastname}
               disabled={!fetched ? true : false}
             />
           </div>
@@ -102,14 +132,25 @@ const Account = ({
           </p>
         </div>
         <div className="grid-item">
+        {errors.email?.type === 'required' && (
+                <InputError>Your email is required</InputError>
+              )}
+              {errors.email?.type === 'pattern' && (
+                <InputError>
+                  Please provide a valid email address
+                </InputError>
+              )}
           <CustomInput
             name="email"
             type="text"
             label="Email Address"
             placeholder="e.g johndoe@gmail.com"
-            value={defaultValues.email}
-            register={register}
-            onChange={(e) => onChangeHandler(e)}
+            defaultValue={defaultValues.email}
+            showError={errors.email ? true : false}
+            register={register({
+              required: true,
+              pattern: emailRegex,
+            })}
             disabled={!fetched ? true : false}
           />
         </div>
@@ -122,14 +163,26 @@ const Account = ({
           </p>
         </div>
         <div className="grid-item">
+        {errors.phone?.type === 'required' && (
+          <InputError>Your Phone number is required</InputError>
+        )}
+           {errors.phone?.type === 'pattern' && (
+                <InputError>
+                  Please ensure that you include your country code e.g +1****
+                </InputError>
+            )}
+
           <CustomInput
             name="phone"
             type="text"
             label="Phone Number"
             placeholder="e.g +234 8066474547"
-            register={register}
-            value={defaultValues.phone}
-            onChange={(e) => onChangeHandler(e)}
+            showError={errors.phone ? true : false}
+            register={register({
+              required: true,
+              pattern: phoneRegex
+            })}
+            defaultValue={defaultValues.phone}
             disabled={!fetched ? true : false}
           />
           <div className="save-changes_btn">

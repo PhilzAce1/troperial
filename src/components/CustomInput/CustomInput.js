@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './CustomInput.css';
 
 const CustomInput = ({
@@ -11,9 +11,13 @@ const CustomInput = ({
   showError,
   register,
   hint,
-  value,
-  disabled
+  disabled,
+  defaultValue
 }) => {
+  const [input, setInput] = useState('')
+  useEffect(() => {
+    setInput(defaultValue)
+  }, [defaultValue])
   return (
     <div className="customInputContainer">
       <div className="customInputContainer__error error-bubble">
@@ -28,8 +32,8 @@ const CustomInput = ({
           onChange={onChange}
           type={type}
           placeholder={placeholder}
-          value={value}
           disabled={disabled}
+          defaultValue={input}
         />
         {hint && (
           <div className="customInputContainer__input-hint">
@@ -42,6 +46,7 @@ const CustomInput = ({
 };
 CustomInput.defaultProps = {
   hint: false,
+  defaultValue: ''
 };
 
 export default CustomInput;

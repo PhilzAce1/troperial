@@ -11,7 +11,9 @@ const initialState = {
   phoneNumber:'',
   verified: null,
   accountId:'',
-  accounts: null
+  accounts: null,
+  phoneId: '',
+  emailId: '',
 };
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -21,7 +23,7 @@ export default function (state = initialState, action) {
         accounts: action.payload
       }
     case SET_CURRENT_USER_DETAILS: 
-    const {firstName, lastName, userAlias, number, verified, accountId} = action.payload;
+    const {firstName, lastName, userAlias, number, verified, accountId, phoneId, emailId} = action.payload;
     return {
       ...state,
       firstName,
@@ -29,7 +31,9 @@ export default function (state = initialState, action) {
       userName: userAlias,
       phoneNumber: number,
       verified,
-      accountId
+      accountId,
+      phoneId,
+      emailId
     }
     case CREATE_USER:
       return {

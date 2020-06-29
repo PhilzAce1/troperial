@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import './UpdateProfile.css';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomButton from '../CustomButton/CustomButton';
@@ -7,15 +7,13 @@ import InputError from '../InputError/InputError';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/authActions';
-import {phoneRegex} from '../../constants/regex';
+import {phoneRegex, usernameRegex, nameRegex} from '../../constants/regex';
 
-const UpdateProfile = ({ onClick, createUser }) => {
+const UpdateProfile = ({ createUser }) => {
   const { register, handleSubmit, errors, } = useForm();
   const onSubmit = async (data) => {
     const { firstname, lastname, username, phone } = data;
      createUser(firstname, lastname, username, phone);
-
-  
   };
 
   return (
@@ -37,7 +35,7 @@ const UpdateProfile = ({ onClick, createUser }) => {
               showError={errors.firstname ? true : false}
               register={register({
                 required: true,
-                pattern: /^[a-zA-Z\-]+$/
+                pattern: nameRegex
               })}
               name="firstname"
               type="text"
@@ -52,8 +50,6 @@ const UpdateProfile = ({ onClick, createUser }) => {
             {errors.lastname?.type === 'pattern' && (
               <InputError>Last name should consist of only alphabets</InputError>
             )}
-         
-           
             <CustomInput
               name="lastname"
               type="text"
@@ -62,7 +58,7 @@ const UpdateProfile = ({ onClick, createUser }) => {
               showError={errors.lastname ? true : false}
               register={register({
                 required: true,
-                pattern: /^[a-zA-Z\-]+$/,
+                pattern: nameRegex,
               
               })}
             />
@@ -76,7 +72,7 @@ const UpdateProfile = ({ onClick, createUser }) => {
           <InputError>Your username is required</InputError>
         )}
         {errors.username?.type === 'pattern' && (
-          <InputError>Usernames must be 4 to 8 characters long and contain only letters</InputError>
+          <InputError>Usernames must be 6 to 8 characters long and contain only letters</InputError>
         )}
      
         <CustomInput
@@ -88,8 +84,7 @@ const UpdateProfile = ({ onClick, createUser }) => {
           showError={errors.username ? true : false}
           register={register({
             required: true,
-            pattern:/^[a-zA-Z\-].{3,10}$/,
-       
+            pattern: usernameRegex,
           })}
         />
         {errors.phone?.type === 'required' && (
