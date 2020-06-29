@@ -40,7 +40,6 @@ const Profile = () => {
       if (!personId) {
         return null;
       }
-      console.log(personId)
       const user = await axios.get(
         `https://persons.api.troperial.com/persons/${personId}`,
       );
@@ -65,14 +64,6 @@ const Profile = () => {
       console.log(e);
     }
   };
-
-  const onChangeHandler = (e) => {
-    setDefaultValues({
-      ...defaultValues,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleBackDrop = () => {
     setShowBackDrop(!showBackDrop)
     setControlView(!controlView);
@@ -111,7 +102,7 @@ const Profile = () => {
                 <Account
                   fetched={fetched}
                   defaultValues={defaultValues}
-                  onChangeHandler={onChangeHandler}
+                  getUserDetails={getUserDetails}
                 />
               </PaddedContainer>
             </TabPanel>
