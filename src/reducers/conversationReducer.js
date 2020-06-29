@@ -40,9 +40,7 @@ export default function (state = State, action) {
           .join('');
         return newState.conversations.push({
           id: conversation.conversation.id,
-          title: conversation.conversation.members
-            .filter((user) => user !== action.payload.username)
-            .join(''),
+          title: userTitle,
           messageLoaded: false,
           messages: [],
           stack: [],

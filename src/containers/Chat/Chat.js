@@ -63,10 +63,9 @@ const Chat = ({
             },
           } = a;
           userDetails(id, username);
-
           return setTimeout(
-            () => userConversations(conversations, username),
-            1000,
+            () => userConversations(conversations, user.username),
+            1500,
           );
         } else {
           return console.log(

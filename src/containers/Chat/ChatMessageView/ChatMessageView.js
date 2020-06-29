@@ -63,7 +63,8 @@ const ChatMessageView = ({
       selectedConversation &&
       selectedConversation.messages &&
       !selectedConversation.messageLoaded &&
-      selectedConversation.messages.length <= 0
+      selectedConversation.messages.length <= 0 &&
+      selectedConversation.id
     ) {
       // console.log(selectedConversation.messageLoaded);
       messageLoader(loadMessages, selectedConversation.id);
