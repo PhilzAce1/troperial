@@ -263,6 +263,46 @@ export const onCreateMessage = /* GraphQL */ `
   }
 `;
 
+// export const onCreateConvoLink = /* GraphQL */ `
+//   subscription OnCreateConvoLink($convoLinkUserId: ID!) {
+//     onCreateConvoLink(convoLinkUserId: $convoLinkUserId) {
+//       id
+//       user {
+//         id
+//         username
+//         conversations {
+//           nextToken
+//         }
+//         # messages {
+//         #   nextToken
+//         # }
+//         createdAt
+//         updatedAt
+//       }
+//       convoLinkUserId
+//       conversation {
+//         id
+//         # messages {
+//         #   nextToken
+//         # }
+//         # associated {
+//         #   nextToken
+//         # }
+//         name
+//         members
+//         createdAt
+//         updatedAt
+//       }
+//       convoLinkConversationId
+//       createdAt
+//       updatedAt
+//     }
+//   }
+// `;
+
+
+
+
 export const onCreateConvoLink = /* GraphQL */ `
   subscription OnCreateConvoLink($convoLinkUserId: ID!) {
     onCreateConvoLink(convoLinkUserId: $convoLinkUserId) {

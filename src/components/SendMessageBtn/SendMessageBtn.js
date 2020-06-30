@@ -16,9 +16,7 @@ import {
   createConversation,
 } from '../../libs/conversationHelpers';
 import { finders } from './helpers/finders';
-import {
-  UPDATE_PROFILE,
-} from '../../actions/types';
+import { UPDATE_PROFILE } from '../../actions/types';
 function SendMessageBtn({
   by,
   have,
@@ -38,6 +36,7 @@ function SendMessageBtn({
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
+  // check if user exist : create new User
   async function getUserData() {
     try {
       if (!user || !user.username || user.username === '') {
@@ -55,8 +54,12 @@ function SendMessageBtn({
           conversations: { items: conversations },
         },
       } = await createUser(user.username);
+      // update stor with user details
       userDetails(id, username);
-      userConversations(conversations, username);
+      // update store with the conversations of the user
+      setTimeout(() => {
+        userConversations(conversations, username);
+      }, 1500);
     } catch (e) {
       console.log(e);
     }
@@ -66,14 +69,15 @@ function SendMessageBtn({
       return handleBackDrop();
     }
     setLoading(true);
+    //check if the conversation already exist in store
     const convo = finders(conversation.conversations, by);
     if (convo.exist) {
+      //change the selected conversation
       conversationChanged(convo.conversation.id);
       listingChanged(true, by, have, need, rate);
       setLoading(false);
       return history.push('/messages');
     }
-    // TODO ...if conversation on the Local state exist with that user ...simply go there
     try {
       if (
         conversation.user.username === undefined ||
@@ -85,6 +89,10 @@ function SendMessageBtn({
       }
       let newConvo;
       let currentUser = conversation.user;
+      if (currentUser.username === by) {
+        return console.log('user is trying to message himsef');
+      }
+      // create the otheruser or get details if he exists
       let otherUser = await createUser(by);
       otherUser = { ...otherUser }.payload;
       let convoExist = await conversationExist(

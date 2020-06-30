@@ -43,7 +43,7 @@ const Chat = ({
     } catch (e) {
       console.log(e);
     }
-    // if (!user.username) return alert('please complete your profile');
+    // check if the username is empty
     if (
       conversation.user.username === undefined ||
       conversation.user.username === '' ||
@@ -52,6 +52,7 @@ const Chat = ({
       conversation.conversations.length < 1
     ) {
       try {
+        // create a user for the chat MS
         const a = await createUser(user.username);
         if (a.success) {
           let {
@@ -62,13 +63,14 @@ const Chat = ({
             },
           } = a;
           userDetails(id, username);
-
           return setTimeout(
-            () => userConversations(conversations, username),
-            1000,
+            () => userConversations(conversations, user.username),
+            1500,
           );
         } else {
-          return;
+          return console.log(
+            "couldn't get create the user or user do not exist",
+          );
         }
       } catch (e) {
         console.log(e);
