@@ -2,7 +2,7 @@ import React from 'react';
 import './Profile.css';
 import MyListings from '../Listings/MyListings';
 import {connect} from 'react-redux';
-const History = ({handleDeleteModal, totalListingsPosted}) => {
+const History = ({handleDeleteModal, totalListingsPosted, conversationLength}) => {
   return (
     <section className="history_container">
       <header className="stats">
@@ -14,7 +14,7 @@ const History = ({handleDeleteModal, totalListingsPosted}) => {
         </div>
         <div className="stats-item">
           <span className="stats-figure conversations_started">
-           10
+           {conversationLength}
           </span>
           <span className="stats-title">Conversations Started</span>
         </div>
@@ -35,6 +35,7 @@ const History = ({handleDeleteModal, totalListingsPosted}) => {
 };
 const mapStateToProps = (state) => ({
   totalListingsPosted: state.myTransaction.totalListingsPosted,
+  conversationLength: state.conversation.conversationLength
 });
 
 export default connect(mapStateToProps, null)(History);
