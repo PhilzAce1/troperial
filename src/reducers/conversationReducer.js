@@ -32,6 +32,10 @@ export default function (state = State, action) {
       const newState = { ...state };
       if (action.payload.items.length <= 0) return newState;
       newState.conversations = [];
+      // if (!action.payload.items || action.payload.username) {
+
+      //   return newState;
+      // }
       action.payload.items.forEach((conversation) => {
         const userTitle = conversation.conversation.members
           .filter(
