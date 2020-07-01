@@ -9,10 +9,15 @@ import {
 import axios from 'axios';
 
 export const getAllRates = () => async (dispatch) => {
+  const authToken = localStorage.getItem('authToken');
   try {
     const response = await axios.get(
       'https://transactions.api.troperial.com/rates',
-    );
+      {
+        headers: {
+          Authorization: authToken,
+        },
+      });
     const {data: rates} = response;
     dispatch({
       type: GET_ALL_RATES,
@@ -32,10 +37,15 @@ export const getTransactions = (page = 1, size = 5) => async (
   dispatch,
 ) => {
   dispatch(setLoading(true));
+  const authToken = localStorage.getItem('authToken');
   try {
     const response = await axios.get(
       `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=${size}`,
-    );
+      {
+        headers: {
+          Authorization: authToken,
+        },
+      });
     dispatch({
       type: GET_ALL_TRANSACTIONS,
       payload: { ...response.data },
@@ -46,10 +56,14 @@ export const getTransactions = (page = 1, size = 5) => async (
 };
 
 export const getMoreTransactions = (page) => async (dispatch) => {
+  const authToken = localStorage.getItem('authToken');
   try {
     const response = await axios.get(
-      `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=5`,
-    );
+      `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=5`, {
+        headers: {
+          Authorization: authToken,
+        },
+      });
     dispatch({
       type: GET_MORE_TRANSACTIONS,
       payload: response.data,

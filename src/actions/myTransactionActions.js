@@ -17,13 +17,17 @@ import {
     dispatch,
   ) => {
     dispatch(setLoading(true));
-
+     const authToken = localStorage.getItem('authToken');
     try {
       const currentUserInfo = await Auth.currentUserInfo();
       let accountId = currentUserInfo.attributes['custom:accountId'];
       const response = await axios.get(
         `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
-      );
+      {
+        headers: {
+          Authorization: authToken,
+        },
+      });
       dispatch({
       type:SET_USER_TOTAL_LISTING,
       payload: response.data.length
