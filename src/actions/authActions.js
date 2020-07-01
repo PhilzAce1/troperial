@@ -18,6 +18,7 @@ export const createUser = (
   username,
   phone,
 ) => async (dispatch) => {
+  const authToken = localStorage.getItem('authToken');
   const phoneDetails = parsePhoneNumberFromString(phone);
   const currentUserInfo = await Auth.currentUserInfo();
   try {
@@ -40,7 +41,11 @@ export const createUser = (
     try {
       const response = await axios.post(
         'https://persons.api.troperial.com/persons',
-        userData,
+        userData, {
+          headers: {
+            Authorization: authToken,
+          },
+        },
       );
       const {
         personId,
@@ -90,10 +95,14 @@ export const createUser = (
   }
 };
 const getUserDetails = (personId) => async (dispatch) => {
+  const authToken = localStorage.getItem('authToken');
   try {
     const user = await axios.get(
-      `https://persons.api.troperial.com/persons/${personId}`,
-    );
+      `https://persons.api.troperial.com/persons/${personId}`, {
+      headers: {
+        Authorization: authToken,
+      },
+    });
     const {
       firstName,
       lastName,

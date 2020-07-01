@@ -39,11 +39,15 @@ const SignIn = ({checkUserProfile}) => {
       userHasAuthenticated(true);
       const idToken = await Auth.currentSession();
       localStorage.setItem('authToken', idToken.idToken.jwtToken);
+      console.log(idToken.idToken.jwtToken)
     } catch (e) {
       setAuthError(e.message);
       setIsLoading(false);
     }
   };
+
+
+
   return (
     <OnboardingContainer>
       <OnboardingAside illustration={SignInSvg} />

@@ -17,11 +17,36 @@ import { connect } from 'react-redux';
 import { checkUserProfile } from './actions/authActions';
 import ChatPage from './pages/ChatPage';
 import NewsPage from './pages/NewsPage';
+import {Auth} from 'aws-amplify';
 
 const Routes = ({ checkUserProfile, getAllRates }) => {
   useEffect(() => {
     checkUserProfile();
+
+    callBack()
+
+
+
   }, [checkUserProfile]);
+
+
+  const refreshToken = async () =>  {
+    try {
+      const cognitoUser = await Auth.currentAuthenticatedUser();
+      const currentSession = await Auth.currentSession();
+      cognitoUser.refreshSession(currentSession.refreshToken, (err, session) => {
+        const { idToken } = session;
+        localStorage.setItem('authToken', idToken.jwtToken)
+        console.log('token refresed', idToken.jwtToken)
+      });
+    } catch (e) {
+      console.log('Unable to refresh Token', e);
+    }
+  }
+  const callBack = () => {
+     refreshToken();
+     setInterval(refreshToken, 3600000);
+  }
   return (
     <Switch>
       <UnauthenticatedRoute exact path="/">

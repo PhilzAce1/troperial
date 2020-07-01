@@ -7,7 +7,7 @@ import InputError from '../InputError/InputError';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/authActions';
-import {phoneRegex, usernameRegex, nameRegex} from '../../constants/regex';
+import {phoneRegex, nameRegex} from '../../constants/regex';
 
 const UpdateProfile = ({ createUser }) => {
   const { register, handleSubmit, errors, } = useForm();
@@ -68,13 +68,9 @@ const UpdateProfile = ({ createUser }) => {
           Providing Your name is for identity purposes, we would not
           share this with anyone.
         </p>
-        {errors.username?.type === 'required' && (
-          <InputError>Your username is required</InputError>
-        )}
-        {errors.username?.type === 'pattern' && (
+        {errors.username === 'pattern' && (
           <InputError>Usernames must be 6 to 8 characters long and contain only letters</InputError>
         )}
-     
         <CustomInput
           name="username"
           type="text"
@@ -84,7 +80,8 @@ const UpdateProfile = ({ createUser }) => {
           showError={errors.username ? true : false}
           register={register({
             required: true,
-            pattern: usernameRegex,
+            minLength: 6,
+            maxLength: 8
           })}
         />
         {errors.phone?.type === 'required' && (

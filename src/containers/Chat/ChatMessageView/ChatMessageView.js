@@ -159,6 +159,7 @@ const ChatMessageView = ({
       </div>
     );
   }
+  console.log(conversation.conversationLength);
   const userheaderTitle = () => {
     return (
       <button className="user__header-title">
