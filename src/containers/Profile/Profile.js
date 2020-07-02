@@ -90,7 +90,7 @@ const Profile = () => {
       <div className="listingsCustom__container">
         <AppAside />
         <AppMain>
-          <Tabs>
+          <Tabs defaultIndex={0}>
             <div className="tab_list-container">
               <TabList>
                 <div className="scrolling-wrapper">

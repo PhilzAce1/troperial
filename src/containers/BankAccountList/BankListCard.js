@@ -1,8 +1,8 @@
 import React from 'react';
-import './BankAccountChatBubble.css';
+import './BankAccountList.css';
 import CurrencyFlag from 'react-currency-flags';
 import { currency_titles } from '../../constants/currency_titles';
-const BankAccountChatBubble = ({
+const BankListCard = ({
   accountNumber,
   bvnNumber,
   primaryBank,
@@ -13,26 +13,22 @@ const BankAccountChatBubble = ({
   zelleEmail,
   userId,
   currency,
-  fromMe,
+  active,
+  onClick
 }) => {
   return (
-    <div
-      className={`BankAccountChatBubble ${
-        fromMe === true
-          ? 'BankAccountChatBubble__fromMe'
-          : 'BankAccountChatBubble__fromContact'
-      }`}
-    >
+
+    <div onClick={onClick} className={`${active ? "active-bank" : ""} bankList_button bank-card`}>
       <header>
         <CurrencyFlag currency={currency} width={19} />
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
       <div className="bank__details-grid">
-        {userId && (
+      {userId && (
           <div className="bank__details_grid-item">
             <span className="label">User ID</span>
-            <span className="value">{userId && userId}</span>
+            <span className="value">{userId}</span>
           </div>
         )}
 
@@ -40,7 +36,7 @@ const BankAccountChatBubble = ({
           <div className="bank__details_grid-item">
             <span className="label">Bank</span>
             <span className="value">
-              {primaryBank && primaryBank}
+              {primaryBank}
             </span>
           </div>
         )}
@@ -87,27 +83,12 @@ const BankAccountChatBubble = ({
           </div>
         )}
 
-        <div className="bank__details_grid-item">
-          <span className="label">Bank</span>
-          <span className="value">Chase</span>
-        </div>
-        <div className="bank__details_grid-item">
-          <span className="label">Account Number</span>
-          <span className="value">2989128974</span>
-        </div>
-        <div className="bank__details_grid-item">
-          <span className="label">ABA/ACH routing code</span>
-          <span className="value">3883765</span>
-        </div>
-        <div className="bank__details_grid-item">
-          <span className="label">Account Name</span>
-          <span className="value">Peter Olusesan</span>
-        </div>
+    
       </div>
     </div>
   );
 };
-BankAccountChatBubble.defaultProps = {
-  fromMe: false,
-};
-export default BankAccountChatBubble;
+BankListCard.defaultProps = {
+    currency: 'NGN'
+}
+export default BankListCard;

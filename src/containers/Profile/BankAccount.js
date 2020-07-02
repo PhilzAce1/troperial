@@ -17,7 +17,7 @@ const BankAccount = ({
 }) => {
   useEffect(() => {
     getAccount(accountId);
-  }, [getAccount]);
+  }, [getAccount, accountId]);
 
   const renderAccounts = (accounts) => {
     if (accounts === null) {

@@ -1,92 +1,95 @@
 import React, { Fragment, useState } from 'react';
 import './BankCards.css';
-import CurrencyFlag from 'react-currency-flags'
-import {currency_titles} from '../../constants/currency_titles';
+import CurrencyFlag from 'react-currency-flags';
+import { currency_titles } from '../../constants/currency_titles';
 const BankCards = ({
   accountNumber,
   bvnNumber,
   primaryBank,
- customerAccountNumber,
- sortCode,
+  customerAccountNumber,
+  sortCode,
   routingNumber,
   externalAccountSubType,
   zelleEmail,
   userId,
-  currency
+  currency,
 }) => {
   const [toggle, setToggleState] = useState(false);
   const toggleDetails = () => setToggleState(!toggle);
   return (
     <div className="bank-card">
       <header>
-      <CurrencyFlag currency={currency} width={19} />
+        <CurrencyFlag currency={currency} width={19} />
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
       <div className="bank__details-grid">
-
         {userId ? (
-         <div className="bank__details_grid-item">
-         <span className="label">User ID</span>
-         <span className="value">{userId && userId}</span>
-       </div>
-        ): (
+          <div className="bank__details_grid-item">
+            <span className="label">User ID</span>
+            <span className="value">{userId && userId}</span>
+          </div>
+        ) : (
           <Fragment>
-               <div className="bank__details_grid-item">
-          <span className="label">Bank</span>
-          <span className="value">{primaryBank && primaryBank}</span>
-        </div>
-        {toggle && (
-          <Fragment>
-            {customerAccountNumber && (
-              <div className="bank__details_grid-item">
-                <span className="label">Account Number</span>
-                <span className="value">{customerAccountNumber}</span>
-              </div>
+            <div className="bank__details_grid-item">
+              <span className="label">Bank</span>
+              <span className="value">
+                {primaryBank && primaryBank}
+              </span>
+            </div>
+            {toggle && (
+              <Fragment>
+                {customerAccountNumber && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Account Number</span>
+                    <span className="value">
+                      {customerAccountNumber}
+                    </span>
+                  </div>
+                )}
+                {zelleEmail && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Zelle Email</span>
+                    <span className="value">{zelleEmail}</span>
+                  </div>
+                )}
+                {accountNumber && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Account Number</span>
+                    <span className="value">{accountNumber}</span>
+                  </div>
+                )}
+                {externalAccountSubType && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Account Type</span>
+                    <span className="value">
+                      {externalAccountSubType}
+                    </span>
+                  </div>
+                )}
+                {routingNumber && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Routing Number</span>
+                    <span className="value">{routingNumber}</span>
+                  </div>
+                )}
+                {bvnNumber && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">BVN Number</span>
+                    <span className="value">{bvnNumber}</span>
+                  </div>
+                )}
+                {sortCode && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Sort Code</span>
+                    <span className="value">{sortCode}</span>
+                  </div>
+                )}
+              </Fragment>
             )}
-            {zelleEmail && (
-              <div className="bank__details_grid-item">
-                <span className="label">Zelle Email</span>
-                <span className="value">{zelleEmail}</span>
-              </div>
-            )}
-            {accountNumber && (
-              <div className="bank__details_grid-item">
-                <span className="label">Account Number</span>
-                <span className="value">{accountNumber}</span>
-              </div>
-            )}
-            {externalAccountSubType && (
-              <div className="bank__details_grid-item">
-                <span className="label">Account Type</span>
-                <span className="value">
-                  {externalAccountSubType}
-                </span>
-              </div>
-            )}
-            {routingNumber && (
-              <div className="bank__details_grid-item">
-                <span className="label">Routing Number</span>
-                <span className="value">{routingNumber}</span>
-              </div>
-            )}
-            {bvnNumber && (
-              <div className="bank__details_grid-item">
-                <span className="label">BVN Number</span>
-                <span className="value">{bvnNumber}</span>
-              </div>
-            )}
-            {sortCode && (
-              <div className="bank__details_grid-item">
-                <span className="label">Sort Code</span>
-                <span className="value">{sortCode}</span>
-              </div>
-            )}
-          </Fragment>
-        )}
-        <button className="bank_button" onClick={toggleDetails}>
-          {toggle ? 'Hide Details' : 'Show Details'}
-        </button>
+            <button className="bank_button" onClick={toggleDetails}>
+              {toggle ? 'Hide Details' : 'Show Details'}
+            </button>
           </Fragment>
         )}
       </div>

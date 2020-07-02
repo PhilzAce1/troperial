@@ -266,7 +266,6 @@ const updateEmail = (email, personId) => async (
 export const getAccount = (accountId) => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');
   let accountList = [];
-  console.log(accountId);
   try {
     const response = await axios.get(
       `https://accounts.api.troperial.com/accounts/${accountId}`,
@@ -289,7 +288,6 @@ export const getAccount = (accountId) => async (dispatch) => {
         zelleAccounts,
         cashAppAccounts
       } = response.data.externalAccounts;
-      console.log(response.data.externalAccounts)
       if (Object.keys(response.data.externalAccounts).length === 0) {
         accountList = [];
       }

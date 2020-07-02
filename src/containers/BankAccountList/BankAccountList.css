@@ -1,0 +1,61 @@
+.handleBankAccountList_modal-bg {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	background: #fff;
+	z-index: 1000;
+}
+.handleBankAccountList-modal {
+    background: #fff;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.active-bank {
+    
+    border-color: var(--troperial-blue);
+}
+.bankList_button {
+   cursor: pointer;
+}
+   
+
+@media (min-width: 768px) {
+    .handleBankAccountList_modal-bg {
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.5);
+        display: flex;  
+        justify-content: center;
+        align-items: center;
+    }
+    .handleBankAccountList-modal {
+        width: 25%;
+        margin: 0 auto;
+        max-height: 80vh;
+        overflow-y: scroll;
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .handleBankAccountList-modal::-webkit-scrollbar {
+        display: none;
+    }
+    /* .users__showcase .horizontal__scroll--container {
+   
+        -webkit-overflow-scrolling: touch;
+       
+    } */
+  
+	
+}
+
+@media (min-width:1110px) {
+    .handleBankAccountList_modal-bg {
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.5);
+        display: flex;  
+        justify-content: center;
+        align-items: center;
+    }
+
+}
