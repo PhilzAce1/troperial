@@ -58,6 +58,7 @@ function SendMessageBtn({
       userDetails(id, username);
       // update store with the conversations of the user
       setTimeout(() => {
+        console.log(username);
         userConversations(conversations, username);
       }, 1500);
     } catch (e) {
@@ -142,7 +143,8 @@ function SendMessageBtn({
   );
 }
 const mapDispatchToProps = (dispatch) => ({
-  userConversations: (items) => dispatch(userConversations(items)),
+  userConversations: (items, username) =>
+    dispatch(userConversations(items, username)),
   conversationChanged: (conversationId) =>
     dispatch(conversationChanged(conversationId)),
   listingChanged: (status, by, have, need, rate) =>

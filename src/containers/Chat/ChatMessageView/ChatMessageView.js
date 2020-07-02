@@ -33,11 +33,16 @@ const ChatMessageView = ({
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
   const scrollToBottom = () => {
-    lastMessage.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'start',
-    });
+    const lM = document.querySelector('#lastmessage');
+    if (lM) {
+      lastMessage.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
+      });
+    } else {
+      console.log(false);
+    }
   };
   const messageLoader = useCallback(async (fn1, id) => {
     try {
@@ -75,7 +80,14 @@ const ChatMessageView = ({
       selectedConversation.messages &&
       selectedConversation.messages.length > 1
     ) {
-      setTimeout(() => scrollToBottom(), 3000);
+      setTimeout(() => {
+        const lM = document.querySelector('#lastmessageb');
+        if (lM) {
+          scrollToBottom();
+        } else {
+          console.log(false);
+        }
+      }, 3000);
     }
     // if (selectedConversation.messages.some((x) => x.read === false)) {
     // }
@@ -147,7 +159,6 @@ const ChatMessageView = ({
       </div>
     );
   }
-  console.log(conversation.conversationLength);
   const userheaderTitle = () => {
     return (
       <button className="user__header-title">
@@ -188,7 +199,7 @@ const ChatMessageView = ({
             {messageList}
           </ScrollToBottom>
           {/* for scrollToBottom */}
-          <div ref={lastMessage} />
+          <div ref={lastMessage} id="lastmessage" />
         </Scrollbars>
       </main>
       <section className="message__view--input-container">

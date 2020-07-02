@@ -31,12 +31,18 @@ export default function (state = State, action) {
     case 'SET_USER_CONVERSATIONS': {
       const newState = { ...state };
       if (action.payload.items.length <= 0) return newState;
-
       newState.conversations = [];
-      console.log(newState.user);
+      // if (!action.payload.items || action.payload.username) {
+
+      //   return newState;
+      // }
       action.payload.items.forEach((conversation) => {
         const userTitle = conversation.conversation.members
-          .filter((user) => user !== action.payload.username)
+          .filter(
+            (user) =>
+              user.toLowerCase() !==
+              action.payload.username.toLowerCase(),
+          )
           .join('');
         return newState.conversations.push({
           id: conversation.conversation.id,
