@@ -34,11 +34,14 @@ const Routes = ({ checkUserProfile, getAllRates }) => {
     try {
       const cognitoUser = await Auth.currentAuthenticatedUser();
       const currentSession = await Auth.currentSession();
-      cognitoUser.refreshSession(currentSession.refreshToken, (err, session) => {
-        const { idToken } = session;
-        localStorage.setItem('authToken', idToken.jwtToken)
-        console.log('token refresed', idToken.jwtToken)
-      });
+
+      const session = await cognitoUser.refreshSession(currentSession.refreshToken);
+      const { idToken } = session;
+      localStorage.setItem('authToken', idToken.jwtToken)
+      // cognitoUser.refreshSession(currentSession.refreshToken, (err, session) => {
+      //   const { idToken } = session;
+      //   localStorage.setItem('authToken', idToken.jwtToken)
+      // })
     } catch (e) {
       console.log('Unable to refresh Token', e);
     }

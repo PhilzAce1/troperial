@@ -286,7 +286,10 @@ export const getAccount = (accountId) => async (dispatch) => {
         ngnAccounts,
         usAccounts,
         ukAccounts,
+        zelleAccounts,
+        cashAppAccounts
       } = response.data.externalAccounts;
+      console.log(response.data.externalAccounts)
       if (Object.keys(response.data.externalAccounts).length === 0) {
         accountList = [];
       }
@@ -299,6 +302,13 @@ export const getAccount = (accountId) => async (dispatch) => {
       if (ukAccounts) {
         accountList = [...accountList, ...ukAccounts];
       }
+      if (zelleAccounts) {
+        accountList = [...accountList, ...zelleAccounts];
+      }
+      if (cashAppAccounts) {
+        accountList = [...accountList, ...cashAppAccounts];
+      }
+
       dispatch({
         type: GET_ALL_ACCOUNTS,
         payload: accountList,

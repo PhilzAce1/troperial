@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import './BankCards.css';
-import ReactCountryFlag from 'react-country-flag';
+import CurrencyFlag from 'react-currency-flags'
+import {currency_titles} from '../../constants/currency_titles';
 const BankCards = ({
   accountNumber,
   bvnNumber,
@@ -9,26 +10,29 @@ const BankCards = ({
  sortCode,
   routingNumber,
   externalAccountSubType,
+  zelleEmail,
+  userId,
+  currency
 }) => {
   const [toggle, setToggleState] = useState(false);
   const toggleDetails = () => setToggleState(!toggle);
   return (
     <div className="bank-card">
       <header>
-        <ReactCountryFlag
-          countryCode="NG"
-          svg
-          style={{
-            width: '1.25em',
-            height: '1.25em',
-          }}
-          title="NG"
-        />{' '}
-        (NGN) Nigerian Naira
+      <CurrencyFlag currency={currency} width={19} />
+        {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
       <div className="bank__details-grid">
-        <div className="bank__details_grid-item">
+
+        {userId ? (
+         <div className="bank__details_grid-item">
+         <span className="label">User ID</span>
+         <span className="value">{userId && userId}</span>
+       </div>
+        ): (
+          <Fragment>
+               <div className="bank__details_grid-item">
           <span className="label">Bank</span>
           <span className="value">{primaryBank && primaryBank}</span>
         </div>
@@ -38,6 +42,12 @@ const BankCards = ({
               <div className="bank__details_grid-item">
                 <span className="label">Account Number</span>
                 <span className="value">{customerAccountNumber}</span>
+              </div>
+            )}
+            {zelleEmail && (
+              <div className="bank__details_grid-item">
+                <span className="label">Zelle Email</span>
+                <span className="value">{zelleEmail}</span>
               </div>
             )}
             {accountNumber && (
@@ -77,6 +87,8 @@ const BankCards = ({
         <button className="bank_button" onClick={toggleDetails}>
           {toggle ? 'Hide Details' : 'Show Details'}
         </button>
+          </Fragment>
+        )}
       </div>
     </div>
   );
