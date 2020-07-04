@@ -5,6 +5,14 @@
 	background: #fff;
 	z-index: 1000;
 }
+.closeBtn_bank-list {
+    background: transparent;
+    outline: transparent;
+    border: none;
+}
+.closeBtn_container {
+    text-align: right;
+}
 .handleBankAccountList-modal {
     background: #fff;
     width: 90%;
@@ -38,15 +46,18 @@
         border-radius: 10px;
     }
     .handleBankAccountList-modal::-webkit-scrollbar {
-        display: none;
-    }
-    /* .users__showcase .horizontal__scroll--container {
-   
-        -webkit-overflow-scrolling: touch;
-       
-    } */
-  
-	
+        width: 12px;
+      }
+      .handleBankAccountList-modal::-webkit-scrollbar-track {
+        background: var(--light-grey);
+        border-radius: 10px;
+        
+      }
+      .handleBankAccountList-modal::-webkit-scrollbar-thumb {
+        background-color: var(--dark-grey);
+        border-radius: 20px;
+        border: 3px solid var(--light-grey);
+      }
 }
 
 @media (min-width:1110px) {

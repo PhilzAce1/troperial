@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, {Fragment} from 'react';
 import './UpdateProfile.css';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomButton from '../CustomButton/CustomButton';
@@ -8,6 +8,8 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/authActions';
 import {phoneRegex, nameRegex} from '../../constants/regex';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateProfile = ({ createUser }) => {
   const { register, handleSubmit, errors, } = useForm();
@@ -17,8 +19,10 @@ const UpdateProfile = ({ createUser }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="backdrop__form" action="">
+   <Fragment>
+     <ToastContainer/>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="backdrop__form">
         <div className="backdrop__profile-heading">
           <img src={profileImg} alt="update profile" />
           <h2>Update Your profile to post your first listing</h2>
@@ -68,7 +72,7 @@ const UpdateProfile = ({ createUser }) => {
           Providing Your name is for identity purposes, we would not
           share this with anyone.
         </p>
-        {errors.username === 'pattern' && (
+        {errors.username && (
           <InputError>Usernames must be 6 to 8 characters long and contain only letters</InputError>
         )}
         <CustomInput
@@ -107,6 +111,7 @@ const UpdateProfile = ({ createUser }) => {
         <CustomButton loading={false}>Update Profile</CustomButton>
       </div>
     </form>
+   </Fragment>
   );
 };
 export default connect(null, { createUser })(

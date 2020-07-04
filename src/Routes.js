@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Switch } from 'react-router-dom';
 import UnauthenticatedRoute from './components/UnAuthenticatedRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
@@ -15,41 +15,36 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/Login';
 import { connect } from 'react-redux';
 import { checkUserProfile } from './actions/authActions';
+
 import ChatPage from './pages/ChatPage';
 import NewsPage from './pages/NewsPage';
 import {Auth} from 'aws-amplify';
+import { getAllRates } from './actions/transactionActions';
 
 const Routes = ({ checkUserProfile, getAllRates }) => {
+  const callBack = useCallback(() => {
+    refreshToken();
+    setInterval(refreshToken, 1800000);
+ }, [])
   useEffect(() => {
-    checkUserProfile();
-
     callBack()
-
-
-
-  }, [checkUserProfile]);
+    checkUserProfile();
+  
+  }, [checkUserProfile, callBack]);
 
 
   const refreshToken = async () =>  {
     try {
       const cognitoUser = await Auth.currentAuthenticatedUser();
       const currentSession = await Auth.currentSession();
-
-      const session = await cognitoUser.refreshSession(currentSession.refreshToken);
-      const { idToken } = session;
-      localStorage.setItem('authToken', idToken.jwtToken)
-      // cognitoUser.refreshSession(currentSession.refreshToken, (err, session) => {
-      //   const { idToken } = session;
-      //   localStorage.setItem('authToken', idToken.jwtToken)
-      // })
+      cognitoUser.refreshSession(currentSession.refreshToken, (err, session) => {
+        localStorage.setItem('authToken', session.idToken.jwtToken)
+      })
     } catch (e) {
       console.log('Unable to refresh Token', e);
     }
   }
-  const callBack = () => {
-     refreshToken();
-     setInterval(refreshToken, 3600000);
-  }
+
   return (
     <Switch>
       <UnauthenticatedRoute exact path="/">
@@ -64,9 +59,6 @@ const Routes = ({ checkUserProfile, getAllRates }) => {
       <UnauthenticatedRoute exact path="/signup">
         <SignUp />
       </UnauthenticatedRoute>
-      {/* <UnauthenticatedRoute exact path="/messages">
-        <ChatPage />
-      </UnauthenticatedRoute> */}
       <UnauthenticatedRoute exact path="/forgotpassword">
         <ForgotPassword />
       </UnauthenticatedRoute>
@@ -85,9 +77,6 @@ const Routes = ({ checkUserProfile, getAllRates }) => {
       <AuthenticatedRoute exact path="/profile">
         <ProfilePage />
       </AuthenticatedRoute>
-      {/* <UnauthenticatedRoute exact path="/messages">
-      <ChatPage/>
-      </UnauthenticatedRoute> */}
       <UnauthenticatedRoute exact path="/how-it-works">
         <HowItWorksPage />
       </UnauthenticatedRoute>
@@ -100,4 +89,4 @@ const Routes = ({ checkUserProfile, getAllRates }) => {
     </Switch>
   );
 };
-export default connect(null, { checkUserProfile })(Routes);
+export default connect(null, { checkUserProfile, getAllRates })(Routes);

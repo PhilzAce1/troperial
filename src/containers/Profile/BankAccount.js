@@ -4,7 +4,6 @@ import BankCards from '../../components/BankCards/BankCards';
 import { connect } from 'react-redux';
 import { getAccount } from '../../actions/authActions';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-import { currency_titles } from '../../constants/currency_titles';
 const title = 'Add Your Bank Account Details';
 const message =
   'Add your bank accounts to troperial to make quicker and faster trades. Make sure the account name matches whats on your Verification ID.';

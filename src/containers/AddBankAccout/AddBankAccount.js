@@ -3,10 +3,9 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import HybridInput from '../../components/HybridInput/HybridInput';
 import InputError from '../../components/InputError/InputError';
-import CustomAlert from '../../components/CustomAlert/CustomAlert';
 import { currency_titles } from '../../constants/currency_titles';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
- 
+import { getAccount } from '../../actions/authActions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { emailRegex } from '../../constants/regex';
-const AddBankAccount = ({ accountId }) => {
+const AddBankAccount = ({ accountId, getAccount}) => {
   const { register, handleSubmit, errors } = useForm();
   const [country, setCountry] = useState('USD');
 
@@ -23,14 +22,13 @@ const AddBankAccount = ({ accountId }) => {
     setCountry(data);
   };
 
-  const notify = (message) => toast(message);
 
   const submitNGNAccount = async (data) => {
     const authToken = localStorage.getItem('authToken');
     const { accountName, bvnNumber, accountNumber, primaryBank } = data;
 
     try {
-      const response = await axios.post(
+        await axios.post(
         `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/ngn`,
         {
           bvnNumber,
@@ -46,10 +44,10 @@ const AddBankAccount = ({ accountId }) => {
         },
       );
       toast.success('Account Successfully Added!')
-      console.log(response);
+      getAccount(accountId)
     } catch (e) {
       console.log(e);
-      toast.error('Oops something went wrong, please ensure all credentials are correct and try again')
+      toast.error('Oops something went wrong, please try again!')
     }
   };
   const submitZelleAccount = async (data) => {
@@ -57,7 +55,7 @@ const AddBankAccount = ({ accountId }) => {
     const { zelleEmail, primaryBank } = data;
 
     try {
-      const response = await axios.post(
+         await axios.post(
         `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/zelle`,
         {
           zelleEmail,
@@ -69,9 +67,11 @@ const AddBankAccount = ({ accountId }) => {
           },
         },
       );
-      console.log(response);
+      toast.success('Account Successfully Added!')
+      getAccount(accountId)
     } catch (e) {
       console.log(e);
+      toast.error('Oops something went wrong, please try again!')
     }
   }
   const submitCashAppAccount = async (data) => {
@@ -79,7 +79,7 @@ const AddBankAccount = ({ accountId }) => {
     const { userId } = data;
 
     try {
-      const response = await axios.post(
+       await axios.post(
         `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/cashapp`,
         {
          userId
@@ -90,9 +90,11 @@ const AddBankAccount = ({ accountId }) => {
           },
         },
       );
-      console.log(response);
+      toast.success('Account Successfully Added!')
+      getAccount(accountId);
     } catch (e) {
       console.log(e);
+      toast.error('Oops something went wrong, please try again!')
     }
   }
   const submitUSDAccount = async (data) => {
@@ -100,7 +102,7 @@ const AddBankAccount = ({ accountId }) => {
     const { routingNumber, accountNumber, primaryBank } = data;
 
     try {
-      const response = await axios.post(
+       await axios.post(
         `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/us`,
         {
           routingNumber,
@@ -114,9 +116,11 @@ const AddBankAccount = ({ accountId }) => {
           },
         },
       );
-      console.log(response);
+      toast.success('Account Successfully Added!')
+      getAccount(accountId)
     } catch (e) {
       console.log(e);
+      toast.error('Oops something went wrong, please try again!')
     }
   };
   const submitUKAccount = async (data) => {
@@ -124,7 +128,7 @@ const AddBankAccount = ({ accountId }) => {
     const { customerAccountNumber, sortCode, primaryBank } = data;
 
     try {
-      const response = await axios.post(
+         await axios.post(
         `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/uk`,
         {
           customerAccountNumber,
@@ -138,9 +142,11 @@ const AddBankAccount = ({ accountId }) => {
           },
         },
       );
-      console.log(response);
+      toast.success('Account Successfully Added!')
+      getAccount(accountId)
     } catch (e) {
       console.log(e);
+      toast.error('Oops something went wrong, please try again!')
     }
   };
 
@@ -394,4 +400,4 @@ const mapStateToProps = (state) => ({
   accountId: state.auth.accountId,
 });
 
-export default connect(mapStateToProps, null)(AddBankAccount);
+export default connect(mapStateToProps, {getAccount})(AddBankAccount);

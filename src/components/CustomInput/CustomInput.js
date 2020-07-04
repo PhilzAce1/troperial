@@ -16,6 +16,9 @@ const CustomInput = ({
 }) => {
   const [input, setInput] = useState('')
   useEffect(() => {
+    if(!defaultValue) {
+      return;
+    }
     setInput(defaultValue)
   }, [defaultValue])
   return (
@@ -33,7 +36,7 @@ const CustomInput = ({
           type={type}
           placeholder={placeholder}
           disabled={disabled}
-          defaultValue={input}
+         defaultValue={input}
         />
         {hint && (
           <div className="customInputContainer__input-hint">
