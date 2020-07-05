@@ -41,6 +41,7 @@ const BankAccountList = ({
                 zelleEmail={account.zelleEmail}
                 userId={account.userId}
                 active={account.externalAccountId === chosen}
+                accountName={account.accountName}
                 onClick={() => setChosen(account.externalAccountId)}
               />
             );
