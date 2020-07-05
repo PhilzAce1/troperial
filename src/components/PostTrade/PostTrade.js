@@ -8,11 +8,12 @@ import React, {
 import './PostTrade.css';
 import HybridInput from '../HybridInput/HybridInput';
 import CustomButton from '../CustomButton/CustomButton';
-import CustomAlert from '../CustomAlert/CustomAlert';
 import { connect } from 'react-redux';
 import { getAllRates } from '../../actions/transactionActions';
 import { currency_symbols } from '../../constants/currency_symbols';
 // import InputError from '../InputError/InputError';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { getTransactions } from '../../actions/transactionActions';
 import { Auth } from 'aws-amplify';
@@ -41,7 +42,6 @@ const PostTrade = ({
   const history = useHistory();
   const { isAuthenticated } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('')
   /**
    * state title: conversionRates
    * data type: Object
@@ -164,10 +164,11 @@ const PostTrade = ({
   };
 
   const handleSubmit = async (e) => {
+    const authToken = localStorage.getItem('authToken');
     e.preventDefault();
 
     if(sourceAmount === '' || prefferedRate.have === '' || prefferedRate.need === '') {
-      return setError('Please ensure that all fields are correctly filled')
+      return toast.error('Please ensure that all fields are correctly filled')
     }
     if (!isAuthenticated) {
       localStorage.setItem(
@@ -185,7 +186,6 @@ const PostTrade = ({
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
     let accountId = currentUserInfo.attributes['custom:accountId']
-
     setLoading(true);
     try {
         const response = await axios.post(
@@ -199,19 +199,24 @@ const PostTrade = ({
             prefferedExchangeRate: calculatedRate,
             personId: personId,
           },
+          {
+            headers: {
+              Authorization: authToken
+            }
+          }
         );
       setStep(CONFIRM_POST_LISTING)
       setLoading(false);
-      getTransactions();
       console.log(response, calculatedRate);
     } catch (e) {
       console.log(`ERROR: ${e}`);
-      setError('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
+      toast.error('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
       setLoading(false);
     }
   };
 
   const postListing = useCallback(async (data) => {
+    const authToken = localStorage.getItem('authToken');
     localStorage.removeItem('unAuthenticatedUserListing');
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
@@ -221,11 +226,16 @@ const PostTrade = ({
      await axios.post(
         `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
         { ...data, personId, verifiedPerson: verified },
+        {
+          headers: {
+            Authorization: authToken
+          }
+        }
       );
       setStep(CONFIRM_POST_LISTING);
     } catch (e) {
       console.log(`ERROR: ${e}`);
-      setError('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
+      toast.error('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
       setLoading(false);
     }
   }, [setStep, verified])
@@ -250,12 +260,13 @@ const PostTrade = ({
 
   return (
     <Fragment>
+          <ToastContainer />
         <form
           className="post__listing-container"
           onSubmit={handleSubmit}
         >
           <h2 className="title">{title}</h2>
-          {error ? <CustomAlert message={error} onClick={() => setError('')}/> : null}
+          {/* {error ? <CustomAlert message={error} onClick={() => setError('')}/> : null} */}
           <div className="first__form__group">
             <HybridInput
               currency={have}
@@ -278,16 +289,11 @@ const PostTrade = ({
                 Trending market rate{' '}
                 <span className="price__summary">
                   -{' '}
-                  {`${currency_symbols[have]}${
+                  {have === 'NGN' ? `${currency_symbols[need]}${
                     conversionRates[have]
-                  } = ${currency_symbols[need]}${
-                    have === 'NGN'
-                      ? (
-                          conversionRates[have] /
-                          conversionRates[need]
-                        ).toFixed(4)
-                      : conversionRates[need]
-                  }`}
+                  } = ${currency_symbols[have]}${conversionRates[need]}`: `${currency_symbols[have]}${
+                    conversionRates[have]
+                  } = ${currency_symbols[need]}${conversionRates[need]}`}
                 </span>
               </p>
             )}

@@ -5,9 +5,40 @@
 .addBank .title {
     font-size: 1.2rem;
 }
+.scrolling-addBank-wrapper {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+}
+.scrolling-addBank-wrapper::-webkit-scrollbar {
+	display: none;
+}
+.scrolling-addBank-wrapper .react-tabs {
+	margin-top: 0;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.react-tabs__tab-list {
+	border-bottom: 1px solid var(--light-grey);
+	margin: 0 0 0;
+	padding: 0;
+}
+
+.scrolling-addBank-wrapper .react-tabs__tab {
+	display: inline-block;
+	list-style: none;
+	padding: 20px 0px;
+	cursor: pointer;
+    margin-right: 30px;
+    font-size: 1rem !important;
+}
+
+
+
 @media (min-width: 768px) {
     .addBank {
-        font-size: 1.3rem;
-        width: 80%;
+        font-size: 1.1rem;
+        width: 90%;
     }
 }

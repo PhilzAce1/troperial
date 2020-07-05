@@ -29,6 +29,7 @@ const ChatMessageView = ({
   conversation,
   updateSeen,
   state,
+  handleBankAccountList,
 }) => {
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -159,7 +160,6 @@ const ChatMessageView = ({
       </div>
     );
   }
-  console.log(conversation.conversationLength);
   const userheaderTitle = () => {
     return (
       <button className="user__header-title">
@@ -208,6 +208,7 @@ const ChatMessageView = ({
           onMessageSubmitted={onMessageSubmitted}
           user={selectedConversation.title}
           scrollToBottom={scrollToBottom}
+          handleBankAccountList={handleBankAccountList}
         />
       </section>
     </section>

@@ -16,7 +16,7 @@ const BankAccount = ({
 }) => {
   useEffect(() => {
     getAccount(accountId);
-  }, [getAccount]);
+  }, [getAccount, accountId]);
 
   const renderAccounts = (accounts) => {
     if (accounts === null) {
@@ -38,6 +38,9 @@ const BankAccount = ({
           key={account.externalAccountId}
           routingNumber={account.routingNumber}
           externalAccountSubType={account.externalAccountSubType}
+          currency={account.currency}
+          zelleEmail={account.zelleEmail}
+          userId={account.userId}
         />
       ));
     }

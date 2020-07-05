@@ -24,6 +24,7 @@ const ChatInput = ({
   user,
   updateMessageStack,
   sortConversation,
+  handleBankAccountList,
   state,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -186,10 +187,7 @@ const ChatInput = ({
           <div className="quick-actions-options">
             <button
               className="share-account-details"
-              onClick={
-                () => console.log('working')
-                // setShareAccountDetails((state) => !state)
-              }
+              onClick={handleBankAccountList}
             >
               Share account details
             </button>

@@ -34,6 +34,7 @@ const Profile = () => {
   });
 
   const getUserDetails = async () => {
+    const authToken = localStorage.getItem('authToken');
     try {
       const currentUserInfo = await Auth.currentUserInfo();
       let personId = currentUserInfo.attributes['custom:personId'];
@@ -42,7 +43,11 @@ const Profile = () => {
       }
       const user = await axios.get(
         `https://persons.api.troperial.com/persons/${personId}`,
-      );
+      {
+        headers: {
+          Authorization: authToken,
+        },
+      });
       const {
         firstName,
         lastName,
@@ -85,7 +90,7 @@ const Profile = () => {
       <div className="listingsCustom__container">
         <AppAside />
         <AppMain>
-          <Tabs>
+          <Tabs defaultIndex={0}>
             <div className="tab_list-container">
               <TabList>
                 <div className="scrolling-wrapper">

@@ -11,6 +11,7 @@ import { Auth } from 'aws-amplify';
 import axios from 'axios';
 import { setStep } from './uiActions';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { toast } from 'react-toastify';
 
 export const createUser = (
   firstname,
@@ -25,9 +26,9 @@ export const createUser = (
     let { sub: cognitoUserId, email } = currentUserInfo.attributes;
     const userData = {
       cognitoUserId,
-      userAlias: username.toLowerCase(),
-      firstName: firstname.toLowerCase(),
-      lastName: lastname.toLowerCase(),
+      userAlias: username,
+      firstName: firstname,
+      lastName: lastname,
       dateOfBirth: '1986-05-01',
       emailAddress: {
         email,
@@ -38,7 +39,7 @@ export const createUser = (
         countryCode: `+${phoneDetails.countryCallingCode}`,
       },
     };
-    try {
+    console.log(userData)
       const response = await axios.post(
         'https://persons.api.troperial.com/persons',
         userData, {
@@ -85,12 +86,9 @@ export const createUser = (
         },
       });
       return false;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
   } catch (e) {
     console.log(e);
+    toast.error('Something wrong happened, please try again.')
     return false;
   }
 };
@@ -266,7 +264,6 @@ const updateEmail = (email, personId) => async (
 export const getAccount = (accountId) => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');
   let accountList = [];
-  console.log(accountId);
   try {
     const response = await axios.get(
       `https://accounts.api.troperial.com/accounts/${accountId}`,
@@ -286,6 +283,8 @@ export const getAccount = (accountId) => async (dispatch) => {
         ngnAccounts,
         usAccounts,
         ukAccounts,
+        zelleAccounts,
+        cashAppAccounts
       } = response.data.externalAccounts;
       if (Object.keys(response.data.externalAccounts).length === 0) {
         accountList = [];
@@ -299,6 +298,13 @@ export const getAccount = (accountId) => async (dispatch) => {
       if (ukAccounts) {
         accountList = [...accountList, ...ukAccounts];
       }
+      if (zelleAccounts) {
+        accountList = [...accountList, ...zelleAccounts];
+      }
+      if (cashAppAccounts) {
+        accountList = [...accountList, ...cashAppAccounts];
+      }
+
       dispatch({
         type: GET_ALL_ACCOUNTS,
         payload: accountList,

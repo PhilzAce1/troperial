@@ -38,6 +38,7 @@ export const getTransactions = (page = 1, size = 5) => async (
 ) => {
   dispatch(setLoading(true));
   const authToken = localStorage.getItem('authToken');
+  page = page - 1;
   try {
     const response = await axios.get(
       `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=${size}`,
@@ -57,6 +58,7 @@ export const getTransactions = (page = 1, size = 5) => async (
 
 export const getMoreTransactions = (page) => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');
+  page = page - 1;
   try {
     const response = await axios.get(
       `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=5`, {
