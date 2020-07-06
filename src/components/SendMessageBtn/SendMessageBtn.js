@@ -25,6 +25,7 @@ function SendMessageBtn({
   newConversation,
   conversation,
   listingChanged,
+  personId,
   conversationChanged,
   user,
   userDetails,
@@ -33,6 +34,8 @@ function SendMessageBtn({
   handleBackDrop,
   step,
 }) {
+  console.log(personId);
+  console.log('state is ', state);
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();

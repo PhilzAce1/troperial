@@ -31,10 +31,10 @@ const AllListings = ({
     const currentUserInfo = await Auth.currentUserInfo();
     try {
       let personId = currentUserInfo.attributes['custom:personId'];
-        setPersonId(personId);
-    }catch(e){
+      setPersonId(personId);
+    } catch (e) {
       setPersonId('');
-        console.log(e)
+      console.log(e);
     }
   };
   if (loading) {
@@ -58,6 +58,7 @@ const AllListings = ({
               destinationCurrency,
               transactionState,
               transactionId,
+              personId,
             } = transaction;
             return (
               <TableContent
@@ -69,6 +70,7 @@ const AllListings = ({
                 userListings={false}
                 key={transactionId}
                 handleBackDrop={handleBackDrop}
+                personId={personId}
               />
             );
           })}

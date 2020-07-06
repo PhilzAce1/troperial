@@ -11,11 +11,12 @@ const TableContent = ({
   userListings,
   onClick,
   trustedTraders,
+  personId,
   username,
   totalTransactions,
   action,
   handleMessage,
-  handleBackDrop
+  handleBackDrop,
 }) => {
   return (
     <Fragment>
@@ -114,6 +115,7 @@ const TableContent = ({
                 by={by}
                 status={status}
                 handleBackDrop={handleBackDrop}
+                personId={personId}
               />
             )}
           </div>

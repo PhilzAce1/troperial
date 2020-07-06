@@ -17,6 +17,10 @@ const BankAccountList = ({
     getAccount(accountId);
   }, [getAccount, accountId]);
   const renderList = (accounts) => {
+    function testOnClick(params) {
+      console.log(params);
+      handleBankAccountList();
+    }
     if (accounts === null) {
       return <h2>Loading Bank Accounts...</h2>;
     } else if (accounts.length === 0) {
@@ -41,11 +45,14 @@ const BankAccountList = ({
                 zelleEmail={account.zelleEmail}
                 userId={account.userId}
                 active={account.externalAccountId === chosen}
-                onClick={() => setChosen(account.externalAccountId)}
+                onClick={() => setChosen(account)}
               />
             );
           })}
-          <CustomButton loading={false}>
+          <CustomButton
+            loading={false}
+            onClickHandler={() => testOnClick(chosen)}
+          >
             Send Bank Details
           </CustomButton>
         </Fragment>

@@ -16,6 +16,7 @@ import { getMessages } from '../../../libs/conversationHelpers';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
+import BankAccountChatBubble from '../../../components/BankAccountChatBubble/BankAccountChatBubble';
 import {
   loadMessages,
   updateSeen,
@@ -183,6 +184,7 @@ const ChatMessageView = ({
   ) {
     return <EmptyChatView />;
   }
+  const xyz = '200';
   return (
     <section className="message__view">
       <header className="message__view--header">
@@ -198,6 +200,21 @@ const ChatMessageView = ({
           <ScrollToBottom mode="bottom">
             {/* Chat feed */}
             {messageList}
+            <BankAccountChatBubble
+              accountNumber={
+                xyz === 'none' && xyz.length < 0 ? null : xyz
+              }
+              bvnNumber={'100'}
+              primaryBank={'100'}
+              customerAccountNumber={'100'}
+              sortCode={'100'}
+              routingNumber={'100'}
+              externalAccountSubType={'100'}
+              zelleEmail={'100'}
+              userId={xyz === 'none' || xyz.length < 0 ? null : xyz}
+              currency={'100'}
+              fromMe={'100'}
+            />
           </ScrollToBottom>
           {/* for scrollToBottom */}
           <div ref={lastMessage} id="lastmessage" />
