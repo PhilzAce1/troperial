@@ -32,6 +32,18 @@ type Message @model(subscriptions: null, queries: null) {
   author: User @connection(name: "UserMessages", keyField: "authorId")
   authorId: String
   isListing: Boolean!
+  isAccountDetail: Boolean
+  accountNumber: String
+  bvnNumber: String
+  primaryBank: String
+  customerAccountNumber: String
+  sortCode: String
+  routingNumber: String
+  externalAccountSubType: String
+  zelleEmail: String
+  userId: String
+  currency: String
+  seen: Boolean
   by: String!
   have: String!
   rate: String!
@@ -66,12 +78,9 @@ type Subscription {
     @aws_subscribe(mutations: ["createConvoLink"])
   onCreateMessage(messageConversationId: ID!): Message
     @aws_subscribe(mutations: ["createMessage"])
+  onUpdateMessage: Message
+    @aws_subscribe(mutations: ["updateMessage"])
+
   onCreateConversation(messageConversationId: ID!): Conversation
     @aws_subscribe(mutations: ["createConvo"])
 }
-
-# type Todo @model {
-#   id: ID!
-#   name: String!
-#   description: String
-# }

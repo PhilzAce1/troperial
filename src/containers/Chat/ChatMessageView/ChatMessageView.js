@@ -11,12 +11,16 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import ChatBubble from '../../../components/ChatBubble/ChatBubble';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { connect } from 'react-redux';
-import { getMessages } from '../../../libs/conversationHelpers';
+import {
+  getMessages,
+  updateMessageSeen,
+} from '../../../libs/conversationHelpers';
 // import ListingCard from '../../../components/ListingCard';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
 import BankAccountChatBubble from '../../../components/BankAccountChatBubble/BankAccountChatBubble';
+import { markAsSeen } from '../helpers';
 import {
   loadMessages,
   updateSeen,
@@ -32,18 +36,19 @@ const ChatMessageView = ({
   state,
   handleBankAccountList,
 }) => {
+  // console.log(state);
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
   const scrollToBottom = () => {
     const lM = document.querySelector('#lastmessage');
     if (lM) {
-      lastMessage.current.scrollIntoView({
+      return lastMessage.current.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
         inline: 'start',
       });
     } else {
-      console.log(false);
+      return;
     }
   };
   const messageLoader = useCallback(async (fn1, id) => {
@@ -64,7 +69,14 @@ const ChatMessageView = ({
   // const messageRead = useCallback((arr, cb) => {}, []);
 
   useEffect(() => {
-    updateSeen(selectedConversation.id, true);
+    if (
+      selectedConversation &&
+      selectedConversation.messages &&
+      selectedConversation.messageLoaded
+    ) {
+      markAsSeen(selectedConversation, updateSeen, updateMessageSeen);
+    }
+    // updateSeen(selectedConversation.id, true);
 
     if (
       selectedConversation &&
@@ -121,12 +133,75 @@ const ChatMessageView = ({
               fromMe={message.isMyMessage}
             />
           )}
-          <ChatBubble
-            fromMe={message.isMyMessage}
-            createdAt={message.createdAt}
-          >
-            {message.messageText}
-          </ChatBubble>
+          {message.isAccountDetail && (
+            <BankAccountChatBubble
+              accountNumber={
+                message.accountNumber === 'none' ||
+                message.accountNumber.length < 0
+                  ? null
+                  : message.accountNumber
+              }
+              bvnNumber={
+                message.bvnNumber === 'none' ||
+                message.bvnNumber.length < 0
+                  ? null
+                  : message.bvnNumber
+              }
+              primaryBank={
+                message.primaryBank === 'none' ||
+                message.primaryBank.length < 0
+                  ? null
+                  : message.primaryBank
+              }
+              customerAccountNumber={
+                message.customerAccountNumber === 'none' ||
+                message.customerAccountNumber.length < 0
+                  ? null
+                  : message.customerAccountNumber
+              }
+              sortCode={
+                message.sortCode === 'none' ||
+                message.sortCode.length < 0
+                  ? null
+                  : message.sortCode
+              }
+              routingNumber={
+                message.routingNumber === 'none' ||
+                message.routingNumber.length < 0
+                  ? null
+                  : message.routingNumber
+              }
+              externalAccountSubType={
+                message.externalAccountSubType === 'none' ||
+                message.externalAccountSubType.length < 0
+                  ? null
+                  : message.externalAccountSubType
+              }
+              zelleEmail={
+                message.zelleEmail === 'none' ||
+                message.zelleEmail.length < 0
+                  ? null
+                  : message.zelleEmail
+              }
+              // userId={xyz === 'none' || xyz.length < 0 ? null : xyz}
+              currency={
+                message.currency === 'none' ||
+                message.currency.length < 0
+                  ? null
+                  : message.currency
+              }
+              fromMe={message.isMyMessage}
+            />
+          )}
+
+          {message.messageText && message.messageText !== 'none' && (
+            <ChatBubble
+              fromMe={message.isMyMessage}
+              createdAt={message.createdAt}
+            >
+              {message.messageText}
+            </ChatBubble>
+          )}
         </div>
       );
     });
@@ -184,7 +259,7 @@ const ChatMessageView = ({
   ) {
     return <EmptyChatView />;
   }
-  const xyz = '200';
+  // const xyz = '200';
   return (
     <section className="message__view">
       <header className="message__view--header">
@@ -200,21 +275,6 @@ const ChatMessageView = ({
           <ScrollToBottom mode="bottom">
             {/* Chat feed */}
             {messageList}
-            <BankAccountChatBubble
-              accountNumber={
-                xyz === 'none' && xyz.length < 0 ? null : xyz
-              }
-              bvnNumber={'100'}
-              primaryBank={'100'}
-              customerAccountNumber={'100'}
-              sortCode={'100'}
-              routingNumber={'100'}
-              externalAccountSubType={'100'}
-              zelleEmail={'100'}
-              userId={xyz === 'none' || xyz.length < 0 ? null : xyz}
-              currency={'100'}
-              fromMe={'100'}
-            />
           </ScrollToBottom>
           {/* for scrollToBottom */}
           <div ref={lastMessage} id="lastmessage" />

@@ -24,6 +24,7 @@ function SendMessageBtn({
   rate,
   newConversation,
   conversation,
+  transaction,
   listingChanged,
   personId,
   conversationChanged,
@@ -78,7 +79,7 @@ function SendMessageBtn({
     if (convo.exist) {
       //change the selected conversation
       conversationChanged(convo.conversation.id);
-      listingChanged(true, by, have, need, rate);
+      listingChanged(true, by, have, need, rate, transaction);
       setLoading(false);
       return history.push('/messages');
     }
@@ -150,8 +151,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(userConversations(items, username)),
   conversationChanged: (conversationId) =>
     dispatch(conversationChanged(conversationId)),
-  listingChanged: (status, by, have, need, rate) =>
-    dispatch(listingChanged(status, by, have, need, rate)),
+  listingChanged: (status, by, have, need, rate, extra) =>
+    dispatch(listingChanged(status, by, have, need, rate, extra)),
   newConversation: (id, members) =>
     dispatch(newConversation(id, members)),
   userDetails: (userId, username) =>

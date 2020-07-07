@@ -53,6 +53,11 @@ export default function (state = State, action) {
           lastMessage: {},
         });
       });
+      const filteredConvo = filterDup(
+        newState.conversations,
+        (it) => it.id,
+      );
+      newState.conversations = filteredConvo;
       newState.selectedConversation = newState.conversations[0];
       newState.conversationLength = newState.conversations.length;
       return newState;
@@ -70,11 +75,25 @@ export default function (state = State, action) {
       }
       convo.messageLoaded = true;
       convo.messages = [];
+      // console.log(action.payload.messages);
       if (action.payload.messages.length < 0) return newState;
       action.payload.messages.forEach((message) => {
         convo.messages.push({
           id: message.id,
           isListing: message.isListing,
+          isAccountDetail: message.isAccountDetail,
+          accountNumber: message.accountNumber,
+          bvnNumber: message.bvnNumber,
+          currency: message.currency,
+          customerAccountNumber: message.customerAccountNumber,
+          externalAccountSubType: message.externalAccountSubType,
+          primaryBank: message.primaryBank,
+          routingNumber: message.routingNumber,
+          // seen: message.seen,
+          sortCode: message.sortCode,
+          updatedAt: message.updatedAt,
+          userId: message.userId,
+          zelleEmail: message.zelleEmail,
           authorId: message.authorId,
           by: message.by,
           have: message.have,
@@ -82,7 +101,7 @@ export default function (state = State, action) {
           need: message.need,
           imageAlt: null,
           messageText: message.content,
-          read: true,
+          read: message.seen !== null ? message.seen : true,
           createdAt: message.createdAt,
           isMyMessage: message.authorId === newState.user.id,
         });
@@ -92,6 +111,13 @@ export default function (state = State, action) {
     }
     case 'SELECTED_CONVERSATION_CHANGED': {
       const newState = { ...state };
+      newState.listing = {
+        open: false,
+        by: 'none',
+        have: 'none',
+        rate: 'none',
+        need: 'none',
+      };
       const filteredConvo = filterDup(
         newState.conversations,
         (it) => it.id,
@@ -129,6 +155,7 @@ export default function (state = State, action) {
         have: action.payload.have,
         need: action.payload.need,
         rate: action.payload.rate,
+        transaction: action.payload.transaction,
       };
 
       return newState;
@@ -284,6 +311,49 @@ export default function (state = State, action) {
     case 'CLEAR_SEARCH_FILTER': {
       const newState = { ...state };
       newState.search = [];
+      return newState;
+    }
+
+    case 'ACCONT_DETAILS_SENT': {
+      console.log(action.payload);
+      const newState = { ...state };
+      newState.selectedConversation = {
+        ...newState.selectedConversation,
+      };
+      newState.selectedConversation.messages.push({
+        isAccountDetail: true,
+        createdAt: Date.now(),
+        isMyMessage: true,
+        accountNumber: action.payload.accountNumber
+          ? action.payload.accountNumber
+          : 'none',
+        bvnNumber: action.payload.bvnNumber
+          ? action.payload.bvnNumber
+          : 'none',
+        primaryBank: action.payload.primaryBank
+          ? action.payload.primaryBank
+          : 'none',
+        customerAccountNumber: action.payload.customerAccountNumber
+          ? action.payload.customerAccountNumber
+          : 'none',
+        sortCode: action.payload.sortCode
+          ? action.payload.sortCode
+          : 'none',
+        routingNumber: action.payload.routingNumber
+          ? action.payload.routingNumber
+          : 'none',
+        externalAccountSubType: action.payload.externalAccountSubType
+          ? action.payload.externalAccountSubType
+          : 'none',
+        zelleEmail: action.payload.zelleEmail
+          ? action.payload.zelleEmail
+          : 'none',
+        userId: action.payload.userId ? action.payload.userId : '200',
+        currency: action.payload.currency
+          ? action.payload.currency
+          : 'none',
+        // fromMe: '200',
+      });
       return newState;
     }
     default:

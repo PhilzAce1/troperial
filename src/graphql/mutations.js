@@ -24,6 +24,18 @@ export const createUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate
@@ -63,6 +75,18 @@ export const updateUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate
@@ -102,6 +126,18 @@ export const deleteUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate
@@ -130,6 +166,18 @@ export const createConvo = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate
@@ -179,6 +227,18 @@ export const createMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      currency
+      seen
       by
       have
       rate
@@ -224,6 +284,18 @@ export const updateMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      currency
+      seen
       by
       have
       rate
@@ -269,6 +341,18 @@ export const deleteMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      currency
+      seen
       by
       have
       rate

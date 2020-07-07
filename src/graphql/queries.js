@@ -21,6 +21,18 @@ export const getUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate
@@ -69,6 +81,18 @@ export const getConvo = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate

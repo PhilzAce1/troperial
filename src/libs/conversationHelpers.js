@@ -8,6 +8,7 @@ import {
   getConvo,
   createConvoLink,
   getUser,
+  updateMessage,
 } from './graphql';
 export const createUser = async (username) => {
   // TODO createCurrent User should be different from createUser
@@ -166,6 +167,63 @@ export const getMessages = async (conversationId) => {
     if (!members && members.length < 1)
       return console.log('Invalid conversatation Link');
     return items;
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const sendAccountDetail = async (
+  conversationId,
+  authorId,
+  data,
+) => {
+  // return console.log(data.primaryBank ? true : false);
+  let messageData = {
+    createdAt: `${Date.now()}`,
+    messageConversationId: conversationId,
+    content: 'none',
+    authorId: authorId,
+    isListing: false,
+    isAccountDetail: true,
+    accountNumber: data.accountNumber ? data.accountNumber : 'none',
+    bvnNumber: data.bvnNumber ? data.bvnNumber : 'none',
+    primaryBank: data.primaryBank ? data.primaryBank : 'none',
+    customerAccountNumber: data.customerAccountNumber
+      ? data.customerAccountNumber
+      : 'none',
+    sortCode: data.sortCode ? data.sortCode : 'none',
+    routingNumber: data.routingNumber ? data.routingNumber : 'none',
+    externalAccountSubType: data.externalAccountSubType
+      ? data.externalAccountSubType
+      : 'none',
+    zelleEmail: data.zelleEmail ? data.zelleEmail : 'none',
+    userId: data.userId ? data.userId : 'none',
+    currency: data.currency ? data.currency : 'none',
+    seen: false,
+    by: 'none',
+    have: 'none',
+    rate: 'none',
+    need: 'none',
+  };
+  try {
+    await API.graphql(
+      graphqlOperation(CreateMessage, { input: messageData }),
+    );
+
+    return 'done';
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const updateMessageSeen = async (data) => {
+  const messageData = {
+    id: data.id,
+    seen: true,
+  };
+  try {
+    const updatedMessage = await API.graphql(
+      graphqlOperation(updateMessage, { input: messageData }),
+    );
+    console.log(updatedMessage);
   } catch (e) {
     console.log(e);
   }

@@ -19,6 +19,7 @@ export const listingChanged = (
   have = 'none',
   need = 'none',
   rate = 'none',
+  transaction = 'none',
 ) => ({
   type: 'LISTING_CHANGED',
   payload: {
@@ -27,6 +28,7 @@ export const listingChanged = (
     have,
     need,
     rate,
+    transaction,
   },
 });
 export const newConversation = (id, members) => ({
@@ -144,3 +146,10 @@ export const searchFilter = (input) => {
 export const clearFilter = () => ({
   type: 'CLEAR_SEARCH_FILTER',
 });
+
+export const addNewAccountDetails = (data) => (dispatch) => {
+  dispatch({
+    type: 'ACCONT_DETAILS_SENT',
+    payload: data,
+  });
+};

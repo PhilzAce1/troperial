@@ -11,6 +11,7 @@ const TableContent = ({
   userListings,
   onClick,
   trustedTraders,
+  transaction,
   personId,
   username,
   totalTransactions,
@@ -116,6 +117,7 @@ const TableContent = ({
                 status={status}
                 handleBackDrop={handleBackDrop}
                 personId={personId}
+                transaction={transaction}
               />
             )}
           </div>

@@ -67,6 +67,17 @@ export const createMessage = /* GraphQL */ `
       # }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      currency
       by
       have
       rate
@@ -190,11 +201,22 @@ export const getConvo = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          currency
+          seen
           by
           have
           rate
           need
-          content
           content
           messageConversationId
           createdAt
@@ -300,9 +322,6 @@ export const onCreateMessage = /* GraphQL */ `
 //   }
 // `;
 
-
-
-
 export const onCreateConvoLink = /* GraphQL */ `
   subscription OnCreateConvoLink($convoLinkUserId: ID!) {
     onCreateConvoLink(convoLinkUserId: $convoLinkUserId) {
@@ -334,6 +353,117 @@ export const onCreateConvoLink = /* GraphQL */ `
         updatedAt
       }
       convoLinkConversationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMessage = /* GraphQL */ `
+  mutation UpdateMessage(
+    $input: UpdateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    updateMessage(input: $input, condition: $condition) {
+      id
+      # author {
+      #   id
+      #   username
+      #   conversations {
+      #     nextToken
+      #   }
+      #   messages {
+      #     nextToken
+      #   }
+      #   createdAt
+      #   updatedAt
+      # }
+      authorId
+      isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      currency
+      seen
+      by
+      have
+      rate
+      need
+      content
+      conversation {
+        id
+        # messages {
+        #   nextToken
+        # }
+        associated {
+          nextToken
+        }
+        name
+        members
+        createdAt
+        updatedAt
+      }
+      messageConversationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage {
+    onUpdateMessage {
+      id
+      # author {
+      #   id
+      #   username
+      #   conversations {
+      #     nextToken
+      #   }
+      #   messages {
+      #     nextToken
+      #   }
+      #   createdAt
+      #   updatedAt
+      # }
+      authorId
+      isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      currency
+      seen
+      by
+      have
+      rate
+      need
+      content
+      # conversation {
+      #   id
+      #   messages {
+      #     nextToken
+      #   }
+      #   associated {
+      #     nextToken
+      #   }
+      #   name
+      #   members
+      #   createdAt
+      #   updatedAt
+      # }
+      messageConversationId
       createdAt
       updatedAt
     }

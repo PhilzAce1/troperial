@@ -71,6 +71,7 @@ const AllListings = ({
                 key={transactionId}
                 handleBackDrop={handleBackDrop}
                 personId={personId}
+                transaction={transaction}
               />
             );
           })}

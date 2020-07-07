@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import BankListCard from './BankListCard';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { getAccount } from '../../actions/authActions';
+import { addNewAccountDetails } from '../../actions/conversationActions';
 import AddBankAccount from '../AddBankAccout/AddBankAccount';
+import { sendAccountDetail } from '../../libs/conversationHelpers';
 import close from '../../assets/images/Close.png';
 const BankAccountList = ({
   handleBankAccountList,
   getAccount,
+  addNewAccountDetails,
   accounts,
   accountId,
+  conversation,
 }) => {
   const [chosen, setChosen] = useState();
   useEffect(() => {
@@ -18,7 +22,12 @@ const BankAccountList = ({
   }, [getAccount, accountId]);
   const renderList = (accounts) => {
     function testOnClick(params) {
-      console.log(params);
+      addNewAccountDetails(params);
+      sendAccountDetail(
+        conversation.selectedConversation.id,
+        conversation.user.id,
+        params,
+      );
       handleBankAccountList();
     }
     if (accounts === null) {
@@ -79,7 +88,9 @@ const BankAccountList = ({
 const mapStateToProps = (state) => ({
   accountId: state.auth.accountId,
   accounts: state.auth.accounts,
+  conversation: state.conversation,
 });
-export default connect(mapStateToProps, { getAccount })(
-  BankAccountList,
-);
+export default connect(mapStateToProps, {
+  getAccount,
+  addNewAccountDetails,
+})(BankAccountList);

@@ -39,56 +39,56 @@ export const createUser = (
         countryCode: `+${phoneDetails.countryCallingCode}`,
       },
     };
-    console.log(userData)
-      const response = await axios.post(
-        'https://persons.api.troperial.com/persons',
-        userData, {
-          headers: {
-            Authorization: authToken,
-          },
+    const response = await axios.post(
+      'https://persons.api.troperial.com/persons',
+      userData,
+      {
+        headers: {
+          Authorization: authToken,
         },
-      );
-      const {
-        personId,
+      },
+    );
+    const {
+      personId,
+      firstName,
+      lastName,
+      userAlias,
+      phoneNumbers,
+      emailAddresses,
+      verified,
+      accountId,
+    } = response.data;
+    const { phoneId, number } = phoneNumbers[0];
+    const { emailId } = emailAddresses[0];
+    console.log(response.data, phoneId, emailId);
+    const user = await Auth.currentAuthenticatedUser();
+    await Auth.updateUserAttributes(user, {
+      'custom:personId': personId,
+      'custom:userName': userAlias,
+      'custom:accountId': accountId,
+    });
+    dispatch({
+      type: CHECK_USER_PROFILE,
+      payload: true,
+    });
+    dispatch(setStep(CONFIRM_PROFILE_UPDATE));
+    dispatch({
+      type: SET_CURRENT_USER_DETAILS,
+      payload: {
         firstName,
         lastName,
         userAlias,
-        phoneNumbers,
-        emailAddresses,
+        number,
         verified,
         accountId,
-      } = response.data;
-      const { phoneId, number } = phoneNumbers[0];
-      const { emailId } = emailAddresses[0];
-      console.log(response.data, phoneId, emailId);
-      const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, {
-        'custom:personId': personId,
-        'custom:userName': userAlias,
-        'custom:accountId': accountId,
-      });
-      dispatch({
-        type: CHECK_USER_PROFILE,
-        payload: true,
-      });
-      dispatch(setStep(CONFIRM_PROFILE_UPDATE));
-      dispatch({
-        type: SET_CURRENT_USER_DETAILS,
-        payload: {
-          firstName,
-          lastName,
-          userAlias,
-          number,
-          verified,
-          accountId,
-          phoneId,
-          emailId,
-        },
-      });
-      return false;
+        phoneId,
+        emailId,
+      },
+    });
+    return false;
   } catch (e) {
     console.log(e);
-    toast.error('Something wrong happened, please try again.')
+    toast.error('Something wrong happened, please try again.');
     return false;
   }
 };
@@ -96,11 +96,13 @@ const getUserDetails = (personId) => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');
   try {
     const user = await axios.get(
-      `https://persons.api.troperial.com/persons/${personId}`, {
-      headers: {
-        Authorization: authToken,
+      `https://persons.api.troperial.com/persons/${personId}`,
+      {
+        headers: {
+          Authorization: authToken,
+        },
       },
-    });
+    );
     const {
       firstName,
       lastName,
@@ -158,9 +160,7 @@ export const checkUserProfile = () => async (dispatch) => {
   }
 };
 
-export const updateUserDetails = (data) => async (
-  dispatch
-) => {
+export const updateUserDetails = (data) => async (dispatch) => {
   const { firstname, lastname, username, email, phone } = data;
 
   try {
@@ -169,7 +169,7 @@ export const updateUserDetails = (data) => async (
     updateNames(firstname, lastname, username, personId);
     dispatch(updateEmail(email, personId));
     dispatch(updatePhone(phone, personId));
-    dispatch(getUserDetails(personId))
+    dispatch(getUserDetails(personId));
   } catch (e) {
     console.log(e);
   }
@@ -284,7 +284,7 @@ export const getAccount = (accountId) => async (dispatch) => {
         usAccounts,
         ukAccounts,
         zelleAccounts,
-        cashAppAccounts
+        cashAppAccounts,
       } = response.data.externalAccounts;
       if (Object.keys(response.data.externalAccounts).length === 0) {
         accountList = [];
