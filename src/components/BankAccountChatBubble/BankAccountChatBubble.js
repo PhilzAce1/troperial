@@ -14,6 +14,7 @@ const BankAccountChatBubble = ({
   userId,
   currency,
   fromMe,
+  accountName
 }) => {
   return (
     <div
@@ -35,7 +36,6 @@ const BankAccountChatBubble = ({
             <span className="value">{userId && userId}</span>
           </div>
         )}
-
         {primaryBank && (
           <div className="bank__details_grid-item">
             <span className="label">Bank</span>
@@ -62,6 +62,12 @@ const BankAccountChatBubble = ({
             <span className="value">{accountNumber}</span>
           </div>
         )}
+          {accountName && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Account Name</span>
+                    <span className="value">{accountName}</span>
+                  </div>
+          )}
         {externalAccountSubType && (
           <div className="bank__details_grid-item">
             <span className="label">Account Type</span>
@@ -86,23 +92,6 @@ const BankAccountChatBubble = ({
             <span className="value">{sortCode}</span>
           </div>
         )}
-
-        <div className="bank__details_grid-item">
-          <span className="label">Bank</span>
-          <span className="value">Chase</span>
-        </div>
-        <div className="bank__details_grid-item">
-          <span className="label">Account Number</span>
-          <span className="value">2989128974</span>
-        </div>
-        <div className="bank__details_grid-item">
-          <span className="label">ABA/ACH routing code</span>
-          <span className="value">3883765</span>
-        </div>
-        <div className="bank__details_grid-item">
-          <span className="label">Account Name</span>
-          <span className="value">Peter Olusesan</span>
-        </div>
       </div>
     </div>
   );

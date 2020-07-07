@@ -41,6 +41,7 @@ const BankAccount = ({
           currency={account.currency}
           zelleEmail={account.zelleEmail}
           userId={account.userId}
+          accountName={account.accountName}
         />
       ));
     }

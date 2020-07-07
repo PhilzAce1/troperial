@@ -14,7 +14,8 @@ const BankListCard = ({
   userId,
   currency,
   active,
-  onClick
+  onClick,
+  accountName
 }) => {
   return (
 
@@ -46,6 +47,12 @@ const BankListCard = ({
             <span className="value">{customerAccountNumber}</span>
           </div>
         )}
+            {accountName && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Account Name</span>
+                    <span className="value">{accountName}</span>
+                  </div>
+          )}
         {zelleEmail && (
           <div className="bank__details_grid-item">
             <span className="label">Zelle Email</span>

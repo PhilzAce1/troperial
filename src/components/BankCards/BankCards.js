@@ -15,6 +15,7 @@ const BankCards = ({
   zelleEmail,
   userId,
   currency,
+  accountName
 }) => {
   const [toggle, setToggleState] = useState(false);
   const toggleDetails = () => setToggleState(!toggle);
@@ -66,6 +67,12 @@ const BankCards = ({
                   <div className="bank__details_grid-item">
                     <span className="label">Account Number</span>
                     <span className="value">{accountNumber}</span>
+                  </div>
+                )}
+                {accountName && (
+                  <div className="bank__details_grid-item">
+                    <span className="label">Account Name</span>
+                    <span className="value">{accountName}</span>
                   </div>
                 )}
                 {externalAccountSubType && (
