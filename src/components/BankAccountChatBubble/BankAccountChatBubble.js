@@ -1,6 +1,6 @@
 import React from 'react';
 import './BankAccountChatBubble.css';
-import CurrencyFlag from 'react-currency-flags';
+// import CurrencyFlag from 'react-currency-flags';
 import { currency_titles } from '../../constants/currency_titles';
 const BankAccountChatBubble = ({
   accountNumber,
@@ -14,7 +14,7 @@ const BankAccountChatBubble = ({
   userId,
   currency,
   fromMe,
-  accountName
+  accountName,
 }) => {
   return (
     <div
@@ -25,7 +25,7 @@ const BankAccountChatBubble = ({
       }`}
     >
       <header>
-        <CurrencyFlag currency={currency} width={19} />
+        {/* <CurrencyFlag currency={currency} width={19} /> */}
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
@@ -62,12 +62,12 @@ const BankAccountChatBubble = ({
             <span className="value">{accountNumber}</span>
           </div>
         )}
-          {accountName && (
-                  <div className="bank__details_grid-item">
-                    <span className="label">Account Name</span>
-                    <span className="value">{accountName}</span>
-                  </div>
-          )}
+        {accountName && (
+          <div className="bank__details_grid-item">
+            <span className="label">Account Name</span>
+            <span className="value">{accountName}</span>
+          </div>
+        )}
         {externalAccountSubType && (
           <div className="bank__details_grid-item">
             <span className="label">Account Type</span>

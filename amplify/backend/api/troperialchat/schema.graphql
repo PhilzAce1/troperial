@@ -43,6 +43,7 @@ type Message @model(subscriptions: null, queries: null) {
   externalAccountSubType: String
   zelleEmail: String
   userId: String
+  accountName: String
   currency: String
   seen: Boolean
   by: String!

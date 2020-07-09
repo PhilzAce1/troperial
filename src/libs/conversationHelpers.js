@@ -185,6 +185,8 @@ export const sendAccountDetail = async (
     isListing: false,
     isAccountDetail: true,
     accountNumber: data.accountNumber ? data.accountNumber : 'none',
+    accountName: data.accountName ? data.accountName : 'none',
+
     bvnNumber: data.bvnNumber ? data.bvnNumber : 'none',
     primaryBank: data.primaryBank ? data.primaryBank : 'none',
     customerAccountNumber: data.customerAccountNumber
@@ -215,7 +217,6 @@ export const sendAccountDetail = async (
   }
 };
 export const updateMessageSeen = async (data) => {
-  console.log('i will be updating');
   const messageData = {
     id: data.id,
     seen: true,

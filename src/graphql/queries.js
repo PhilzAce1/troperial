@@ -32,6 +32,7 @@ export const getUser = /* GraphQL */ `
           externalAccountSubType
           zelleEmail
           userId
+          accountName
           currency
           seen
           by
@@ -93,6 +94,7 @@ export const getConvo = /* GraphQL */ `
           externalAccountSubType
           zelleEmail
           userId
+          accountName
           currency
           seen
           by

@@ -93,12 +93,13 @@ export default function (state = State, action) {
           externalAccountSubType: message.externalAccountSubType,
           primaryBank: message.primaryBank,
           routingNumber: message.routingNumber,
-          // seen: message.seen,
+          seen: message.seen !== null ? message.seen : true,
           sortCode: message.sortCode,
           updatedAt: message.updatedAt,
           userId: message.userId,
           zelleEmail: message.zelleEmail,
           authorId: message.authorId,
+          accountName: message.accountName,
           by: message.by,
           have: message.have,
           rate: message.rate,
@@ -138,8 +139,6 @@ export default function (state = State, action) {
         ...newState.selectedConversation,
       };
       newState.selectedConversation.messages.push({
-        imageUrl: null,
-        imageAlt: null,
         isListing: action.payload.isListing,
         by: action.payload.by,
         have: action.payload.have,
@@ -168,8 +167,9 @@ export default function (state = State, action) {
       const newState = { ...state };
       const convo = newState.conversations.find(
         (conversation) =>
-          conversation.id === action.payload.conversationId,
+          conversation.id === action.payload.messageConversationId,
       );
+
       if (!convo) return newState;
       if (action.payload.authorId === newState.user.id)
         return newState;
@@ -182,9 +182,43 @@ export default function (state = State, action) {
       }
       convo.messages.push({
         id: action.payload.id,
-        imageUrl: null,
-        imageAlt: null,
+
         isListing: action.payload.isListing,
+        isAccountDetail: action.payload.isAccountDetail,
+        accountNumber: action.payload.accountNumber
+          ? action.payload.accountNumber
+          : 'none',
+        bvnNumber: action.payload.bvnNumber
+          ? action.payload.bvnNumber
+          : 'none',
+        primaryBank: action.payload.primaryBank
+          ? action.payload.primaryBank
+          : 'none',
+        customerAccountNumber: action.payload.customerAccountNumber
+          ? action.payload.customerAccountNumber
+          : 'none',
+        sortCode: action.payload.sortCode
+          ? action.payload.sortCode
+          : 'none',
+        routingNumber: action.payload.routingNumber
+          ? action.payload.routingNumber
+          : 'none',
+        externalAccountSubType: action.payload.externalAccountSubType
+          ? action.payload.externalAccountSubType
+          : 'none',
+        zelleEmail: action.payload.zelleEmail
+          ? action.payload.zelleEmail
+          : 'none',
+        userId: action.payload.userId
+          ? action.payload.userId
+          : 'none',
+        currency: action.payload.currency
+          ? action.payload.currency
+          : 'none',
+        accountName: action.payload.accountName
+          ? action.payload.accountName
+          : 'none',
+
         by: action.payload.by,
         have: action.payload.have,
         rate: action.payload.rate,
@@ -221,8 +255,6 @@ export default function (state = State, action) {
 
       convo.stack.push(action.payload.stackNumber);
       convo.messages.push({
-        imageUrl: null,
-        imageAlt: null,
         isListing: action.payload.isListing,
         by: action.payload.by,
         have: action.payload.have,
@@ -319,7 +351,6 @@ export default function (state = State, action) {
     }
 
     case 'ACCONT_DETAILS_SENT': {
-      console.log(action.payload);
       const newState = { ...state };
       newState.selectedConversation = {
         ...newState.selectedConversation,
@@ -352,9 +383,14 @@ export default function (state = State, action) {
         zelleEmail: action.payload.zelleEmail
           ? action.payload.zelleEmail
           : 'none',
-        userId: action.payload.userId ? action.payload.userId : '200',
+        userId: action.payload.userId
+          ? action.payload.userId
+          : 'none',
         currency: action.payload.currency
           ? action.payload.currency
+          : 'none',
+        accountName: action.payload.accountName
+          ? action.payload.accountName
           : 'none',
         // fromMe: '200',
       });

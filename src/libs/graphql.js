@@ -78,6 +78,7 @@ export const createMessage = /* GraphQL */ `
       zelleEmail
       userId
       currency
+      accountName
       by
       have
       rate
@@ -210,6 +211,7 @@ export const getConvo = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          accountName
           userId
           currency
           seen
@@ -245,20 +247,21 @@ export const onCreateMessage = /* GraphQL */ `
   subscription OnCreateMessage($messageConversationId: ID!) {
     onCreateMessage(messageConversationId: $messageConversationId) {
       id
-      author {
-        id
-        username
-        # conversations {
-        #   nextToken
-        # }
-        # messages {
-        #   nextToken
-        # }
-        createdAt
-        updatedAt
-      }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      accountName
+      currency
+      seen
       by
       have
       rate

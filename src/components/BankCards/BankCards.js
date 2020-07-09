@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import './BankCards.css';
-import CurrencyFlag from 'react-currency-flags';
+// import CurrencyFlag from 'react-currency-flags';
 import cashApp from '../../assets/svgs/cash-app.svg';
 import zelle from '../../assets/svgs/zelle.svg';
 import { currency_titles } from '../../constants/currency_titles';
@@ -15,7 +15,7 @@ const BankCards = ({
   zelleEmail,
   userId,
   currency,
-  accountName
+  accountName,
 }) => {
   const [toggle, setToggleState] = useState(false);
   const toggleDetails = () => setToggleState(!toggle);
@@ -23,12 +23,16 @@ const BankCards = ({
     <div className="bank-card">
       <header className="bank-card-header">
         <div>
-          <CurrencyFlag currency={currency} width={19} />
-  {' '}{currency_titles[currency]}
+          {/* <CurrencyFlag currency={currency} width={19} /> */}{' '}
+          {currency_titles[currency]}
         </div>
         {zelleEmail || userId ? (
           <div>
-            <img className="platform-icon" src={zelleEmail ? zelle : cashApp} alt="platform" />
+            <img
+              className="platform-icon"
+              src={zelleEmail ? zelle : cashApp}
+              alt="platform"
+            />
           </div>
         ) : null}
       </header>

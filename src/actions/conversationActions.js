@@ -51,32 +51,10 @@ export const newMessageAdded = (textMessage) => ({
   type: 'NEW_MESSAGE_ADDED',
   payload: { textMessage },
 });
-export const newExternalMessage = (
-  conversationId,
-  textMessage,
-  createdAt,
-  isListing = false,
-  authorId,
-  id,
-  by = 'none',
-  have = 'none',
-  need = 'none',
-  rate = 'none',
-) => {
+export const newExternalMessage = (messageReceived) => {
   return {
     type: 'NEW_EXTERNAL_MESSAGE',
-    payload: {
-      createdAt,
-      isListing,
-      conversationId,
-      textMessage,
-      by,
-      have,
-      need,
-      rate,
-      authorId,
-      id,
-    },
+    payload: messageReceived,
   };
 };
 

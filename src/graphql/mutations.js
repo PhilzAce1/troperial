@@ -35,6 +35,7 @@ export const createUser = /* GraphQL */ `
           externalAccountSubType
           zelleEmail
           userId
+          accountName
           currency
           seen
           by
@@ -87,6 +88,7 @@ export const updateUser = /* GraphQL */ `
           externalAccountSubType
           zelleEmail
           userId
+          accountName
           currency
           seen
           by
@@ -139,6 +141,7 @@ export const deleteUser = /* GraphQL */ `
           externalAccountSubType
           zelleEmail
           userId
+          accountName
           currency
           seen
           by
@@ -179,6 +182,7 @@ export const createConvo = /* GraphQL */ `
           externalAccountSubType
           zelleEmail
           userId
+          accountName
           currency
           seen
           by
@@ -241,6 +245,7 @@ export const createMessage = /* GraphQL */ `
       externalAccountSubType
       zelleEmail
       userId
+      accountName
       currency
       seen
       by
@@ -299,6 +304,7 @@ export const updateMessage = /* GraphQL */ `
       externalAccountSubType
       zelleEmail
       userId
+      accountName
       currency
       seen
       by
@@ -357,6 +363,7 @@ export const deleteMessage = /* GraphQL */ `
       externalAccountSubType
       zelleEmail
       userId
+      accountName
       currency
       seen
       by

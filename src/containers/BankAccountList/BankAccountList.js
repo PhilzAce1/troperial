@@ -28,7 +28,7 @@ const BankAccountList = ({
         conversation.user.id,
         params,
       );
-      handleBankAccountList();
+      return handleBankAccountList();
     }
     if (accounts === null) {
       return <h2>Loading Bank Accounts...</h2>;
@@ -55,7 +55,7 @@ const BankAccountList = ({
                 userId={account.userId}
                 active={account.externalAccountId === chosen}
                 accountName={account.accountName}
-                onClick={() => setChosen(account.externalAccountId)}
+                onClick={() => setChosen(account)}
               />
             );
           })}

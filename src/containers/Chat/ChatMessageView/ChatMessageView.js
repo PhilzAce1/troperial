@@ -95,13 +95,13 @@ const ChatMessageView = ({
       selectedConversation.messages.length > 1
     ) {
       setTimeout(() => {
-        const lM = document.querySelector('#lastmessageb');
-        if (lM) {
-          scrollToBottom();
+        const lastMessageRef = document.querySelector('#lastmessage');
+        if (lastMessageRef) {
+          return scrollToBottom();
         } else {
-          console.log(false);
+          return;
         }
-      }, 3000);
+      }, 2000);
     }
     // if (selectedConversation.messages.some((x) => x.read === false)) {
     // }
@@ -137,58 +137,58 @@ const ChatMessageView = ({
             <BankAccountChatBubble
               accountNumber={
                 message.accountNumber === 'none' ||
-                message.accountNumber.length < 0
+                !message.accountNumber
                   ? null
                   : message.accountNumber
               }
               bvnNumber={
-                message.bvnNumber === 'none' ||
-                message.bvnNumber.length < 0
+                message.bvnNumber === 'none' || !message.bvnNumber
                   ? null
                   : message.bvnNumber
               }
               primaryBank={
-                message.primaryBank === 'none' ||
-                message.primaryBank.length < 0
+                message.primaryBank === 'none' || !message.primaryBank
                   ? null
                   : message.primaryBank
               }
               customerAccountNumber={
                 message.customerAccountNumber === 'none' ||
-                message.customerAccountNumber.length < 0
+                !message.customerAccountNumber
                   ? null
                   : message.customerAccountNumber
               }
               sortCode={
-                message.sortCode === 'none' ||
-                message.sortCode.length < 0
+                message.sortCode === 'none' || !message.sortCode
                   ? null
                   : message.sortCode
               }
               routingNumber={
                 message.routingNumber === 'none' ||
-                message.routingNumber.length < 0
+                !message.routingNumber
                   ? null
                   : message.routingNumber
               }
               externalAccountSubType={
                 message.externalAccountSubType === 'none' ||
-                message.externalAccountSubType.length < 0
+                !message.externalAccountSubType
                   ? null
                   : message.externalAccountSubType
               }
               zelleEmail={
-                message.zelleEmail === 'none' ||
-                message.zelleEmail.length < 0
+                message.zelleEmail === 'none' || !message.zelleEmail
                   ? null
                   : message.zelleEmail
               }
               // userId={xyz === 'none' || xyz.length < 0 ? null : xyz}
               currency={
-                message.currency === 'none' ||
-                message.currency.length < 0
+                message.currency === 'none' || !message.currency
                   ? null
                   : message.currency
+              }
+              accountName={
+                message.accountName === 'none' || !message.accountName
+                  ? null
+                  : message.accountName
               }
               fromMe={message.isMyMessage}
             />

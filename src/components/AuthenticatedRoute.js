@@ -14,6 +14,7 @@ import {
 import {
   newExternalMessage,
   loadMessages,
+  updateSeen,
 } from '../actions/conversationActions';
 import { findConvo } from '../containers/Chat/helpers';
 function AuthenticatedRoute({
@@ -25,7 +26,6 @@ function AuthenticatedRoute({
 }) {
   const messageLoad = useCallback(
     async (convoId) => {
-      console.log('what is going');
       try {
         const message = await getMessages(convoId);
         if (!Array.isArray(message))
@@ -52,45 +52,26 @@ function AuthenticatedRoute({
             }),
           ).subscribe({
             next: (eventData) => {
-              // console.log(eventData);
               const {
-                id,
-                authorId,
-                content,
-                messageConversationId,
-                isListing,
-                have,
-                by,
-                need,
-                rate,
-                createdAt,
-              } = eventData.value.data.onCreateMessage;
+                onCreateMessage: messageReceived,
+              } = eventData.value.data;
               const convers = findConvo(
                 conversation.conversations,
-                messageConversationId,
+                messageReceived.messageConversationId,
               );
               if (convers.convoExist) {
                 // if (
                 //   !convers.messageLoaded &&
                 //   convers.convo.messages.length <= 0
                 // ) {
-                messageLoad(messageConversationId);
+                messageLoad(messageReceived.messageConversationId);
                 // }\
-                if (conversation.user.id !== authorId) {
-                  pushNotification(content);
+                if (
+                  conversation.user.id !== messageReceived.authorId
+                ) {
+                  pushNotification(messageReceived.content);
                 }
-                newExternalMessage(
-                  messageConversationId,
-                  content,
-                  createdAt,
-                  isListing,
-                  authorId,
-                  id,
-                  by,
-                  have,
-                  need,
-                  rate,
-                );
+                newExternalMessage(messageReceived);
               }
             },
           });
@@ -105,7 +86,7 @@ function AuthenticatedRoute({
                   },
                 },
               } = eventData;
-              console.log(messageConversationId);
+              console.log('on update message is working');
             },
           });
 
@@ -151,32 +132,8 @@ const mapStateToProps = (state) => ({
   conversation: state.conversation,
 });
 const mapDispatchToProps = (dispatch) => ({
-  newExternalMessage: (
-    conversationId,
-    textMessage,
-    createdAt,
-    isListing,
-    authorId,
-    id,
-    by,
-    have,
-    need,
-    rate,
-  ) => {
-    dispatch(
-      newExternalMessage(
-        conversationId,
-        textMessage,
-        createdAt,
-        isListing,
-        authorId,
-        id,
-        by,
-        have,
-        need,
-        rate,
-      ),
-    );
+  newExternalMessage: (data) => {
+    dispatch(newExternalMessage(data));
   },
   loadMessages: (message, conversationId) =>
     dispatch(loadMessages(message, conversationId)),
