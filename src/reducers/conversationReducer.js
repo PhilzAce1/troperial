@@ -165,6 +165,7 @@ export default function (state = State, action) {
     }
     case 'NEW_EXTERNAL_MESSAGE': {
       const newState = { ...state };
+      console.log(action.payload);
       const convo = newState.conversations.find(
         (conversation) =>
           conversation.id === action.payload.messageConversationId,
@@ -218,7 +219,7 @@ export default function (state = State, action) {
         accountName: action.payload.accountName
           ? action.payload.accountName
           : 'none',
-
+        seen: action.payload.seen,
         by: action.payload.by,
         have: action.payload.have,
         rate: action.payload.rate,
@@ -394,6 +395,21 @@ export default function (state = State, action) {
           : 'none',
         // fromMe: '200',
       });
+      return newState;
+    }
+    case 'UPDATE_MESSAGE_SEEN': {
+      const newState = { ...state };
+      const convo = newState.conversations.find(
+        (conversation) =>
+          conversation.id === action.payload.messageConversationId,
+      );
+      if (!convo) return newState;
+      const messageThatWasSeen = convo.messages.find(
+        (message) => message.id === action.payload.id,
+      );
+      if (messageThatWasSeen) {
+        messageThatWasSeen.seen = true;
+      }
       return newState;
     }
     default:

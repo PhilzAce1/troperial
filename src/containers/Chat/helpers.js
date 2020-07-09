@@ -45,15 +45,17 @@ export const findConvo = (arr, convoId) => {
 
 export const markAsSeen = async (data, cb1, cb2) => {
   const { id, messages } = data;
-  const unseen = messages.filter(
-    (msg) => msg.read === false && !messages.isMyMessage,
-  );
+  const unseen = messages.filter((msg) => {
+    return !msg.seen && !messages.isMyMessage;
+  });
+
   if (unseen) {
     unseen.forEach(async (msg) => {
       const { id } = msg;
       cb1({ id });
     });
   }
+  cb2(id, true);
   // console.log(data);
   // cb2({ id });
   // cb1();

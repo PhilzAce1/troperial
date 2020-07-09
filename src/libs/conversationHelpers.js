@@ -135,6 +135,7 @@ export const createMessage = async (
     content: content,
     authorId: authorId,
     isListing: isListing,
+    seen: false,
     by,
     have,
     rate,
@@ -217,16 +218,17 @@ export const sendAccountDetail = async (
   }
 };
 export const updateMessageSeen = async (data) => {
-  const messageData = {
-    id: data.id,
-    seen: true,
-  };
-  try {
-    const updatedMessage = await API.graphql(
-      graphqlOperation(updateMessage, { input: messageData }),
-    );
-    console.log(updatedMessage);
-  } catch (e) {
-    console.log(e);
+  if (data.id) {
+    const messageData = {
+      id: data.id,
+      seen: true,
+    };
+    try {
+      await API.graphql(
+        graphqlOperation(updateMessage, { input: messageData }),
+      );
+    } catch (e) {
+      console.log(e);
+    }
   }
 };

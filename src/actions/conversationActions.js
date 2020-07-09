@@ -131,3 +131,10 @@ export const addNewAccountDetails = (data) => (dispatch) => {
     payload: data,
   });
 };
+export const updateMessageSeen = (data) => {
+  console.log(data);
+  return {
+    type: 'UPDATE_MESSAGE_SEEN',
+    payload: data,
+  };
+};

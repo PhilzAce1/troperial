@@ -74,7 +74,7 @@ const ChatMessageView = ({
       selectedConversation.messages &&
       selectedConversation.messageLoaded
     ) {
-      markAsSeen(selectedConversation, updateMessageSeen);
+      markAsSeen(selectedConversation, updateMessageSeen, updateSeen);
     }
     // updateSeen(selectedConversation.id, true);
 

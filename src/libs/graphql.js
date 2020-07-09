@@ -80,6 +80,7 @@ export const createMessage = /* GraphQL */ `
       currency
       accountName
       by
+      seen
       have
       rate
       need
@@ -329,18 +330,19 @@ export const onCreateConvoLink = /* GraphQL */ `
   subscription OnCreateConvoLink($convoLinkUserId: ID!) {
     onCreateConvoLink(convoLinkUserId: $convoLinkUserId) {
       id
-      user {
-        id
-        username
-        conversations {
-          nextToken
-        }
-        # messages {
-        #   nextToken
-        # }
-        createdAt
-        updatedAt
-      }
+      # user {
+      #   id
+      #   personId
+      #   username
+      #   conversations {
+      #     nextToken
+      #   }
+      # messages {
+      #   nextToken
+      # }
+      # createdAt
+      # updatedAt
+      # }
       convoLinkUserId
       conversation {
         id

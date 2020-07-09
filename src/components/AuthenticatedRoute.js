@@ -9,12 +9,13 @@ import { pushNotification } from '../libs/pushNotification';
 import {
   onCreateMessage as OnCreateMessage,
   onUpdateMessage as OnUpdateMessage,
-  // onCreateConvoLink,
+  onCreateConvoLink,
 } from '../libs/graphql';
 import {
   newExternalMessage,
   loadMessages,
   updateSeen,
+  updateMessageSeen,
 } from '../actions/conversationActions';
 import { findConvo } from '../containers/Chat/helpers';
 function AuthenticatedRoute({
@@ -22,6 +23,7 @@ function AuthenticatedRoute({
   conversation,
   newExternalMessage,
   loadMessages,
+  updateMessageSeen,
   ...rest
 }) {
   const messageLoad = useCallback(
@@ -37,6 +39,7 @@ function AuthenticatedRoute({
     },
     [loadMessages],
   );
+
   useEffect(() => {
     if (
       conversation &&
@@ -71,6 +74,7 @@ function AuthenticatedRoute({
                 ) {
                   pushNotification(messageReceived.content);
                 }
+                console.log('the Message received', messageReceived);
                 newExternalMessage(messageReceived);
               }
             },
@@ -82,11 +86,11 @@ function AuthenticatedRoute({
               const {
                 value: {
                   data: {
-                    onUpdateMessage: { messageConversationId },
+                    onUpdateMessage: { id, messageConversationId },
                   },
                 },
               } = eventData;
-              console.log('on update message is working');
+              updateMessageSeen({ id, messageConversationId });
             },
           });
 
@@ -97,18 +101,18 @@ function AuthenticatedRoute({
         }
       });
     }
-    // if (conversation.user && conversation.user.id) {
-    //        const subscription = API.graphql(
-    //   graphqlOperation(OnCreateConvoLink, {
-    //     convoLinkUserId: conversation.user.id,
-    //   }),
-    // ).subscribe({
-    //   next: (eventData) => {
-    //     console.log(eventData);
-    //   },
-    // });
-    // return () => subscription.unsubscribe();
-    // }
+    if (conversation.user && conversation.user.id) {
+      const subscription = API.graphql(
+        graphqlOperation(onCreateConvoLink, {
+          convoLinkUserId: conversation.user.id,
+        }),
+      ).subscribe({
+        next: (eventData) => {
+          console.log(eventData);
+        },
+      });
+      return () => subscription.unsubscribe();
+    }
     // eslint-disable-next-line
   }, [
     newExternalMessage,
@@ -137,6 +141,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadMessages: (message, conversationId) =>
     dispatch(loadMessages(message, conversationId)),
+  updateMessageSeen: (data) => dispatch(updateMessageSeen(data)),
 });
 
 export default connect(
