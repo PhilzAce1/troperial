@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import './NavBar.css';
 import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
-import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { AppContext } from '../../libs/contextLib';
 import { useHistory } from 'react-router-dom';
