@@ -161,35 +161,29 @@ export const checkUserProfile = () => async (dispatch) => {
 export const updateUserDetails = (data) => async (
   dispatch
 ) => {
-  const { firstname, lastname, username, email, phone } = data;
-
-  try {
-    const currentUserInfo = await Auth.currentUserInfo();
-    let personId = currentUserInfo.attributes['custom:personId'];
-    updateNames(firstname, lastname, username, personId);
-    dispatch(updateEmail(email, personId));
-    dispatch(updatePhone(phone, personId));
-    dispatch(getUserDetails(personId))
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const updateNames = async (
-  firstname,
-  lastname,
-  username,
-  personId,
-) => {
   const authToken = localStorage.getItem('authToken');
+  const { firstname, lastname, username, email, phone } = data;
+  const phoneDetails = parsePhoneNumberFromString(phone);
   try {
+      const currentUserInfo = await Auth.currentUserInfo();
+    let personId = currentUserInfo.attributes['custom:personId'];
     const response = await axios.patch(
-      `https://persons.api.troperial.com/persons/${personId}/name`,
+      `https://persons.api.troperial.com/persons/${personId}`,
       {
-        firstName: firstname,
-        lastName: lastname,
-        userAlias: username,
-      },
+        newName: {
+            firstName: firstname,
+            lastName: lastname,
+            userAlias: username
+        },
+        newEmail: {
+            email,
+        },
+        newPhone: {
+          country: phoneDetails.country,
+          number: phoneDetails.number,
+          countryCode: `+${phoneDetails.countryCallingCode}`,
+        },
+       },
       {
         headers: {
           Authorization: authToken,
@@ -200,66 +194,15 @@ const updateNames = async (
     await Auth.updateUserAttributes(user, {
       'custom:userName': username,
     });
-
-    console.log(response);
+    dispatch(getUserDetails(personId));
+    toast.success('Profile updated!')
+    console.log(response)
   } catch (e) {
-    console.log(e);
-  }
-};
-const updatePhone = (phone, personId) => async (
-  dispatch,
-  getState,
-) => {
-  const authToken = localStorage.getItem('authToken');
-  const { phoneId } = getState().auth;
-  console.log(phoneId);
-  const phoneDetails = parsePhoneNumberFromString(phone);
-  const { country, number, countryCallingCode } = phoneDetails;
-  try {
-    const response = await axios.patch(
-      `https://persons.api.troperial.com/persons/${personId}/phoneNumbers/${phoneId}`,
-      {
-        country,
-        number,
-        countryCode: countryCallingCode,
-      },
-      {
-        headers: {
-          Authorization: authToken,
-        },
-      },
-    );
-
-    console.log(response);
-  } catch (e) {
-    console.log(e);
+      console.log(e);
+      toast.error('Please try again!')
   }
 };
 
-const updateEmail = (email, personId) => async (
-  dispatch,
-  getState,
-) => {
-  const authToken = localStorage.getItem('authToken');
-  const { emailId } = getState().auth;
-  try {
-    const response = await axios.patch(
-      `https://persons.api.troperial.com/persons/${personId}/emailAddresses/${emailId}`,
-      {
-        email,
-      },
-      {
-        headers: {
-          Authorization: authToken,
-        },
-      },
-    );
-
-    console.log(response);
-  } catch (e) {
-    console.log(e);
-  }
-};
 // Get Accounts
 export const getAccount = (accountId) => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');

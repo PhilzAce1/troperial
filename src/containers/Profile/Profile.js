@@ -15,12 +15,13 @@ import { Auth } from 'aws-amplify';
 import axios from 'axios';
 import BackDrop from '../../components/BackDrop/BackDrop';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
+import EditBackDrop from '../../components/EditBackDrop/EditBackDrop';
 
 const Profile = () => {
   useEffect(() => {
     getUserDetails();
   }, []);
-
+  const [showEditBackDrop, setShowEditBackDrop] = useState(false);
   const [fetched, setFetched] = useState(false);
   const [controlView, setControlView] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -77,6 +78,10 @@ const Profile = () => {
     setShowDelete(!showDelete);
     setControlView(!controlView);
   };
+  const handleEditBackDrop = () => {
+    setControlView(!controlView);
+     setShowEditBackDrop(!showEditBackDrop)
+    };
 
   return (
     <Container showBackDrop={controlView}>
@@ -86,6 +91,9 @@ const Profile = () => {
       ) : null}
       {showDelete ? (
         <DeleteModal handleClose={handleDeleteModal} />
+      ) : null}
+        {showEditBackDrop ? (
+        <EditBackDrop handleEditBackDrop={handleEditBackDrop} />
       ) : null}
       <div className="listingsCustom__container">
         <AppAside />
@@ -113,7 +121,7 @@ const Profile = () => {
             </TabPanel>
             <TabPanel>
               <PaddedContainer padding="0 25px 25px 25px">
-                <History handleDeleteModal={handleDeleteModal}/>
+                <History handleEditBackDrop={handleEditBackDrop} handleDeleteModal={handleDeleteModal}/>
               </PaddedContainer>
             </TabPanel>
             <TabPanel>

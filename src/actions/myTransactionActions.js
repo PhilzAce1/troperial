@@ -3,9 +3,11 @@ import {
     APPLY_MY_FILTER,
     NOTIFY_USER,
     GET_MY_TRANSACTIONS,
-    SET_USER_TOTAL_LISTING
+    SET_USER_TOTAL_LISTING,
+    SET_EDIT_TRANSACTION
   } from './types';
   import axios from 'axios';
+  import { toast } from 'react-toastify';
   import { Auth } from 'aws-amplify';
   
   export const applyFilter = (filtered) => async (dispatch) =>
@@ -40,7 +42,38 @@ import {
       console.log(e);
     }
   };
+   export const setEditTransaction = (data) => (dispatch) => {
+     dispatch({
+       type: SET_EDIT_TRANSACTION,
+       payload: data
+     })
+   }
 
+  export const editMyTransaction = (data) => async (dispatch) => {
+    const authToken = localStorage.getItem('authToken');
+    const {accountId, transactionId, sourceAmount, destinationAmount, prefferedRate} = data;
+    try {
+      const response = await axios.post(
+        `https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transactionId}`,
+        {
+          sourceAmount,
+          destinationAmount,
+          prefferedExchangeRate: prefferedRate
+        },
+      {
+        headers: {
+          Authorization: authToken,
+        },
+      });
+      console.log(response)
+      toast.success('Your listing has been successfully updated!!')
+      console.log(data)
+    } catch(e) {
+      console.log(e)
+      toast.error('Oops, please try again!')
+    }
+
+  }
   export const setLoading = (loading) => {
     return {
       type: SET_LOADING,

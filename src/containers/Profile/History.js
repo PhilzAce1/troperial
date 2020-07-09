@@ -2,7 +2,7 @@ import React from 'react';
 import './Profile.css';
 import MyListings from '../Listings/MyListings';
 import {connect} from 'react-redux';
-const History = ({handleDeleteModal, totalListingsPosted, conversationLength}) => {
+const History = ({handleDeleteModal, totalListingsPosted, conversationLength, handleEditBackDrop}) => {
   return (
     <section className="history_container">
       <header className="stats">
@@ -28,8 +28,7 @@ const History = ({handleDeleteModal, totalListingsPosted, conversationLength}) =
       <div>
         <h2>Your Listings</h2>
       </div>
-  
-      <MyListings handleDeleteModal={handleDeleteModal}/>
+      <MyListings handleDeleteModal={handleDeleteModal} handleEditBackDrop={handleEditBackDrop}/>
     </section>
   );
 };
