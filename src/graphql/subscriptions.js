@@ -7,6 +7,7 @@ export const onCreateConvoLink = /* GraphQL */ `
       id
       user {
         id
+        personId
         username
         conversations {
           nextToken
@@ -43,6 +44,7 @@ export const onCreateMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -97,6 +99,7 @@ export const onUpdateMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -198,6 +201,7 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
       id
+      personId
       username
       conversations {
         items {
@@ -246,6 +250,7 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
       id
+      personId
       username
       conversations {
         items {
@@ -294,6 +299,7 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
       id
+      personId
       username
       conversations {
         items {

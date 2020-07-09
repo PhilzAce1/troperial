@@ -74,7 +74,7 @@ const ChatMessageView = ({
       selectedConversation.messages &&
       selectedConversation.messageLoaded
     ) {
-      markAsSeen(selectedConversation, updateSeen, updateMessageSeen);
+      markAsSeen(selectedConversation, updateMessageSeen);
     }
     // updateSeen(selectedConversation.id, true);
 
@@ -114,7 +114,7 @@ const ChatMessageView = ({
     selectedConversation,
     messageLoader,
     loadMessages,
-    selectedConversation.messages,
+    selectedConversation.messages.length,
     conversation.conversations,
     // conversation,
     // updateSeen,

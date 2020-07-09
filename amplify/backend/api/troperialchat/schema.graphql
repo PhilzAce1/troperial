@@ -1,6 +1,7 @@
 type User @model {
   # @auth(rules: [{ allow: owner, ownerField: "id", queries: null }])
   id: ID!
+  personId: String
   username: String!
   conversations: [ConvoLink] @connection(name: "UserLinks")
   messages: [Message] @connection(name: "UserMessages")

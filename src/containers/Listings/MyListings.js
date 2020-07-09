@@ -3,18 +3,54 @@ import TableContent from '../../components/TableContent/TableContent';
 import TableHead from '../../components/TableHead/TableHead';
 import { currency_symbols } from '../../constants/currency_symbols';
 import { currency_titles } from '../../constants/currency_titles';
-import { getMyTransactions } from '../../actions/myTransactionActions';
+import {
+  getMyTransactions,
+  setEditTransaction,
+} from '../../actions/myTransactionActions';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { connect } from 'react-redux';
+import { getAllRates } from '../../actions/transactionActions';
 const MyListings = ({
   getMyTransactions,
+  getAllRates,
   mySortedTransactions,
   loading,
-  handleDeleteModal 
+  handleDeleteModal,
+  handleEditBackDrop,
+  setEditTransaction,
 }) => {
   useEffect(() => {
     getMyTransactions();
-  }, [getMyTransactions]);
+    getAllRates()
+  }, [getMyTransactions, getAllRates]);
+
+  const handleEditTransaction = (
+    sourceAmount,
+    sourceCurrency,
+    destinationCurrency,
+    destinationAmount,
+    transactionState,
+    transactionId,
+    accountId,
+    personId,
+    prefferedRate,
+    privateListing,
+  ) => {
+    const data = {
+      sourceAmount,
+      sourceCurrency,
+      destinationCurrency,
+      destinationAmount,
+      transactionState,
+      transactionId,
+      accountId,
+      personId,
+      prefferedRate,
+      privateListing
+    }
+    setEditTransaction(data);
+    handleEditBackDrop();
+  };
   if (loading) {
     return (
       <div className="listings_spinner">
@@ -31,8 +67,13 @@ const MyListings = ({
             sourceAmount,
             sourceCurrency,
             destinationCurrency,
+            destinationAmount,
             transactionState,
             transactionId,
+            accountId,
+            personId,
+            prefferedRate,
+            privateListing
           } = transaction;
           return (
             <TableContent
@@ -43,6 +84,20 @@ const MyListings = ({
               userListings={true}
               key={transactionId}
               onClick={handleDeleteModal}
+              handleEditTransaction={() =>
+                handleEditTransaction(
+                  sourceAmount,
+                  sourceCurrency,
+                  destinationCurrency,
+                  destinationAmount,
+                  transactionState,
+                  transactionId,
+                  accountId,
+                  personId,
+                  prefferedRate,
+                  privateListing
+                )
+              }
             />
           );
         })}
@@ -58,4 +113,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getMyTransactions,
+  setEditTransaction,
+  getAllRates,
 })(MyListings);

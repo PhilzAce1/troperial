@@ -8,6 +8,7 @@ import { getMessages } from '../libs/conversationHelpers';
 import { pushNotification } from '../libs/pushNotification';
 import {
   onCreateMessage as OnCreateMessage,
+  onUpdateMessage as OnUpdateMessage,
   // onCreateConvoLink,
 } from '../libs/graphql';
 import {
@@ -75,7 +76,7 @@ function AuthenticatedRoute({
                 // ) {
                 messageLoad(messageConversationId);
                 // }\
-                if (!conversation.user.id === authorId) {
+                if (conversation.user.id !== authorId) {
                   pushNotification(content);
                 }
                 newExternalMessage(
@@ -93,7 +94,25 @@ function AuthenticatedRoute({
               }
             },
           });
-          return () => subscription.unsubscribe();
+          const updateMsgSub = API.graphql(
+            graphqlOperation(OnUpdateMessage),
+          ).subscribe({
+            next: (eventData) => {
+              const {
+                value: {
+                  data: {
+                    onUpdateMessage: { messageConversationId },
+                  },
+                },
+              } = eventData;
+              console.log(messageConversationId);
+            },
+          });
+
+          return () => {
+            subscription.unsubscribe();
+            updateMsgSub.unsubscribe();
+          };
         }
       });
     }

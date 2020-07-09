@@ -9,7 +9,7 @@ import {
   CREATE_TRANSACTION,
   UPDATE_PROFILE,
   CONFIRM_PROFILE_UPDATE,
-  CONFIRM_POST_LISTING
+  CONFIRM_POST_LISTING,
 } from '../../actions/types';
 import AddBankAccount from '../../containers/AddBankAccout/AddBankAccount';
 
@@ -68,7 +68,7 @@ const BackDrop = ({
 };
 const mapStateToProps = (state) => ({
   step: state.ui.step,
-  verified: state.auth.verified
+  verified: state.auth.verified,
 });
 
 BackDrop.defaultProps = {

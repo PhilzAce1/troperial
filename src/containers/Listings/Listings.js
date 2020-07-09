@@ -11,6 +11,7 @@ import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import Container from '../../components/Container/Container';
 import AppAside from '../../components/AppAside/AppAside';
 import BackDrop from '../../components/BackDrop/BackDrop';
+import EditBackDrop from '../../components/EditBackDrop/EditBackDrop';
 import AppMain from '../../components/AppMain/AppMain';
 import Banner from '../../components/Banner/Banner';
 import NavBar from '../../components/NavBar/NavBar';
@@ -34,6 +35,7 @@ const Listings = ({
   notification
 }) => {
   const [showBackDrop, setShowBackDrop] = useState(false);
+  const [showEditBackDrop, setShowEditBackDrop] = useState(false);
   const [controlView, setControlView] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,6 +59,10 @@ const Listings = ({
     setShowDelete(!showDelete);
     setControlView(!controlView);
   };
+   const handleEditBackDrop = () => {
+    setControlView(!controlView);
+     setShowEditBackDrop(!showEditBackDrop)
+    };
 
   const listSizeHandler = (value) => {
     setCurrentPage(1);
@@ -84,6 +90,9 @@ const Listings = ({
       <NavBar page="Listings" icon="icon-listings" />
       {showBackDrop ? (
         <BackDrop handleBackDrop={handleBackDrop} />
+      ) : null}
+      {showEditBackDrop ? (
+        <EditBackDrop handleEditBackDrop={handleEditBackDrop} />
       ) : null}
       {showDelete ? (
         <DeleteModal handleClose={handleDeleteModal} />
@@ -114,7 +123,7 @@ const Listings = ({
                 )}
               </TabPanel>
               <TabPanel>
-                <MyListings handleDeleteModal={handleDeleteModal} />
+                <MyListings handleDeleteModal={handleDeleteModal} handleEditBackDrop={handleEditBackDrop}/>
               </TabPanel>
             </Tabs>
           </PaddedContainer>

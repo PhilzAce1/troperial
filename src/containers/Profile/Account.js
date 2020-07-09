@@ -2,6 +2,8 @@ import React from 'react';
 import './Profile';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   checkUserProfile,
   updateUserDetails,
@@ -24,6 +26,8 @@ const Account = ({
     getUserDetails();
   }
   return (
+    <>
+    <ToastContainer/>
     <form onSubmit={handleSubmit(onSubmit)}>
       <section className="profile_container">
         <div className="grid-item headers">
@@ -196,6 +200,7 @@ const Account = ({
         </div>
       </section>
     </form>
+    </>
   );
 };
 const mapStateToProps = (state) => ({

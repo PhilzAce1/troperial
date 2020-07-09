@@ -1,4 +1,9 @@
-import React, { useEffect, useCallback, Fragment, useState } from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  Fragment,
+  useState,
+} from 'react';
 import { connect } from 'react-redux';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onCreateMessage as OnCreateMessage } from '../../libs/graphql';
@@ -30,7 +35,9 @@ const Chat = ({
   userConversations,
   user,
 }) => {
-  const [showBankAccountList, setShowBankAccountList] = useState(false);
+  const [showBankAccountList, setShowBankAccountList] = useState(
+    false,
+  );
   const getUserData = useCallback(async () => {
     // user.username = 'runo';
     try {
@@ -129,14 +136,16 @@ const Chat = ({
     selectedConversation,
   ]);
 
-  const handleBankAccountList = () => setShowBankAccountList(!showBankAccountList);
+  const handleBankAccountList = () =>
+    setShowBankAccountList(!showBankAccountList);
 
   return (
     <Fragment>
-
       <NavBar page="Messages" icon="icon-messages" />
       {showBankAccountList ? (
-        <BankAccountList handleBankAccountList={handleBankAccountList} />
+        <BankAccountList
+          handleBankAccountList={handleBankAccountList}
+        />
       ) : null}
       <div className="chat-main-container">
         <section className="chat__container">
@@ -152,7 +161,9 @@ const Chat = ({
               onMessageSubmitted={onMessageSubmitted}
               handleBankAccountList={handleBankAccountList}
             />
-            <ChatUserProfile />
+            <ChatUserProfile
+              selectedConversation={selectedConversation}
+            />
           </div>
         </section>
       </div>

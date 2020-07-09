@@ -8,6 +8,7 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
+      personId
       username
       conversations {
         items {
@@ -59,6 +60,7 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
+      personId
       username
       conversations {
         items {
@@ -110,6 +112,7 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
+      personId
       username
       conversations {
         items {
@@ -215,6 +218,7 @@ export const createMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -272,6 +276,7 @@ export const updateMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -329,6 +334,7 @@ export const deleteMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -386,6 +392,7 @@ export const createConvoLink = /* GraphQL */ `
       id
       user {
         id
+        personId
         username
         conversations {
           nextToken
@@ -425,6 +432,7 @@ export const updateConvoLink = /* GraphQL */ `
       id
       user {
         id
+        personId
         username
         conversations {
           nextToken

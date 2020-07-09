@@ -1,0 +1,52 @@
+.edit_backdrop {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	background: #fff;
+	z-index: 1000;
+}
+.edit_backdrop__content-container {
+    width: 90%;
+    margin: 0 auto;
+}
+.edit_mobile__close-btn-container {
+	margin-top: 60px;
+}
+.edit_mobile__close-btn-container button{
+	color: var(--dark-grey);
+	background: #fff;
+	border: none;
+}
+.edit_mobile__close-btn-container button i{
+	font-size: 1.2rem;
+}
+@media (min-width: 768px) {
+    .edit_backdrop {
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: flex-end;
+	}
+	.edit_backdrop__background {
+		width: 60%;
+    }
+    .edit_backdrop__content-container {
+		height: 100vh;
+		margin: 0;
+		max-width: 40%;
+		background: #fff;
+		top: 0;
+    }
+    .edit_mobile__close-btn-container {
+        display: none
+    }
+}
+
+@media (min-width:1110px) {
+	.edit_backdrop__background {
+		width: 70%;
+    }
+    .edit_backdrop__content-container {
+		max-width: 35%;
+    }
+}

@@ -14,6 +14,10 @@ let State = {
   listing: {},
   search: [],
   conversationLength: 0,
+  chatUserProfile: {
+    userProfileLoaded: false,
+    personId: '',
+  },
 };
 if (initialState.conversations.length > 0) {
   initialState.selectedConversation = initialState.conversations[1];

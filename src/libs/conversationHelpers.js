@@ -215,6 +215,7 @@ export const sendAccountDetail = async (
   }
 };
 export const updateMessageSeen = async (data) => {
+  console.log('i will be updating');
   const messageData = {
     id: data.id,
     seen: true,
