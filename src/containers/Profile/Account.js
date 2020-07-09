@@ -9,16 +9,18 @@ import {
   updateUserDetails,
 } from '../../actions/authActions';
 import { useForm } from 'react-hook-form';
-import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import InputError from '../../components/InputError/InputError';
 import { nameRegex, phoneRegex, emailRegex } from '../../constants/regex';
+import Avatar from 'react-avatar';
 const Account = ({
   userCognitoEmail,
   defaultValues,
   fetched,
   updateUserDetails,
-  getUserDetails
+  getUserDetails,
+  firstName,
+  lastName
 }) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
@@ -39,17 +41,7 @@ const Account = ({
           </p>
         </div>
         <div className="grid-item user-avatar-container">
-          <Gravatar
-            email={
-              userCognitoEmail === null
-                ? 'null@null.com'
-                : userCognitoEmail
-            }
-            size={50}
-            rating="pg"
-            default="mp"
-            className="CustomAvatar-image"
-          />
+           {firstName ? <Avatar className="CustomAvatar-image" name={`${firstName} ${lastName}`} size="50" round={true} />: <Avatar name={'*'} size="50" round={true} />}
         </div>
         <div className="grid-item headers">
           <h3 className="profile__input-data-heading">Username</h3>
@@ -205,6 +197,8 @@ const Account = ({
 };
 const mapStateToProps = (state) => ({
   userCognitoEmail: state.auth.userCognitoEmail,
+  firstName: state.auth.firstName,
+  lastName: state.auth.lastName
 });
 export default connect(mapStateToProps, {
   checkUserProfile,
