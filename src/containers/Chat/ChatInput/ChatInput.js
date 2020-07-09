@@ -169,7 +169,7 @@ const ChatInput = ({
           {showOptions && (
             <Fragment>
               <div className="quick-actions-options">
-                <button className="share-account-details">
+                <button className="share-account-details" onClick={handleBankAccountList}>
                   Share account details
                 </button>
                 <button className="update-listing-status">
