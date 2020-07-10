@@ -185,7 +185,7 @@ const ChatMessageView = ({
             />
           )}
 
-          {message.messageText && (
+          {message.messageText && message.messageText !== 'none' && (
             <ChatBubble
               fromMe={message.isMyMessage}
               createdAt={message.createdAt}
