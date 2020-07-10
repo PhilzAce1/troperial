@@ -7,6 +7,7 @@ export const onCreateConvoLink = /* GraphQL */ `
       id
       user {
         id
+        personId
         username
         conversations {
           nextToken
@@ -43,6 +44,7 @@ export const onCreateMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -55,6 +57,75 @@ export const onCreateMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      accountName
+      currency
+      seen
+      by
+      have
+      rate
+      need
+      content
+      conversation {
+        id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
+        name
+        members
+        createdAt
+        updatedAt
+      }
+      messageConversationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage {
+    onUpdateMessage {
+      id
+      author {
+        id
+        personId
+        username
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      authorId
+      isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      accountName
+      currency
+      seen
       by
       have
       rate
@@ -88,6 +159,19 @@ export const onCreateConversation = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate
@@ -120,6 +204,7 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
       id
+      personId
       username
       conversations {
         items {
@@ -136,6 +221,19 @@ export const onCreateUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate
@@ -156,6 +254,7 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
       id
+      personId
       username
       conversations {
         items {
@@ -172,6 +271,19 @@ export const onUpdateUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate
@@ -192,6 +304,7 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
       id
+      personId
       username
       conversations {
         items {
@@ -208,6 +321,19 @@ export const onDeleteUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate

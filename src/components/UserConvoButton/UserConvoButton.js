@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import dp from '../../assets/images/profile-picture.png';
+import Avatar from 'react-avatar';
+// import dp from '../../assets/images/profile-picture.png';
 import './UserConvoButton.css';
 import { connect } from 'react-redux';
 
@@ -11,6 +12,27 @@ const UserConvoButton = ({
   state,
 }) => {
   useEffect(() => {}, [conversation.messages, conversations, state]);
+  let userAvatar;
+
+  if (
+    conversation.chatUserProfile &&
+    conversation.chatUserProfile.userProfileLoaded &&
+    conversation.chatUserProfile.data
+  ) {
+    userAvatar = (
+      <Avatar
+        name={`${conversation.chatUserProfile.data.firstName} ${conversation.chatUserProfile.data.lastName}`}
+        size="25"
+        email={conversation.chatUserProfile.data.email}
+      />
+    );
+  }
+  if (
+    !conversation.chatUserProfile.userProfileLoaded &&
+    conversation.title
+  ) {
+    userAvatar = <Avatar name={`${conversation.title}`} size="25" />;
+  }
   return (
     <button
       className={`user-convo-btn ${isActive && 'active-chat'}`}
@@ -22,7 +44,14 @@ const UserConvoButton = ({
       }}
     >
       <span>
-        <img className="user-profile-picture" src={dp} alt="dp" />
+        {/* {conversation.chatUserProfile.data && (
+          <Avatar
+            name={`${conversation.chatUserProfile.data.firstName} ${selectedConversation.chatUserProfile.data.lastName}`}
+            size="150"
+            email={conversation.chatUserProfile.data.email}
+          />
+        )} */}
+        {userAvatar}
       </span>
       <span className="username">@{conversation.title}</span>
       {conversation.messages.some(

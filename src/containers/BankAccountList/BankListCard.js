@@ -14,18 +14,22 @@ const BankListCard = ({
   currency,
   active,
   onClick,
-  accountName
+  accountName,
 }) => {
   return (
-
-    <div onClick={onClick} className={`${active ? "active-bank" : ""} bankList_button bank-card`}>
+    <div
+      onClick={onClick}
+      className={`${
+        active ? 'active-bank' : ''
+      } bankList_button bank-card`}
+    >
       <header>
         <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
       <div className="bank__details-grid">
-      {userId && (
+        {userId && (
           <div className="bank__details_grid-item">
             <span className="label">User ID</span>
             <span className="value">{userId}</span>
@@ -35,9 +39,7 @@ const BankListCard = ({
         {primaryBank && (
           <div className="bank__details_grid-item">
             <span className="label">Bank</span>
-            <span className="value">
-              {primaryBank}
-            </span>
+            <span className="value">{primaryBank}</span>
           </div>
         )}
         {customerAccountNumber && (
@@ -46,12 +48,12 @@ const BankListCard = ({
             <span className="value">{customerAccountNumber}</span>
           </div>
         )}
-            {accountName && (
-                  <div className="bank__details_grid-item">
-                    <span className="label">Account Name</span>
-                    <span className="value">{accountName}</span>
-                  </div>
-          )}
+        {accountName && (
+          <div className="bank__details_grid-item">
+            <span className="label">Account Name</span>
+            <span className="value">{accountName}</span>
+          </div>
+        )}
         {zelleEmail && (
           <div className="bank__details_grid-item">
             <span className="label">Zelle Email</span>
@@ -88,13 +90,11 @@ const BankListCard = ({
             <span className="value">{sortCode}</span>
           </div>
         )}
-
-    
       </div>
     </div>
   );
 };
 BankListCard.defaultProps = {
-    currency: 'NGN'
-}
+  currency: 'NGN',
+};
 export default BankListCard;

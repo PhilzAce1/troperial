@@ -8,11 +8,13 @@ import { getMessages } from '../libs/conversationHelpers';
 import { pushNotification } from '../libs/pushNotification';
 import {
   onCreateMessage as OnCreateMessage,
+  onUpdateMessage as OnUpdateMessage,
   // onCreateConvoLink,
 } from '../libs/graphql';
 import {
   newExternalMessage,
   loadMessages,
+  updateMessageSeen,
 } from '../actions/conversationActions';
 import { findConvo } from '../containers/Chat/helpers';
 function AuthenticatedRoute({
@@ -20,11 +22,11 @@ function AuthenticatedRoute({
   conversation,
   newExternalMessage,
   loadMessages,
+  updateMessageSeen,
   ...rest
 }) {
   const messageLoad = useCallback(
     async (convoId) => {
-      console.log('what is going');
       try {
         const message = await getMessages(convoId);
         if (!Array.isArray(message))
@@ -36,6 +38,7 @@ function AuthenticatedRoute({
     },
     [loadMessages],
   );
+
   useEffect(() => {
     if (
       conversation &&
@@ -51,63 +54,62 @@ function AuthenticatedRoute({
             }),
           ).subscribe({
             next: (eventData) => {
-              // console.log(eventData);
               const {
-                id,
-                authorId,
-                content,
-                messageConversationId,
-                isListing,
-                have,
-                by,
-                need,
-                rate,
-                createdAt,
-              } = eventData.value.data.onCreateMessage;
+                onCreateMessage: messageReceived,
+              } = eventData.value.data;
               const convers = findConvo(
                 conversation.conversations,
-                messageConversationId,
+                messageReceived.messageConversationId,
               );
               if (convers.convoExist) {
                 // if (
                 //   !convers.messageLoaded &&
                 //   convers.convo.messages.length <= 0
                 // ) {
-                messageLoad(messageConversationId);
+                messageLoad(messageReceived.messageConversationId);
                 // }\
-                if (!conversation.user.id === authorId) {
-                  pushNotification(content);
+                if (
+                  conversation.user.id !== messageReceived.authorId
+                ) {
+                  pushNotification(messageReceived.content);
                 }
-                newExternalMessage(
-                  messageConversationId,
-                  content,
-                  createdAt,
-                  isListing,
-                  authorId,
-                  id,
-                  by,
-                  have,
-                  need,
-                  rate,
-                );
+                newExternalMessage(messageReceived);
               }
             },
           });
-          return () => subscription.unsubscribe();
+          const updateMsgSub = API.graphql(
+            graphqlOperation(OnUpdateMessage),
+          ).subscribe({
+            next: (eventData) => {
+              const {
+                value: {
+                  data: {
+                    onUpdateMessage: { id, messageConversationId },
+                  },
+                },
+              } = eventData;
+              updateMessageSeen({ id, messageConversationId });
+            },
+          });
+
+          return () => {
+            subscription.unsubscribe();
+            updateMsgSub.unsubscribe();
+          };
         }
       });
     }
     // if (conversation.user && conversation.user.id) {
-    //        const subscription = API.graphql(
-    //   graphqlOperation(OnCreateConvoLink, {
-    //     convoLinkUserId: conversation.user.id,
-    //   }),
-    // ).subscribe({
-    //   next: (eventData) => {
-    //     console.log(eventData);
-    //   },
-    // });
-    // return () => subscription.unsubscribe();
+    //   const subscription = API.graphql(
+    //     graphqlOperation(onCreateConvoLink, {
+    //       convoLinkUserId: conversation.user.id,
+    //     }),
+    //   ).subscribe({
+    //     next: (eventData) => {
+    //       console.log(eventData);
+    //     },
+    //   });
+    //   return () => subscription.unsubscribe();
     // }
     // eslint-disable-next-line
   }, [
@@ -132,35 +134,12 @@ const mapStateToProps = (state) => ({
   conversation: state.conversation,
 });
 const mapDispatchToProps = (dispatch) => ({
-  newExternalMessage: (
-    conversationId,
-    textMessage,
-    createdAt,
-    isListing,
-    authorId,
-    id,
-    by,
-    have,
-    need,
-    rate,
-  ) => {
-    dispatch(
-      newExternalMessage(
-        conversationId,
-        textMessage,
-        createdAt,
-        isListing,
-        authorId,
-        id,
-        by,
-        have,
-        need,
-        rate,
-      ),
-    );
+  newExternalMessage: (data) => {
+    dispatch(newExternalMessage(data));
   },
   loadMessages: (message, conversationId) =>
     dispatch(loadMessages(message, conversationId)),
+  updateMessageSeen: (data) => dispatch(updateMessageSeen(data)),
 });
 
 export default connect(

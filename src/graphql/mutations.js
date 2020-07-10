@@ -8,6 +8,7 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
+      personId
       username
       conversations {
         items {
@@ -24,6 +25,19 @@ export const createUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate
@@ -47,33 +61,47 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
+      personId
       username
-      conversations {
-        items {
-          id
-          convoLinkUserId
-          convoLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          isListing
-          by
-          have
-          rate
-          need
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      # conversations {
+      #   items {
+      #     id
+      #     convoLinkUserId
+      #     convoLinkConversationId
+      #     createdAt
+      #     updatedAt
+      #   }
+      #   nextToken
+      # }
+      # messages {
+      #   items {
+      #     id
+      #     authorId
+      #     isListing
+      #     isAccountDetail
+      #     accountNumber
+      #     bvnNumber
+      #     primaryBank
+      #     customerAccountNumber
+      #     sortCode
+      #     routingNumber
+      #     externalAccountSubType
+      #     zelleEmail
+      #     userId
+      #     accountName
+      #     currency
+      #     seen
+      #     by
+      #     have
+      #     rate
+      #     need
+      #     content
+      #     messageConversationId
+      #     createdAt
+      #     updatedAt
+      #   }
+      #   nextToken
+      # }
       createdAt
       updatedAt
     }
@@ -86,6 +114,7 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
+      personId
       username
       conversations {
         items {
@@ -102,6 +131,19 @@ export const deleteUser = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate
@@ -130,6 +172,19 @@ export const createConvo = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate
@@ -167,6 +222,7 @@ export const createMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -179,6 +235,19 @@ export const createMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      accountName
+      currency
+      seen
       by
       have
       rate
@@ -212,6 +281,7 @@ export const updateMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -224,6 +294,19 @@ export const updateMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      accountName
+      currency
+      seen
       by
       have
       rate
@@ -257,6 +340,7 @@ export const deleteMessage = /* GraphQL */ `
       id
       author {
         id
+        personId
         username
         conversations {
           nextToken
@@ -269,6 +353,19 @@ export const deleteMessage = /* GraphQL */ `
       }
       authorId
       isListing
+      isAccountDetail
+      accountNumber
+      bvnNumber
+      primaryBank
+      customerAccountNumber
+      sortCode
+      routingNumber
+      externalAccountSubType
+      zelleEmail
+      userId
+      accountName
+      currency
+      seen
       by
       have
       rate
@@ -302,6 +399,7 @@ export const createConvoLink = /* GraphQL */ `
       id
       user {
         id
+        personId
         username
         conversations {
           nextToken
@@ -341,6 +439,7 @@ export const updateConvoLink = /* GraphQL */ `
       id
       user {
         id
+        personId
         username
         conversations {
           nextToken

@@ -11,11 +11,16 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import ChatBubble from '../../../components/ChatBubble/ChatBubble';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { connect } from 'react-redux';
-import { getMessages } from '../../../libs/conversationHelpers';
+import {
+  getMessages,
+  updateMessageSeen,
+} from '../../../libs/conversationHelpers';
 // import ListingCard from '../../../components/ListingCard';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import EmptyChatView from '../../../components/EmptyChatView/EmptyChatView';
+import BankAccountChatBubble from '../../../components/BankAccountChatBubble/BankAccountChatBubble';
+import { markAsSeen } from '../helpers';
 import {
   loadMessages,
   updateSeen,
@@ -28,7 +33,6 @@ const ChatMessageView = ({
   loadMessages,
   conversation,
   updateSeen,
-  state,
   handleBankAccountList,
 }) => {
   const lastMessage = useRef(null);
@@ -36,13 +40,13 @@ const ChatMessageView = ({
   const scrollToBottom = () => {
     const lM = document.querySelector('#lastmessage');
     if (lM) {
-      lastMessage.current.scrollIntoView({
+      return lastMessage.current.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
         inline: 'start',
       });
     } else {
-      console.log(false);
+      return;
     }
   };
   const messageLoader = useCallback(async (fn1, id) => {
@@ -61,9 +65,15 @@ const ChatMessageView = ({
     }
   }, []);
   // const messageRead = useCallback((arr, cb) => {}, []);
-
   useEffect(() => {
-    updateSeen(selectedConversation.id, true);
+    if (
+      selectedConversation &&
+      selectedConversation.messages &&
+      selectedConversation.messageLoaded
+    ) {
+      markAsSeen(selectedConversation, updateMessageSeen, updateSeen);
+    }
+    // updateSeen(selectedConversation.id, true);
 
     if (
       selectedConversation &&
@@ -72,7 +82,6 @@ const ChatMessageView = ({
       selectedConversation.messages.length <= 0 &&
       selectedConversation.id
     ) {
-      // console.log(selectedConversation.messageLoaded);
       messageLoader(loadMessages, selectedConversation.id);
     }
 
@@ -82,26 +91,21 @@ const ChatMessageView = ({
       selectedConversation.messages.length > 1
     ) {
       setTimeout(() => {
-        const lM = document.querySelector('#lastmessageb');
-        if (lM) {
-          scrollToBottom();
+        const lastMessageRef = document.querySelector('#lastmessage');
+        if (lastMessageRef) {
+          return scrollToBottom();
         } else {
-          console.log(false);
+          return;
         }
-      }, 3000);
+      }, 2000);
     }
-    // if (selectedConversation.messages.some((x) => x.read === false)) {
-    // }
-    // check if there are unread messages
-    // change the unread messages to read
-    // messageRead();
     // eslint-disable-next-line
   }, [
     selectedConversation.id,
     selectedConversation,
     messageLoader,
     loadMessages,
-    selectedConversation.messages,
+    selectedConversation.messages.length,
     conversation.conversations,
     // conversation,
     // updateSeen,
@@ -120,12 +124,75 @@ const ChatMessageView = ({
               fromMe={message.isMyMessage}
             />
           )}
-          <ChatBubble
-            fromMe={message.isMyMessage}
-            createdAt={message.createdAt}
-          >
-            {message.messageText}
-          </ChatBubble>
+          {message.isAccountDetail && (
+            <BankAccountChatBubble
+              accountNumber={
+                message.accountNumber === 'none' ||
+                !message.accountNumber
+                  ? null
+                  : message.accountNumber
+              }
+              bvnNumber={
+                message.bvnNumber === 'none' || !message.bvnNumber
+                  ? null
+                  : message.bvnNumber
+              }
+              primaryBank={
+                message.primaryBank === 'none' || !message.primaryBank
+                  ? null
+                  : message.primaryBank
+              }
+              customerAccountNumber={
+                message.customerAccountNumber === 'none' ||
+                !message.customerAccountNumber
+                  ? null
+                  : message.customerAccountNumber
+              }
+              sortCode={
+                message.sortCode === 'none' || !message.sortCode
+                  ? null
+                  : message.sortCode
+              }
+              routingNumber={
+                message.routingNumber === 'none' ||
+                !message.routingNumber
+                  ? null
+                  : message.routingNumber
+              }
+              externalAccountSubType={
+                message.externalAccountSubType === 'none' ||
+                !message.externalAccountSubType
+                  ? null
+                  : message.externalAccountSubType
+              }
+              zelleEmail={
+                message.zelleEmail === 'none' || !message.zelleEmail
+                  ? null
+                  : message.zelleEmail
+              }
+              // userId={xyz === 'none' || xyz.length < 0 ? null : xyz}
+              currency={
+                message.currency === 'none' || !message.currency
+                  ? null
+                  : message.currency
+              }
+              accountName={
+                message.accountName === 'none' || !message.accountName
+                  ? null
+                  : message.accountName
+              }
+              fromMe={message.isMyMessage}
+            />
+          )}
+
+          {message.messageText && message.messageText !== 'none' && (
+            <ChatBubble
+              fromMe={message.isMyMessage}
+              createdAt={message.createdAt}
+            >
+              {message.messageText}
+            </ChatBubble>
+          )}
         </div>
       );
     });
@@ -183,6 +250,7 @@ const ChatMessageView = ({
   ) {
     return <EmptyChatView />;
   }
+  // const xyz = '200';
   return (
     <section className="message__view">
       <header className="message__view--header">

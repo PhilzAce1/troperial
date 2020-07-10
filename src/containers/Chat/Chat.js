@@ -1,9 +1,12 @@
-import React, { useEffect, useCallback, Fragment, useState } from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  Fragment,
+  useState,
+} from 'react';
 import { connect } from 'react-redux';
-import { API, graphqlOperation } from 'aws-amplify';
-import { onCreateMessage as OnCreateMessage } from '../../libs/graphql';
-// import { API, graphqlOperation } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
 import ChatMessageView from './ChatMessageView/ChatMessageView';
 import ChatUserProfile from './ChatUserProfile/ChatUserProfile';
@@ -30,7 +33,9 @@ const Chat = ({
   userConversations,
   user,
 }) => {
-  const [showBankAccountList, setShowBankAccountList] = useState(false);
+  const [showBankAccountList, setShowBankAccountList] = useState(
+    false,
+  );
   const getUserData = useCallback(async () => {
     // user.username = 'runo';
     try {
@@ -87,41 +92,6 @@ const Chat = ({
   ]);
   useEffect(() => {
     getUserData();
-    // if (selectedConversation && selectedConversation.id) {
-    const subscription = API.graphql(
-      graphqlOperation(OnCreateMessage, {
-        messageConversationId: selectedConversation.id,
-      }),
-    ).subscribe({
-      next: (eventData) => {
-        // const {
-        //   id,
-        //   authorId,
-        //   content,
-        //   messageConversationId,
-        //   isListing,
-        //   have,
-        //   by,
-        //   need,
-        //   rate,
-        //   createdAt,
-        // } = eventData.value.data.onCreateMessage;
-        // if (conversation.user.id === authorId)
-        // newExternalMessage(
-        //   messageConversationId,
-        //   content,
-        //   createdAt,
-        //   isListing,
-        //   authorId,
-        //   by,
-        //   have,
-        //   need,
-        //   rate,
-        // );
-      },
-    });
-
-    return () => subscription.unsubscribe();
   }, [
     conversation.user.id,
     getUserData,
@@ -129,16 +99,23 @@ const Chat = ({
     selectedConversation,
   ]);
 
-  const handleBankAccountList = () => setShowBankAccountList(!showBankAccountList);
+  const handleBankAccountList = () =>
+    setShowBankAccountList(!showBankAccountList);
 
   return (
     <Fragment>
-
       <NavBar page="Messages" icon="icon-messages" />
       {showBankAccountList ? (
-        <BankAccountList handleBankAccountList={handleBankAccountList} />
+        <BankAccountList
+          handleBankAccountList={handleBankAccountList}
+        />
       ) : null}
       <div className="chat-main-container">
+       {/* Preloader */}
+        {/* <div style={{height:'100vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
+      <ScaleLoader size={150} color={'#0383ef'} loading={true} />
+        </div> */}
+        {/* End of Preloader */}
         <section className="chat__container">
           <div className="chat-grid-container">
             <ChatConversationList
@@ -152,7 +129,9 @@ const Chat = ({
               onMessageSubmitted={onMessageSubmitted}
               handleBankAccountList={handleBankAccountList}
             />
-            <ChatUserProfile />
+            <ChatUserProfile
+              selectedConversation={selectedConversation}
+            />
           </div>
         </section>
       </div>
