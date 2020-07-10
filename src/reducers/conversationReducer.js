@@ -55,6 +55,10 @@ export default function (state = State, action) {
           messages: [],
           stack: [],
           lastMessage: {},
+          chatUserProfile: {
+            userProfileLoaded: false,
+            personId: '',
+          },
         });
       });
       const filteredConvo = filterDup(
@@ -240,6 +244,10 @@ export default function (state = State, action) {
         title: action.payload.members,
         messages: [],
         stack: [],
+        chatUserProfile: {
+          userProfileLoaded: false,
+          personId: '',
+        },
       });
       newState.conversationLength = newState.conversations.length;
 
@@ -410,6 +418,16 @@ export default function (state = State, action) {
       if (messageThatWasSeen) {
         messageThatWasSeen.seen = true;
       }
+      return newState;
+    }
+    case 'UPDATE_USER_PROFILE': {
+      const newState = { ...state };
+      const convo = newState.conversations.find(
+        (conversation) => conversation.id === action.payload.convoId,
+      );
+      if (!convo) return newState;
+      convo.chatUserProfile.userProfileLoaded = true;
+      convo.chatUserProfile.data = action.payload;
       return newState;
     }
     default:

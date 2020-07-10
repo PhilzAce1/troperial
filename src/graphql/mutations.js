@@ -63,45 +63,45 @@ export const updateUser = /* GraphQL */ `
       id
       personId
       username
-      conversations {
-        items {
-          id
-          convoLinkUserId
-          convoLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          isListing
-          isAccountDetail
-          accountNumber
-          bvnNumber
-          primaryBank
-          customerAccountNumber
-          sortCode
-          routingNumber
-          externalAccountSubType
-          zelleEmail
-          userId
-          accountName
-          currency
-          seen
-          by
-          have
-          rate
-          need
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      # conversations {
+      #   items {
+      #     id
+      #     convoLinkUserId
+      #     convoLinkConversationId
+      #     createdAt
+      #     updatedAt
+      #   }
+      #   nextToken
+      # }
+      # messages {
+      #   items {
+      #     id
+      #     authorId
+      #     isListing
+      #     isAccountDetail
+      #     accountNumber
+      #     bvnNumber
+      #     primaryBank
+      #     customerAccountNumber
+      #     sortCode
+      #     routingNumber
+      #     externalAccountSubType
+      #     zelleEmail
+      #     userId
+      #     accountName
+      #     currency
+      #     seen
+      #     by
+      #     have
+      #     rate
+      #     need
+      #     content
+      #     messageConversationId
+      #     createdAt
+      #     updatedAt
+      #   }
+      #   nextToken
+      # }
       createdAt
       updatedAt
     }

@@ -10,7 +10,7 @@ import {
   getUser,
   updateMessage,
 } from './graphql';
-export const createUser = async (username) => {
+export const createUser = async (username, personId = null) => {
   // TODO createCurrent User should be different from createUser
   // make api request with the id and username to see if user exist
 
@@ -34,8 +34,11 @@ export const createUser = async (username) => {
     const {
       data: { createUser: item },
     } = await API.graphql(
-      graphqlOperation(CreateUser, { input: { username: newUser } }),
+      graphqlOperation(CreateUser, {
+        input: { username: newUser, personId: personId },
+      }),
     );
+    console.log(item);
     return { success: true, payload: item };
   } catch (e) {
     console.log(e);

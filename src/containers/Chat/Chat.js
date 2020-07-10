@@ -94,41 +94,6 @@ const Chat = ({
   ]);
   useEffect(() => {
     getUserData();
-    // if (selectedConversation && selectedConversation.id) {
-    const subscription = API.graphql(
-      graphqlOperation(OnCreateMessage, {
-        messageConversationId: selectedConversation.id,
-      }),
-    ).subscribe({
-      next: (eventData) => {
-        // const {
-        //   id,
-        //   authorId,
-        //   content,
-        //   messageConversationId,
-        //   isListing,
-        //   have,
-        //   by,
-        //   need,
-        //   rate,
-        //   createdAt,
-        // } = eventData.value.data.onCreateMessage;
-        // if (conversation.user.id === authorId)
-        // newExternalMessage(
-        //   messageConversationId,
-        //   content,
-        //   createdAt,
-        //   isListing,
-        //   authorId,
-        //   by,
-        //   have,
-        //   need,
-        //   rate,
-        // );
-      },
-    });
-
-    return () => subscription.unsubscribe();
   }, [
     conversation.user.id,
     getUserData,

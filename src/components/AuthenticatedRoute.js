@@ -74,7 +74,6 @@ function AuthenticatedRoute({
                 ) {
                   pushNotification(messageReceived.content);
                 }
-                console.log('the Message received', messageReceived);
                 newExternalMessage(messageReceived);
               }
             },

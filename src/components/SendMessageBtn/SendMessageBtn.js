@@ -35,8 +35,6 @@ function SendMessageBtn({
   handleBackDrop,
   step,
 }) {
-  console.log(personId);
-  console.log('state is ', state);
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
@@ -62,7 +60,6 @@ function SendMessageBtn({
       userDetails(id, username);
       // update store with the conversations of the user
       setTimeout(() => {
-        console.log(username);
         userConversations(conversations, username);
       }, 1500);
     } catch (e) {
@@ -98,7 +95,7 @@ function SendMessageBtn({
         return console.log('user is trying to message himsef');
       }
       // create the otheruser or get details if he exists
-      let otherUser = await createUser(by);
+      let otherUser = await createUser(by, personId);
       otherUser = { ...otherUser }.payload;
       let convoExist = await conversationExist(
         currentUser.id,

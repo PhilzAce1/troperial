@@ -173,6 +173,8 @@ export const listUsers = /* GraphQL */ `
       items {
         id
         username
+        personId
+
         conversations {
           items {
             conversation {

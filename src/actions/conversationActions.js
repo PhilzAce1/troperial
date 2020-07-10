@@ -132,9 +132,15 @@ export const addNewAccountDetails = (data) => (dispatch) => {
   });
 };
 export const updateMessageSeen = (data) => {
-  console.log(data);
   return {
     type: 'UPDATE_MESSAGE_SEEN',
+    payload: data,
+  };
+};
+
+export const updateUserProfile = (data) => {
+  return {
+    type: 'UPDATE_USER_PROFILE',
     payload: data,
   };
 };
