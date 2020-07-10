@@ -15,6 +15,7 @@ import {
   getMessages,
   updateMessageSeen,
 } from '../../../libs/conversationHelpers';
+import Avatar from 'react-avatar';
 // import ListingCard from '../../../components/ListingCard';
 import ListingChatBubble from '../../../components/ListingChatBubble/ListingChatBubble';
 import ScaleLoader from 'react-spinners/ScaleLoader';
@@ -227,14 +228,41 @@ const ChatMessageView = ({
       </div>
     );
   }
+  let userAvatar;
+
+  if (
+    selectedConversation &&
+    selectedConversation.chatUserProfile &&
+    selectedConversation.chatUserProfile.userProfileLoaded &&
+    selectedConversation.chatUserProfile.data
+  ) {
+    userAvatar = (
+      <Avatar
+        name={`${selectedConversation.chatUserProfile.data.firstName} ${selectedConversation.chatUserProfile.data.lastName}`}
+        size="32"
+        email={selectedConversation.chatUserProfile.data.email}
+        round={true}
+      />
+    );
+  }
+  if (
+    selectedConversation &&
+    selectedConversation.chatUserProfile &&
+    !selectedConversation.chatUserProfile.userProfileLoaded &&
+    selectedConversation.title
+  ) {
+    userAvatar = (
+      <Avatar
+        name={`${selectedConversation.title}`}
+        size="32"
+        round={true}
+      />
+    );
+  }
   const userheaderTitle = () => {
     return (
       <button className="user__header-title">
-        <img
-          className="user__header-temporary-dp"
-          src={dp}
-          alt="dp"
-        />
+        {userAvatar}
         <span className="user__header-username">
           {selectedConversation.title
             ? `${selectedConversation.title}`

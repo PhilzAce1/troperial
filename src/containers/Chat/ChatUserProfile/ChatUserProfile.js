@@ -106,6 +106,7 @@ const ChatUserProfile = ({
           }}
         >
           <Avatar
+            round={true}
             name={`${selectedConversation.chatUserProfile.data.firstName} ${selectedConversation.chatUserProfile.data.lastName}`}
             size="150"
             email={selectedConversation.chatUserProfile.data.email}
