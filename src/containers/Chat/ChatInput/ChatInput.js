@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { createMessage } from '../../../libs/conversationHelpers';
+import close from '../../../assets/images/Close.png';
 // import { onCreateMessage as OnCreateMessage } from '../../../libs/graphql';
 // import { createMessage as CreateMessage } from '../../../graphql/mutations';
 // import { API, graphqlOperation } from 'aws-amplify';
@@ -25,6 +26,7 @@ const ChatInput = ({
   updateMessageStack,
   sortConversation,
   handleBankAccountList,
+  handleCloseTrade,
   state,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -110,39 +112,27 @@ const ChatInput = ({
       setTimeout(() => {
         return sortConversation();
       }, 2500);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
+    <>
+      <div className="reminder">
+        <p>Looks like you've both shared account details. update the status of this transaction?</p> <img src={close} alt="close"/> 
+      </div>
     <div className="chat__input">
       {listing !== undefined && listing.open && (
         <div className="chat__input-listing">
           <ListingCard listing={listing} />
-          {/* listings card */}
-          {/* UNCOMMENT TO USE AND MANIPULATE */}
-          {/* <div className="chat__input-listing">
-          <ListingCard have="NGN200" need="US Dollars" by="Runo" />
-      </div> */}
-          {/* end of listings card */}
         </div>
       )}
-
-      {/* <div className="chat__input-field-container">
-        <input
-          type="text"
-          placeholder="send messsage to @gidigbi"
-          className="chat__input-field"
-        />
-        <button className="send-message-btn">
-          <span className="large-screen-send">send</span>{' '}
-          <img src={sendIcon} alt="send icon" />
-        </button>
-      </div> */}
-      {/* <div className="chat__input-field-container"> */}
       <form
         className="chat__input-field-container"
         onSubmit={handleSubmit}
       >
+        
         <input
           type="text"
           placeholder={`send messsage to ${user ? user : ''}`}
@@ -172,7 +162,7 @@ const ChatInput = ({
                 <button className="share-account-details" onClick={handleBankAccountList}>
                   Share account details
                 </button>
-                <button className="update-listing-status">
+                <button className="update-listing-status" onClick={handleCloseTrade}>
                   Update listing status
                 </button>
               </div>
@@ -191,13 +181,14 @@ const ChatInput = ({
             >
               Share account details
             </button>
-            <button className="update-listing">
+            <button className="update-listing" onClick={handleCloseTrade}>
               Update listing status
             </button>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

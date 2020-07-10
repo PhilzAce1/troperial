@@ -1,0 +1,74 @@
+.update_listing_status {
+    text-align: center;
+}
+.update_listing_status .title {
+    color: #01A954;
+}
+.update_listing_status .message {
+    font-size: 1.2rem;
+}
+.update_listing_status .close {
+    background: none;
+    border: none;
+    color: var(--troperial-blue);
+    outline: transparent;
+    cursor: pointer;
+}
+.closeTrade_modal-bg {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	background: #fff;
+	z-index: 1000;
+}
+.closeTrade_bank-list {
+    background: transparent;
+    outline: transparent;
+    border: none;
+}
+.closeBtn_container {
+    text-align: right;
+}
+.closeTrade-modal {
+    background: #fff;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.closeTrade_close {
+    cursor: pointer;
+    background: transparent;
+    outline: transparent;
+    border: none !important;
+}
+
+   
+
+@media (min-width: 768px) {
+    .closeTrade_modal-bg {
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.5);
+        display: flex;  
+        justify-content: center;
+        align-items: center;
+    }
+    .closeTrade-modal {
+        width: 25%;
+        margin: 0 auto;
+        max-height: 80vh;
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 10px;
+    }
+}
+
+@media (min-width:1110px) {
+    .closeTrade_modal-bg {
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.5);
+        display: flex;  
+        justify-content: center;
+        align-items: center;
+    }
+
+}

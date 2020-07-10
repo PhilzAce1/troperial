@@ -41,7 +41,7 @@
      box-sizing: border-box;
  }
 
-.chat-feed::-webkit-scrollbar {
+.chat-feed::-webkit-scrollbar{
 	display: none;
 }
 

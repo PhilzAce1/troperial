@@ -35,6 +35,7 @@ const ChatMessageView = ({
   conversation,
   updateSeen,
   handleBankAccountList,
+  handleCloseTrade
 }) => {
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -305,6 +306,7 @@ const ChatMessageView = ({
           user={selectedConversation.title}
           scrollToBottom={scrollToBottom}
           handleBankAccountList={handleBankAccountList}
+          handleCloseTrade={handleCloseTrade}
         />
       </section>
     </section>

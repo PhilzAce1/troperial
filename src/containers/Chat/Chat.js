@@ -22,6 +22,7 @@ import './Chat.css';
 
 import NavBar from '../../components/NavBar/NavBar';
 import BankAccountList from '../BankAccountList/BankAccountList';
+import CloseTrade from '../../components/CloseTrade/CloseTrade';
 const Chat = ({
   conversations,
   selectedConversation,
@@ -34,6 +35,9 @@ const Chat = ({
   user,
 }) => {
   const [showBankAccountList, setShowBankAccountList] = useState(
+    false,
+  );
+  const [showCloseTrade, setShowCloseTrade] = useState(
     false,
   );
   const getUserData = useCallback(async () => {
@@ -102,12 +106,21 @@ const Chat = ({
   const handleBankAccountList = () =>
     setShowBankAccountList(!showBankAccountList);
 
+    const handleCloseTrade = () => {
+      setShowCloseTrade(!showCloseTrade);
+    }
+
   return (
     <Fragment>
       <NavBar page="Messages" icon="icon-messages" />
       {showBankAccountList ? (
         <BankAccountList
           handleBankAccountList={handleBankAccountList}
+        />
+      ) : null}
+      {showCloseTrade ? (
+        <CloseTrade
+        handleCloseTrade={handleCloseTrade}
         />
       ) : null}
       <div className="chat-main-container">
@@ -128,6 +141,7 @@ const Chat = ({
               selectedConversation={selectedConversation}
               onMessageSubmitted={onMessageSubmitted}
               handleBankAccountList={handleBankAccountList}
+              handleCloseTrade={handleCloseTrade}
             />
             <ChatUserProfile
               selectedConversation={selectedConversation}
