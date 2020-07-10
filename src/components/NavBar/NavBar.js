@@ -2,12 +2,20 @@ import React, { useState, useContext } from 'react';
 import './NavBar.css';
 import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/images/Logo.png';
-import Gravatar from 'react-gravatar'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { AppContext } from '../../libs/contextLib';
 import { useHistory } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
+import Avatar from 'react-avatar';
+const NavBar = ({
+  page,
+  icon,
+  userCognitoEmail,
+  username,
+  profileUpdated,
+  firstName,
+  lastName
+}) => {
   const history = useHistory();
   const { userHasAuthenticated } = useContext(AppContext);
   const [menu, setMenu] = useState(false);
@@ -19,8 +27,8 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
     await Auth.signOut();
     userHasAuthenticated(false);
     localStorage.removeItem('authToken');
-    if(localStorage.getItem('unAuthenticatedUserListing')){
-      localStorage.removeItem('unAuthenticatedUserListing')
+    if (localStorage.getItem('unAuthenticatedUserListing')) {
+      localStorage.removeItem('unAuthenticatedUserListing');
     }
     history.push('/');
   }
@@ -29,13 +37,13 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
       {/* large screen nav bar */}
       <section className="largeScreen__container">
         <div className="largeScreen__logoContainer">
-        <Link to="/listings">
-        <img
-            className="largeScreen__logo"
-            src={logo}
-            alt="troperial logo"
-          />
-        </Link>
+          <Link to="/listings">
+            <img
+              className="largeScreen__logo"
+              src={logo}
+              alt="troperial logo"
+            />
+          </Link>
         </div>
         <div className="largeScreen-links">
           <NavLink
@@ -43,34 +51,40 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
             className="nav-link"
             to="/listings"
           >
-             <span className="icon icon-listings"></span> Listings
+            <span className="icon icon-listings"></span> Listings
           </NavLink>
-         {profileUpdated && (
+          {profileUpdated && (
             <NavLink
-            activeClassName="is-active"
-            className="nav-link"
-            to="/messages"
-          >
-            <span className="icon icon-messages"></span> messages
-          </NavLink>
-         )}
+              activeClassName="is-active"
+              className="nav-link"
+              to="/messages"
+            >
+              <span className="icon icon-messages"></span> messages
+            </NavLink>
+          )}
           <NavLink
             activeClassName="is-active"
             className="nav-link"
             to="/notifications"
           >
-             <span className="icon icon-notifications"></span> notifications
+            <span className="icon icon-notifications"></span>{' '}
+            notifications
           </NavLink>
         </div>
         <div className="profile-container">
-        <NavLink
+          <NavLink
             activeClassName="profile-is-active"
             className="profile_nav-link"
             to="/profile"
           >
-             <Gravatar email={userCognitoEmail} size={22} rating="pg" default="monsterid" className="largeScreen__profile" />
+          
             <span>
-              {username &&  <span className="navbar-username">{username}</span>}<i className="fas fa-caret-down"></i>
+            {firstName ? <Avatar name={`${firstName} ${lastName}`} size="25" round={true} />: <Avatar name={'*'} size="25" round={true} />}
+              {username && (
+                <span className="navbar-username">{username}</span>
+              )}
+
+              <i className="fas fa-caret-down"></i>
             </span>
           </NavLink>
           <div className="border"></div>
@@ -91,9 +105,7 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
             </h4>
           </div>
           <div className="smallScreen__profileContainer">
-    
-            <Gravatar email={userCognitoEmail === null ? 'null@null.com': userCognitoEmail} size={22} rating="pg" default="mp" className="smallScreen__profile" />
-  
+          {firstName ? <Avatar name={`${firstName} ${lastName}`} size="25" round={true} />: <Avatar name={'*'} size="25" round={true} />}
           </div>
         </div>
         {/* navigation links */}
@@ -106,15 +118,15 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
             >
               Listings
             </NavLink>
-           {profileUpdated && (
-               <NavLink
-               activeClassName="is-active"
-               className="nav-link"
-               to="/messages"
-             >
-               messages
-             </NavLink>
-           )}
+            {profileUpdated && (
+              <NavLink
+                activeClassName="is-active"
+                className="nav-link"
+                to="/messages"
+              >
+                messages
+              </NavLink>
+            )}
             <NavLink
               activeClassName="is-active"
               className="nav-link"
@@ -129,10 +141,10 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
             >
               Profile
             </NavLink>
-          <div className="small_screen-horizonal-line"></div>
+            <div className="small_screen-horizonal-line"></div>
             <button
-             onClick={handleLogout}
-             className="navigation-logout-btn"
+              onClick={handleLogout}
+              className="navigation-logout-btn"
             >
               Logout
             </button>
@@ -146,6 +158,8 @@ const NavBar = ({ page, icon, userCognitoEmail, username, profileUpdated}) => {
 const mapStateToProps = (state) => ({
   userCognitoEmail: state.auth.userCognitoEmail,
   username: state.auth.userName,
-  profileUpdated: state.auth.profileUpdated
+  firstName: state.auth.firstName,
+  lastName: state.auth.lastName,
+  profileUpdated: state.auth.profileUpdated,
 });
-export default connect(mapStateToProps, null)(NavBar)
+export default connect(mapStateToProps, null)(NavBar);

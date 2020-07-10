@@ -1,6 +1,5 @@
 import React from 'react';
 import './BankAccountChatBubble.css';
-// import CurrencyFlag from 'react-currency-flags';
 import { currency_titles } from '../../constants/currency_titles';
 const BankAccountChatBubble = ({
   accountNumber,
@@ -25,7 +24,7 @@ const BankAccountChatBubble = ({
       }`}
     >
       <header>
-        {/* <CurrencyFlag currency={currency} width={19} /> */}
+      <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
