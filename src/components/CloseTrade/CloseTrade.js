@@ -25,7 +25,7 @@ const CloseTrade = ({
             <img src={greenCheck} alt="green check"/>
   <p className="message">Have you successfully exchanged currencies with @{user}</p>
             <CustomButton loading={false}>Yes, Mark Trade as complete</CustomButton>
-            <button className="close">No exchange was carried out</button>
+            <button className="close" onClick={handleCloseTrade}>No exchange was carried out</button>
         </section>
       </div>
     </div>
