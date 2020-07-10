@@ -17,6 +17,7 @@ const BankAccountList = ({
   conversation,
 }) => {
   const [chosen, setChosen] = useState();
+  const [details, setDetails] = useState();
   useEffect(() => {
     getAccount(accountId);
   }, [getAccount, accountId]);
@@ -55,13 +56,16 @@ const BankAccountList = ({
                 userId={account.userId}
                 active={account.externalAccountId === chosen}
                 accountName={account.accountName}
-                onClick={() => setChosen(account)}
+                onClick={() => {
+                  setChosen(account.externalAccountId);
+                  setDetails(account);
+                }}
               />
             );
           })}
           <CustomButton
             loading={false}
-            onClickHandler={() => testOnClick(chosen)}
+            onClickHandler={() => testOnClick(details)}
           >
             Send Bank Details
           </CustomButton>
