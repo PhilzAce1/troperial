@@ -6,7 +6,7 @@ import Avatar from 'react-avatar';
 import updater from './helper';
 import './ChatUserProfile.css';
 import { updateUserProfile } from '../../../actions/conversationActions';
-import dp from '../../../assets/images/profile-picture.png';
+// import dp from '../../../assets/images/profile-picture.png';
 // import { updateUserDetails } from '../../../actions/authActions';
 const ChatUserProfile = ({
   username,
