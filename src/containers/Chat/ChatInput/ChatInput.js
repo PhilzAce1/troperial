@@ -25,6 +25,7 @@ const ChatInput = ({
   updateMessageStack,
   sortConversation,
   handleBankAccountList,
+  handleCloseTrade,
   state,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -172,7 +173,7 @@ const ChatInput = ({
                 <button className="share-account-details" onClick={handleBankAccountList}>
                   Share account details
                 </button>
-                <button className="update-listing-status">
+                <button className="update-listing-status" onClick={handleCloseTrade}>
                   Update listing status
                 </button>
               </div>
@@ -191,7 +192,7 @@ const ChatInput = ({
             >
               Share account details
             </button>
-            <button className="update-listing">
+            <button className="update-listing" onClick={handleCloseTrade}>
               Update listing status
             </button>
           </div>
