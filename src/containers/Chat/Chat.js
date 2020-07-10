@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 import { Auth } from 'aws-amplify';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
 import ChatMessageView from './ChatMessageView/ChatMessageView';
 import ChatUserProfile from './ChatUserProfile/ChatUserProfile';
@@ -110,6 +111,11 @@ const Chat = ({
         />
       ) : null}
       <div className="chat-main-container">
+       {/* Preloader */}
+        {/* <div style={{height:'100vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
+      <ScaleLoader size={150} color={'#0383ef'} loading={true} />
+        </div> */}
+        {/* End of Preloader */}
         <section className="chat__container">
           <div className="chat-grid-container">
             <ChatConversationList
