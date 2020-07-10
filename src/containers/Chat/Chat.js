@@ -5,9 +5,6 @@ import React, {
   useState,
 } from 'react';
 import { connect } from 'react-redux';
-import { API, graphqlOperation } from 'aws-amplify';
-import { onCreateMessage as OnCreateMessage } from '../../libs/graphql';
-// import { API, graphqlOperation } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
 import ChatMessageView from './ChatMessageView/ChatMessageView';

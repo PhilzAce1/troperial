@@ -2,7 +2,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import axios from 'axios';
 import { listUsers } from '../../../libs/graphql';
 // import { updateUser } from '../../../graphql/mutations';
-import { getUser } from '../../../graphql/queries';
+// import { getUser } from '../../../graphql/queries';
 const userExist = async (data) => {
   if (typeof data !== 'string')
     return console.log('something went wrong ... ');

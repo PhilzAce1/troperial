@@ -38,7 +38,7 @@ export const createUser = async (username, personId = null) => {
         input: { username: newUser, personId: personId },
       }),
     );
-    console.log(item);
+    // console.log(item);
     return { success: true, payload: item };
   } catch (e) {
     console.log(e);

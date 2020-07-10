@@ -9,12 +9,11 @@ import { pushNotification } from '../libs/pushNotification';
 import {
   onCreateMessage as OnCreateMessage,
   onUpdateMessage as OnUpdateMessage,
-  onCreateConvoLink,
+  // onCreateConvoLink,
 } from '../libs/graphql';
 import {
   newExternalMessage,
   loadMessages,
-  updateSeen,
   updateMessageSeen,
 } from '../actions/conversationActions';
 import { findConvo } from '../containers/Chat/helpers';
@@ -100,18 +99,18 @@ function AuthenticatedRoute({
         }
       });
     }
-    if (conversation.user && conversation.user.id) {
-      const subscription = API.graphql(
-        graphqlOperation(onCreateConvoLink, {
-          convoLinkUserId: conversation.user.id,
-        }),
-      ).subscribe({
-        next: (eventData) => {
-          console.log(eventData);
-        },
-      });
-      return () => subscription.unsubscribe();
-    }
+    // if (conversation.user && conversation.user.id) {
+    //   const subscription = API.graphql(
+    //     graphqlOperation(onCreateConvoLink, {
+    //       convoLinkUserId: conversation.user.id,
+    //     }),
+    //   ).subscribe({
+    //     next: (eventData) => {
+    //       console.log(eventData);
+    //     },
+    //   });
+    //   return () => subscription.unsubscribe();
+    // }
     // eslint-disable-next-line
   }, [
     newExternalMessage,

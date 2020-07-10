@@ -83,7 +83,6 @@ export default function (state = State, action) {
       }
       convo.messageLoaded = true;
       convo.messages = [];
-      // console.log(action.payload.messages);
       if (action.payload.messages.length < 0) return newState;
       action.payload.messages.forEach((message) => {
         convo.messages.push({
@@ -169,7 +168,6 @@ export default function (state = State, action) {
     }
     case 'NEW_EXTERNAL_MESSAGE': {
       const newState = { ...state };
-      console.log(action.payload);
       const convo = newState.conversations.find(
         (conversation) =>
           conversation.id === action.payload.messageConversationId,
@@ -178,16 +176,16 @@ export default function (state = State, action) {
       if (!convo) return newState;
       if (action.payload.authorId === newState.user.id)
         return newState;
+
       const msgExist = convo.messages.find((x) => {
         return x.id === action.payload.id;
       });
-
       if (msgExist) {
         return newState;
       }
+      console.log(convo.messages.length, action.payload);
       convo.messages.push({
         id: action.payload.id,
-
         isListing: action.payload.isListing,
         isAccountDetail: action.payload.isAccountDetail,
         accountNumber: action.payload.accountNumber
@@ -228,7 +226,7 @@ export default function (state = State, action) {
         have: action.payload.have,
         rate: action.payload.rate,
         need: action.payload.need,
-        messageText: action.payload.textMessage,
+        messageText: action.payload.content,
         createdAt: action.payload.createdAt,
         read: false,
         isMyMessage: false,

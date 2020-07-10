@@ -33,10 +33,8 @@ const ChatMessageView = ({
   loadMessages,
   conversation,
   updateSeen,
-  state,
   handleBankAccountList,
 }) => {
-  // console.log(state);
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
   const scrollToBottom = () => {
@@ -67,7 +65,6 @@ const ChatMessageView = ({
     }
   }, []);
   // const messageRead = useCallback((arr, cb) => {}, []);
-
   useEffect(() => {
     if (
       selectedConversation &&
@@ -85,7 +82,6 @@ const ChatMessageView = ({
       selectedConversation.messages.length <= 0 &&
       selectedConversation.id
     ) {
-      // console.log(selectedConversation.messageLoaded);
       messageLoader(loadMessages, selectedConversation.id);
     }
 
@@ -103,11 +99,6 @@ const ChatMessageView = ({
         }
       }, 2000);
     }
-    // if (selectedConversation.messages.some((x) => x.read === false)) {
-    // }
-    // check if there are unread messages
-    // change the unread messages to read
-    // messageRead();
     // eslint-disable-next-line
   }, [
     selectedConversation.id,
@@ -194,7 +185,7 @@ const ChatMessageView = ({
             />
           )}
 
-          {message.messageText && message.messageText !== 'none' && (
+          {message.messageText && (
             <ChatBubble
               fromMe={message.isMyMessage}
               createdAt={message.createdAt}
