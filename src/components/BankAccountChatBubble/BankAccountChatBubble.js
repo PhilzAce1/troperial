@@ -24,7 +24,13 @@ const BankAccountChatBubble = ({
       }`}
     >
       <header>
-      <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
+        <img
+          style={{ width: '19px' }}
+          src={require(`../../assets/flags/${
+            currency ? currency : 'NGN'
+          }.png`)}
+          alt={currency_titles[currency]}
+        />
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>

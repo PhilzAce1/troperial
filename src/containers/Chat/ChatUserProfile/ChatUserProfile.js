@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import Avatar from 'react-avatar';
 
 import updater from './helper';
 import './ChatUserProfile.css';
@@ -94,11 +95,22 @@ const ChatUserProfile = ({
   ) {
     return (
       <section className="user__profile">
-        <img
+        {/* <img
           className="user__profile-temporary-dp"
           src={dp}
           alt="user dp"
-        />
+        /> */}
+        <div
+          style={{
+            borderRadius: '50%',
+          }}
+        >
+          <Avatar
+            name={`${selectedConversation.chatUserProfile.data.firstName} ${selectedConversation.chatUserProfile.data.lastName}`}
+            size="150"
+            email={selectedConversation.chatUserProfile.data.email}
+          />
+        </div>
         {selectedConversation.chatUserProfile &&
           selectedConversation.chatUserProfile.data &&
           selectedConversation.chatUserProfile.data.username && (

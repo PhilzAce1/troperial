@@ -14,7 +14,7 @@ const NavBar = ({
   username,
   profileUpdated,
   firstName,
-  lastName
+  lastName,
 }) => {
   const history = useHistory();
   const { userHasAuthenticated } = useContext(AppContext);
@@ -77,9 +77,16 @@ const NavBar = ({
             className="profile_nav-link"
             to="/profile"
           >
-          
             <span>
-            {firstName ? <Avatar name={`${firstName} ${lastName}`} size="25" round={true} />: <Avatar name={'*'} size="25" round={true} />}
+              {firstName ? (
+                <Avatar
+                  name={`${firstName} ${lastName}`}
+                  size="25"
+                  round={true}
+                />
+              ) : (
+                <Avatar name={'*'} size="25" round={true} />
+              )}
               {username && (
                 <span className="navbar-username">{username}</span>
               )}
@@ -105,7 +112,15 @@ const NavBar = ({
             </h4>
           </div>
           <div className="smallScreen__profileContainer">
-          {firstName ? <Avatar name={`${firstName} ${lastName}`} size="25" round={true} />: <Avatar name={'*'} size="25" round={true} />}
+            {firstName ? (
+              <Avatar
+                name={`${firstName} ${lastName}`}
+                size="25"
+                round={true}
+              />
+            ) : (
+              <Avatar name={'*'} size="25" round={true} />
+            )}
           </div>
         </div>
         {/* navigation links */}
