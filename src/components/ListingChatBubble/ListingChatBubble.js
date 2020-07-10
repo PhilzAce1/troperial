@@ -21,7 +21,7 @@ const ListingChatBubble = ({ have, need, by, fromMe }) => {
       <div className="listing-card-horizontal-line"></div>
       <div className="preferred-rate">
         <span className="label">preferred rate</span>
-        <p className="value">1 USD (NGN) > (NGN) 467</p>
+        <p className="value">1 USD (NGN) `{'>'}` (NGN) 467</p>
         <p className="by">
           by <span className="username">{by}</span>
         </p>

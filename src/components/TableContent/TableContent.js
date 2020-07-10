@@ -11,12 +11,14 @@ const TableContent = ({
   userListings,
   onClick,
   trustedTraders,
+  transaction,
+  personId,
   username,
   totalTransactions,
   action,
   handleMessage,
   handleBackDrop,
-  handleEditTransaction
+  handleEditTransaction,
 }) => {
   return (
     <Fragment>
@@ -100,7 +102,12 @@ const TableContent = ({
                 {/* <button className="show__matches__btn">
                   Show Matches
                 </button> */}
-                <button className="edit__btn" onClick={handleEditTransaction}>Edit</button>
+                <button
+                  className="edit__btn"
+                  onClick={handleEditTransaction}
+                >
+                  Edit
+                </button>
                 <button className="delete__btn" onClick={onClick}>
                   Delete
                 </button>
@@ -115,6 +122,8 @@ const TableContent = ({
                 by={by}
                 status={status}
                 handleBackDrop={handleBackDrop}
+                personId={personId}
+                transaction={transaction}
               />
             )}
           </div>

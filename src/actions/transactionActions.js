@@ -17,12 +17,13 @@ export const getAllRates = () => async (dispatch) => {
         headers: {
           Authorization: authToken,
         },
-      });
-    const {data: rates} = response;
+      },
+    );
+    const { data: rates } = response;
     dispatch({
       type: GET_ALL_RATES,
-      payload: rates
-    })
+      payload: rates,
+    });
     return rates;
   } catch (e) {
     console.log(e);
@@ -46,7 +47,9 @@ export const getTransactions = (page = 1, size = 5) => async (
         headers: {
           Authorization: authToken,
         },
-      });
+      },
+    );
+    console.log(response.data);
     dispatch({
       type: GET_ALL_TRANSACTIONS,
       payload: { ...response.data },
@@ -61,11 +64,13 @@ export const getMoreTransactions = (page) => async (dispatch) => {
   page = page - 1;
   try {
     const response = await axios.get(
-      `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=5`, {
+      `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=5`,
+      {
         headers: {
           Authorization: authToken,
         },
-      });
+      },
+    );
     dispatch({
       type: GET_MORE_TRANSACTIONS,
       payload: response.data,

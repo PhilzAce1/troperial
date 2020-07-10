@@ -24,7 +24,9 @@ function SendMessageBtn({
   rate,
   newConversation,
   conversation,
+  transaction,
   listingChanged,
+  personId,
   conversationChanged,
   user,
   userDetails,
@@ -58,7 +60,6 @@ function SendMessageBtn({
       userDetails(id, username);
       // update store with the conversations of the user
       setTimeout(() => {
-        console.log(username);
         userConversations(conversations, username);
       }, 1500);
     } catch (e) {
@@ -75,7 +76,7 @@ function SendMessageBtn({
     if (convo.exist) {
       //change the selected conversation
       conversationChanged(convo.conversation.id);
-      listingChanged(true, by, have, need, rate);
+      listingChanged(true, by, have, need, rate, transaction);
       setLoading(false);
       return history.push('/messages');
     }
@@ -94,7 +95,7 @@ function SendMessageBtn({
         return console.log('user is trying to message himsef');
       }
       // create the otheruser or get details if he exists
-      let otherUser = await createUser(by);
+      let otherUser = await createUser(by, personId);
       otherUser = { ...otherUser }.payload;
       let convoExist = await conversationExist(
         currentUser.id,
@@ -147,8 +148,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(userConversations(items, username)),
   conversationChanged: (conversationId) =>
     dispatch(conversationChanged(conversationId)),
-  listingChanged: (status, by, have, need, rate) =>
-    dispatch(listingChanged(status, by, have, need, rate)),
+  listingChanged: (status, by, have, need, rate, extra) =>
+    dispatch(listingChanged(status, by, have, need, rate, extra)),
   newConversation: (id, members) =>
     dispatch(newConversation(id, members)),
   userDetails: (userId, username) =>

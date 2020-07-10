@@ -4,19 +4,32 @@ import { connect } from 'react-redux';
 import BankListCard from './BankListCard';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { getAccount } from '../../actions/authActions';
+import { addNewAccountDetails } from '../../actions/conversationActions';
 import AddBankAccount from '../AddBankAccout/AddBankAccount';
+import { sendAccountDetail } from '../../libs/conversationHelpers';
 import close from '../../assets/images/Close.png';
 const BankAccountList = ({
   handleBankAccountList,
   getAccount,
+  addNewAccountDetails,
   accounts,
   accountId,
+  conversation,
 }) => {
   const [chosen, setChosen] = useState();
   useEffect(() => {
     getAccount(accountId);
   }, [getAccount, accountId]);
   const renderList = (accounts) => {
+    function testOnClick(params) {
+      addNewAccountDetails(params);
+      sendAccountDetail(
+        conversation.selectedConversation.id,
+        conversation.user.id,
+        params,
+      );
+      return handleBankAccountList();
+    }
     if (accounts === null) {
       return <h2>Loading Bank Accounts...</h2>;
     } else if (accounts.length === 0) {
@@ -42,11 +55,14 @@ const BankAccountList = ({
                 userId={account.userId}
                 active={account.externalAccountId === chosen}
                 accountName={account.accountName}
-                onClick={() => setChosen(account.externalAccountId)}
+                onClick={() => setChosen(account)}
               />
             );
           })}
-          <CustomButton loading={false}>
+          <CustomButton
+            loading={false}
+            onClickHandler={() => testOnClick(chosen)}
+          >
             Send Bank Details
           </CustomButton>
         </Fragment>
@@ -73,7 +89,9 @@ const BankAccountList = ({
 const mapStateToProps = (state) => ({
   accountId: state.auth.accountId,
   accounts: state.auth.accounts,
+  conversation: state.conversation,
 });
-export default connect(mapStateToProps, { getAccount })(
-  BankAccountList,
-);
+export default connect(mapStateToProps, {
+  getAccount,
+  addNewAccountDetails,
+})(BankAccountList);

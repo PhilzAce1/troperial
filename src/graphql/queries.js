@@ -5,33 +5,47 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
+      personId
       username
-      conversations {
-        items {
-          id
-          convoLinkUserId
-          convoLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          isListing
-          by
-          have
-          rate
-          need
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      # conversations {
+      #   items {
+      #     id
+      #     convoLinkUserId
+      #     convoLinkConversationId
+      #     createdAt
+      #     updatedAt
+      #   }
+      #   nextToken
+      # }
+      # messages {
+      #   items {
+      #     id
+      #     authorId
+      #     isListing
+      #     isAccountDetail
+      #     accountNumber
+      #     bvnNumber
+      #     primaryBank
+      #     customerAccountNumber
+      #     sortCode
+      #     routingNumber
+      #     externalAccountSubType
+      #     zelleEmail
+      #     userId
+      #     accountName
+      #     currency
+      #     seen
+      #     by
+      #     have
+      #     rate
+      #     need
+      #     content
+      #     messageConversationId
+      #     createdAt
+      #     updatedAt
+      #   }
+      #   nextToken
+      # }
       createdAt
       updatedAt
     }
@@ -46,6 +60,7 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        personId
         username
         conversations {
           nextToken
@@ -69,6 +84,19 @@ export const getConvo = /* GraphQL */ `
           id
           authorId
           isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          userId
+          accountName
+          currency
+          seen
           by
           have
           rate

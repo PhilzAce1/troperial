@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { onCreateConvoLink as OnCreateConvoLink } from '../../../libs/graphql';
 import UserConvoButton from '../../../components/UserConvoButton/UserConvoButton';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+// import ScaleLoader from 'react-spinners/ScaleLoader';
 import {
   searchFilter,
   clearFilter,

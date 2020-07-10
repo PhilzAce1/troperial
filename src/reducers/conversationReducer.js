@@ -14,6 +14,10 @@ let State = {
   listing: {},
   search: [],
   conversationLength: 0,
+  chatUserProfile: {
+    userProfileLoaded: false,
+    personId: '',
+  },
 };
 if (initialState.conversations.length > 0) {
   initialState.selectedConversation = initialState.conversations[1];
@@ -51,8 +55,17 @@ export default function (state = State, action) {
           messages: [],
           stack: [],
           lastMessage: {},
+          chatUserProfile: {
+            userProfileLoaded: false,
+            personId: '',
+          },
         });
       });
+      const filteredConvo = filterDup(
+        newState.conversations,
+        (it) => it.id,
+      );
+      newState.conversations = filteredConvo;
       newState.selectedConversation = newState.conversations[0];
       newState.conversationLength = newState.conversations.length;
       return newState;
@@ -75,14 +88,28 @@ export default function (state = State, action) {
         convo.messages.push({
           id: message.id,
           isListing: message.isListing,
+          isAccountDetail: message.isAccountDetail,
+          accountNumber: message.accountNumber,
+          bvnNumber: message.bvnNumber,
+          currency: message.currency,
+          customerAccountNumber: message.customerAccountNumber,
+          externalAccountSubType: message.externalAccountSubType,
+          primaryBank: message.primaryBank,
+          routingNumber: message.routingNumber,
+          seen: message.seen !== null ? message.seen : true,
+          sortCode: message.sortCode,
+          updatedAt: message.updatedAt,
+          userId: message.userId,
+          zelleEmail: message.zelleEmail,
           authorId: message.authorId,
+          accountName: message.accountName,
           by: message.by,
           have: message.have,
           rate: message.rate,
           need: message.need,
           imageAlt: null,
           messageText: message.content,
-          read: true,
+          read: message.seen !== null ? message.seen : true,
           createdAt: message.createdAt,
           isMyMessage: message.authorId === newState.user.id,
         });
@@ -92,6 +119,13 @@ export default function (state = State, action) {
     }
     case 'SELECTED_CONVERSATION_CHANGED': {
       const newState = { ...state };
+      newState.listing = {
+        open: false,
+        by: 'none',
+        have: 'none',
+        rate: 'none',
+        need: 'none',
+      };
       const filteredConvo = filterDup(
         newState.conversations,
         (it) => it.id,
@@ -108,8 +142,6 @@ export default function (state = State, action) {
         ...newState.selectedConversation,
       };
       newState.selectedConversation.messages.push({
-        imageUrl: null,
-        imageAlt: null,
         isListing: action.payload.isListing,
         by: action.payload.by,
         have: action.payload.have,
@@ -129,6 +161,7 @@ export default function (state = State, action) {
         have: action.payload.have,
         need: action.payload.need,
         rate: action.payload.rate,
+        transaction: action.payload.transaction,
       };
 
       return newState;
@@ -137,28 +170,63 @@ export default function (state = State, action) {
       const newState = { ...state };
       const convo = newState.conversations.find(
         (conversation) =>
-          conversation.id === action.payload.conversationId,
+          conversation.id === action.payload.messageConversationId,
       );
+
       if (!convo) return newState;
       if (action.payload.authorId === newState.user.id)
         return newState;
+
       const msgExist = convo.messages.find((x) => {
         return x.id === action.payload.id;
       });
-
       if (msgExist) {
         return newState;
       }
+      console.log(convo.messages.length, action.payload);
       convo.messages.push({
         id: action.payload.id,
-        imageUrl: null,
-        imageAlt: null,
         isListing: action.payload.isListing,
+        isAccountDetail: action.payload.isAccountDetail,
+        accountNumber: action.payload.accountNumber
+          ? action.payload.accountNumber
+          : 'none',
+        bvnNumber: action.payload.bvnNumber
+          ? action.payload.bvnNumber
+          : 'none',
+        primaryBank: action.payload.primaryBank
+          ? action.payload.primaryBank
+          : 'none',
+        customerAccountNumber: action.payload.customerAccountNumber
+          ? action.payload.customerAccountNumber
+          : 'none',
+        sortCode: action.payload.sortCode
+          ? action.payload.sortCode
+          : 'none',
+        routingNumber: action.payload.routingNumber
+          ? action.payload.routingNumber
+          : 'none',
+        externalAccountSubType: action.payload.externalAccountSubType
+          ? action.payload.externalAccountSubType
+          : 'none',
+        zelleEmail: action.payload.zelleEmail
+          ? action.payload.zelleEmail
+          : 'none',
+        userId: action.payload.userId
+          ? action.payload.userId
+          : 'none',
+        currency: action.payload.currency
+          ? action.payload.currency
+          : 'none',
+        accountName: action.payload.accountName
+          ? action.payload.accountName
+          : 'none',
+        seen: action.payload.seen,
         by: action.payload.by,
         have: action.payload.have,
         rate: action.payload.rate,
         need: action.payload.need,
-        messageText: action.payload.textMessage,
+        messageText: action.payload.content,
         createdAt: action.payload.createdAt,
         read: false,
         isMyMessage: false,
@@ -174,6 +242,10 @@ export default function (state = State, action) {
         title: action.payload.members,
         messages: [],
         stack: [],
+        chatUserProfile: {
+          userProfileLoaded: false,
+          personId: '',
+        },
       });
       newState.conversationLength = newState.conversations.length;
 
@@ -190,8 +262,6 @@ export default function (state = State, action) {
 
       convo.stack.push(action.payload.stackNumber);
       convo.messages.push({
-        imageUrl: null,
-        imageAlt: null,
         isListing: action.payload.isListing,
         by: action.payload.by,
         have: action.payload.have,
@@ -284,6 +354,78 @@ export default function (state = State, action) {
     case 'CLEAR_SEARCH_FILTER': {
       const newState = { ...state };
       newState.search = [];
+      return newState;
+    }
+
+    case 'ACCONT_DETAILS_SENT': {
+      const newState = { ...state };
+      newState.selectedConversation = {
+        ...newState.selectedConversation,
+      };
+      newState.selectedConversation.messages.push({
+        isAccountDetail: true,
+        createdAt: Date.now(),
+        isMyMessage: true,
+        accountNumber: action.payload.accountNumber
+          ? action.payload.accountNumber
+          : 'none',
+        bvnNumber: action.payload.bvnNumber
+          ? action.payload.bvnNumber
+          : 'none',
+        primaryBank: action.payload.primaryBank
+          ? action.payload.primaryBank
+          : 'none',
+        customerAccountNumber: action.payload.customerAccountNumber
+          ? action.payload.customerAccountNumber
+          : 'none',
+        sortCode: action.payload.sortCode
+          ? action.payload.sortCode
+          : 'none',
+        routingNumber: action.payload.routingNumber
+          ? action.payload.routingNumber
+          : 'none',
+        externalAccountSubType: action.payload.externalAccountSubType
+          ? action.payload.externalAccountSubType
+          : 'none',
+        zelleEmail: action.payload.zelleEmail
+          ? action.payload.zelleEmail
+          : 'none',
+        userId: action.payload.userId
+          ? action.payload.userId
+          : 'none',
+        currency: action.payload.currency
+          ? action.payload.currency
+          : 'none',
+        accountName: action.payload.accountName
+          ? action.payload.accountName
+          : 'none',
+        // fromMe: '200',
+      });
+      return newState;
+    }
+    case 'UPDATE_MESSAGE_SEEN': {
+      const newState = { ...state };
+      const convo = newState.conversations.find(
+        (conversation) =>
+          conversation.id === action.payload.messageConversationId,
+      );
+      if (!convo) return newState;
+      const messageThatWasSeen = convo.messages.find(
+        (message) => message.id === action.payload.id,
+      );
+      if (messageThatWasSeen) {
+        messageThatWasSeen.seen = true;
+      }
+      return newState;
+    }
+    case 'UPDATE_USER_PROFILE': {
+      const newState = { ...state };
+      const convo = newState.conversations.find(
+        (conversation) => conversation.id === action.payload.convoId,
+      );
+      if (!convo) return newState;
+      convo.chatUserProfile.userProfileLoaded = true;
+      convo.chatUserProfile.data = action.payload;
       return newState;
     }
     default:

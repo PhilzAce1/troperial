@@ -19,6 +19,7 @@ export const listingChanged = (
   have = 'none',
   need = 'none',
   rate = 'none',
+  transaction = 'none',
 ) => ({
   type: 'LISTING_CHANGED',
   payload: {
@@ -27,6 +28,7 @@ export const listingChanged = (
     have,
     need,
     rate,
+    transaction,
   },
 });
 export const newConversation = (id, members) => ({
@@ -49,32 +51,10 @@ export const newMessageAdded = (textMessage) => ({
   type: 'NEW_MESSAGE_ADDED',
   payload: { textMessage },
 });
-export const newExternalMessage = (
-  conversationId,
-  textMessage,
-  createdAt,
-  isListing = false,
-  authorId,
-  id,
-  by = 'none',
-  have = 'none',
-  need = 'none',
-  rate = 'none',
-) => {
+export const newExternalMessage = (messageReceived) => {
   return {
     type: 'NEW_EXTERNAL_MESSAGE',
-    payload: {
-      createdAt,
-      isListing,
-      conversationId,
-      textMessage,
-      by,
-      have,
-      need,
-      rate,
-      authorId,
-      id,
-    },
+    payload: messageReceived,
   };
 };
 
@@ -144,3 +124,23 @@ export const searchFilter = (input) => {
 export const clearFilter = () => ({
   type: 'CLEAR_SEARCH_FILTER',
 });
+
+export const addNewAccountDetails = (data) => (dispatch) => {
+  dispatch({
+    type: 'ACCONT_DETAILS_SENT',
+    payload: data,
+  });
+};
+export const updateMessageSeen = (data) => {
+  return {
+    type: 'UPDATE_MESSAGE_SEEN',
+    payload: data,
+  };
+};
+
+export const updateUserProfile = (data) => {
+  return {
+    type: 'UPDATE_USER_PROFILE',
+    payload: data,
+  };
+};

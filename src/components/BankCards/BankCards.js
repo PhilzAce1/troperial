@@ -14,7 +14,7 @@ const BankCards = ({
   zelleEmail,
   userId,
   currency,
-  accountName
+  accountName,
 }) => {
   const [toggle, setToggleState] = useState(false);
   const toggleDetails = () => setToggleState(!toggle);
@@ -27,7 +27,11 @@ const BankCards = ({
         </div>
         {zelleEmail || userId ? (
           <div>
-            <img className="platform-icon" src={zelleEmail ? zelle : cashApp} alt="platform" />
+            <img
+              className="platform-icon"
+              src={zelleEmail ? zelle : cashApp}
+              alt="platform"
+            />
           </div>
         ) : null}
       </header>

@@ -13,7 +13,7 @@ const BankAccountChatBubble = ({
   userId,
   currency,
   fromMe,
-  accountName
+  accountName,
 }) => {
   return (
     <div
@@ -24,7 +24,13 @@ const BankAccountChatBubble = ({
       }`}
     >
       <header>
-      <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
+        <img
+          style={{ width: '19px' }}
+          src={require(`../../assets/flags/${
+            currency ? currency : 'NGN'
+          }.png`)}
+          alt={currency_titles[currency]}
+        />
         {currency_titles[currency]}
       </header>
       <div className="horizontal-line"></div>
@@ -61,12 +67,12 @@ const BankAccountChatBubble = ({
             <span className="value">{accountNumber}</span>
           </div>
         )}
-          {accountName && (
-                  <div className="bank__details_grid-item">
-                    <span className="label">Account Name</span>
-                    <span className="value">{accountName}</span>
-                  </div>
-          )}
+        {accountName && (
+          <div className="bank__details_grid-item">
+            <span className="label">Account Name</span>
+            <span className="value">{accountName}</span>
+          </div>
+        )}
         {externalAccountSubType && (
           <div className="bank__details_grid-item">
             <span className="label">Account Type</span>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './HybridInput.css';
-import CurrencyFlag from 'react-currency-flags';
+// import CurrencyFlag from 'react-currency-flags';
 import { supported_countries } from '../../constants/supported_currencies';
 import { currency_titles } from '../../constants/currency_titles';
 const HybridInput = ({
@@ -31,7 +31,7 @@ const HybridInput = ({
       </label>
       <div className="hybridInput__wrapper">
         <span className="hybridInput__custom-select" name="country">
-          <CurrencyFlag currency={currency} width={19} />
+          {/* <CurrencyFlag currency={currency} width={19} /> */}
           {changeCurrencyHandler === null ? null : (
             <i
               className="country-dropdown fas fa-angle-down"
@@ -58,7 +58,7 @@ const HybridInput = ({
                 key={country.id}
                 onClick={() => onChangeCurrency(country.currency)}
               >
-                <CurrencyFlag currency={country.currency} size="md" />
+                {/* <CurrencyFlag currency={country.currency} size="md" /> */}
                 {`  (${country.currency})`}{' '}
                 {currency_titles[country.currency]}
               </div>

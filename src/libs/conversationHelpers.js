@@ -8,8 +8,9 @@ import {
   getConvo,
   createConvoLink,
   getUser,
+  updateMessage,
 } from './graphql';
-export const createUser = async (username) => {
+export const createUser = async (username, personId = null) => {
   // TODO createCurrent User should be different from createUser
   // make api request with the id and username to see if user exist
 
@@ -33,8 +34,11 @@ export const createUser = async (username) => {
     const {
       data: { createUser: item },
     } = await API.graphql(
-      graphqlOperation(CreateUser, { input: { username: newUser } }),
+      graphqlOperation(CreateUser, {
+        input: { username: newUser, personId: personId },
+      }),
     );
+    // console.log(item);
     return { success: true, payload: item };
   } catch (e) {
     console.log(e);
@@ -134,6 +138,7 @@ export const createMessage = async (
     content: content,
     authorId: authorId,
     isListing: isListing,
+    seen: false,
     by,
     have,
     rate,
@@ -168,5 +173,65 @@ export const getMessages = async (conversationId) => {
     return items;
   } catch (e) {
     console.log(e);
+  }
+};
+export const sendAccountDetail = async (
+  conversationId,
+  authorId,
+  data,
+) => {
+  // return console.log(data.primaryBank ? true : false);
+  let messageData = {
+    createdAt: `${Date.now()}`,
+    messageConversationId: conversationId,
+    content: 'none',
+    authorId: authorId,
+    isListing: false,
+    isAccountDetail: true,
+    accountNumber: data.accountNumber ? data.accountNumber : 'none',
+    accountName: data.accountName ? data.accountName : 'none',
+
+    bvnNumber: data.bvnNumber ? data.bvnNumber : 'none',
+    primaryBank: data.primaryBank ? data.primaryBank : 'none',
+    customerAccountNumber: data.customerAccountNumber
+      ? data.customerAccountNumber
+      : 'none',
+    sortCode: data.sortCode ? data.sortCode : 'none',
+    routingNumber: data.routingNumber ? data.routingNumber : 'none',
+    externalAccountSubType: data.externalAccountSubType
+      ? data.externalAccountSubType
+      : 'none',
+    zelleEmail: data.zelleEmail ? data.zelleEmail : 'none',
+    userId: data.userId ? data.userId : 'none',
+    currency: data.currency ? data.currency : 'none',
+    seen: false,
+    by: 'none',
+    have: 'none',
+    rate: 'none',
+    need: 'none',
+  };
+  try {
+    await API.graphql(
+      graphqlOperation(CreateMessage, { input: messageData }),
+    );
+
+    return 'done';
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const updateMessageSeen = async (data) => {
+  if (data.id) {
+    const messageData = {
+      id: data.id,
+      seen: true,
+    };
+    try {
+      await API.graphql(
+        graphqlOperation(updateMessage, { input: messageData }),
+      );
+    } catch (e) {
+      console.log(e);
+    }
   }
 };
