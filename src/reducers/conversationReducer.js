@@ -2,8 +2,11 @@ import data from '../containers/Chat/data';
 import { removeStack, filterDup } from '../containers/Chat/helpers';
 let initialState = data;
 let State = {
-  user: {},
+  user: {
+    convoConnectionCreated: false,
+  },
   conversations: [],
+  conversationLoaded: false,
   selectedConversation: {
     stack: [],
     id: '',
@@ -40,6 +43,7 @@ export default function (state = State, action) {
 
       //   return newState;
       // }
+      newState.conversationLoaded = true;
       action.payload.items.forEach((conversation) => {
         const userTitle = conversation.conversation.members
           .filter(
@@ -467,6 +471,18 @@ export default function (state = State, action) {
       if (!convo) return newState;
       convo.chatUserProfile.userProfileLoaded = true;
       convo.chatUserProfile.data = action.payload;
+      return newState;
+    }
+    case 'SET_REMINDER': {
+      const newState = { ...state };
+      console.log(action.payload);
+      return newState;
+    }
+    case 'CONVO_CONNECTION_STATUS': {
+      const newState = { ...state };
+      // console.log('called');
+
+      // console.log(action.payload);
       return newState;
     }
     default:

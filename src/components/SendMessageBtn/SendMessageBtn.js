@@ -30,7 +30,6 @@ function SendMessageBtn({
   conversationChanged,
   user,
   userDetails,
-  state,
   userConversations,
   handleBackDrop,
   step,
@@ -55,7 +54,7 @@ function SendMessageBtn({
           username,
           conversations: { items: conversations },
         },
-      } = await createUser(user.username);
+      } = await createUser(user.username, user.personId);
       // update stor with user details
       userDetails(id, username);
       // update store with the conversations of the user
@@ -189,7 +188,6 @@ const mapStateToProps = (state) => {
     step: state.ui.step,
     user: state.auth,
     selectedConversation: state.conversation.selectedConversation,
-    state,
   };
 };
 
