@@ -19,7 +19,8 @@ export const listingChanged = (
   have = 'none',
   need = 'none',
   rate = 'none',
-  transaction = 'none',
+  transaction = {},
+  convoId = '',
 ) => ({
   type: 'LISTING_CHANGED',
   payload: {
@@ -29,6 +30,7 @@ export const listingChanged = (
     need,
     rate,
     transaction,
+    convoId,
   },
 });
 export const newConversation = (id, members) => ({

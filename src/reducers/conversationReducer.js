@@ -59,6 +59,7 @@ export default function (state = State, action) {
             userProfileLoaded: false,
             personId: '',
           },
+          listing: {},
         });
       });
       const filteredConvo = filterDup(
@@ -155,14 +156,55 @@ export default function (state = State, action) {
     }
     case 'LISTING_CHANGED': {
       const newState = { ...state };
-      newState.listing = {
+      if (action.payload.status === 'clear') {
+        const convo = newState.conversations.find(
+          (conversation) =>
+            conversation.id === newState.selectedConversation.id,
+        );
+        if (!convo) return newState;
+        convo.listing = {
+          open: false,
+          by: null,
+          have: null,
+          need: null,
+          rate: null,
+          transaction: {},
+          convoid: '',
+        };
+        return newState;
+      }
+      const convo = newState.conversations.find(
+        (conversation) => conversation.id === action.payload.convoId,
+      );
+      if (!convo) return newState;
+      if (
+        action.payload.by === null ||
+        action.payload.have === null ||
+        action.payload.rate === null ||
+        action.payload.need === null
+      ) {
+        console.log('something is supposed to happen na');
+        convo.listing.open = action.payload.status;
+        return newState;
+      }
+      convo.listing = {
         open: action.payload.status,
         by: action.payload.by,
         have: action.payload.have,
         need: action.payload.need,
         rate: action.payload.rate,
         transaction: action.payload.transaction,
+        convoid: action.payload.convoId,
       };
+
+      // newState.listing = {
+      //   open: action.payload.status,
+      //   by: action.payload.by,
+      //   have: action.payload.have,
+      //   need: action.payload.need,
+      //   rate: action.payload.rate,
+      //   transaction: action.payload.transaction,
+      // };
 
       return newState;
     }
@@ -183,7 +225,6 @@ export default function (state = State, action) {
       if (msgExist) {
         return newState;
       }
-      console.log(convo.messages.length, action.payload);
       convo.messages.push({
         id: action.payload.id,
         isListing: action.payload.isListing,

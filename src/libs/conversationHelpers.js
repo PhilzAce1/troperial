@@ -180,6 +180,7 @@ export const sendAccountDetail = async (
   authorId,
   data,
 ) => {
+  console.log('userid :', data.userId);
   // return console.log(data.primaryBank ? true : false);
   let messageData = {
     createdAt: `${Date.now()}`,

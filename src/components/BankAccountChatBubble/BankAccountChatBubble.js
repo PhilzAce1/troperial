@@ -44,9 +44,7 @@ const BankAccountChatBubble = ({
         {primaryBank && (
           <div className="bank__details_grid-item">
             <span className="label">Bank</span>
-            <span className="value">
-              {primaryBank}
-            </span>
+            <span className="value">{primaryBank}</span>
           </div>
         )}
         {customerAccountNumber && (
