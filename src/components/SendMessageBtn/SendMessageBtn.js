@@ -76,7 +76,15 @@ function SendMessageBtn({
     if (convo.exist) {
       //change the selected conversation
       conversationChanged(convo.conversation.id);
-      listingChanged(true, by, have, need, rate, transaction);
+      listingChanged(
+        true,
+        by,
+        have,
+        need,
+        rate,
+        transaction,
+        convo.conversation.id,
+      );
       setLoading(false);
       return history.push('/messages');
     }
@@ -109,6 +117,15 @@ function SendMessageBtn({
             .join(''),
         );
         conversationChanged(convoExist.conversationId);
+        listingChanged(
+          true,
+          by,
+          have,
+          need,
+          rate,
+          transaction,
+          convoExist.conversationId,
+        );
       } else {
         newConvo = await createConversation(currentUser, otherUser);
         newConversation(
@@ -118,8 +135,17 @@ function SendMessageBtn({
             .join(''),
         );
         conversationChanged(newConvo.conversationId);
+        listingChanged(
+          true,
+          by,
+          have,
+          need,
+          rate,
+          transaction,
+          newConvo.conversationId,
+        );
       }
-      listingChanged(true, by, have, need, rate);
+      // listingChanged(true, by, have, need, rate);
       setLoading(false);
       history.push('/messages');
     } catch (e) {
@@ -148,8 +174,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(userConversations(items, username)),
   conversationChanged: (conversationId) =>
     dispatch(conversationChanged(conversationId)),
-  listingChanged: (status, by, have, need, rate, extra) =>
-    dispatch(listingChanged(status, by, have, need, rate, extra)),
+  listingChanged: (status, by, have, need, rate, extra, convoId) =>
+    dispatch(
+      listingChanged(status, by, have, need, rate, extra, convoId),
+    ),
   newConversation: (id, members) =>
     dispatch(newConversation(id, members)),
   userDetails: (userId, username) =>

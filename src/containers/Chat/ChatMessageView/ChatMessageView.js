@@ -35,7 +35,7 @@ const ChatMessageView = ({
   conversation,
   updateSeen,
   handleBankAccountList,
-  handleCloseTrade
+  handleCloseTrade,
 }) => {
   const lastMessage = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -182,6 +182,11 @@ const ChatMessageView = ({
                 message.accountName === 'none' || !message.accountName
                   ? null
                   : message.accountName
+              }
+              userId={
+                message.userId === 'none' || !message.userId
+                  ? null
+                  : message.userId
               }
               fromMe={message.isMyMessage}
             />
