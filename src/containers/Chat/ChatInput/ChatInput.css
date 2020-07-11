@@ -1,23 +1,40 @@
 .chat__input {
   width: 100%;
-  border: solid 1px var(--light-grey);
+  /* border: solid 1px var(--light-grey); */
   box-sizing: border-box;
   background: #fff;
 }
+.reminder {
+  width: 90%;
+  margin: 5px auto;
+  padding: 2px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--troperial-blue);
+  background: lightblue;
+  border-radius: 10px;
+}
 .chat__input-field-container {
   display: flex;
-  border: solid 1px var(--light-grey);
   padding: 0 10px;
   box-sizing: border-box;
 }
+
 .chat__input-field-container .chat__input-field {
-  padding: 20px 5px;
+  padding: 18px 5px;
   flex: 3;
   border: none;
   font-size: 1.2rem;
   box-sizing: border-box;
   outline: transparent;
 }
+.chat__input-field { 
+
+  border-bottom: 1px solid var(--light-grey) !important;
+  font-size: 1.2rem;
+}
+
 .chat__input-field-container .send-message-btn {
   background: transparent;
   border: none;
@@ -102,7 +119,6 @@
     width: 95%;
     margin: 0 auto;
     margin-bottom: 20px;
-    border: solid 1px var(--light-grey);
     box-sizing: border-box;
     background: #fff;
     border-radius: 20px;

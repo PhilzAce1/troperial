@@ -38,14 +38,14 @@ const BankAccountChatBubble = ({
         {userId && (
           <div className="bank__details_grid-item">
             <span className="label">User ID</span>
-            <span className="value">{userId && userId}</span>
+            <span className="value">{userId}</span>
           </div>
         )}
         {primaryBank && (
           <div className="bank__details_grid-item">
             <span className="label">Bank</span>
             <span className="value">
-              {primaryBank && primaryBank}
+              {primaryBank}
             </span>
           </div>
         )}

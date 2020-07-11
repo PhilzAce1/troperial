@@ -22,8 +22,9 @@ const UserConvoButton = ({
     userAvatar = (
       <Avatar
         name={`${conversation.chatUserProfile.data.firstName} ${conversation.chatUserProfile.data.lastName}`}
-        size="25"
+        size="32"
         email={conversation.chatUserProfile.data.email}
+        round={true}
       />
     );
   }
@@ -31,7 +32,9 @@ const UserConvoButton = ({
     !conversation.chatUserProfile.userProfileLoaded &&
     conversation.title
   ) {
-    userAvatar = <Avatar name={`${conversation.title}`} size="25" />;
+    userAvatar = (
+      <Avatar name={`${conversation.title}`} size="32" round={true} />
+    );
   }
   return (
     <button
