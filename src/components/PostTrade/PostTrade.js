@@ -42,6 +42,7 @@ const PostTrade = ({
   const history = useHistory();
   const { isAuthenticated } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
   /**
    * state title: conversionRates
    * data type: Object
@@ -166,6 +167,14 @@ const PostTrade = ({
   const handleSubmit = async (e) => {
     const authToken = localStorage.getItem('authToken');
     e.preventDefault();
+    console.log({
+      sourceAmount: sourceAmount,
+      sourceCurrency: currency.have,
+      destinationAmount: convertedSourceAmount,
+      destinationCurrency: currency.need,
+      prefferedExchangeRate: calculatedRate,
+      privateListing: checked
+    })
 
     if(sourceAmount === '' || prefferedRate.have === '' || prefferedRate.need === '') {
       return toast.error('Please ensure that all fields are correctly filled')
@@ -179,6 +188,7 @@ const PostTrade = ({
           destinationAmount: convertedSourceAmount,
           destinationCurrency: currency.need,
           exchangeRate: calculatedRate,
+          privateListing: checked
         }),
       );
       return history.push('/signin');
@@ -198,6 +208,7 @@ const PostTrade = ({
             destinationCurrency: currency.need,
             prefferedExchangeRate: calculatedRate,
             personId: personId,
+            privateListing: checked
           },
           {
             headers: {
@@ -208,8 +219,18 @@ const PostTrade = ({
       setStep(CONFIRM_POST_LISTING)
       setLoading(false);
       console.log(response, calculatedRate);
+      console.log({
+        verifiedPerson: verified,
+        sourceAmount: sourceAmount,
+        sourceCurrency: currency.have,
+        destinationAmount: convertedSourceAmount,
+        destinationCurrency: currency.need,
+        prefferedExchangeRate: calculatedRate,
+        personId: personId,
+        privateListing: checked
+      })
     } catch (e) {
-      console.log(`ERROR: ${e}`);
+      console.log(`ERROR: ${e.message}`);
       toast.error('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
       setLoading(false);
     }
@@ -330,10 +351,10 @@ const PostTrade = ({
               </span>
             </p>
           )}
-          {/* <div className="checkbox__area">
-            <input type="checkbox" />
+          <div className="checkbox__area">
+            <input type="checkbox" onChange={() => setChecked(!checked)} checked={checked}/>
             <p>Show to only trusted traders</p>
-          </div> */}
+          </div>
           <CustomButton loading={loading}>
             Post this Trade
           </CustomButton>
