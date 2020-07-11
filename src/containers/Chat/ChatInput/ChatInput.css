@@ -29,8 +29,7 @@
   box-sizing: border-box;
   outline: transparent;
 }
-.chat__input-field { 
-
+.chat__input-field {
   border-bottom: 1px solid var(--light-grey) !important;
   font-size: 1.2rem;
 }

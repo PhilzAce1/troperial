@@ -42,13 +42,29 @@ function AuthenticatedRoute({
   );
 
   useEffect(() => {
+    let convoSub = conversation.user.convoConnectionCreated;
+
+    if (conversation.user && conversation.user.id && !convoSub) {
+      setUserConvoConnection(true);
+      convoSub = true;
+      console.log(convoSub);
+      const subscription = API.graphql(
+        graphqlOperation(onCreateConvoLink, {
+          convoLinkUserId: conversation.user.id,
+        }),
+      ).subscribe({
+        next: (eventData) => {
+          console.log(eventData);
+        },
+      });
+      subscription.unsubscribe();
+    }
     if (
       conversation &&
       conversation.conversations.length > 0 &&
       conversation.selectedConversation &&
       conversation.selectedConversation.id !== ''
     ) {
-      let convoSub = conversation.user.convoConnectionCreated;
       return conversation.conversations.forEach((x) => {
         if (x && x.id) {
           const subscription = API.graphql(
@@ -65,12 +81,7 @@ function AuthenticatedRoute({
                 messageReceived.messageConversationId,
               );
               if (convers.convoExist) {
-                // if (
-                //   !convers.messageLoaded &&
-                //   convers.convo.messages.length <= 0
-                // ) {
                 messageLoad(messageReceived.messageConversationId);
-                // }\
                 if (
                   conversation.user.id !== messageReceived.authorId
                 ) {
@@ -95,27 +106,6 @@ function AuthenticatedRoute({
             },
           });
 
-          if (
-            conversation.user &&
-            conversation.user.id &&
-            !convoSub
-          ) {
-            console.log(convoSub);
-            setUserConvoConnection(true);
-            convoSub = true;
-            console.log(convoSub);
-            // console.log('something should go on');
-            const subscription = API.graphql(
-              graphqlOperation(onCreateConvoLink, {
-                convoLinkUserId: conversation.user.id,
-              }),
-            ).subscribe({
-              next: (eventData) => {
-                console.log(eventData);
-              },
-            });
-            subscription.unsubscribe();
-          }
           return () => {
             subscription.unsubscribe();
             updateMsgSub.unsubscribe();

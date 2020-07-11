@@ -37,13 +37,10 @@ export default function (state = State, action) {
     }
     case 'SET_USER_CONVERSATIONS': {
       const newState = { ...state };
+      newState.conversationLoaded = true;
+
       if (action.payload.items.length <= 0) return newState;
       newState.conversations = [];
-      // if (!action.payload.items || action.payload.username) {
-
-      //   return newState;
-      // }
-      newState.conversationLoaded = true;
       action.payload.items.forEach((conversation) => {
         const userTitle = conversation.conversation.members
           .filter(
@@ -64,6 +61,7 @@ export default function (state = State, action) {
             personId: '',
           },
           listing: {},
+          isReminder: false,
         });
       });
       const filteredConvo = filterDup(
@@ -475,14 +473,21 @@ export default function (state = State, action) {
     }
     case 'SET_REMINDER': {
       const newState = { ...state };
-      console.log(action.payload);
+      newState.selectedConversation.isReminder = action.payload;
+      const convo = newState.conversations.find(
+        (conversation) =>
+          conversation.id === newState.selectedConversation.id,
+      );
+      console.log(convo);
+      if (!convo) return newState;
+      console.log(convo);
+      convo.isReminder = action.payload;
+      // console.log(action.payload);
       return newState;
     }
     case 'CONVO_CONNECTION_STATUS': {
       const newState = { ...state };
-      // console.log('called');
-
-      // console.log(action.payload);
+      newState.user.convoConnectionCreated = action.payload;
       return newState;
     }
     default:

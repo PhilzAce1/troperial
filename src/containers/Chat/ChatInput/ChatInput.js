@@ -2,9 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { createMessage } from '../../../libs/conversationHelpers';
 import close from '../../../assets/images/Close.png';
-// import { onCreateMessage as OnCreateMessage } from '../../../libs/graphql';
-// import { createMessage as CreateMessage } from '../../../graphql/mutations';
-// import { API, graphqlOperation } from 'aws-amplify';
 import './ChatInput.css';
 import ListingCard from '../../../components/ListingCard/ListingCard';
 import {
@@ -12,6 +9,7 @@ import {
   updateMessageStack,
   currentUserMessage,
   sortConversation,
+  setReminder,
 } from '../../../actions/conversationActions';
 import sendIcon from '../../../assets/svgs/send-icon.svg';
 import { getStack } from '../helpers';
@@ -27,6 +25,7 @@ const ChatInput = ({
   sortConversation,
   handleBankAccountList,
   handleCloseTrade,
+  setReminder,
   state,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -127,13 +126,27 @@ const ChatInput = ({
 
   return (
     <>
-      <div className="reminder">
-        <p>
-          Looks like you've both shared account details. update the
-          status of this transaction?
-        </p>{' '}
-        <img src={close} alt="close" />
-      </div>
+      {selectedConversation.isReminder && (
+        <div className="reminder">
+          <p>
+            Looks like you've both shared account details. update the
+            status of this transaction?
+          </p>{' '}
+          <button
+            style={{
+              background: 'none',
+              border: '0',
+              outline: 'none',
+            }}
+            onClick={() => {
+              console.log('somthing clicked');
+              setReminder(false);
+            }}
+          >
+            <img src={close} alt="close" />
+          </button>
+        </div>
+      )}
       <div className="chat__input">
         {listing !== undefined && listing.open && (
           <div className="chat__input-listing">
@@ -253,8 +266,9 @@ const mapDispatchToProps = (dispatch) => ({
       updateMessageStack(conversationId, stackNUmber, createdAt, id),
     ),
   sortConversation: () => dispatch(sortConversation()),
+  // setReminder,
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ChatInput);
+export default connect(mapStateToProps, {
+  ...mapDispatchToProps,
+  setReminder,
+})(ChatInput);
