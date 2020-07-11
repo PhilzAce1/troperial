@@ -16,7 +16,7 @@ import {
 import sendIcon from '../../../assets/svgs/send-icon.svg';
 import { getStack } from '../helpers';
 const ChatInput = ({
-  listing,
+  // listing,
   listingChanged,
   conversation,
   currentUserMessage,
@@ -31,6 +31,7 @@ const ChatInput = ({
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [textMessage, setTextMessage] = useState('');
+  const listing = selectedConversation.listing;
   const handleChange = (e) => {
     setTextMessage(e.target.value);
   };
@@ -57,8 +58,15 @@ const ChatInput = ({
           listing.rate,
         );
         scrollToBottom();
-
-        listingChanged(false);
+        listingChanged(
+          false,
+          null,
+          null,
+          null,
+          null,
+          null,
+          selectedConversation.id,
+        );
         const msg = await createMessage(
           stackId,
           true,
@@ -113,81 +121,93 @@ const ChatInput = ({
         return sortConversation();
       }, 2500);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
     <>
       <div className="reminder">
-        <p>Looks like you've both shared account details. update the status of this transaction?</p> <img src={close} alt="close"/> 
+        <p>
+          Looks like you've both shared account details. update the
+          status of this transaction?
+        </p>{' '}
+        <img src={close} alt="close" />
       </div>
-    <div className="chat__input">
-      {listing !== undefined && listing.open && (
-        <div className="chat__input-listing">
-          <ListingCard listing={listing} />
-        </div>
-      )}
-      <form
-        className="chat__input-field-container"
-        onSubmit={handleSubmit}
-      >
-        
-        <input
-          type="text"
-          placeholder={`send messsage to ${user ? user : ''}`}
-          className="chat__input-field"
-          onChange={handleChange}
-          value={textMessage}
-        />
-        <button className="send-message-btn">
-          <span className="large-screen-send">send</span>{' '}
-          <img src={sendIcon} alt="send icon" />
-        </button>
-      </form>
-      {/* </div> */}
-      <div>
-        {/* mobile quick actions */}
-        <div className="mobile-quick-actions">
-          <button
-            className="quick-actions-btn"
-            onClick={() => setShowOptions(!showOptions)}
-          >
-            Quick actions
+      <div className="chat__input">
+        {listing !== undefined && listing.open && (
+          <div className="chat__input-listing">
+            <ListingCard listing={listing} />
+          </div>
+        )}
+        <form
+          className="chat__input-field-container"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            placeholder={`send messsage to ${user ? user : ''}`}
+            className="chat__input-field"
+            onChange={handleChange}
+            value={textMessage}
+          />
+          <button className="send-message-btn">
+            <span className="large-screen-send">send</span>{' '}
+            <img src={sendIcon} alt="send icon" />
           </button>
-
-          {showOptions && (
-            <Fragment>
-              <div className="quick-actions-options">
-                <button className="share-account-details" onClick={handleBankAccountList}>
-                  Share account details
-                </button>
-                <button className="update-listing-status" onClick={handleCloseTrade}>
-                  Update listing status
-                </button>
-              </div>
-            </Fragment>
-          )}
-        </div>
-
-        {/* desktop quick actions */}
-        <div className="largescreen-quick-actions">
-          <span className="quick-actions-btn">Quick actions</span>
-          <div className="vertical-line"></div>
-          <div className="quick-actions-options">
+        </form>
+        {/* </div> */}
+        <div>
+          {/* mobile quick actions */}
+          <div className="mobile-quick-actions">
             <button
-              className="share-account-details"
-              onClick={handleBankAccountList}
+              className="quick-actions-btn"
+              onClick={() => setShowOptions(!showOptions)}
             >
-              Share account details
+              Quick actions
             </button>
-            <button className="update-listing" onClick={handleCloseTrade}>
-              Update listing status
-            </button>
+
+            {showOptions && (
+              <Fragment>
+                <div className="quick-actions-options">
+                  <button
+                    className="share-account-details"
+                    onClick={handleBankAccountList}
+                  >
+                    Share account details
+                  </button>
+                  <button
+                    className="update-listing-status"
+                    onClick={handleCloseTrade}
+                  >
+                    Update listing status
+                  </button>
+                </div>
+              </Fragment>
+            )}
+          </div>
+
+          {/* desktop quick actions */}
+          <div className="largescreen-quick-actions">
+            <span className="quick-actions-btn">Quick actions</span>
+            <div className="vertical-line"></div>
+            <div className="quick-actions-options">
+              <button
+                className="share-account-details"
+                onClick={handleBankAccountList}
+              >
+                Share account details
+              </button>
+              <button
+                className="update-listing"
+                onClick={handleCloseTrade}
+              >
+                Update listing status
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
@@ -225,8 +245,8 @@ const mapDispatchToProps = (dispatch) => ({
         rate,
       ),
     ),
-  listingChanged: (status, by, have, need, rate) =>
-    dispatch(listingChanged(status, by, have, need, rate)),
+  listingChanged: (status, by, have, need, rate, extra, id) =>
+    dispatch(listingChanged(status, by, have, need, rate, extra, id)),
 
   updateMessageStack: (conversationId, stackNUmber, createdAt, id) =>
     dispatch(
