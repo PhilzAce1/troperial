@@ -9,12 +9,13 @@ import { pushNotification } from '../libs/pushNotification';
 import {
   onCreateMessage as OnCreateMessage,
   onUpdateMessage as OnUpdateMessage,
-  // onCreateConvoLink,
+  onCreateConvoLink,
 } from '../libs/graphql';
 import {
   newExternalMessage,
   loadMessages,
   updateMessageSeen,
+  setUserConvoConnection,
 } from '../actions/conversationActions';
 import { findConvo } from '../containers/Chat/helpers';
 function AuthenticatedRoute({
@@ -22,6 +23,7 @@ function AuthenticatedRoute({
   conversation,
   newExternalMessage,
   loadMessages,
+  setUserConvoConnection,
   updateMessageSeen,
   ...rest
 }) {
@@ -40,6 +42,23 @@ function AuthenticatedRoute({
   );
 
   useEffect(() => {
+    let convoSub = conversation.user.convoConnectionCreated;
+
+    if (conversation.user && conversation.user.id && !convoSub) {
+      setUserConvoConnection(true);
+      convoSub = true;
+      console.log(convoSub);
+      const subscription = API.graphql(
+        graphqlOperation(onCreateConvoLink, {
+          convoLinkUserId: conversation.user.id,
+        }),
+      ).subscribe({
+        next: (eventData) => {
+          console.log(eventData);
+        },
+      });
+      subscription.unsubscribe();
+    }
     if (
       conversation &&
       conversation.conversations.length > 0 &&
@@ -62,12 +81,7 @@ function AuthenticatedRoute({
                 messageReceived.messageConversationId,
               );
               if (convers.convoExist) {
-                // if (
-                //   !convers.messageLoaded &&
-                //   convers.convo.messages.length <= 0
-                // ) {
                 messageLoad(messageReceived.messageConversationId);
-                // }\
                 if (
                   conversation.user.id !== messageReceived.authorId
                 ) {
@@ -99,18 +113,7 @@ function AuthenticatedRoute({
         }
       });
     }
-    // if (conversation.user && conversation.user.id) {
-    //   const subscription = API.graphql(
-    //     graphqlOperation(onCreateConvoLink, {
-    //       convoLinkUserId: conversation.user.id,
-    //     }),
-    //   ).subscribe({
-    //     next: (eventData) => {
-    //       console.log(eventData);
-    //     },
-    //   });
-    //   return () => subscription.unsubscribe();
-    // }
+
     // eslint-disable-next-line
   }, [
     newExternalMessage,
@@ -140,6 +143,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadMessages: (message, conversationId) =>
     dispatch(loadMessages(message, conversationId)),
   updateMessageSeen: (data) => dispatch(updateMessageSeen(data)),
+  setUserConvoConnection: (data) =>
+    dispatch(setUserConvoConnection(data)),
 });
 
 export default connect(

@@ -146,3 +146,16 @@ export const updateUserProfile = (data) => {
     payload: data,
   };
 };
+export const setReminder = (data) => (dispatch) => {
+  console.log('workign');
+  return dispatch({
+    type: 'SET_REMINDER',
+    payload: data,
+  });
+};
+export const setUserConvoConnection = (data) => {
+  return {
+    type: 'CONVO_CONNECTION_STATUS',
+    payload: data,
+  };
+};
