@@ -72,14 +72,14 @@ const MyListings = ({
             transactionId,
             accountId,
             personId,
-            prefferedRate,
+            preferredExchangeRate,
             privateListing
           } = transaction;
           return (
             <TableContent
               have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
               need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
-              rate={`USD 1 > NGN 470`}
+              rate={`${currency_symbols[sourceCurrency]} 1 > ${currency_symbols[destinationCurrency]} ${preferredExchangeRate}`}
               status={transactionState}
               userListings={true}
               key={transactionId}
@@ -94,7 +94,7 @@ const MyListings = ({
                   transactionId,
                   accountId,
                   personId,
-                  prefferedRate,
+                  preferredExchangeRate,
                   privateListing
                 )
               }
