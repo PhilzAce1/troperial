@@ -36,11 +36,11 @@ const ChatInput = ({
   const handleChange = (e) => {
     setTextMessage(e.target.value);
   };
+  console.log(currentUserMessage);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       scrollToBottom();
-
       setTextMessage('');
       const stackId = getStack(selectedConversation.stack);
       if (textMessage === '') return;
@@ -141,7 +141,6 @@ const ChatInput = ({
               outline: 'none',
             }}
             onClick={() => {
-              console.log('somthing clicked');
               setReminder(false);
             }}
           >
@@ -273,9 +272,11 @@ const mapDispatchToProps = (dispatch) => ({
       updateMessageStack(conversationId, stackNUmber, createdAt, id),
     ),
   sortConversation: () => dispatch(sortConversation()),
-  // setReminder,
+  setReminder: () => dispatch(setReminder()),
 });
-export default connect(mapStateToProps, {
-  ...mapDispatchToProps,
-  setReminder,
-})(ChatInput);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ChatInput);
+
+// setReminder
