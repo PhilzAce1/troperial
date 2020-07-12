@@ -1,4 +1,10 @@
-import { CREATE_USER, CHECK_USER_PROFILE, SET_USER_COGNITO_EMAIL, SET_CURRENT_USER_DETAILS, GET_ALL_ACCOUNTS } from '../actions/types';
+import {
+  CREATE_USER,
+  CHECK_USER_PROFILE,
+  SET_USER_COGNITO_EMAIL,
+  SET_CURRENT_USER_DETAILS,
+  GET_ALL_ACCOUNTS,
+} from '../actions/types';
 
 const initialState = {
   currentUser: null,
@@ -6,11 +12,11 @@ const initialState = {
   userCognitoEmail: null,
   firstName: '',
   lastName: '',
-  userName:'',
-  password:'',
-  phoneNumber:'',
+  userName: '',
+  password: '',
+  phoneNumber: '',
   verified: null,
-  accountId:'',
+  accountId: '',
   accounts: null,
   phoneId: '',
   emailId: '',
@@ -20,21 +26,32 @@ export default function (state = initialState, action) {
     case GET_ALL_ACCOUNTS:
       return {
         ...state,
-        accounts: action.payload
-      }
-    case SET_CURRENT_USER_DETAILS: 
-    const {firstName, lastName, userAlias, number, verified, accountId, phoneId, emailId} = action.payload;
-    return {
-      ...state,
-      firstName,
-      lastName,
-      userName: userAlias,
-      phoneNumber: number,
-      verified,
-      accountId,
-      phoneId,
-      emailId
-    }
+        accounts: action.payload,
+      };
+    case SET_CURRENT_USER_DETAILS:
+      const {
+        firstName,
+        lastName,
+        userAlias,
+        number,
+        verified,
+        accountId,
+        phoneId,
+        emailId,
+        personId,
+      } = action.payload;
+      return {
+        ...state,
+        firstName,
+        lastName,
+        userName: userAlias,
+        phoneNumber: number,
+        verified,
+        accountId,
+        phoneId,
+        emailId,
+        personId,
+      };
     case CREATE_USER:
       return {
         ...state,
@@ -45,11 +62,11 @@ export default function (state = initialState, action) {
         ...state,
         profileUpdated: action.payload,
       };
-      case SET_USER_COGNITO_EMAIL: 
+    case SET_USER_COGNITO_EMAIL:
       return {
         ...state,
-        userCognitoEmail: action.payload 
-      }
+        userCognitoEmail: action.payload,
+      };
     default:
       return state;
   }

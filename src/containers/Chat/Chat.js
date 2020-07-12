@@ -33,13 +33,12 @@ const Chat = ({
   userDetails,
   userConversations,
   user,
+  state,
 }) => {
   const [showBankAccountList, setShowBankAccountList] = useState(
     false,
   );
-  const [showCloseTrade, setShowCloseTrade] = useState(
-    false,
-  );
+  const [showCloseTrade, setShowCloseTrade] = useState(false);
   const getUserData = useCallback(async () => {
     // user.username = 'runo';
     try {
@@ -64,7 +63,7 @@ const Chat = ({
     ) {
       try {
         // create a user for the chat MS
-        const a = await createUser(user.username);
+        const a = await createUser(user.username, user.personId);
         if (a.success) {
           let {
             payload: {
@@ -106,9 +105,9 @@ const Chat = ({
   const handleBankAccountList = () =>
     setShowBankAccountList(!showBankAccountList);
 
-    const handleCloseTrade = () => {
-      setShowCloseTrade(!showCloseTrade);
-    }
+  const handleCloseTrade = () => {
+    setShowCloseTrade(!showCloseTrade);
+  };
 
   return (
     <Fragment>
@@ -119,15 +118,26 @@ const Chat = ({
         />
       ) : null}
       {showCloseTrade ? (
-        <CloseTrade
-        handleCloseTrade={handleCloseTrade}
-        />
+        <CloseTrade handleCloseTrade={handleCloseTrade} />
       ) : null}
       <div className="chat-main-container">
-       {/* Preloader */}
-        {/* <div style={{height:'100vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
-      <ScaleLoader size={150} color={'#0383ef'} loading={true} />
-        </div> */}
+        {/* Preloader */}
+        {!conversation.conversationLoaded && (
+          <div
+            style={{
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <ScaleLoader
+              size={150}
+              color={'#0383ef'}
+              loading={true}
+            />
+          </div>
+        )}
         {/* End of Preloader */}
         <section className="chat__container">
           <div className="chat-grid-container">
@@ -154,6 +164,7 @@ const Chat = ({
 };
 const mapStateToProps = (state) => {
   return {
+    state,
     conversation: state.conversation,
     conversations: state.conversation.conversations,
     user: state.auth,

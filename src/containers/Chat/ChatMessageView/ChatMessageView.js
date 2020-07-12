@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import './ChatMessageView.css';
 import ChatInput from '../ChatInput/ChatInput';
-import dp from '../../../assets/images/profile-picture.png';
+// import dp from '../../../assets/images/profile-picture.png';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ChatBubble from '../../../components/ChatBubble/ChatBubble';
 import ScrollToBottom from 'react-scroll-to-bottom';

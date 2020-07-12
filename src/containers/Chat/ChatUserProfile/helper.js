@@ -49,6 +49,7 @@ const userExist = async (data) => {
         error: 'personId is missing',
       };
     }
+    console.log(userData.username, userData.personId);
 
     return {
       success: true,

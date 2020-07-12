@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import BankListCard from './BankListCard';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { getAccount } from '../../actions/authActions';
-import { addNewAccountDetails } from '../../actions/conversationActions';
+import {
+  addNewAccountDetails,
+  setReminder,
+} from '../../actions/conversationActions';
 import AddBankAccount from '../AddBankAccout/AddBankAccount';
 import { sendAccountDetail } from '../../libs/conversationHelpers';
 import close from '../../assets/images/Close.png';
@@ -12,6 +15,7 @@ const BankAccountList = ({
   handleBankAccountList,
   getAccount,
   addNewAccountDetails,
+  setReminder,
   accounts,
   accountId,
   conversation,
@@ -29,6 +33,7 @@ const BankAccountList = ({
         conversation.user.id,
         params,
       );
+      setReminder(true);
       return handleBankAccountList();
     }
     if (accounts === null) {
@@ -98,4 +103,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAccount,
   addNewAccountDetails,
+  setReminder,
 })(BankAccountList);
