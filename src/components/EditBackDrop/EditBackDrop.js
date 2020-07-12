@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 const EditBackDrop = ({
   handleEditBackDrop,
 }) => {
-
-//   useEffect(()=> {
-//   }, [])
- 
   return (
     <div className="edit_backdrop">
       <div
