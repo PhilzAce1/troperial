@@ -26,8 +26,10 @@ const ChatInput = ({
   handleBankAccountList,
   handleCloseTrade,
   setReminder,
+  transaction,
   state,
 }) => {
+  console.log(selectedConversation, transaction)
   const [showOptions, setShowOptions] = useState(false);
   const [textMessage, setTextMessage] = useState('');
   const listing = selectedConversation.listing;
@@ -189,12 +191,14 @@ const ChatInput = ({
                   >
                     Share account details
                   </button>
-                  <button
-                    className="update-listing-status"
-                    onClick={handleCloseTrade}
-                  >
-                    Update listing status
-                  </button>
+                  {transaction && (
+                <button
+                className="update-listing-status"
+                onClick={handleCloseTrade}
+              >
+                Update listing status
+              </button>
+              )}
                 </div>
               </Fragment>
             )}
@@ -211,12 +215,14 @@ const ChatInput = ({
               >
                 Share account details
               </button>
-              <button
+              {transaction && (
+                <button
                 className="update-listing"
                 onClick={handleCloseTrade}
               >
                 Update listing status
               </button>
+              )}
             </div>
           </div>
         </div>
@@ -230,6 +236,7 @@ const mapStateToProps = (state) => {
     conversation: state.conversation,
     listing: state.conversation.listing,
     selectedConversation: state.conversation.selectedConversation,
+    transaction: state.conversation.selectedConversation.listing.transaction,
     state,
   };
 };
