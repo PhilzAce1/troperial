@@ -3,7 +3,7 @@ import React, {
   useEffect,
   Fragment,
   useContext,
-  useCallback
+  useCallback,
 } from 'react';
 import './PostTrade.css';
 import HybridInput from '../HybridInput/HybridInput';
@@ -22,7 +22,7 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../libs/contextLib';
 
 import { setStep } from '../../actions/uiActions';
-import { CONFIRM_POST_LISTING} from '../../actions/types';
+import { CONFIRM_POST_LISTING } from '../../actions/types';
 const currency_title = {
   USD: 'United States Dollar',
   NGN: 'Nigerian Naira',
@@ -37,7 +37,7 @@ const PostTrade = ({
   getAllRates,
   getTransactions,
   verified,
-  setStep
+  setStep,
 }) => {
   const history = useHistory();
   const { isAuthenticated } = useContext(AppContext);
@@ -86,34 +86,41 @@ const PostTrade = ({
   );
   const { have, need } = currency;
 
-
-  const calculateRate = useCallback( (have, need) => {
-    need = parseFloat(need);
-    have = parseFloat(have);
-    const rate = need * have;
-    setCalculatedRate(rate);
-    if (!sourceAmount) {
-      return;
-    }
-    const expectedValue = parseFloat(sourceAmount) * rate;
-    setConvertedSourceAmount(expectedValue);
-  }, [sourceAmount])
-  const filterRatesByCurrency = useCallback((currency, rates) => {
-    if (!rates || rates.length === 0) {return null};
-    try {
-      const { conversionRates } = rates.filter(
-        (rate) => rate.baseCurrency === currency,
-      )[0];
-      setPrefferedRate({
-        have: conversionRates[have],
-        need: conversionRates[need],
-      })
-      calculateRate(conversionRates[have], conversionRates[need])
-      setConversionRates(conversionRates);
-    }catch(e) {
-      alert('Internal System error, chech back in a 10minutes')
-    }
-  }, [calculateRate, have, need])
+  const calculateRate = useCallback(
+    (have, need) => {
+      need = parseFloat(need);
+      have = parseFloat(have);
+      const rate = need * have;
+      setCalculatedRate(rate);
+      if (!sourceAmount) {
+        return;
+      }
+      const expectedValue = parseFloat(sourceAmount) * rate;
+      setConvertedSourceAmount(expectedValue);
+    },
+    [sourceAmount],
+  );
+  const filterRatesByCurrency = useCallback(
+    (currency, rates) => {
+      if (!rates || rates.length === 0) {
+        return null;
+      }
+      try {
+        const { conversionRates } = rates.filter(
+          (rate) => rate.baseCurrency === currency,
+        )[0];
+        setPrefferedRate({
+          have: conversionRates[have],
+          need: conversionRates[need],
+        });
+        calculateRate(conversionRates[have], conversionRates[need]);
+        setConversionRates(conversionRates);
+      } catch (e) {
+        alert('Internal System error, chech back in a 10minutes');
+      }
+    },
+    [calculateRate, have, need],
+  );
 
   const changeUserHave = (data) => {
     setCurrency({ ...currency, have: data });
@@ -125,13 +132,13 @@ const PostTrade = ({
       ...prefferedRate,
       need: conversionRates[data],
     });
-    calculateRate(conversionRates[have], conversionRates[data])
+    calculateRate(conversionRates[have], conversionRates[data]);
   };
 
   const handleSourceAmountChange = (e) => {
     if (!e.target.value) {
       setSourceAmount('');
-    } else{
+    } else {
       setSourceAmount(e.target.value);
     }
     if (!calculatedRate || !e.target.value) {
@@ -140,7 +147,6 @@ const PostTrade = ({
     const expectedValue = parseFloat(e.target.value) * calculatedRate;
     setConvertedSourceAmount(expectedValue);
   };
-
 
   const handlePrefferedRateForHave = (e) => {
     setPrefferedRate({
@@ -173,11 +179,17 @@ const PostTrade = ({
       destinationAmount: convertedSourceAmount,
       destinationCurrency: currency.need,
       prefferedExchangeRate: calculatedRate,
-      privateListing: checked
-    })
+      privateListing: checked,
+    });
 
-    if(sourceAmount === '' || prefferedRate.have === '' || prefferedRate.need === '') {
-      return toast.error('Please ensure that all fields are correctly filled')
+    if (
+      sourceAmount === '' ||
+      prefferedRate.have === '' ||
+      prefferedRate.need === ''
+    ) {
+      return toast.error(
+        'Please ensure that all fields are correctly filled',
+      );
     }
     if (!isAuthenticated) {
       localStorage.setItem(
@@ -188,78 +200,90 @@ const PostTrade = ({
           destinationAmount: convertedSourceAmount,
           destinationCurrency: currency.need,
           exchangeRate: calculatedRate,
-          privateListing: checked
+          privateListing: checked,
         }),
       );
       return history.push('/signin');
     }
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
-    let accountId = currentUserInfo.attributes['custom:accountId']
+    let accountId = currentUserInfo.attributes['custom:accountId'];
     setLoading(true);
     try {
-        const response = await axios.post(
-          `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
-          {
-            verifiedPerson: verified,
-            sourceAmount: sourceAmount,
-            sourceCurrency: currency.have,
-            destinationAmount: convertedSourceAmount,
-            destinationCurrency: currency.need,
-            prefferedExchangeRate: calculatedRate,
-            personId: personId,
-            privateListing: checked
+      const response = await axios.post(
+        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+        {
+          verifiedPerson: verified,
+          sourceAmount: sourceAmount,
+          sourceCurrency: currency.have,
+          destinationAmount: convertedSourceAmount,
+          destinationCurrency: currency.need,
+          prefferedExchangeRate: calculatedRate,
+          personId: personId,
+          privateListing: checked,
+        },
+        {
+          headers: {
+            Authorization: authToken,
           },
-          {
-            headers: {
-              Authorization: authToken
-            }
-          }
-        );
-      setStep(CONFIRM_POST_LISTING)
+        },
+      );
+      console.log(response.data);
+      setStep(CONFIRM_POST_LISTING);
       setLoading(false);
-      console.log(response, calculatedRate);
-      console.log({
-        verifiedPerson: verified,
-        sourceAmount: sourceAmount,
-        sourceCurrency: currency.have,
-        destinationAmount: convertedSourceAmount,
-        destinationCurrency: currency.need,
-        prefferedExchangeRate: calculatedRate,
-        personId: personId,
-        privateListing: checked
-      })
     } catch (e) {
-      console.log(`ERROR: ${e.message}`);
-      toast.error('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
+      e.response.data.message.includes(
+        'User has exceeded max count (3) for unverified transaction listings',
+      )
+        ? toast.error(
+            'Unverified accounts are limited to posting more than 3 listings, please verify your account to post more listings!',
+          )
+        : toast.error(
+            `Please Verify your account to be able to post listings above ${currency_symbols[currency.have]}1000`,
+          );
       setLoading(false);
     }
   };
 
-  const postListing = useCallback(async (data) => {
-    const authToken = localStorage.getItem('authToken');
-    localStorage.removeItem('unAuthenticatedUserListing');
-    const currentUserInfo = await Auth.currentUserInfo();
-    let personId = currentUserInfo.attributes['custom:personId'];
-    let accountId = currentUserInfo.attributes['custom:accountId']
-    console.log({ ...data, personId, verifiedPerson: verified, accountId });
-    try {
-     await axios.post(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
-        { ...data, personId, verifiedPerson: verified },
-        {
-          headers: {
-            Authorization: authToken
-          }
-        }
-      );
-      setStep(CONFIRM_POST_LISTING);
-    } catch (e) {
-      console.log(`ERROR: ${e}`);
-      toast.error('Please kindly verify your account to post more trades. You can no longer post a new listing until you verify your account');
-      setLoading(false);
-    }
-  }, [setStep, verified])
+  const postListing = useCallback(
+    async (data) => {
+      const authToken = localStorage.getItem('authToken');
+      localStorage.removeItem('unAuthenticatedUserListing');
+      const currentUserInfo = await Auth.currentUserInfo();
+      let personId = currentUserInfo.attributes['custom:personId'];
+      let accountId = currentUserInfo.attributes['custom:accountId'];
+      console.log({
+        ...data,
+        personId,
+        verifiedPerson: verified,
+        accountId,
+      });
+      try {
+        await axios.post(
+          `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+          { ...data, personId, verifiedPerson: verified },
+          {
+            headers: {
+              Authorization: authToken,
+            },
+          },
+        );
+        setStep(CONFIRM_POST_LISTING);
+      } catch (e) {
+        e.response.data.message.includes(
+          'User has exceeded max count (3) for unverified transaction listings',
+        )
+          ? toast.error(
+              'Unverified accounts are limited to posting more than 3 listings, please verify your account to post more listings!',
+            )
+          : toast.error(
+              `Please Verify your account to be able to post listings above ${currency_symbols[data.sourceCurrency]}1000`,
+            );
+        setLoading(false);
+      }
+    },
+    [setStep, verified],
+  );
   useEffect(() => {
     if (
       localStorage.getItem('unAuthenticatedUserListing') &&
@@ -277,50 +301,54 @@ const PostTrade = ({
       };
       fetchRates();
     }
-  }, [getAllRates, currency.have, filterRatesByCurrency, isAuthenticated, postListing]);
+  }, [
+    getAllRates,
+    currency.have,
+    filterRatesByCurrency,
+    isAuthenticated,
+    postListing,
+  ]);
 
   return (
     <Fragment>
-          <ToastContainer />
-        <form
-          className="post__listing-container"
-          onSubmit={handleSubmit}
-        >
-          <h2 className="title">{title}</h2>
-          {/* {error ? <CustomAlert message={error} onClick={() => setError('')}/> : null} */}
-          <div className="first__form__group">
-            <HybridInput
-              currency={have}
-              changeCurrencyHandler={changeUserHave}
-              line={true}
-              onChange={handleSourceAmountChange}
-              value={sourceAmount}
-              label="I have"
-            />
-            <HybridInput
-              currency={need}
-              changeCurrencyHandler={changeUserNeed}
-              line={true}
-              value={currency_title[need]}
-              readOnly={true}
-              label="I need"
-            />
-            {conversionRates === null ? null : (
-              <p className="trending__market__rate summary">
-                Trending market rate{' '}
-                <span className="price__summary">
-                  -{' '}
-                  {have === 'NGN' ? `${currency_symbols[need]}${
-                    conversionRates[have]
-                  } = ${currency_symbols[have]}${conversionRates[need]}`: `${currency_symbols[have]}${
-                    conversionRates[have]
-                  } = ${currency_symbols[need]}${conversionRates[need]}`}
-                </span>
-              </p>
-            )}
-          </div>
-          <h4 className="subtitle">Preffered exchange rate</h4>
-          <div className="inline_hybridInput">
+      <ToastContainer />
+      <form
+        className="post__listing-container"
+        onSubmit={handleSubmit}
+      >
+        <h2 className="title">{title}</h2>
+        {/* {error ? <CustomAlert message={error} onClick={() => setError('')}/> : null} */}
+        <div className="first__form__group">
+          <HybridInput
+            currency={have}
+            changeCurrencyHandler={changeUserHave}
+            line={true}
+            onChange={handleSourceAmountChange}
+            value={sourceAmount}
+            label="I have"
+          />
+          <HybridInput
+            currency={need}
+            changeCurrencyHandler={changeUserNeed}
+            line={true}
+            value={currency_title[need]}
+            readOnly={true}
+            label="I need"
+          />
+          {conversionRates === null ? null : (
+            <p className="trending__market__rate summary">
+              Trending market rate{' '}
+              <span className="price__summary">
+                -{' '}
+                {have === 'NGN'
+                  ? `${currency_symbols[need]}${conversionRates[have]} = ${currency_symbols[have]}${conversionRates[need]}`
+                  : `${currency_symbols[have]}${conversionRates[have]} = ${currency_symbols[need]}${conversionRates[need]}`}
+              </span>
+            </p>
+          )}
+        </div>
+        <h4 className="subtitle">Preffered exchange rate</h4>
+        <div className="inline_hybridInput">
           <div>
             <HybridInput
               value={prefferedRate.have}
@@ -329,36 +357,37 @@ const PostTrade = ({
               name="have"
             />
           </div>
-            <i className="exchange-desktop fas fa-exchange-alt"></i>
-           <div>
-           </div>
-            <HybridInput
-              value={prefferedRate.need}
-              currency={need}
-              onChange={handlePrefferedRateForNeed}
-              name="need"
-            />
-          </div>
-          {!convertedSourceAmount ? null : (
-            <p className="summary">
-              At this rate i'd get{' '}
-              <span className="price__summary">
-                {`${
-                  currency_symbols[need]
-                }${convertedSourceAmount.toLocaleString(undefined, {
-                  minimumFractionDigits: 4,
-                })}`}
-              </span>
-            </p>
-          )}
-          <div className="checkbox__area">
-            <input type="checkbox" onChange={() => setChecked(!checked)} checked={checked}/>
-            <p>Show to only trusted traders</p>
-          </div>
-          <CustomButton loading={loading}>
-            Post this Trade
-          </CustomButton>
-        </form>
+          <i className="exchange-desktop fas fa-exchange-alt"></i>
+          <div></div>
+          <HybridInput
+            value={prefferedRate.need}
+            currency={need}
+            onChange={handlePrefferedRateForNeed}
+            name="need"
+          />
+        </div>
+        {!convertedSourceAmount ? null : (
+          <p className="summary">
+            At this rate i'd get{' '}
+            <span className="price__summary">
+              {`${
+                currency_symbols[need]
+              }${convertedSourceAmount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+              })}`}
+            </span>
+          </p>
+        )}
+        <div className="checkbox__area">
+          <input
+            type="checkbox"
+            onChange={() => setChecked(!checked)}
+            checked={checked}
+          />
+          <p>Show to only trusted traders</p>
+        </div>
+        <CustomButton loading={loading}>Post this Trade</CustomButton>
+      </form>
     </Fragment>
   );
 };
@@ -368,10 +397,10 @@ PostTrade.defaultProps = {
 };
 const mapStateToProps = (state) => ({
   rates: state.transaction.rates,
-  verified: state.auth.verified
+  verified: state.auth.verified,
 });
 export default connect(mapStateToProps, {
   getAllRates,
   getTransactions,
-  setStep
+  setStep,
 })(PostTrade);

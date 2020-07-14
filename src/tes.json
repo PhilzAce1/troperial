@@ -1,0 +1,5 @@
+{
+	"status": 400,
+	"message": "User has exceeded max count (3) for unverified transaction listings",
+	"errorResponseList": [ { "errorMessage": "User has exceeded max count (3) for unverified transaction listings" } ]
+}
