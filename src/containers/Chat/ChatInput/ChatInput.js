@@ -29,14 +29,12 @@ const ChatInput = ({
   transaction,
   state,
 }) => {
-  console.log(selectedConversation, transaction)
   const [showOptions, setShowOptions] = useState(false);
   const [textMessage, setTextMessage] = useState('');
   const listing = selectedConversation.listing;
   const handleChange = (e) => {
     setTextMessage(e.target.value);
   };
-  console.log(currentUserMessage);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -191,13 +189,13 @@ const ChatInput = ({
                     Share account details
                   </button>
                   {transaction && (
-                <button
-                className="update-listing-status"
-                onClick={handleCloseTrade}
-              >
-                Update listing status
-              </button>
-              )}
+                    <button
+                      className="update-listing-status"
+                      onClick={handleCloseTrade}
+                    >
+                      Update listing status
+                    </button>
+                  )}
                 </div>
               </Fragment>
             )}
@@ -216,11 +214,11 @@ const ChatInput = ({
               </button>
               {transaction && (
                 <button
-                className="update-listing"
-                onClick={handleCloseTrade}
-              >
-                Update listing status
-              </button>
+                  className="update-listing"
+                  onClick={handleCloseTrade}
+                >
+                  Update listing status
+                </button>
               )}
             </div>
           </div>
@@ -235,7 +233,8 @@ const mapStateToProps = (state) => {
     conversation: state.conversation,
     listing: state.conversation.listing,
     selectedConversation: state.conversation.selectedConversation,
-    transaction: state.conversation.selectedConversation.listing.transaction,
+    transaction:
+      state.conversation.selectedConversation.listing.transaction,
     state,
   };
 };

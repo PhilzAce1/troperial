@@ -185,7 +185,6 @@ export default function (state = State, action) {
         action.payload.rate === null ||
         action.payload.need === null
       ) {
-        console.log('something is supposed to happen na');
         convo.listing.open = action.payload.status;
         return newState;
       }
@@ -478,11 +477,8 @@ export default function (state = State, action) {
         (conversation) =>
           conversation.id === newState.selectedConversation.id,
       );
-      console.log(convo);
       if (!convo) return newState;
-      console.log(convo);
       convo.isReminder = action.payload;
-      // console.log(action.payload);
       return newState;
     }
     case 'CONVO_CONNECTION_STATUS': {

@@ -76,6 +76,8 @@ function AuthenticatedRoute({
               const {
                 onCreateMessage: messageReceived,
               } = eventData.value.data;
+              // console.log(messageReceived);
+
               const convers = findConvo(
                 conversation.conversations,
                 messageReceived.messageConversationId,
@@ -85,7 +87,14 @@ function AuthenticatedRoute({
                 if (
                   conversation.user.id !== messageReceived.authorId
                 ) {
-                  pushNotification(messageReceived.content);
+                  if (messageReceived.content === 'none') {
+                    console.log('somethig');
+                    pushNotification(
+                      'You received an account detail',
+                    );
+                  } else {
+                    pushNotification(messageReceived.content);
+                  }
                 }
                 newExternalMessage(messageReceived);
               }
