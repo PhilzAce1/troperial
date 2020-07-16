@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "troperialchat",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "S3DeploymentBucket": "amplify-troperialchat-philenv-224205-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/beac096a575381d7ac49a4c98253b95940a34daa"
+}
