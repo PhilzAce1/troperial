@@ -8,7 +8,9 @@ import { currency_titles } from '../../constants/currency_titles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { editMyTransaction } from '../../actions/myTransactionActions';
+import close from '../../assets/svgs/close-x.svg';
 const EditTrade = ({
+  handleEditBackDrop,
   editMyTransaction,
   title,
   rates,
@@ -85,8 +87,8 @@ const EditTrade = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values.prefferedRate)
-    editMyTransaction(values)
+    console.log(values.prefferedRate);
+    editMyTransaction(values);
   };
   return (
     <Fragment>
@@ -95,7 +97,13 @@ const EditTrade = ({
         className="post__listing-container"
         onSubmit={handleSubmit}
       >
-        <h2 className="title">{title}</h2>
+        <div className="header">
+          <h2 className="title">{title}</h2>
+          <button className="close" onClick={handleEditBackDrop}>
+            <img src={close} alt="close" />
+            <span>close</span>
+          </button>
+        </div>
         <div className="first__form__group">
           <HybridInput
             currency={values.sourceCurrency}
@@ -172,4 +180,6 @@ const mapStateToProps = (state) => ({
   prefferedRate: state.myTransaction.prefferedRate,
   privateListing: state.myTransaction.privateListing,
 });
-export default connect(mapStateToProps, {editMyTransaction})(EditTrade);
+export default connect(mapStateToProps, { editMyTransaction })(
+  EditTrade,
+);

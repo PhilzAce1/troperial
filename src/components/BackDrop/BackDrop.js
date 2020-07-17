@@ -36,7 +36,7 @@ const BackDrop = ({
     } else if (step === CONFIRM_PROFILE_UPDATE) {
       return <VerifiedNotification message="You can now proceed to start a conversation from your preferred listing or click the button to Post A Listing" btnMessage="Post A Listing" onClick={() => setStep(CREATE_TRANSACTION)} />
     } else if (step === CREATE_TRANSACTION) {
-      return <PostTrade />;
+      return <PostTrade handleBackDrop={handleBackDrop}/>;
     } else if(step === CONFIRM_POST_LISTING) {
       return <VerifiedNotification title="Your Listing was successfully Posted" message="You can now proceed to start a conversation from your preferred listing or click the button to Post another Listing" btnMessage="Post A Listing" onClick={() => setStep(CREATE_TRANSACTION)}/>
     } else {

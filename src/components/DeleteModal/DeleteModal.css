@@ -7,8 +7,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  cursor: pointer;
 }
 .delete__modal {
+  cursor: initial;
   position: relative;
   background: #fff;
   text-align: center;
@@ -43,6 +45,7 @@
   background-color: var(--danger-red-icon);
   padding: 10px 14px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .delete__modal-cancel-btn {
@@ -50,6 +53,7 @@
   background: transparent;
   color: var(--dark-grey);
   font-size: 1rem;
+  cursor: pointer;
 }
 .customButton:hover {
   cursor: pointer;
@@ -60,6 +64,7 @@
     left: 85%;
     top: 15px;
     width: 25px;
+    cursor: pointer;
 }
 @media (min-width: 768px) {
     .delete__modal {

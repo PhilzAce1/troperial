@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import './PostTrade.css';
+import close from '../../assets/svgs/close-x.svg';
 import HybridInput from '../HybridInput/HybridInput';
 import CustomButton from '../CustomButton/CustomButton';
 import { connect } from 'react-redux';
@@ -38,6 +39,9 @@ const PostTrade = ({
   getTransactions,
   verified,
   setStep,
+  handleBackDrop,
+  showCheckBox,
+  showCloseBtn
 }) => {
   const history = useHistory();
   const { isAuthenticated } = useContext(AppContext);
@@ -316,7 +320,16 @@ const PostTrade = ({
         className="post__listing-container"
         onSubmit={handleSubmit}
       >
-        <h2 className="title">{title}</h2>
+        
+            <div className="header">
+            <h2 className="title">{title}</h2>
+             {showCloseBtn && (
+               <button className="close" onClick={handleBackDrop}>
+               <img src={close} alt="close" />
+               <span>close</span>
+             </button>
+             )}
+          </div>
         {/* {error ? <CustomAlert message={error} onClick={() => setError('')}/> : null} */}
         <div className="first__form__group">
           <HybridInput
@@ -378,7 +391,9 @@ const PostTrade = ({
             </span>
           </p>
         )}
-        <div className="checkbox__area">
+      {
+        showCheckBox && (
+          <div className="checkbox__area">
           <input
             type="checkbox"
             onChange={() => setChecked(!checked)}
@@ -386,6 +401,8 @@ const PostTrade = ({
           />
           <p>Show to only trusted traders</p>
         </div>
+        )
+      }
         <CustomButton loading={loading}>Post this Trade</CustomButton>
       </form>
     </Fragment>
@@ -394,6 +411,8 @@ const PostTrade = ({
 
 PostTrade.defaultProps = {
   title: 'Post a listing',
+  showCheckBox: true,
+  showCloseBtn: true
 };
 const mapStateToProps = (state) => ({
   rates: state.transaction.rates,

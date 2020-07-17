@@ -6,6 +6,7 @@
     padding: 10px;
     border-radius: 10px;
     box-sizing: border-box;
+    background: #fff;
 }
 .listingBubble_fromMe {
     margin-left: auto;
