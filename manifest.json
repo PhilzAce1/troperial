@@ -1,0 +1,15 @@
+{
+  "short_name": "Troperial LLC",
+  "name": "The quicker, more secure and fairer way to exchange currencies across borders",
+  "icons": [
+    {
+      "src": "troperial-meta-logo-1.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
