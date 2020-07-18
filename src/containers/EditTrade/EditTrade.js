@@ -112,6 +112,7 @@ const EditTrade = ({
             onChange={handleSourceAmountChange}
             value={values.sourceAmount}
             label="I have"
+            selectedCurrency={values.sourceCurrency}
           />
           <HybridInput
             currency={values.destinationCurrency}
@@ -120,6 +121,7 @@ const EditTrade = ({
             value={currency_titles[values.destinationCurrency]}
             label="I need"
             readOnly={true}
+            selectedCurrency={values.sourceCurrency}
           />
           {filterRatesByCurrency(
             values.sourceCurrency,

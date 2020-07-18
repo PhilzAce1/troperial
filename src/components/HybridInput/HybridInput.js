@@ -12,6 +12,8 @@ const HybridInput = ({
   onChange,
   name,
   type,
+  selectedCurrency,
+  placeholder
 }) => {
   const [dropdown, setDropdown] = useState(false);
   const showDropdown = () => setDropdown(!dropdown);
@@ -31,12 +33,12 @@ const HybridInput = ({
       <div className="hybridInput__wrapper">
         <span className="hybridInput__custom-select" name="country">
           <img
-          style={{ width: '19px' }}
-          src={require(`../../assets/flags/${
-            currency ? currency : 'NGN'
-          }.png`)}
-          alt={currency}
-        />
+            style={{ width: '19px' }}
+            src={require(`../../assets/flags/${
+              currency ? currency : 'NGN'
+            }.png`)}
+            alt={currency}
+          />
           {changeCurrencyHandler === null ? null : (
             <i
               className="country-dropdown fas fa-angle-down"
@@ -51,23 +53,24 @@ const HybridInput = ({
           value={value}
           type={type}
           readOnly={readOnly}
+          placeholder={placeholder}
         />
       </div>
 
       {dropdown === false ? null : (
         <section className="custom__dropdown">
           <div className="option">
-            {supported_countries.map((country) => (
+            {supported_countries.filter(country => country.currency !== selectedCurrency).map((country) => (
               <div
                 className="select-currency-btn"
                 key={country.id}
                 onClick={() => onChangeCurrency(country.currency)}
               >
                 <img
-          style={{ width: '19px' }}
-          src={require(`../../assets/flags/${country.currency}.png`)}
-          alt={country.currency}
-        />
+                  style={{ width: '19px' }}
+                  src={require(`../../assets/flags/${country.currency}.png`)}
+                  alt={country.currency}
+                />
                 {`  (${country.currency})`}{' '}
                 {currency_titles[country.currency]}
               </div>
