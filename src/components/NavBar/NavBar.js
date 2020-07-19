@@ -19,6 +19,10 @@ const NavBar = ({
   const history = useHistory();
   const { userHasAuthenticated } = useContext(AppContext);
   const [menu, setMenu] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+  const toggleDropdown = () => {
+    setDropdown(!dropdown);
+  }
   const toggleMenu = () => {
     const menuState = menu;
     setMenu(!menuState);
@@ -72,29 +76,38 @@ const NavBar = ({
           </NavLink>
         </div>
         <div className="profile-container">
+          <span role="button" className="profile-btn" onClick={toggleDropdown}>
+            {firstName ? (
+              <Avatar
+                name={`${firstName} ${lastName}`}
+                size="30"
+                round={true}
+              />
+            ) : (
+              <Avatar name={'*'} size="30" round={true} />
+            )}
+            {username && (
+              <span className="navbar-username">{username}</span>
+            )}
+            <i className="fas fa-caret-down"></i>
+          </span>
+          {
+            dropdown && (
+              <div className="lg__profile-dropdown">
           <NavLink
-            activeClassName="profile-is-active"
-            className="profile_nav-link"
-            to="/profile"
-          >
-            <span>
-              {firstName ? (
-                <Avatar
-                  name={`${firstName} ${lastName}`}
-                  size="25"
-                  round={true}
-                />
-              ) : (
-                <Avatar name={'*'} size="25" round={true} />
-              )}
-              {username && (
-                <span className="navbar-username">{username}</span>
-              )}
-
-              <i className="fas fa-caret-down"></i>
+                activeClassName="profile-is-active"
+                className="profile_nav-link"
+                to="/profile"
+                onClick={toggleDropdown}
+              >
+                User Profile
+            </NavLink>
+            <span className="lg__screen-sign-out" onClick={handleLogout}>
+                Sign Out
             </span>
-          </NavLink>
-          <div className="border"></div>
+          </div>
+            )
+          }
         </div>
       </section>
       {/* small screen navbar */}

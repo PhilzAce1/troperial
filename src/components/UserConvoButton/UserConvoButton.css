@@ -8,6 +8,11 @@
     padding: 15px 15px;
     margin: 10px 0;
     background: #fff;
+    cursor: pointer;
+    transition: 0.5s ease-in-out all;
+}
+.user-convo-btn:hover {
+   background: var(--from-contact);
 }
 .active-chat {
     background: var(--from-contact);

@@ -71,6 +71,7 @@ const BankAccountList = ({
           <CustomButton
             loading={false}
             onClickHandler={() => testOnClick(details)}
+            disabled={!chosen}
           >
             Send Bank Details
           </CustomButton>

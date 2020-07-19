@@ -30,11 +30,9 @@
     .chat-grid-container {
         border-radius: 10px;
         background: #fff;
-        position: relative;
-        top: 85px;
         width: 95%;
         height: 85vh;
-        margin: 0 auto;
+        margin: 85px auto 0 auto;
         display: grid;
         grid-template-columns: 20% 55% 25%;
     }

@@ -4,6 +4,10 @@
   box-sizing: border-box;
   background: #fff;
 }
+.share-account-details,
+ .update-listing-status {
+   cursor: pointer;
+ }
 .reminder {
   width: 90%;
   margin: 5px auto;
@@ -14,6 +18,9 @@
   color: var(--troperial-blue);
   background: lightblue;
   border-radius: 10px;
+}
+.reminder .close-reminder {
+ cursor: pointer;
 }
 .chat__input-field-container {
   display: flex;

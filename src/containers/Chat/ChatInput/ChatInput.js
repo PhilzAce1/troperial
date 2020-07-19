@@ -144,7 +144,7 @@ const ChatInput = ({
               setReminder(false);
             }}
           >
-            <img src={close} alt="close" />
+            <img className="close-reminder" src={close} alt="close" />
           </button>
         </div>
       )}
