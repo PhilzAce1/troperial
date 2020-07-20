@@ -20,10 +20,16 @@ const BankCards = ({
   const toggleDetails = () => setToggleState(!toggle);
   return (
     <div className="bank-card">
-      <header className="bank-card-header">
+    <header className="bank-card-header">
         <div>
-        <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
-  {' '}{currency_titles[currency]}
+        <img
+          style={{ width: '19px' }}
+          src={require(`../../assets/flags/${
+            currency ? currency : 'NGN'
+          }.png`)}
+          alt={currency_titles[currency]}
+        />
+        {currency_titles[currency]}
         </div>
         {zelleEmail || userId ? (
           <div>
@@ -39,7 +45,7 @@ const BankCards = ({
       <div className="bank__details-grid">
         {userId ? (
           <div className="bank__details_grid-item">
-            <span className="label">User ID</span>
+            <span className="label">CashApp ID</span>
             <span className="value">{userId && userId}</span>
           </div>
         ) : (

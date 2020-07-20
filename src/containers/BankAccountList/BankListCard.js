@@ -1,5 +1,7 @@
 import React from 'react';
 import './BankAccountList.css';
+import cashApp from '../../assets/svgs/cash-app.svg';
+import zelle from '../../assets/svgs/zelle.svg';
 import { currency_titles } from '../../constants/currency_titles';
 const BankListCard = ({
   accountNumber,
@@ -23,9 +25,26 @@ const BankListCard = ({
         active ? 'active-bank' : ''
       } bankList_button bank-card`}
     >
-      <header>
-        <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
+       <header className="bank-card-header">
+        <div>
+        <img
+          style={{ width: '19px' }}
+          src={require(`../../assets/flags/${
+            currency ? currency : 'NGN'
+          }.png`)}
+          alt={currency_titles[currency]}
+        />
         {currency_titles[currency]}
+        </div>
+        {zelleEmail || userId ? (
+          <div>
+            <img
+              className="platform-icon"
+              src={zelleEmail ? zelle : cashApp}
+              alt="platform"
+            />
+          </div>
+        ) : null}
       </header>
       <div className="horizontal-line"></div>
       <div className="bank__details-grid">

@@ -232,7 +232,18 @@ const AddBankAccount = ({ accountId, getAccount}) => {
           name="sortCode"
           label="sort code"
         />
-
+           {errors.accountName?.type === 'required' && (
+          <InputError>Your account name is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Account Name"
+          showError={errors.accountName ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="accountName"
+          label="Account Name"
+        />
         {errors.primaryBank?.type === 'required' && (
           <InputError>Your primary bank name is required</InputError>
         )}
@@ -328,6 +339,18 @@ const AddBankAccount = ({ accountId, getAccount}) => {
           })}
           name="accountNumber"
           label="Account Number"
+        />
+           {errors.accountName?.type === 'required' && (
+          <InputError>Your account name is required</InputError>
+        )}
+        <CustomInput
+          placeholder="Account Name"
+          showError={errors.accountName ? true : false}
+          register={register({
+            required: true,
+          })}
+          name="accountName"
+          label="Account Name"
         />
         {errors.primaryBank?.type === 'required' && (
           <InputError>Your bank name is required</InputError>
