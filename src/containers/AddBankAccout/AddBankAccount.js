@@ -38,8 +38,8 @@ const AddBankAccount = ({ accountId, getAccount}) => {
       borderRadius: '10px',
       marginTop: '10px',
       padding: '4px 0',
-      borderWidth:'2px',
-      borderColor: "#e8e8e8"
+      // borderWidth:'1px',
+      // borderColor: "#e8e8e8"
     }),
   };
 
@@ -294,19 +294,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
           label="Zelle Email"
           placeholder="Your Zelle Email"
         />
-
-        {errors.primaryBank?.type === 'required' && (
-          <InputError>Your bank name is required</InputError>
-        )}
-        <CustomInput
-          placeholder="Bank Name"
-          showError={errors.primaryBank ? true : false}
-          register={register({
-            required: true,
-          })}
-          name="primaryBank"
-          label="Bank Name"
-        />
+        <Select value={selectedBank} onChange={handleSelectedBank} placeholder="Select Bank" styles={customStyles} options={country === 'USD' ? optionsUS : optionsCD} />
         <CustomButton loading={false}>Add Bank</CustomButton>
       </form>
     );

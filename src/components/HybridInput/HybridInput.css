@@ -39,6 +39,7 @@ input[type=text] {
 }
 .select-currency-btn {
     background: transparent;
+    border: none;
     border-bottom: 1px solid var(--light-grey);
     display: flex;
     height: 40px;

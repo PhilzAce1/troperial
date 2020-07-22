@@ -28,12 +28,8 @@ const PostTrade = ({
 }) => {
   const history = useHistory();
   const { isAuthenticated } = useContext(AppContext);
-  const [selectedCurrency, setSelectedCurrency] = useState({
-    sourceCurrency: 'USD',
-    destinationCurrency: 'NGN',
-  });
   const [values, setValues] = useState({
-    sourceAmount: 1000,
+    sourceAmount: '',
     sourceCurrency: 'USD',
     destinationAmount: '',
     destinationCurrency: 'NGN',
@@ -65,19 +61,23 @@ const PostTrade = ({
       </p>
     );
   };
+
+  const randomCurrency = (currencyObj, destinationCurrency, sourceCurrency) => {
+    const keys = Object.keys(currencyObj).filter(value => value !== sourceCurrency && value !== destinationCurrency);
+   return keys[keys.length * Math.random() << 0];
+  }
   const changeSourceCurrency = (data) => {
-    setValues({ ...values, sourceCurrency: data });
-    setSelectedCurrency({
-      ...selectedCurrency,
-      sourceCurrency: data,
-    });
+    const random = randomCurrency(currency_titles, values.destinationCurrency, values.sourceCurrency);
+    if(data === values.destinationCurrency){ 
+      setValues({ ...values, sourceCurrency: data, destinationCurrency: random });
+    } else {
+      setValues({ ...values, sourceCurrency: data });
+    }
+    
   };
+
   const changeDestinationCurrency = (data) => {
     setValues({ ...values, destinationCurrency: data });
-    setSelectedCurrency({
-      ...selectedCurrency,
-      destinationCurrency: data,
-    });
   };
   const handleSourceAmountChange = (e) => {
     const destinationAmount =
@@ -159,11 +159,11 @@ const PostTrade = ({
             currency={values.sourceCurrency}
             changeCurrencyHandler={changeSourceCurrency}
             line={true}
+            placeholder="1000"
             onChange={handleSourceAmountChange}
             value={values.sourceAmount}
             label="I have"
             type="number"
-            selectedCurrency={selectedCurrency.destinationCurrency}
           />
           <HybridInput
             currency={values.destinationCurrency}
@@ -172,7 +172,7 @@ const PostTrade = ({
             value={currency_titles[values.destinationCurrency]}
             label="I need"
             readOnly={true}
-            selectedCurrency={selectedCurrency.sourceCurrency}
+            selectedCurrency={values.sourceCurrency}
           />
           {rates.length === 0
             ? null

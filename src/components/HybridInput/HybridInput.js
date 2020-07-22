@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './HybridInput.css';
 import { supported_countries } from '../../constants/supported_currencies';
 import { currency_titles } from '../../constants/currency_titles';
+import Dropdown from './Dropdown';
+
 const HybridInput = ({
   label,
   line,
@@ -13,14 +15,30 @@ const HybridInput = ({
   name,
   type,
   selectedCurrency,
-  placeholder
+  placeholder,
 }) => {
   const [dropdown, setDropdown] = useState(false);
-  const showDropdown = () => setDropdown(!dropdown);
+  const showDropdown = () => {
+    setDropdown(!dropdown);
+    console.log(dropdown)
+  }
+  const ref = useRef(null);
   const onChangeCurrency = (currency) => {
     changeCurrencyHandler(currency);
     showDropdown();
   };
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+        setDropdown(false);
+    }
+};
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+        document.removeEventListener('click', handleClickOutside, true);
+    };
+});
   return (
     <div className="hybridInput__container">
       <label
@@ -31,7 +49,7 @@ const HybridInput = ({
         {label}
       </label>
       <div className="hybridInput__wrapper">
-        <span className="hybridInput__custom-select" name="country">
+        <span className="hybridInput__custom-select" name="country" onClick={() => showDropdown()}>
           <img
             style={{ width: '19px' }}
             src={require(`../../assets/flags/${
@@ -42,7 +60,6 @@ const HybridInput = ({
           {changeCurrencyHandler === null ? null : (
             <i
               className="country-dropdown fas fa-angle-down"
-              onClick={showDropdown}
             ></i>
           )}
         </span>
@@ -58,11 +75,13 @@ const HybridInput = ({
       </div>
 
       {dropdown === false ? null : (
-        <section className="custom__dropdown">
+        <Dropdown wrappedRef={ref}>
           <div className="option">
-            {supported_countries.filter(country => country.currency !== selectedCurrency).map((country) => (
-              <div
+            {supported_countries.map((country) => (
+              <button
+                role="button"
                 className="select-currency-btn"
+                disabled={selectedCurrency === country.currency ? true : false}
                 key={country.id}
                 onClick={() => onChangeCurrency(country.currency)}
               >
@@ -73,10 +92,10 @@ const HybridInput = ({
                 />
                 {`  (${country.currency})`}{' '}
                 {currency_titles[country.currency]}
-              </div>
+              </button>
             ))}
           </div>
-        </section>
+          </Dropdown>
       )}
       {line === false ? null : (
         <div className="hybridInput__optional-line"></div>
@@ -94,4 +113,5 @@ HybridInput.defaultProps = {
   readOnly: false,
   type: 'text',
 };
-export default HybridInput;
+
+export default HybridInput
