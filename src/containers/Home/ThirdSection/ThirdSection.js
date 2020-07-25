@@ -5,19 +5,19 @@ import boyUser from '../../../assets/images/path-image-1.png';
 import girlUser from '../../../assets/images/path-image-2.png';
 import bypass1 from '../../../assets/svgs/bypass-1.svg';
 import bypass2 from '../../../assets/svgs/bypass-2.svg';
-import exchangeLogo from '../../../assets/svgs/exchange-troperial-logo.png';
-import Slide from 'react-reveal/Slide';
+import exchangeLogo from '../../../assets/svgs/Logo.svg';
+import Fade from 'react-reveal/Fade';
 import {Link} from 'react-router-dom';
 const ThirdSection = () => {
     return (
         <section className="details-section">
         <div className="header">
-          <h1>Connecting buyers with trusted traders.</h1>
+          <h1>How Troperial Works</h1>
           <p>
             We connect buyers and trusted traders, starting the right
             conversation that leads to an exchange
           </p>
-          <Link to="/#" className="learn__more">
+          <Link to="/how-it-works" className="learn__more">
             Learn more about how it works
           </Link>
         </div>
@@ -43,11 +43,13 @@ const ThirdSection = () => {
               alt="bypass"
             />
           </div>
-          <img
+         <div className="mobile_logo-container">
+         <img
             className="exchange-troperial-logo"
             src={exchangeLogo}
             alt="exchange troperial logo"
           />
+         </div>
           <div className="mobile-group-card-2">
             <img
               className="chat-user"
@@ -64,7 +66,7 @@ const ThirdSection = () => {
         </div>
         {/* END OF MOBILE SVG GROUP MARKUP */}
         <div className="info-grid">
-        <Slide right>
+        <Fade bottom>
           <div className="grid">
             <h1>Buyer</h1>
             <p>
@@ -72,8 +74,8 @@ const ThirdSection = () => {
               conversation that leads to an exchange
             </p>
           </div>
-          </Slide>
-          <Slide right>
+          </Fade>
+          <Fade bottom>
           <div className="grid">
             <h1>Platform</h1>
             <p>
@@ -81,8 +83,8 @@ const ThirdSection = () => {
               conversation that leads to an exchange
             </p>
           </div>
-          </Slide>
-          <Slide right>
+          </Fade>
+          <Fade bottom>
           <div className="grid">
             <h1>FX Trader</h1>
             <p>
@@ -90,7 +92,7 @@ const ThirdSection = () => {
               conversation that leads to an exchange
             </p>
           </div>
-          </Slide>
+          </Fade>
         </div>
       </section>
     )

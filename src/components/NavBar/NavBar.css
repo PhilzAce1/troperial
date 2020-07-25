@@ -117,7 +117,7 @@ nav.navigationBar {
 	.largeScreen__container {
 		width: 95%;
 		box-sizing: border-box;
-		height: 50px;
+		height: 60px;
 		margin: 0 auto;
 		display: flex;
 		justify-content: space-between;
@@ -130,14 +130,18 @@ nav.navigationBar {
 	}
 	.largeScreen__logo {
 		width: 100px;
+		margin-top: 5px;
 	}
 	.largeScreen-links .nav-link {
 		text-decoration: none;
 		margin: 0 30px;
-		color: var(--dark-grey);
+		color: #000;
 		text-transform: capitalize;
 		height: 100vh;
-		padding-bottom: 11px;
+		padding-bottom: 17px;
+		font-family: GT Walsheim;
+font-size: 16px;
+line-height: 30px;
 	}
 	.icon {
 		width: 20px;
@@ -163,6 +167,17 @@ nav.navigationBar {
 	}
 	.profile-btn {
 		cursor: pointer;
+		font-family: GT Walsheim;
+		font-size: 16px;
+		line-height: 30px;
+	}
+	.navbar-username {
+		margin: 0 5px;
+	}
+	.desktop-nav-caret {
+		color: var(--dark-grey);
+		position: relative;
+		top: 1px;
 	}
 	.lg__profile-dropdown { 
 		position: absolute;

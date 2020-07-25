@@ -89,7 +89,7 @@ const NavBar = ({
             {username && (
               <span className="navbar-username">{username}</span>
             )}
-            <i className="fas fa-caret-down"></i>
+            <i className="desktop-nav-caret fas fa-caret-down"></i>
           </span>
           {
             dropdown && (

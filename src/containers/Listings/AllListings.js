@@ -59,12 +59,13 @@ const AllListings = ({
               transactionState,
               transactionId,
               personId,
+              preferredExchangeRate,
             } = transaction;
             return (
               <TableContent
                 have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
                 need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
-                rate={`USD 1 > NGN 470`}
+                rate={sourceCurrency === 'NGN' ? `${currency_symbols[sourceCurrency]} ${preferredExchangeRate} = ${currency_symbols[destinationCurrency]} 1`:`${currency_symbols[sourceCurrency]} 1 = ${currency_symbols[destinationCurrency]} ${preferredExchangeRate}`}
                 by={`@${userAlias}`}
                 status={transactionState}
                 userListings={false}

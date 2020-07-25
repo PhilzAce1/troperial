@@ -18,10 +18,7 @@ const HybridInput = ({
   placeholder,
 }) => {
   const [dropdown, setDropdown] = useState(false);
-  const showDropdown = () => {
-    setDropdown(!dropdown);
-    console.log(dropdown)
-  }
+  const showDropdown = () => setDropdown(!dropdown);
   const ref = useRef(null);
   const onChangeCurrency = (currency) => {
     changeCurrencyHandler(currency);
@@ -49,7 +46,7 @@ const HybridInput = ({
         {label}
       </label>
       <div className="hybridInput__wrapper">
-        <span className="hybridInput__custom-select" name="country" onClick={() => showDropdown()}>
+        <span className="hybridInput__custom-select" name="country">
           <img
             style={{ width: '19px' }}
             src={require(`../../assets/flags/${
@@ -59,6 +56,7 @@ const HybridInput = ({
           />
           {changeCurrencyHandler === null ? null : (
             <i
+            onClick={() => showDropdown()}
               className="country-dropdown fas fa-angle-down"
             ></i>
           )}
@@ -71,6 +69,7 @@ const HybridInput = ({
           type={type}
           readOnly={readOnly}
           placeholder={placeholder}
+          pattern="[0-9]*"
         />
       </div>
 

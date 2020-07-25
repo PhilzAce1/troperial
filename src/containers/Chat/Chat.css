@@ -32,7 +32,7 @@
         background: #fff;
         width: 95%;
         height: 85vh;
-        margin: 85px auto 0 auto;
+        margin: 90px auto 0 auto;
         display: grid;
         grid-template-columns: 20% 55% 25%;
     }

@@ -120,6 +120,7 @@ const ChatMessageView = ({
         <div key={i}>
           {message.isListing && (
             <ListingChatBubble
+              preferredExchangeRate={message.rate}
               have={message.have}
               by={message.by}
               need={message.need}
@@ -215,7 +216,7 @@ const ChatMessageView = ({
             alignItems: 'center',
           }}
         >
-          <ScaleLoader loading={true} />;
+          <ScaleLoader size={100} color={'#0383ef'} loading={true} />
         </div>
       </div>
     );

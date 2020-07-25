@@ -12,6 +12,8 @@ import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { setStep } from './uiActions';
 import { currency_symbols } from '../constants/currency_symbols';
+import { getMyTransactions } from './myTransactionActions';
+
 export const createTransaction = (data) => async (dispatch) => {
 
   const {
@@ -63,6 +65,7 @@ export const createTransaction = (data) => async (dispatch) => {
         },
       );
       console.log(response.data);
+      dispatch(getMyTransactions)
       dispatch(setStep(CONFIRM_POST_LISTING))
       dispatch(setLoading(false));
     } catch (e) {
@@ -101,6 +104,7 @@ export const createUnAuthenticatedUserTransaction = (data, verified) => async (d
             },
           },
         );
+        dispatch(getMyTransactions)
         dispatch(setStep(CONFIRM_POST_LISTING));
       } catch (e) {
         e.response.data.message.includes(

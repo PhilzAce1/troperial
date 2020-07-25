@@ -10,6 +10,9 @@
   display: none;
 }
 .conversation__list h2 {
+  padding: 10px;
+  font-size: 24px;
+line-height: 32px;
   margin: 0;
 }
 .conversation__list .conversation__list--search-bar {

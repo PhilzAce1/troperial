@@ -1,7 +1,7 @@
-
-
 .post__listing-container .title  {
-    font-size: 1.1rem;
+    font-weight: bold;
+font-size: 24px;
+line-height: 32px;
 }
 .post__listing-container .header {
     display: flex;
@@ -10,8 +10,6 @@
 .post__listing-container .header .close {
     display: none;
 }
-
-
 .exchange-desktop {
     position: relative;
     left: 48%;
@@ -68,8 +66,9 @@
 
     }
     .exchange-desktop {
-        margin: 0 15px;
+        margin: 10px 15px 0 15px;
         position: static;
+
         left:initial;
         transform: rotate(0deg);
     }

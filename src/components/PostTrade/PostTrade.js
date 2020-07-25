@@ -262,7 +262,7 @@ const PostTrade = ({
             <p>Show to only trusted traders</p>
           </div>
         )}
-        <CustomButton loading={false}>Post this Trade</CustomButton>
+        <CustomButton loading={false}>Create a listing</CustomButton>
       </form>
     </Fragment>
   );

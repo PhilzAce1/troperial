@@ -79,7 +79,7 @@ const MyListings = ({
             <TableContent
               have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
               need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
-              rate={`${currency_symbols[sourceCurrency]} 1 > ${currency_symbols[destinationCurrency]} ${preferredExchangeRate}`}
+              rate={sourceCurrency === 'NGN' ? `${currency_symbols[sourceCurrency]} ${preferredExchangeRate} = ${currency_symbols[destinationCurrency]} 1`:`${currency_symbols[sourceCurrency]} 1 = ${currency_symbols[destinationCurrency]} ${preferredExchangeRate}`}
               status={transactionState}
               userListings={true}
               key={transactionId}

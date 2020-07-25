@@ -12,9 +12,19 @@
 	display: flex;
 	flex-direction: column;
 }
-.exchange-troperial-logo {
-	width: 180px;
+.mobile_logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #fff;
 	align-self: flex-end;
+	padding: 10px 12px 10px 12px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.exchange-troperial-logo {
+	width: 130px;
+
 }
 .chat-user {
     width: 50px;
@@ -47,23 +57,31 @@
 	align-self: center;
 }
 .details-section .header h1 {
+	font-size: 24px;
+line-height: 32px;
+letter-spacing: -0.03em;
 	width: 80%;
 	margin-bottom: 0;
 }
 .details-section .header p {
 	color: var(--dark-grey);
-	font-size: 1.1rem;
-	line-height: 1.6;
+	font-size: 16px;
+line-height: 30px;
 	width: 90%;
 }
 .details-section .header .learn__more {
 	color: var(--troperial-blue);
 	text-decoration: none;
-	font-size: 1.09rem;
+	font-size: 16px;
+line-height: 30px;
+}
+.info-grid .grid h1{
+	font-size: 24px;
+	line-height: 1.6;
 }
 .info-grid .grid p {
 	color: var(--dark-grey);
-	font-size: 1.09rem;
+	font-size: 1rem;
 	line-height: 1.6;
 	width: 85%;
 }
@@ -94,20 +112,19 @@
 	}
 	.details-section .header h1 {
 	    margin: 0 auto;
-		font-size: 2rem;
+		font-size: 36px;
+line-height: 42px;
+
 	}
 	.details-section .header p{
-		font-size: 1.4rem;
+		font-size: 20px;
 		margin: 10px auto;
 	}
 	.details-section .header .learn__more {
 		font-size: 1.2rem;
 	}
-	.info-grid .grid p {
-		color: var(--dark-grey);
-		font-size: 1.09rem;
-		line-height: 1.6;
-		width: 85%;
+	.info-grid .grid h1 {
+		font-size: 36px;
 	}
 	.info-grid .grid p {
 		font-size: 1.1rem;
@@ -133,12 +150,10 @@
 		padding: 10px 0;
 	}
 	.details-section .header h1 {
-		width: 30%;
+		width: 50%;
 		margin: 0 auto;
-		font-size: 1.8rem;
 	}
 	.details-section .header p {
-		font-size: 1.2rem;
 		width: 40%;
 		margin: 10px auto;
 	}
@@ -146,17 +161,15 @@
 		font-size: 1.2rem;
 	}
 	.info-grid .grid h1 {
-		font-size: 1.5rem;
 		width: 100%;
+		font-size: 36px;
+	}
+	.info-grid p {
+		font-size: 20px;
+
 	}
 	.info-grid {
 		grid-gap: 50px 100px;
 	}
 }
 
-@media (min-width: 1800px) {
-    .info-grid p {
-		font-size: 1.5rem;
-	}
-	
-}

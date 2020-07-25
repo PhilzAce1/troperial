@@ -1,6 +1,5 @@
 .chat__input {
   width: 100%;
-  /* border: solid 1px var(--light-grey); */
   box-sizing: border-box;
   background: #fff;
 }
@@ -38,7 +37,11 @@
 }
 .chat__input-field {
   border-bottom: 1px solid var(--light-grey) !important;
-  font-size: 1.2rem;
+  font-family: GT Walsheim;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 30px;
 }
 
 .chat__input-field-container .send-message-btn {

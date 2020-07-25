@@ -5,7 +5,6 @@ import zelle from '../../assets/svgs/zelle.svg';
 import { currency_titles } from '../../constants/currency_titles';
 const BankAccountChatBubble = ({
   accountNumber,
-  bvnNumber,
   primaryBank,
   customerAccountNumber,
   sortCode,
@@ -94,12 +93,6 @@ const BankAccountChatBubble = ({
           <div className="bank__details_grid-item">
             <span className="label">Routing Number</span>
             <span className="value">{routingNumber}</span>
-          </div>
-        )}
-        {bvnNumber && (
-          <div className="bank__details_grid-item">
-            <span className="label">BVN Number</span>
-            <span className="value">{bvnNumber}</span>
           </div>
         )}
         {sortCode && (

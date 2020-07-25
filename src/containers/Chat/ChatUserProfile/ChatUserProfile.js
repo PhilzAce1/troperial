@@ -55,7 +55,7 @@ const ChatUserProfile = ({
           }}
         >
           <div>
-            <ScaleLoader />
+            <ScaleLoader size={150} color={'#0383ef'} />
           </div>
         </div>
       </section>

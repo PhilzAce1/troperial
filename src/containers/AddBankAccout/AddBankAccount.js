@@ -205,18 +205,6 @@ const AddBankAccount = ({ accountId, getAccount}) => {
           name="accountNumber"
           label="Account Number"
         />
-        {errors.bvnNumber?.type === 'required' && (
-          <InputError>Your BVN is required</InputError>
-        )}
-        <CustomInput
-          placeholder="BVN"
-          showError={errors.bvnNumber ? true : false}
-          register={register({
-            required: true,
-          })}
-          name="bvnNumber"
-          label="BVN"
-        />
         <Select value={selectedBank} onChange={handleSelectedBank} placeholder="Select Bank" styles={customStyles} options={optionsNG} />
         <Select value={accountType} onChange={handleAccountType} placeholder="Account Type" styles={customStyles} options={accountTypeOpts} />
         <CustomInput

@@ -65,8 +65,10 @@ import {
           Authorization: authToken,
         },
       });
-      console.log(response)
+      console.log(response);
+
       toast.success('Your listing has been successfully updated!!')
+     dispatch(getMyTransactions);
       console.log(data)
     } catch(e) {
       console.log(e)
