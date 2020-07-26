@@ -132,7 +132,9 @@ const NavBar = ({
                 round={true}
               />
             ) : (
+              <Link to="/profile">
               <Avatar name={'*'} size="25" round={true} />
+              </Link>
             )}
           </div>
         </div>
@@ -152,7 +154,7 @@ const NavBar = ({
                 className="nav-link"
                 to="/messages"
               >
-                messages
+                Messages
               </NavLink>
             )}
             <NavLink
@@ -160,7 +162,7 @@ const NavBar = ({
               className="nav-link"
               to="/notifications"
             >
-              notifications
+              Notifications
             </NavLink>
             <NavLink
               activeClassName="is-active"

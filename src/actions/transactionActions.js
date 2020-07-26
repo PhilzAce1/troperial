@@ -145,7 +145,7 @@ export const applyFilter = (filtered) => async (dispatch) =>
 
 export const notifyUser = (message) => async (dispatch) =>
   dispatch({ type: NOTIFY_USER, payload: message });
-export const getTransactions = (page = 1, size = 5) => async (
+export const getTransactions = (page = 1, size = 10) => async (
   dispatch,
 ) => {
   dispatch(setLoading(true));
@@ -160,7 +160,7 @@ export const getTransactions = (page = 1, size = 5) => async (
         },
       },
     );
-    console.log(response.data);
+    console.log(response)
     dispatch({
       type: GET_ALL_TRANSACTIONS,
       payload: { ...response.data },

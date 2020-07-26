@@ -24,7 +24,7 @@ Banner.defaultProps = {
   title: 'Post a Listing',
   message:
     'The quick, fairer way to exchange currencies across borders',
-  buttonText: 'Post a listing',
+  buttonText: 'Create a listing',
   hideSvg: false
 };
 export default Banner;

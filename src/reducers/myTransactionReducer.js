@@ -4,9 +4,11 @@ import {
     APPLY_MY_FILTER,
     NOTIFY_USER,
     SET_USER_TOTAL_LISTING,
-    SET_EDIT_TRANSACTION
+    SET_EDIT_TRANSACTION,
+    SET_DELETE_TRANSACTION_ID
   } from '../actions/types';
   const initialState = {
+    deleteTransactionId:'',
     myTransactions: [],
     mySortedTransactions: [],
     notification: false,
@@ -18,13 +20,13 @@ import {
     transactionId:'',
     personId:'',
     accountId:'',
-    prefferedRate: '',
+    preferredExchangeRate: '',
     privateListing: false
   };
   export default function (state = initialState, action) {
     switch (action.type) {
       case SET_EDIT_TRANSACTION:
-        const {sourceAmount, sourceCurrency, destinationAmount, destinationCurrency,transactionId, personId, accountId, prefferedRate, privateListing} = action.payload;
+        const {sourceAmount, sourceCurrency, destinationAmount, destinationCurrency,transactionId, personId, accountId,  preferredExchangeRate, privateListing} = action.payload;
         return {
           ...state,
           sourceAmount,
@@ -34,9 +36,14 @@ import {
           transactionId, 
           personId,
           accountId,
-          prefferedRate,
+          preferredExchangeRate,
           privateListing
         }
+      case SET_DELETE_TRANSACTION_ID:
+        return {
+          ...state,
+          deleteTransactionId: action.payload,
+        };
       case APPLY_MY_FILTER:
         return {
           ...state,

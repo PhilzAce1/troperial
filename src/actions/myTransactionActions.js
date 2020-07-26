@@ -4,7 +4,8 @@ import {
     NOTIFY_USER,
     GET_MY_TRANSACTIONS,
     SET_USER_TOTAL_LISTING,
-    SET_EDIT_TRANSACTION
+    SET_EDIT_TRANSACTION,
+    SET_DELETE_TRANSACTION_ID
   } from './types';
   import axios from 'axios';
   import { toast } from 'react-toastify';
@@ -48,12 +49,22 @@ import {
        payload: data
      })
    }
+   export const setDeleteTransactionId = (data) => (dispatch) => {
+     dispatch({
+       type: SET_DELETE_TRANSACTION_ID,
+       payload: data
+     })
+   }
+
+   export const deleteTransaction = (data) => {
+      
+   }
 
   export const editMyTransaction = (data) => async (dispatch) => {
     const authToken = localStorage.getItem('authToken');
     const {accountId, transactionId, sourceAmount, destinationAmount, prefferedRate} = data;
     try {
-      const response = await axios.post(
+      const response = await axios.patch(
         `https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transactionId}`,
         {
           sourceAmount,
@@ -68,7 +79,7 @@ import {
       console.log(response);
 
       toast.success('Your listing has been successfully updated!!')
-     dispatch(getMyTransactions);
+     dispatch(getMyTransactions());
       console.log(data)
     } catch(e) {
       console.log(e)

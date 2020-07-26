@@ -160,7 +160,7 @@ const ChatInput = ({
         >
           <input
             type="text"
-            placeholder={`message @${user ? user : ''}`}
+            placeholder={`message @${user ? user : ''}...`}
             className="chat__input-field"
             onChange={handleChange}
             value={textMessage}

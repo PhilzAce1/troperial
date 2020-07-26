@@ -20,7 +20,7 @@ const EditTrade = ({
   destinationCurrency,
   transactionId,
   accountId,
-  prefferedRate,
+  preferredExchangeRate,
   privateListing,
 }) => {
   const [values, setValues] = useState({
@@ -30,7 +30,7 @@ const EditTrade = ({
     destinationCurrency,
     transactionId,
     accountId,
-    preferredExchangeRate: '',
+    preferredExchangeRate,
     privateListing,
   });
 
@@ -238,7 +238,7 @@ const mapStateToProps = (state) => ({
   transactionId: state.myTransaction.transactionId,
   personId: state.myTransaction.personId,
   accountId: state.myTransaction.accountId,
-  prefferedRate: state.myTransaction.prefferedRate,
+  preferredExchangeRate: state.myTransaction.preferredExchangeRate,
   privateListing: state.myTransaction.privateListing,
 });
 export default connect(mapStateToProps, { editMyTransaction })(

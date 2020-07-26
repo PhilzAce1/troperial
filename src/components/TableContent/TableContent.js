@@ -19,6 +19,7 @@ const TableContent = ({
   handleMessage,
   handleBackDrop,
   handleEditTransaction,
+  myTransaction
 }) => {
   return (
     <Fragment>
@@ -109,7 +110,7 @@ const TableContent = ({
                   Edit
                 </button>
                 <button className="delete__btn" onClick={onClick}>
-                  Delete
+                  Unlist
                 </button>
               </div>
             ) : null}
@@ -124,6 +125,7 @@ const TableContent = ({
                 handleBackDrop={handleBackDrop}
                 personId={personId}
                 transaction={transaction}
+                disabled={myTransaction}
               />
             )}
           </div>
