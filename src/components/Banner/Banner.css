@@ -29,8 +29,9 @@ h3 {
   font-size: 1rem;
   color: var(--original-white);
   background: var(--troperial-blue);
-  font-weight: medium;
   padding: 10px 15px;
+  font-weight: 400;
+  font-family: GT Walsheim;
 }
 
 .banner__listing-btn:hover {

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './EditBackDrop.css';
 import EditTrade from '../../containers/EditTrade/EditTrade';
 import { connect } from 'react-redux';
@@ -19,7 +19,7 @@ const EditBackDrop = ({
           </button>
         </div>
         <div>
-        <EditTrade/>
+        <EditTrade handleEditBackDrop={handleEditBackDrop}/>
         </div>
       </div>
     </div>

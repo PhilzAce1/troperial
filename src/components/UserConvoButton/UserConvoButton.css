@@ -1,4 +1,5 @@
 .user-convo-btn {
+    font-family: GT Walsheim;
     border: none;
     width: 100%;
     box-sizing: border-box;
@@ -8,12 +9,21 @@
     padding: 15px 15px;
     margin: 10px 0;
     background: #fff;
+    cursor: pointer;
+    transition: 0.5s ease-in-out all;
+}
+.user-convo-btn:hover {
+   background: var(--from-contact);
 }
 .active-chat {
     background: var(--from-contact);
 }
 .user-convo-btn .username {
-   font-size: 1.3rem;
+
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 30px;
    margin: 0 5px;
 }
 .user-convo-btn .user-profile-picture {

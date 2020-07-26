@@ -21,19 +21,22 @@ const AllListings = ({
   currentSize,
   handleBackDrop,
 }) => {
-  const [personId, setPersonId] = useState('');
+  const [myPersonId, setMyPersonId] = useState('');
   useEffect(() => {
     getUserPersonId();
-    getTransactions();
+   
+    if(localStorage.getItem('authToken')) {
+      getTransactions();
+    }
   }, [getTransactions]);
 
   const getUserPersonId = async () => {
     const currentUserInfo = await Auth.currentUserInfo();
     try {
       let personId = currentUserInfo.attributes['custom:personId'];
-      setPersonId(personId);
+      setMyPersonId(personId);
     } catch (e) {
-      setPersonId('');
+      setMyPersonId('');
       console.log(e);
     }
   };
@@ -49,7 +52,6 @@ const AllListings = ({
       <div className="table-container">
         <TableHead userListing={false} />
         {sortedTransactions
-          .filter((transaction) => transaction.personId !== personId)
           .map((transaction) => {
             const {
               sourceAmount,
@@ -59,12 +61,13 @@ const AllListings = ({
               transactionState,
               transactionId,
               personId,
+              preferredExchangeRate,
             } = transaction;
             return (
               <TableContent
                 have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
                 need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
-                rate={`USD 1 > NGN 470`}
+                rate={sourceCurrency === 'NGN' ? `${currency_symbols[sourceCurrency]} ${preferredExchangeRate} = ${currency_symbols[destinationCurrency]} 1`:`${currency_symbols[sourceCurrency]} 1 = ${currency_symbols[destinationCurrency]} ${preferredExchangeRate}`}
                 by={`@${userAlias}`}
                 status={transactionState}
                 userListings={false}
@@ -72,6 +75,7 @@ const AllListings = ({
                 handleBackDrop={handleBackDrop}
                 personId={personId}
                 transaction={transaction}
+                myTransaction={myPersonId === personId}
               />
             );
           })}

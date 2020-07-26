@@ -9,6 +9,7 @@
     background: transparent;
     outline: transparent;
     border: none;
+    cursor: pointer;
 }
 .closeBtn_container {
     text-align: right;
@@ -21,10 +22,16 @@
 }
 .active-bank {
     
-    border-color: var(--troperial-blue);
+    border-color: var(--troperial-green);
 }
 .bankList_button {
    cursor: pointer;
+   border-width: 2px;
+}
+   
+.bankList_button:hover{
+   cursor: pointer;
+   border: 2px solid var(--troperial-blue);
 }
    
 

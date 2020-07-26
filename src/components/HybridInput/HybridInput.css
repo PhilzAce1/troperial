@@ -39,6 +39,7 @@ input[type=text] {
 }
 .select-currency-btn {
     background: transparent;
+    border: none;
     border-bottom: 1px solid var(--light-grey);
     display: flex;
     height: 40px;
@@ -64,7 +65,16 @@ input[type=text] {
     padding: 10px 14px;
     box-sizing: border-box;
 }
-
+/* Chrome, Safari, Edge, Opera */
+.hybridInput__textInput::-webkit-outer-spin-button,
+.hybridInput__textInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.hybridInput__textInput input[type=number] {
+  -moz-appearance: textfield;
+}
 .hybridInput__textInput {
     border: 1px solid var(--light-grey);
     border-radius: 0px 10px 10px 0px;

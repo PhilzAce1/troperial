@@ -1,7 +1,13 @@
-
-
 .post__listing-container .title  {
     font-size: 1.1rem;
+}
+
+.post__listing-container .header {
+    display: flex;
+    justify-content: space-between;
+}
+.post__listing-container .header .close {
+    display: none;
 }
 
 .exchange-desktop {
@@ -43,6 +49,16 @@
     color: var(--troperial-blue);
 }
 @media (min-width: 768px) {
+    .post__listing-container .header .close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        outline: transparent;
+        border: transparent;
+        color: var(--troperial-blue);
+        cursor: pointer;
+    }
     .inline_hybridInput {
         display: flex;
         justify-content: center;

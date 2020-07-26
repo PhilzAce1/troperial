@@ -117,7 +117,7 @@ nav.navigationBar {
 	.largeScreen__container {
 		width: 95%;
 		box-sizing: border-box;
-		height: 50px;
+		height: 60px;
 		margin: 0 auto;
 		display: flex;
 		justify-content: space-between;
@@ -130,14 +130,18 @@ nav.navigationBar {
 	}
 	.largeScreen__logo {
 		width: 100px;
+		margin-top: 5px;
 	}
 	.largeScreen-links .nav-link {
 		text-decoration: none;
 		margin: 0 30px;
-		color: var(--dark-grey);
+		color: #000;
 		text-transform: capitalize;
 		height: 100vh;
-		padding-bottom: 11px;
+		padding-bottom: 17px;
+		font-family: GT Walsheim;
+font-size: 16px;
+line-height: 30px;
 	}
 	.icon {
 		width: 20px;
@@ -161,35 +165,47 @@ nav.navigationBar {
 	.profile-container {
 		position: relative;
 	}
-	.border {
-		display: none;
-		position: absolute;
-		bottom: -11px;
-		width: 100px;
-		height: 3px;
-		background: var(--troperial-blue);
+	.profile-btn {
+		cursor: pointer;
+		font-family: GT Walsheim;
+		font-size: 16px;
+		line-height: 30px;
 	}
-	.profile_nav-link {
-		text-decoration: none;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+	.navbar-username {
+		margin: 0 5px;
+	}
+	.desktop-nav-caret {
 		color: var(--dark-grey);
-		margin-right: 15px;
+		position: relative;
+		top: 1px;
 	}
-	.largeScreen__profile {
-		width: 22px;
-		height: 22px;
-		border-radius: 100%;
-		margin: 5px 5px 0 5px;
+	.lg__profile-dropdown { 
+		position: absolute;
+		width: 150px;
+		right: 10%;
+		box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+		background: #fff;
+		margin: 12px 0;
 		padding: 0;
-		border: solid 2px var(--light-grey);
-		box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+		color: var(--dark-grey);
+		overflow: hidden;
+		z-index: 10000000 !important;
 	}
-	.profile_nav-link:hover + .border {
-		display: block;
+	.lg__profile-dropdown .profile_nav-link, .lg__profile-dropdown .lg__screen-sign-out {
+	 display: block;
+	 padding: 10px;
+	 text-decoration: none;
+	 color: var(--dark-grey);
+	 transition: 0.1s ease-in-out;
 	}
-	.profile-is-active + .border {
-		display: block;
+	.lg__profile-dropdown .profile_nav-link:hover, .lg__profile-dropdown .lg__screen-sign-out:hover {
+	cursor: pointer;
+	background: var(--troperial-blue) !important;
+	color: #fff;
+	}
+	.profile-is-active {
+	background: var(--troperial-blue);
+	color: #fff !important;
 	}
 }

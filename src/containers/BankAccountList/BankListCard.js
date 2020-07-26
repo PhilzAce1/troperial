@@ -1,9 +1,10 @@
 import React from 'react';
 import './BankAccountList.css';
+import cashApp from '../../assets/svgs/cash-app.svg';
+import zelle from '../../assets/svgs/zelle.svg';
 import { currency_titles } from '../../constants/currency_titles';
 const BankListCard = ({
   accountNumber,
-  bvnNumber,
   primaryBank,
   customerAccountNumber,
   sortCode,
@@ -23,15 +24,32 @@ const BankListCard = ({
         active ? 'active-bank' : ''
       } bankList_button bank-card`}
     >
-      <header>
-        <img style={{width: '19px'}} src={require(`../../assets/flags/${currency}.png`)} alt={currency_titles[currency]}/>
+       <header className="bank-card-header">
+        <div>
+        <img
+          style={{ width: '19px' }}
+          src={require(`../../assets/flags/${
+            currency ? currency : 'NGN'
+          }.png`)}
+          alt={currency_titles[currency]}
+        />
         {currency_titles[currency]}
+        </div>
+        {zelleEmail || userId ? (
+          <div>
+            <img
+              className="platform-icon"
+              src={zelleEmail ? zelle : cashApp}
+              alt="platform"
+            />
+          </div>
+        ) : null}
       </header>
       <div className="horizontal-line"></div>
       <div className="bank__details-grid">
         {userId && (
           <div className="bank__details_grid-item">
-            <span className="label">User ID</span>
+            <span className="label">CashApp ID</span>
             <span className="value">{userId}</span>
           </div>
         )}
@@ -76,12 +94,6 @@ const BankListCard = ({
           <div className="bank__details_grid-item">
             <span className="label">Routing Number</span>
             <span className="value">{routingNumber}</span>
-          </div>
-        )}
-        {bvnNumber && (
-          <div className="bank__details_grid-item">
-            <span className="label">BVN Number</span>
-            <span className="value">{bvnNumber}</span>
           </div>
         )}
         {sortCode && (

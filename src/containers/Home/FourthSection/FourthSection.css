@@ -4,24 +4,29 @@
 }
 .fouthSection .heading {
     margin-bottom: 50px;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.03
 }
 .fouthSection .grid {
-    margin: 20px 0;
+    margin: 50px 0;
 }
 .fouthSection .grid .grid-item  {
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 .fouthSection .grid .grid-item img{
  width: 30px
 }
 .fouthSection .grid .grid-item h1{
-
+    font-size: 24px;
+    line-height: 32px;
  margin: 5px 0;
 
 }
 .fouthSection .grid .grid-item p{
-line-height: 1.6;
-font-size: 1.1rem;
+font-size: 16px;
+line-height: 30px;
 
 }
 
@@ -33,6 +38,8 @@ font-size: 1.1rem;
     }
     .fouthSection h1.heading {
         text-align: center;
+        font-size: 36px;
+line-height: 42px;
     }
     .fouthSection .grid {
         margin: 20px 0;
@@ -40,9 +47,13 @@ font-size: 1.1rem;
         grid-template-columns: 1fr 1fr;
         grid-gap: 50px 50px;
     }
+    .fouthSection .grid .grid-item h1 {
+        font-size: 24px;
+        line-height: 32px;
+    }
     .fouthSection .grid .grid-item p{
-    line-height: 1.6;
-    font-size: 1.09rem;
+        font-size: 20px;
+        line-height: 30px;
     
     }
 }

@@ -6,11 +6,13 @@ import { currency_titles } from '../../constants/currency_titles';
 import {
   getMyTransactions,
   setEditTransaction,
+  setDeleteTransactionId
 } from '../../actions/myTransactionActions';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { connect } from 'react-redux';
 import { getAllRates } from '../../actions/transactionActions';
 const MyListings = ({
+  setDeleteTransactionId,
   getMyTransactions,
   getAllRates,
   mySortedTransactions,
@@ -23,7 +25,10 @@ const MyListings = ({
     getMyTransactions();
     getAllRates()
   }, [getMyTransactions, getAllRates]);
-
+  const handleDeleteListing = (transactionId) => {
+    setDeleteTransactionId(transactionId)
+    handleDeleteModal();
+  }
   const handleEditTransaction = (
     sourceAmount,
     sourceCurrency,
@@ -33,7 +38,7 @@ const MyListings = ({
     transactionId,
     accountId,
     personId,
-    prefferedRate,
+    preferredExchangeRate,
     privateListing,
   ) => {
     const data = {
@@ -45,7 +50,7 @@ const MyListings = ({
       transactionId,
       accountId,
       personId,
-      prefferedRate,
+      preferredExchangeRate,
       privateListing
     }
     setEditTransaction(data);
@@ -72,18 +77,18 @@ const MyListings = ({
             transactionId,
             accountId,
             personId,
-            prefferedRate,
+            preferredExchangeRate,
             privateListing
           } = transaction;
           return (
             <TableContent
               have={`${currency_symbols[sourceCurrency]} ${sourceAmount}`}
               need={`(${currency_symbols[destinationCurrency]}) ${currency_titles[destinationCurrency]}`}
-              rate={`USD 1 > NGN 470`}
+              rate={sourceCurrency === 'NGN' ? `${currency_symbols[sourceCurrency]} ${preferredExchangeRate} = ${currency_symbols[destinationCurrency]} 1`:`${currency_symbols[sourceCurrency]} 1 = ${currency_symbols[destinationCurrency]} ${preferredExchangeRate}`}
               status={transactionState}
               userListings={true}
               key={transactionId}
-              onClick={handleDeleteModal}
+              onClick={() => handleDeleteListing(transactionId)}
               handleEditTransaction={() =>
                 handleEditTransaction(
                   sourceAmount,
@@ -94,7 +99,7 @@ const MyListings = ({
                   transactionId,
                   accountId,
                   personId,
-                  prefferedRate,
+                  preferredExchangeRate,
                   privateListing
                 )
               }
@@ -115,4 +120,5 @@ export default connect(mapStateToProps, {
   getMyTransactions,
   setEditTransaction,
   getAllRates,
+  setDeleteTransactionId
 })(MyListings);

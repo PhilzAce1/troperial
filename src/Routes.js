@@ -29,17 +29,14 @@ const Routes = ({ checkUserProfile, getAllRates }) => {
   useEffect(() => {
     callBack()
     checkUserProfile();
+    getAllRates()
   
-  }, [checkUserProfile, callBack]);
-
-
+  }, [checkUserProfile, callBack, getAllRates]);
   const refreshToken = async () =>  {
     try {
       const cognitoUser = await Auth.currentAuthenticatedUser();
       const currentSession = cognitoUser.signInUserSession;
       cognitoUser.refreshSession(currentSession.refreshToken, (err, session) => {
-        // // do something with the new session
-        // console.log(session.idToken.jwtToken)
         localStorage.setItem('authToken', session.idToken.jwtToken);
       });
     } catch (e) {

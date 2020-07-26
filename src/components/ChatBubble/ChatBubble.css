@@ -30,8 +30,8 @@
 
 }
 .from_contact {
-     background: var(--from-contact);
-        margin-right: auto;
+   background: #EFC66A;
+   margin-right: auto;
    border-radius: 10px 10px 10px 0;
 }
  

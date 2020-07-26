@@ -33,6 +33,7 @@ function SendMessageBtn({
   userConversations,
   handleBackDrop,
   step,
+  disabled
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -155,7 +156,7 @@ function SendMessageBtn({
   return (
     <Fragment>
       <button
-        disabled={loading}
+        disabled={loading ||disabled}
         className="send__message__btn"
         onClick={clicked}
       >

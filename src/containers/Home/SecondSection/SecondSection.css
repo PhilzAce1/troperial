@@ -7,10 +7,18 @@
    text-align: left;
    margin: 25px 0;
 }
+.secondSection .header h1{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.03em;
+}
 .secondSection .header p{
-   font-size: 1.1rem;
    width: 90%;
-   line-height: 1.6;
+   font-family: GT Walsheim;
+font-size: 20px;
+line-height: 30px;
 }
 
 .users__showcase .horizontal__scroll--container {
@@ -92,6 +100,15 @@
        padding: 0 0;
        text-align: center;
        margin: 0px auto 25px auto;
+    }
+    .secondSection .header h1{
+       padding: 0 0;
+       text-align: center;
+       margin: 0px auto 25px auto;
+       font-weight: bold;
+font-size: 36px;
+line-height: 42px;
+
     }
     .secondSection .header p{
        font-size: 1.2rem;

@@ -21,6 +21,7 @@
     border: none;
     display: flex;
     align-items: center;
+
  }
  .user__header-title .user__header-temporary-dp {
      width: 35px;
@@ -29,11 +30,16 @@
      border: 2px solid var(--light-grey);
  }
  .user__header-title .user__header-username {
-     font-size: 1.3rem;
      margin: 0 5px;
+     font-family: GT Walsheim;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 30px;
  }
 
  .chat-feed {
+     padding-top: 2.5px;
      overflow-y: scroll;
      width: 100%;
      overflow-x: hidden;

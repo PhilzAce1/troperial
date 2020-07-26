@@ -58,10 +58,8 @@ export const createUser = (
       verified,
       accountId,
     } = response.data;
-    // console.log(response.data, 'res data');
     const { phoneId, number } = phoneNumbers[0];
     const { emailId } = emailAddresses[0];
-    // console.log(response.data, phoneId, emailId);
     const user = await Auth.currentAuthenticatedUser();
     await Auth.updateUserAttributes(user, {
       'custom:personId': personId,
@@ -114,7 +112,6 @@ const getUserDetails = (personId) => async (dispatch) => {
       verified,
       accountId,
     } = user.data;
-    // console.log('user data', user.data);
     const { phoneId, number } = phoneNumbers[0];
     const { emailId } = emailAddresses[0];
     dispatch({
@@ -157,7 +154,6 @@ export const checkUserProfile = () => async (dispatch) => {
       });
       dispatch(setStep(CREATE_TRANSACTION));
       dispatch(getUserDetails(personId));
-      // console.log('Users profile is updated');
     }
   } catch (err) {
     console.log('error fetching user info: ', err);
@@ -200,7 +196,6 @@ export const updateUserDetails = (data) => async (dispatch) => {
     });
     dispatch(getUserDetails(personId));
     toast.success('Profile updated!');
-    // console.log(response);
   } catch (e) {
     console.log(e);
     toast.error('Please try again!');

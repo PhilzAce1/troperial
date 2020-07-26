@@ -17,6 +17,7 @@ const ListingsFilters = ({
   applyFilter,
   transactions,
   notifyUser,
+  getTransactions,
 }) => {
   const { register, handleSubmit } = useForm();
   const [showFilter, setShowFilter] = useState(false);
@@ -67,6 +68,7 @@ const ListingsFilters = ({
           <i className="fas fa-caret-down"></i>
         </span>
         {showFilter && (
+          <>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="generalFilter__dropdown">
               <div className="have__and__need">
@@ -98,13 +100,14 @@ const ListingsFilters = ({
               <div className="preffered__rate">
                 <div>
                   {/* <HybridInput /> */}
-                  <div className="exchange_icon">
+                  {/* <div className="exchange_icon">
                     <i className="exchange fas fa-exchange-alt"></i>
-                  </div>
+                  </div> */}
                   {/* <HybridInput /> */}
                 </div>
               </div>
-              <div className="status">
+
+              {/* <div className="status">
                 <label htmlFor="status">Status</label>
                 <select
                   id="status"
@@ -114,12 +117,15 @@ const ListingsFilters = ({
                   <option value="LISTED">LISTED</option>
                   <option value="COMPLETED">COMPLETED</option>
                 </select>
-              </div>
+              </div> */}
               <CustomButton loading={false}>
                 Apply filters
               </CustomButton>
+             <div className="clear-filters" onClick={() => getTransactions()}>Clear Filters</div>
             </div>
           </form>
+            
+           </>
         )}
       </div>
     </section>

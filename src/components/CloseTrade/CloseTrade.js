@@ -16,7 +16,7 @@ const CloseTrade = ({ handleCloseTrade, user, listingChanged, transaction}) => {
       console.log(transaction)
       const currentUserInfo = await Auth.currentUserInfo();
       let accountId = currentUserInfo.attributes['custom:accountId'];
-        const response = await axios.post(`https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transaction.transactionId}/close`,{
+        const response = await axios.patch(`https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transaction.transactionId}/close`,{
           completedByAccountId: transaction.accountId,
           finalExchangeRate: 350.0,
           completedByPersonId: transaction.personId,

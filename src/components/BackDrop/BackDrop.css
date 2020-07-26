@@ -29,6 +29,7 @@
 	}
 	.backdrop__background {
 		width: 60%;
+		cursor: pointer;
     }
     .backdrop__content-container {
 		height: 100vh;

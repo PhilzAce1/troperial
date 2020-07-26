@@ -1,6 +1,4 @@
-/* .navbar  {
-    position: fixed;
-} */
+
 .hideOnMobile {
      display: none;
 }
@@ -29,7 +27,6 @@
     margin: 10px auto;
     border-radius: 12px;
     background: transparent;
-
 }
 .mobileNav .mobileNavContainer {
     text-align: center;
@@ -53,11 +50,15 @@
 
 }
 .mobileNav .mobileNavContainer .home-link{
+    font-family: GT Walsheim;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 30px;
+color: #000;
     display: block;
 	padding: 15px 0;
 	text-decoration: none;
-	font-weight: bold;
-    color: var(--dark-grey);
     width: 100%;
 }
 .home-active-link{
@@ -69,10 +70,11 @@
   color: #fff;
 }
 .sign-up_btn {
+    font-family: GT Walsheim;
     background: var(--troperial-blue);
 	color: #fff;
 	border: none;
-	font-size: 1.1rem;
+	font-size: 16px;
 	padding: 10px 15px;
 	border-radius: 10px;
 	width: 90%;
@@ -104,13 +106,13 @@
     .navbarContainer .mainLinks li .link, .authLinks li .link{
         text-decoration: none;
         text-transform: capitalize;
-        color: var(--dark-grey);
-        font-weight: 600;
-    }
-    .navbarContainer .mainLinks li .link, .authLinks li .link{
-        text-decoration: none;
-        text-transform: capitalize;
+        font-family: GT Walsheim;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 30px;
         transition: 0.6s ease 0s;
+        color: #000
     }
     .navbarContainer .mainLinks li .link:hover, .authLinks li .link:hover{
         color: var(--troperial-blue);
@@ -128,11 +130,11 @@
         margin-left: 10px !important;
     }
     .signUpDesktop {
+        font-family: GT Walsheim;
         margin: 0;
         background: var(--troperial-blue);
         color: #fff;
         border: none;
-        font-weight: 600;
         text-transform: capitalize;
         padding: 8px 15px !important;
         border-radius: 8px;
