@@ -14,29 +14,29 @@ const FourthSection = () => {
                 <Fade bottom>
                     <div className="grid-item">
                         <img src={fast} alt="fast"/>
-                        <h1>it's fast</h1>
-                        <p>get the latest and hottest market news about currency and other things on Troperial</p>
+                        <h1>It's fast</h1>
+                        <p>Complete a transaction in three steps - Post, Negotiate, Transact</p>
                     </div>
                     </Fade>
                     <Fade bottom>
                     <div className="grid-item">
                         <img src={simple} alt="simple"/>
-                        <h1>it's simple</h1>
-                        <p>get the latest and hottest market news about currency and other things on Troperial</p>
+                        <h1>It's simple</h1>
+                        <p>very easy to use</p>
                     </div>
                     </Fade>
                     <Fade bottom>
                     <div className="grid-item">
                         <img src={card} alt="card"/>
                         <h1>Absolutely no fees</h1>
-                        <p>get the latest and hottest market news about currency and other things on Troperial</p>
+                        <p>Zero charges</p>
                     </div>
                     </Fade>
                     <Fade bottom>
                     <div className="grid-item">
                         <img src={safe} alt="safe"/>
-                        <h1>it's safe</h1>
-                        <p>get the latest and hottest market news about currency and other things on Troperial</p>
+                        <h1>It's safe</h1>
+                        <p>we guarantee the highest levels of Internet Security, and security encryption to ensure that your information is completely protected from fraud. everyone is verified.</p>
                     </div>
                     </Fade>
                 </div>

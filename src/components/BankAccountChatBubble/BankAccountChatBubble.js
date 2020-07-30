@@ -15,6 +15,7 @@ const BankAccountChatBubble = ({
   currency,
   fromMe,
   accountName,
+  phoneNumber,
 }) => {
   return (
     <div
@@ -57,6 +58,12 @@ const BankAccountChatBubble = ({
           <div className="bank__details_grid-item">
             <span className="label">Bank</span>
             <span className="value">{primaryBank}</span>
+          </div>
+        )}
+          {phoneNumber && (
+          <div className="bank__details_grid-item">
+            <span className="label">Phone Number</span>
+            <span className="value">{phoneNumber}</span>
           </div>
         )}
         {customerAccountNumber && (

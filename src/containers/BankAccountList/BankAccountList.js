@@ -57,6 +57,7 @@ const BankAccountList = ({
                   account.externalAccountSubType
                 }
                 currency={account.currency}
+                phoneNumber={account.phoneNumber}
                 zelleEmail={account.zelleEmail}
                 userId={account.userId}
                 active={account.externalAccountId === chosen}

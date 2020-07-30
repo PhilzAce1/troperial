@@ -173,6 +173,11 @@ const ChatMessageView = ({
                   ? null
                   : message.zelleEmail
               }
+              phoneNumber={
+                message.phoneNumber === 'none' || !message.phoneNumber
+                  ? null
+                  : message.phoneNumber
+              }
               // userId={xyz === 'none' || xyz.length < 0 ? null : xyz}
               currency={
                 message.currency === 'none' || !message.currency

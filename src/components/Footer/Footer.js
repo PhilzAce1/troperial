@@ -15,7 +15,8 @@ const Footer = () => {
         <img src={image} alt="success illustration" />
         <div className="footer-header_title">
           <p>Try Troperial Now.</p>
-          <h1>Get the best exchange rates from trusted traders</h1>
+          <h1>
+Get the best exchange rates from verified persons across the world.</h1>
           <Link className="footer-get-started-btn" to="/signup">
             Create An Accout
           </Link>
@@ -98,7 +99,8 @@ const Footer = () => {
 
           <div className="logo-group">
             <img src={logo} alt="troperial" />
-            <p>&copy; Copyright 2020 Troperial Technologies</p>
+            <p>&copy; Copyright 2020</p>
+            <p>Troperial Technologies</p>
             <p>LLC. All rights reserved</p>
           </div>
         </div>

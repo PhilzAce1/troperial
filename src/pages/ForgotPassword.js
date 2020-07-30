@@ -69,8 +69,7 @@ const ForgotPassword = () => {
         <Link to="/"><img src={img} alt="troperial logo" /></Link>
           <h2>Forgot Your Password</h2>
           <p>
-            Enter your Troperial email address and we'll
-            <br /> send you a link to reset your password
+          Enter your email to reset your password
           </p>
           {authError && (
             <CustomAlert
@@ -103,7 +102,7 @@ const ForgotPassword = () => {
         </form>
         <ContentContainer>
           <p className="sendToNewPage">
-            Remember Your password? <Link to="/signin">Sign In</Link>
+            <Link to="/signin">Back to sign in</Link>
           </p>
         </ContentContainer>
       </OnboardingFormContainer>
@@ -184,7 +183,7 @@ const ForgotPassword = () => {
         </form>
         <ContentContainer>
           <p className="custom-cta">
-            Remember Your Password? <Link to="/">Sign In</Link>
+            <Link to="/">Back to sign in</Link>
           </p>
         </ContentContainer>
       </OnboardingFormContainer>

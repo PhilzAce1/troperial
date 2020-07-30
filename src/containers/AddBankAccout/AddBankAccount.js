@@ -43,7 +43,10 @@ const AddBankAccount = ({ accountId, getAccount}) => {
     }),
   };
 
-  const changeCurrencyHandler = (data) => setCountry(data);
+  const changeCurrencyHandler = (data) => {
+    setCountry(data)
+    setSelectedBank(null)
+  };
   const handleSelectedBank = selectedOption =>  setSelectedBank(selectedOption);
   const handleAccountType = selectedOption =>  setAccountType(selectedOption);
 
@@ -82,14 +85,15 @@ const AddBankAccount = ({ accountId, getAccount}) => {
   };
   const submitZelleAccount = async (data) => {
     const authToken = localStorage.getItem('authToken');
-    const { zelleEmail, primaryBank } = data;
+    const { zelleEmail, phoneNumber } = data;
 
     try {
          await axios.post(
         `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/zelle`,
         {
           zelleEmail,
-          primaryBank
+          primaryBank: selectedBank.value,
+          phoneNumber
         },
         {
           headers: {
@@ -100,7 +104,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
       toast.success('Account Successfully Added!')
       getAccount(accountId)
     } catch (e) {
-      console.log(e);
+      console.log(e.response);
       toast.error('Oops something went wrong, please try again!')
     }
   }
@@ -152,7 +156,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
       setAccountType(null)
       getAccount(accountId)
     } catch (e) {
-      console.log(e);
+      console.log(e.response);
       toast.error('Oops something went wrong, please try again!')
       setSelectedBank(null);
       setAccountType(null)
@@ -282,6 +286,19 @@ const AddBankAccount = ({ accountId, getAccount}) => {
           label="Zelle Email"
           placeholder="Your Zelle Email"
         />
+        {errors.phoneNumber?.type === 'required' && (
+          <InputError>Please provide a valid phone number</InputError>
+        )}
+        <CustomInput
+          showError={errors.phoneNumber ? true : false}
+          register={register({
+            required: true
+          })}
+          name="phoneNumber"
+          label="Phone Number"
+          placeholder="Phone Number"
+        />
+       
         <Select value={selectedBank} onChange={handleSelectedBank} placeholder="Select Bank" styles={customStyles} options={country === 'USD' ? optionsUS : optionsCD} />
         <CustomButton loading={false}>Add Bank</CustomButton>
       </form>
