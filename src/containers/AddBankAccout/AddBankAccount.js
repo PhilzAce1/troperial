@@ -371,7 +371,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
 
   const renderUSOptions = () => {
     return (
-      <Tabs>
+      <Tabs onSelect={() => setSelectedBank(null)}>
         <TabList>
           <div className="scrolling-addBank-wrapper">
             <Tab>Bank Accounts</Tab>

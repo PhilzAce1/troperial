@@ -1,7 +1,7 @@
 nav.navigationBar {
 	width: 100%;
 	position: fixed;
-	z-index: 1;
+	z-index: 10000000000;
 }
 .navbar-username {
 	text-transform: capitalize;
@@ -112,7 +112,7 @@ nav.navigationBar {
 	}
 	nav.navigationBar {
 		margin-top: 20px;
-		z-index: initial;
+		z-index: 1;
 	}
 	.largeScreen__container {
 		width: 95%;

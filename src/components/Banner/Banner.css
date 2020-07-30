@@ -4,6 +4,8 @@
   border-radius: 10px;
   border: 1px solid var(--troperial-banner-border);
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 .banner__textContent p,
 h3 {
