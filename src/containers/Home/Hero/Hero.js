@@ -10,11 +10,11 @@ const Hero = () => {
   // const handleScroll = () => {
   //   const currentScrollPos = window.pageYOffset;
   //   return currentScrollPos > 0 ? setVisible(true) :setVisible(false);
-    
+
   // };
   // useEffect(()=> {
   //   window.addEventListener("scroll", handleScroll);
-  
+
   //   return () => {
   //     window.removeEventListener("scroll", handleScroll);
   //   }
@@ -42,15 +42,19 @@ const Hero = () => {
               </Fade>
               <Fade bottom>
                 <p>
-                  The quicker, more secure and fairer way to exchange
-                  currencies across borders{' '}
+                  A fairer and faster way to exchange currencies
+                  across borders
                 </p>
               </Fade>
             </div>
           </div>
           <div className="landing__page--Trade-container">
             <div className="postTrade__card">
-              <PostTrade title="what currency do you need?" showCheckBox={false} showCloseBtn={false}/>
+              <PostTrade
+                title="what currency do you need?"
+                showCheckBox={false}
+                showCloseBtn={false}
+              />
             </div>
           </div>
         </div>

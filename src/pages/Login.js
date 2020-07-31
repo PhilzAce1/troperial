@@ -60,8 +60,7 @@ const SignIn = ({checkUserProfile}) => {
               <span className="troperial-green">Troperial</span>
             </h2>
             <p>
-              Enter your email address and password
-              <br /> to sign in to Troperial
+            Enter your email address and password
             </p>
             {authError && (
               <CustomAlert
@@ -116,7 +115,7 @@ const SignIn = ({checkUserProfile}) => {
           </Fade>
           <ContentContainer>
             <p className="custom-cta">
-              Forgot Your Password?{' '}
+            Forgot password?{' '}
               <Link to="/forgotpassword">Click here</Link>
             </p>
             <p className="custom-cta">

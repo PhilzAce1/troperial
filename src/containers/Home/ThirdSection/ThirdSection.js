@@ -14,8 +14,7 @@ const ThirdSection = () => {
         <div className="header">
           <h1>How Troperial Works</h1>
           <p>
-            We connect buyers and trusted traders, starting the right
-            conversation that leads to an exchange
+          Connecting People to transact foreign currencies at a fair rate.
           </p>
           <Link to="/how-it-works" className="learn__more">
             Learn more about how it works

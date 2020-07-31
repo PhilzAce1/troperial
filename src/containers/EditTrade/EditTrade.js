@@ -109,7 +109,6 @@ const EditTrade = ({
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values.prefferedRate);
     editMyTransaction(values);
   };
   return (

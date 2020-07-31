@@ -20,7 +20,8 @@ const DeleteModal = ({ handleClose, handleDelete, deleteTransactionId, getMyTran
       console.log(response);
 
       toast.success('Succesfully Unlisted!!')
-     getMyTransactions();
+      getMyTransactions();
+      handleClose()
       console.log(data)
     handleClose();
     } catch(e) {

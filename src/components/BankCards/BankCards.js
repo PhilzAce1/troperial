@@ -14,6 +14,7 @@ const BankCards = ({
   userId,
   currency,
   accountName,
+  phoneNumber
 }) => {
   const [toggle, setToggleState] = useState(false);
   const toggleDetails = () => setToggleState(!toggle);
@@ -65,6 +66,12 @@ const BankCards = ({
                     </span>
                   </div>
                 )}
+                   {phoneNumber && (
+          <div className="bank__details_grid-item">
+            <span className="label">Phone Number</span>
+            <span className="value">{phoneNumber}</span>
+          </div>
+        )}
                 {zelleEmail && (
                   <div className="bank__details_grid-item">
                     <span className="label">Zelle Email</span>

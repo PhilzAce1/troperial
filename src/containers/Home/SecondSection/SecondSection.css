@@ -44,23 +44,24 @@ line-height: 30px;
 }
 .users__showcase .horizontal__scroll--container .card p {
     padding: 15px 20px;
+    font-size: 15px;
 }
 .card-1__img {
     width: 80%;
     position: relative;
-    bottom: -40px;
+    bottom: -10px;
 }
 .card-2__img {
     width: 80%;
     position: relative;
     left: 25px;
-    bottom: -15px;
+    bottom: -50px;
 }
 .card-3__img {
-    width: 200px;
+    width: 80%;
     position: relative;
     left: 55px;
-    bottom: 0px;
+    bottom: -10px;
 }
 .users__showcase .horizontal__scroll--container .card-1 {
 	background: var(--troperial-blue);
@@ -144,10 +145,10 @@ line-height: 42px;
         bottom: -20px;
     }
     .card-2__img {
-        bottom: -15px;
+        bottom: -25px;
     }
     .card-3__img {
-        bottom: -10px;
+        bottom: -15px;
     }
 }
 
