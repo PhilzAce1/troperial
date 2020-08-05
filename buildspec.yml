@@ -23,7 +23,7 @@ phases:
       - echo WEBSITE_S3_BUCKET = $WEBSITE_S3_BUCKET
       - aws s3 cp --recursive ./build/ s3://$WEBSITE_S3_BUCKET/public/
       -
-      - echo WEBSITE_BUCKET = $SWEBSITE_BUCKET
+      - echo WEBSITE_BUCKET = $WEBSITE_BUCKET
       - aws s3 sync s3://$WEBSITE_S3_BUCKET/public/ s3://$WEBSITE_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
 
       # Do not remove this statement. This command is required for AWS CodeStar projects.
