@@ -31,14 +31,14 @@ const NavBar = () => {
           </ul>
 
         <div>
-          <ul className="authLinks hideOnMobile">
+          {/* <ul className="authLinks hideOnMobile">
             <li>
               <Link className="link" to="/signin">Sign In</Link>
             </li>
             <li>
               <Link to="/signup" className="sign-up-link"><button className="signUpDesktop">create an account</button></Link>
             </li>
-          </ul>
+          </ul> */}
     <span onClick={toggleMenu} className="home-hamburger-icon"></span>
           
         </div>
@@ -62,9 +62,9 @@ const NavBar = () => {
 
             <div className="mobile_screen-horizonal-line" />
  
-            <NavLink activeClassName="home-active-link" to="/signin" className="home-link">Sign In</NavLink>
+            {/* <NavLink activeClassName="home-active-link" to="/signin" className="home-link">Sign In</NavLink>
    
-            <button className="sign-up_btn"><Link className="home-sign-up" to="/signup">create an account</Link></button>
+            <button className="sign-up_btn"><Link className="home-sign-up" to="/signup">create an account</Link></button> */}
           </div>
         </div>
       ) : null}
