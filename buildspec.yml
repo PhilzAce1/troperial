@@ -19,11 +19,13 @@ phases:
   post_build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
+
       # WEBSITE_S3_BUCKET ==> ----ui-app and WEBSITE_BUCKET = staging.troperial.com
       - echo WEBSITE_S3_BUCKET = $WEBSITE_S3_BUCKET
       - aws s3 cp --recursive ./build/ s3://$WEBSITE_S3_BUCKET/public/
       - echo STAGING_WEBSITE_BUCKET = $STAGING_WEBSITE_BUCKET
       - aws s3 sync s3://$WEBSITE_S3_BUCKET/public/ s3://$STAGING_WEBSITE_BUCKET/
+
 
       # Do not remove this statement. This command is required for AWS CodeStar projects.
       # Update the AWS Partition, AWS Region, account ID and project ID in the project ARN on template-configuration.json file so AWS CloudFormation can tag project resources.
