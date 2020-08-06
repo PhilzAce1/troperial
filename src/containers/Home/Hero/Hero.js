@@ -5,6 +5,8 @@ import moneyBagSvg from '../../../assets/images/money-bag.png';
 import HomeNavBar from '../../../components/HomeNavBar/NavBar';
 //import XchangeRateBanner from '../../XchangeRateBanner/XchangeRateBanner';
 import Fade from 'react-reveal/Fade';
+import {ToastContainer} from 'react-toastify'
+import WaitListForm from '../../WaitListForm/WaitListForm';
 const Hero = () => {
   // const [visible, setVisible] = useState(false)
   // const handleScroll = () => {
@@ -21,6 +23,7 @@ const Hero = () => {
   // })
   return (
     <div>
+     <ToastContainer/>
       <header className="landing__page-header">
         <div className="lightblue-overlay"></div>
         {/* {visible ? <XchangeRateBanner position="fixed"/>: null} */}
@@ -50,11 +53,12 @@ const Hero = () => {
           </div>
           <div className="landing__page--Trade-container">
             <div className="postTrade__card">
-              <PostTrade
+              {/* <PostTrade
                 title="what currency do you need?"
                 showCheckBox={false}
                 showCloseBtn={false}
-              />
+              /> */}
+              <WaitListForm/>
             </div>
           </div>
         </div>

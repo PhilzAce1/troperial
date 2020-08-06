@@ -77,11 +77,11 @@ position: relative;
 @media (min-width: 1200px){
     .landing__page-header {
         position: relative;
-        height: 80vh;
+        height: 90vh;
         }
         .lightblue-overlay {
             width: 100%;
-            height: 64vh;
+            height: 65.5vh;
             background: var(--troperial-dim-blue);
             position: absolute;
             z-index: -1;
@@ -115,10 +115,10 @@ position: relative;
         }
         .landing__page--Trade-container {
             margin-top: 10px;
+            min-width: 40%;
         }
         .landing__page--Trade-container .postTrade__card {
-
-            width: 90%;
+            width: 100%;
             margin-left: auto;
         }
 }
