@@ -34,6 +34,7 @@ const { register, handleSubmit, errors } = useForm();
       padding: '4px 0',
       borderWidth:'2px',
       borderColor: "#e8e8e8",
+      color:"#737a91",
       '&:hover': {
         borderColor: '#0383ef'
       },
@@ -70,7 +71,7 @@ const { register, handleSubmit, errors } = useForm();
   }
     return (
         <section className="waitList">
-            <h1 className="waitlList_header">Join the Wait List</h1>
+            <h1 className="waitList_header">Please register below to join the waitlist.</h1>
             {/* {authError && (
             <CustomAlert
               message={authError}
@@ -80,7 +81,7 @@ const { register, handleSubmit, errors } = useForm();
          <form onSubmit={handleSubmit(onSubmit)} className="waitList_form">
               <div className="waitList_inputField">
                 {errors.firstName?.type === 'required' && (
-                  <InputError>Your first name is required</InputError>
+                  <InputError>first name is required</InputError>
                 )}
                 <CustomInput
                   showError={errors.firstName ? true : false}
@@ -95,7 +96,7 @@ const { register, handleSubmit, errors } = useForm();
               </div>
               <div className="waitList_inputField">
                 {errors.lastName?.type === 'required' && (
-                  <InputError>Your last name is required</InputError>
+                  <InputError>last name is required</InputError>
                 )}
                 <CustomInput
                   showError={errors.lastName ? true : false}
@@ -110,7 +111,7 @@ const { register, handleSubmit, errors } = useForm();
               </div>
               <div className="waitList_inputField">
                 {errors.email?.type === 'required' && (
-                  <InputError>Your email is required</InputError>
+                  <InputError>email is required</InputError>
                 )}
                 {errors.email?.type === 'pattern' && (
                   <InputError>

@@ -15,7 +15,7 @@ const NavBar = () => {
       <div className="navbarContainer">
           <Link to="/" className='troperial_home_logo'><img src={logo} alt="logo" /></Link>
 
-          <ul className="mainLinks hideOnMobile">
+          {/* <ul className="mainLinks hideOnMobile">
             <li>
               <Link className="link" to="/how-it-works">How it works</Link>
             </li>
@@ -28,7 +28,7 @@ const NavBar = () => {
             <li>
               <Link className="link" to="/about">About</Link>
             </li>
-          </ul>
+          </ul> */}
 
         <div>
           {/* <ul className="authLinks hideOnMobile">
@@ -39,7 +39,7 @@ const NavBar = () => {
               <Link to="/signup" className="sign-up-link"><button className="signUpDesktop">create an account</button></Link>
             </li>
           </ul> */}
-    <span onClick={toggleMenu} className="home-hamburger-icon"></span>
+    {/* <span onClick={toggleMenu} className="home-hamburger-icon"></span> */}
           
         </div>
         
