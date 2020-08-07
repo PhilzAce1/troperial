@@ -17,14 +17,14 @@ const Footer = () => {
           <p>Try Troperial Now.</p>
           <h1>
 Get the best exchange rates from verified persons across the world.</h1>
-          <Link className="footer-get-started-btn" to="/signup">
+          {/* <Link className="footer-get-started-btn" to="/signup">
             Create An Accout
-          </Link>
+          </Link> */}
         </div>
       </div>
       <section className="desktop-flex">
         <div className="footer-navigation">
-          <div className="link-group-1">
+          {/* <div className="link-group-1">
             <h3 className="link-group-title">Company</h3>
             <ul>
               <li>
@@ -53,9 +53,9 @@ Get the best exchange rates from verified persons across the world.</h1>
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
-          <div className="link-group-2">
+          {/* <div className="link-group-2">
             <h3 className="link-group-title">Legal</h3>
             <ul>
               <li>
@@ -74,7 +74,7 @@ Get the best exchange rates from verified persons across the world.</h1>
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="social-link-group">
             <h3 className="link-group-title">Stay in touch</h3>
@@ -82,7 +82,7 @@ Get the best exchange rates from verified persons across the world.</h1>
               hello@troperial.com
             </a>
             <div className="social-icons-group">
-              <a href="/twitter">
+              <a href="#">
                 <img src={twitter} alt="twitter" />
               </a>
               <a href="/facebook">
