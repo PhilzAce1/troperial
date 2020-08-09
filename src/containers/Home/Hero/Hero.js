@@ -40,13 +40,13 @@ const Hero = () => {
                     src={moneyBagSvg}
                     alt="money"
                   />
-                  <br /> at Your Preffered Rate
+                  <br /> at Your Preferred Rate
                 </h1>
               </Fade>
               <Fade bottom>
                 <p>
                   A fairer and faster way to exchange currencies
-                  across borders
+                  across borders.
                 </p>
               </Fade>
             </div>

@@ -14,9 +14,9 @@ const ThirdSection = () => {
         <div className="header">
           <h1>How Troperial Works</h1>
           <p>
-          Connecting People to transact foreign currencies at a fair rate.
+          We connect people to transact foreign currencies at a fair rate.
           </p>
-          <Link to="/how-it-works" className="learn__more">
+          <Link to="/" className="learn__more">
             Learn more about how it works
           </Link>
         </div>
@@ -67,28 +67,25 @@ const ThirdSection = () => {
         <div className="info-grid">
         <Fade bottom>
           <div className="grid">
-            <h1>Buyer</h1>
+            <h1>You</h1>
             <p>
-              We connect buyers and traders, starting the right
-              conversation that leads to an exchange
+              You list the currency you have, need and your exchange rate of choice.
             </p>
           </div>
           </Fade>
           <Fade bottom>
           <div className="grid">
-            <h1>Platform</h1>
+            <h1>Us</h1>
             <p>
-              We connect buyers and traders, starting the right
-              conversation that leads to an exchange
+              We connect verified persons, provide access to our trading floor, and create private space for negotiations.
             </p>
           </div>
           </Fade>
           <Fade bottom>
           <div className="grid">
-            <h1>FX Trader</h1>
+            <h1>Me</h1>
             <p>
-              We connect buyers and traders, starting the right
-              conversation that leads to an exchange
+              I list the currency i have, need and my exchange rate of choice.
             </p>
           </div>
           </Fade>
