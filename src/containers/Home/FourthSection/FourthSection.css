@@ -15,14 +15,10 @@
     margin-top: 50px;
     margin-bottom: 10px;
 }
-.fouthSection .grid .grid-item img{
- width: 30px
-}
 .fouthSection .grid .grid-item h1{
     font-size: 24px;
     line-height: 32px;
- margin: 5px 0;
-
+    margin: 5px 0;
 }
 .fouthSection .grid .grid-item p{
 font-size: 16px;
@@ -33,19 +29,24 @@ line-height: 30px;
 @media (min-width: 800px) {
     .fouthSection {
         padding: 20px 0 20px 0;
-        width: 50%;
-        margin: 50px auto;
     }
     .fouthSection h1.heading {
         text-align: center;
         font-size: 36px;
-line-height: 42px;
+        line-height: 42px;
     }
     .fouthSection .grid {
-        margin: 20px 0;
+        max-width: 698px;
+        margin: 100px auto 0 auto;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 50px 50px;
+        grid-gap: 70px 50px;
+    }
+    .fouthSection .grid .grid-item  {
+        margin-top:0;
+        margin-bottom: 0;
+        min-height: 100px;
+    
     }
     .fouthSection .grid .grid-item h1 {
         font-size: 24px;

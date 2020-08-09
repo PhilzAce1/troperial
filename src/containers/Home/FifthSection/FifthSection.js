@@ -11,7 +11,7 @@ const FifthSection = () => {
         <p>
         Want to know what’s happening in the market?
         </p>
-        <Link className="get-learn-more" to="/news">
+        <Link className="get-learn-more" to="/">
           Learn More
         </Link>
       </div>

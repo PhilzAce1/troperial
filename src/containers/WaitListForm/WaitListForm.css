@@ -2,9 +2,9 @@
     padding: 15px 5px;
 }
 .waitList_header {
-    font-size: 16px;
-    color: var(--dark-grey);
+    font-size: 20px;
     text-align: center;
+    font-weight: bolder;
     margin: 10px 0;
 }
 .waitList_form .waitList_inputField {

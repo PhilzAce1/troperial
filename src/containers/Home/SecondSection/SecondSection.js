@@ -12,8 +12,7 @@ const SecondSection = () => {
       <div className="header">
         <h1>Designed &amp; Built just for you.</h1>
         <p>
-          No matter the FX need you have, Troperial was designed to
-          work for you.
+          We designed Troperial for you and your FX needs.
         </p>
       </div>
 
@@ -22,9 +21,7 @@ const SecondSection = () => {
           <Slide right>
             <div className="card-1 card">
               <p>
-                "Carrying out business across borders has been made
-                easy for me because I can exchange my naira for
-                dollars and spend it however I wish."
+                "I need to pay my Child's school fees without excess charges and at a good rate."
               </p>
               <img
                 className="card-1__img"
@@ -36,8 +33,7 @@ const SecondSection = () => {
           <Slide right>
             <div className="card-2 card">
               <p>
-                "I get more from my allowance from using troperial to
-                trade fx and save on extra fees."
+                "I need a better exchange rate when sending money to my family."
               </p>
               <img
                 className="card-2__img"
@@ -49,8 +45,7 @@ const SecondSection = () => {
           <Slide right>
             <div className="card-3 card">
               <p>
-                "I can now exchange my fx on my own and send the money
-                back home to my parents without using black markets."
+                "I'm new in the US, and need to change my Naira to Dollars."
               </p>
               <img
                 className="card-3__img"
