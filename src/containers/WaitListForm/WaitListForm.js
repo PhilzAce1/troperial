@@ -71,7 +71,7 @@ const { register, handleSubmit, errors } = useForm();
   }
     return (
         <section className="waitList">
-            <h1 className="waitList_header">Join the waitlist.</h1>
+            <h1 className="waitList_header">Join the Waitlist</h1>
             {/* {authError && (
             <CustomAlert
               message={authError}
@@ -135,7 +135,7 @@ const { register, handleSubmit, errors } = useForm();
               </div>
               <div className="waitList_submitBtn">
                 <CustomButton loading={isLoading}>
-                  Join the waitlist
+                  Submit
                 </CustomButton>
               </div>
             </form>
