@@ -49,7 +49,7 @@ line-height: 30px;
 .card-1__img {
     width: 80%;
     position: relative;
-    bottom: -10px;
+    bottom: -20px;
 }
 .card-2__img {
     width: 80%;
@@ -61,7 +61,7 @@ line-height: 30px;
     width: 80%;
     position: relative;
     left: 55px;
-    bottom: -10px;
+    bottom: -20px;
 }
 .users__showcase .horizontal__scroll--container .card-1 {
 	background: var(--troperial-blue);
