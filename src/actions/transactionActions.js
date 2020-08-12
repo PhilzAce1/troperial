@@ -47,7 +47,7 @@ export const createTransaction = (data) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
       const response = await axios.post(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+        `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions`,
         {
           verifiedPerson: verified,
           sourceAmount,
@@ -96,7 +96,7 @@ export const createUnAuthenticatedUserTransaction = (data, verified) => async (d
       });
       try {
         await axios.post(
-          `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+          `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions`,
           { ...data, personId, verifiedPerson: verified },
           {
             headers: {
@@ -123,7 +123,7 @@ export const getAllRates = () => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');
   try {
     const response = await axios.get(
-      'https://transactions.api.troperial.com/rates',
+      `${process.env.REACT_APP_TRANSACTIONS_API}/rates`,
       {
         headers: {
           Authorization: authToken,
@@ -153,7 +153,7 @@ export const getTransactions = (page = 1, size = 10) => async (
   page = page - 1;
   try {
     const response = await axios.get(
-      `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=${size}`,
+      `${process.env.REACT_APP_TRANSACTIONS_API}/transactions/paged?page=${page}&size=${size}`,
       {
         headers: {
           Authorization: authToken,
@@ -175,7 +175,7 @@ export const getMoreTransactions = (page) => async (dispatch) => {
   page = page - 1;
   try {
     const response = await axios.get(
-      `https://transactions.api.troperial.com/transactions/paged?page=${page}&size=5`,
+      `${process.env.REACT_APP_TRANSACTIONS_API}/transactions/paged?page=${page}&size=5`,
       {
         headers: {
           Authorization: authToken,

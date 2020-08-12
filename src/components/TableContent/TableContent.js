@@ -45,7 +45,8 @@ const TableContent = ({
           </div>
           <div>
             <p className="tableContent__mobile-title">Action</p>
-            <p className="tableContent__table-value">{action}</p>
+            <p className="tableContent__table-value">remove</p>
+            <SendMessageBtn/>
           </div>
         </div>
       ) : (

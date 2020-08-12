@@ -25,7 +25,7 @@ import {
       const currentUserInfo = await Auth.currentUserInfo();
       let accountId = currentUserInfo.attributes['custom:accountId'];
       const response = await axios.get(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+        `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions`,
       {
         headers: {
           Authorization: authToken,
@@ -65,7 +65,7 @@ import {
     const {accountId, transactionId, sourceAmount, destinationAmount, preferredExchangeRate} = data;
     try {
       const response = await axios.patch(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transactionId}`,
+        `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions/${transactionId}`,
         {
           sourceAmount,
           destinationAmount,

@@ -40,7 +40,7 @@ export const createUser = (
       },
     };
     const response = await axios.post(
-      'https://persons.api.troperial.com/persons',
+      `${process.env.REACT_APP_PERSONS_API}/persons`,
       userData,
       {
         headers: {
@@ -96,7 +96,7 @@ const getUserDetails = (personId) => async (dispatch) => {
   const authToken = localStorage.getItem('authToken');
   try {
     const user = await axios.get(
-      `https://persons.api.troperial.com/persons/${personId}`,
+      `${process.env.REACT_APP_PERSONS_API}/persons/${personId}`,
       {
         headers: {
           Authorization: authToken,
@@ -168,7 +168,7 @@ export const updateUserDetails = (data) => async (dispatch) => {
     const currentUserInfo = await Auth.currentUserInfo();
     let personId = currentUserInfo.attributes['custom:personId'];
     const response = await axios.patch(
-      `https://persons.api.troperial.com/persons/${personId}`,
+      `${process.env.REACT_APP_PERSONS_API}/persons/${personId}`,
       {
         newName: {
           firstName: firstname,
@@ -208,7 +208,7 @@ export const getAccount = (accountId) => async (dispatch) => {
   let accountList = [];
   try {
     const response = await axios.get(
-      `https://accounts.api.troperial.com/accounts/${accountId}`,
+      `${process.env.REACT_APP_ACCOUNTS_API}/accounts/${accountId}`,
       {
         headers: {
           Authorization: authToken,

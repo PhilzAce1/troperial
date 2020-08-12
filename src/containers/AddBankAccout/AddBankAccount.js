@@ -58,7 +58,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
 
     try {
         await axios.post(
-        `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/ngn`,
+        `${process.env.REACT_APP_ACCOUNTS_API}/accounts/${accountId}/externalAccounts/ngn`,
         {
           bvnNumber,
           accountNumber,
@@ -89,7 +89,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
 
     try {
          await axios.post(
-        `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/zelle`,
+        `${process.env.REACT_APP_ACCOUNTS_API}/accounts/${accountId}/externalAccounts/zelle`,
         {
           zelleEmail,
           primaryBank: selectedBank.value,
@@ -114,7 +114,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
 
     try {
        await axios.post(
-        `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/cashapp`,
+        `${process.env.REACT_APP_ACCOUNTS_API}/accounts/${accountId}/externalAccounts/cashapp`,
         {
          userId
         },
@@ -137,7 +137,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
 
     try {
        await axios.post(
-        `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/us`,
+        `${process.env.REACT_APP_ACCOUNTS_API}/accounts/${accountId}/externalAccounts/us`,
         {
           routingNumber,
           accountName,
@@ -168,7 +168,7 @@ const AddBankAccount = ({ accountId, getAccount}) => {
 
     try {
          await axios.post(
-        `https://accounts.api.troperial.com/accounts/${accountId}/externalAccounts/uk`,
+        `${process.env.REACT_APP_ACCOUNTS_API}/accounts/${accountId}/externalAccounts/uk`,
         {
           customerAccountNumber,
           sortCode,

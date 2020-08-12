@@ -43,7 +43,7 @@ const Profile = () => {
         return null;
       }
       const user = await axios.get(
-        `https://persons.api.troperial.com/persons/${personId}`,
+        `${process.env.REACT_APP_PERSONS_API}/persons/${personId}`,
       {
         headers: {
           Authorization: authToken,
