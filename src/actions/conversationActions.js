@@ -147,7 +147,6 @@ export const updateUserProfile = (data) => {
   };
 };
 export const setReminder = (data) => (dispatch) => {
-  console.log('workign');
   return dispatch({
     type: 'SET_REMINDER',
     payload: data,

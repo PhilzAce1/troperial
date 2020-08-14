@@ -19,6 +19,7 @@ const TableContent = ({
   handleMessage,
   handleBackDrop,
   handleEditTransaction,
+  handleDeleteTrustedTradersModal,
   myTransaction
 }) => {
   return (
@@ -45,7 +46,7 @@ const TableContent = ({
           </div>
           <div>
             <p className="tableContent__mobile-title">Action</p>
-            <p className="tableContent__table-value">remove</p>
+            <p className="tableContent__table-value" onClick={handleDeleteTrustedTradersModal}>remove</p>
             <SendMessageBtn/>
           </div>
         </div>
@@ -115,7 +116,6 @@ const TableContent = ({
                 </button>
               </div>
             ) : null}
-
             {userListings === true ? null : (
               <SendMessageBtn
                 have={have}

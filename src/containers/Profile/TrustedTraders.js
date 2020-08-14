@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import verifyIcon from '../../assets/images/troperial-verified.PNG';
 import TableHead from '../../components/TableHead/TableHead';
 import TableContent from '../../components/TableContent/TableContent';
-const TrustedTraders = () => {
+import {connect} from 'react-redux';
+import axios from 'axios';
+const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) => {
+  const [trustedTraders, setTrustedTraders] = useState([]);
+
+  const getTrustedTraders = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile`);
+     console.log(response)
+  }
+
+  useEffect(() => {
+    getTrustedTraders();
+  }, [getTrustedTraders])
+
   return (
     <section className="trusted__traders">
       <div className="trusted_traders-info">
@@ -14,7 +27,6 @@ const TrustedTraders = () => {
           </p>
         </div>
       </div>
-
       <div>
         <div className="table-container">
           <TableHead trustedTraders={true} />
@@ -23,11 +35,15 @@ const TrustedTraders = () => {
             action="buy"
             username="Runo"
             totalTransactions={21}
+            handleDeleteTrustedTradersModal={handleDeleteTrustedTradersModal}
           />
         </div>
       </div>
     </section>
   );
 };
-
-export default TrustedTraders;
+const mapStateToProps = (state) => ({
+  accountId: state.auth.accountId,
+  personId: state.auth.personId
+})
+export default connect(mapStateToProps, null)(TrustedTraders);

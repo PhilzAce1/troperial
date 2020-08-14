@@ -6,13 +6,13 @@ import {connect} from 'react-redux';
 import { getMyTransactions } from '../../actions/myTransactionActions';
 import {toast, ToastContainer} from 'react-toastify';
 import axios from 'axios';
-const DeleteModal = ({ handleClose, handleDelete, deleteTransactionId, getMyTransactions, accountId}) => {
+const DeleteModal = ({ handleClose, handleDelete, deleteTransactionId, getMyTransactions, accountId, deleteTrustedTraders}) => {
   const deleteTransaction = async (data) => {
     console.log(accountId, deleteTransactionId)
     const authToken = localStorage.getItem('authToken');;
     try {
       const response = await axios.patch(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions/${deleteTransactionId}/unlist`, {
+        `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions/${deleteTransactionId}/unlist`, {
         headers: {
           Authorization: authToken,
         },
@@ -32,7 +32,32 @@ const DeleteModal = ({ handleClose, handleDelete, deleteTransactionId, getMyTran
   return (
     <div className="delete__modal-container">
       <ToastContainer/>
-      <div className="delete__modal">
+     {
+       deleteTrustedTraders ? (
+        <div className="delete__modal">
+        <img
+          onClick={handleClose}
+          className="delete__modal-icon"
+          src={close}
+          alt="close"
+        />
+        <p className="delete__modal-title">Remove Trusted Trader</p>
+        <img className="bin" src={img} alt="delete" />
+        <p className="delete__modal-confirm-message">
+          Are you sure you want to remove this user from your trusted traders?
+        </p>
+        <button className="delete__modal-btn" onClick={() => deleteTransaction(deleteTransactionId)}>
+          Yes, Delete this listing
+        </button>
+        <button
+          className="delete__modal-cancel-btn"
+          onClick={handleDelete}
+        >
+          Cancel
+        </button>
+      </div>
+       ) : (
+        <div className="delete__modal">
         <img
           onClick={handleClose}
           className="delete__modal-icon"
@@ -54,6 +79,8 @@ const DeleteModal = ({ handleClose, handleDelete, deleteTransactionId, getMyTran
           Cancel
         </button>
       </div>
+       )
+     }
     </div>
   );
 };
@@ -62,5 +89,7 @@ const mapStateToProps = (state) => ({
   deleteTransactionId: state.myTransaction.deleteTransactionId,
   accountId: state.auth.accountId
 });
-
+DeleteModal.defaultProps = {
+  deleteTrustedTraders: false
+}
 export default connect(mapStateToProps, {getMyTransactions})(DeleteModal);
