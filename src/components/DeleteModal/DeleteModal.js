@@ -47,7 +47,7 @@ const DeleteModal = ({ handleClose, handleDelete, deleteTransactionId, getMyTran
           Are you sure you want to remove this user from your trusted traders?
         </p>
         <button className="delete__modal-btn" onClick={() => deleteTransaction(deleteTransactionId)}>
-          Yes, Delete this listing
+          Yes, Remove this user
         </button>
         <button
           className="delete__modal-cancel-btn"

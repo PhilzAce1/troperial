@@ -69,7 +69,7 @@ const makeApiCall = async (id) => {
   const authToken = localStorage.getItem('authToken');
   try {
     const user = await axios.get(
-      `https://persons.api.troperial.com/persons/${id}`,
+      `${process.env.REACT_APP_PERSONS_API}/persons/${id}`,
       {
         headers: {
           Authorization: authToken,

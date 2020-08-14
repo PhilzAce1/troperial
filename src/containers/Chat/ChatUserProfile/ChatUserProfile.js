@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import Avatar from 'react-avatar';
-
+import axios from 'axios'
 import updater from './helper';
 import './ChatUserProfile.css';
 import { updateUserProfile } from '../../../actions/conversationActions';
@@ -14,8 +14,24 @@ const ChatUserProfile = ({
   updateUserProfile,
   userProfileDetails,
   selectedConversation,
+  listing
 }) => {
   const [loading, setLoading] = useState(false);
+
+
+  const addTrustedTrader = async (accountId) => {
+    const authToken = localStorage.getItem('authToken');
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/add`, {
+        headers: {
+          Authorization: authToken,
+        },
+      });
+      alert('Successfully added to your trusted traders')
+    } catch (e) {
+      console.log(e)
+    }
+  }
   async function getDetails() {
     if (
       selectedConversation &&
@@ -122,9 +138,11 @@ const ChatUserProfile = ({
         <p className="user__profile-trade-count">
           {tradeCount} successful trades
         </p>
-        <button className="user__profile-trusted-trader-btn">
+       {Object.keys(selectedConversation.listing).length !== 0  ? (
+          <button className="user__profile-trusted-trader-btn" onClick={() => addTrustedTrader(selectedConversation.listing.transaction.accountId)}>
           Mark as trusted trader
         </button>
+       ) : null}
 
         <div className="user__profile-horizontal-line"></div>
         {/* <p className="user__profile-join-date">Joined 2 months ago</p> */}
@@ -142,6 +160,8 @@ ChatUserProfile.defaultProps = {
 };
 const mapStateToProps = (state) => {
   return {
+    // accountId: state.conversation.selectedConversation.listing.transaction.accountId,
+    listing: state.conversation.selectedConversation.listing,
     userProfileDetails: state.conversation.chatUserProfile,
   };
 };

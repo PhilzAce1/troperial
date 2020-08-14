@@ -8,8 +8,17 @@ const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) 
   const [trustedTraders, setTrustedTraders] = useState([]);
 
   const getTrustedTraders = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile`);
-     console.log(response)
+    const authToken = localStorage.getItem('authToken');
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile`,   {
+        headers: {
+          Authorization: authToken,
+        },
+      });
+       console.log(response)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   useEffect(() => {
