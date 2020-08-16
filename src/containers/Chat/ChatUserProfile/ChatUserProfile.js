@@ -14,15 +14,22 @@ const ChatUserProfile = ({
   updateUserProfile,
   userProfileDetails,
   selectedConversation,
-  listing
+  listing,
+  personId,
+  accountId
 }) => {
   const [loading, setLoading] = useState(false);
 
 
-  const addTrustedTrader = async (accountId) => {
+  const addTrustedTrader = async () => {
     const authToken = localStorage.getItem('authToken');
+    console.log( selectedConversation.listing.transaction.personId, selectedConversation.listing.transaction.accountId,  selectedConversation.chatUserProfile.data.username)
     try {
-      const response = await axios.post(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/add`, {
+      const response = await axios.post(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/${personId}/add`, {
+        traderPersonId: selectedConversation.listing.transaction.personId,
+        traderAccountId: selectedConversation.listing.transaction.accountId,
+        traderPersonAlias:  selectedConversation.chatUserProfile.data.username,
+      }, {
         headers: {
           Authorization: authToken,
         },
@@ -30,6 +37,7 @@ const ChatUserProfile = ({
       alert('Successfully added to your trusted traders')
     } catch (e) {
       console.log(e)
+      alert('unsuccessful')
     }
   }
   async function getDetails() {
@@ -139,7 +147,7 @@ const ChatUserProfile = ({
           {tradeCount} successful trades
         </p>
        {Object.keys(selectedConversation.listing).length !== 0  ? (
-          <button className="user__profile-trusted-trader-btn" onClick={() => addTrustedTrader(selectedConversation.listing.transaction.accountId)}>
+          <button className="user__profile-trusted-trader-btn" onClick={() => addTrustedTrader()}>
           Mark as trusted trader
         </button>
        ) : null}
@@ -163,6 +171,8 @@ const mapStateToProps = (state) => {
     // accountId: state.conversation.selectedConversation.listing.transaction.accountId,
     listing: state.conversation.selectedConversation.listing,
     userProfileDetails: state.conversation.chatUserProfile,
+    personId: state.auth.personId,
+    accountId: state.auth.accountId
   };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -53,12 +53,12 @@ const Hero = () => {
           </div>
           <div className="landing__page--Trade-container">
             <div className="postTrade__card">
-              {/* <PostTrade
+              <PostTrade
                 title="what currency do you need?"
                 showCheckBox={false}
                 showCloseBtn={false}
-              /> */}
-              <WaitListForm/>
+              />
+              {/* <WaitListForm/> */}
             </div>
           </div>
         </div>

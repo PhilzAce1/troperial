@@ -6,25 +6,35 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) => {
   const [trustedTraders, setTrustedTraders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getTrustedTraders = async () => {
     const authToken = localStorage.getItem('authToken');
+    setLoading(true)
     try {
-      const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile`,   {
+      const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/${personId}`,   {
         headers: {
           Authorization: authToken,
         },
       });
-       console.log(response)
+       console.log(response.data)
+
+       setTrustedTraders(response.data);
+       setLoading(false);
     } catch (e) {
       console.log(e)
+      setLoading(false)
     }
   }
 
   useEffect(() => {
     getTrustedTraders();
-  }, [getTrustedTraders])
+  }, [])
 
+
+    if(loading) {
+      return <p>Loading...</p>
+    }
   return (
     <section className="trusted__traders">
       <div className="trusted_traders-info">
@@ -37,16 +47,18 @@ const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) 
         </div>
       </div>
       <div>
-        <div className="table-container">
+       {trustedTraders.length === 0 ? <p>You have no trusted Trader</p> : (
+          <div className="table-container">
           <TableHead trustedTraders={true} />
-          <TableContent
-            trustedTraders={true}
-            action="buy"
-            username="Runo"
-            totalTransactions={21}
-            handleDeleteTrustedTradersModal={handleDeleteTrustedTradersModal}
-          />
-        </div>
+            <TableContent
+              trustedTraders={true}
+              action="buy"
+              username="Runo"
+              totalTransactions={21}
+              handleDeleteTrustedTradersModal={handleDeleteTrustedTradersModal}
+            />
+          </div>
+       )}
       </div>
     </section>
   );
