@@ -14,16 +14,17 @@ const Footer = () => {
       <div className="footer-header">
         <img src={image} alt="success illustration" />
         <div className="footer-header_title">
-          <p>Try Troperial Now.</p>
-          <h1>Get the best exchange rates from trusted traders</h1>
-          <Link className="footer-get-started-btn" to="/signup">
+          <p>Try Troperial Now</p>
+          <h1>
+Get the best exchange rates from verified persons across the world.</h1>
+          {/* <Link className="footer-get-started-btn" to="/signup">
             Create An Accout
-          </Link>
+          </Link> */}
         </div>
       </div>
       <section className="desktop-flex">
         <div className="footer-navigation">
-          <div className="link-group-1">
+          {/* <div className="link-group-1">
             <h3 className="link-group-title">Company</h3>
             <ul>
               <li>
@@ -52,9 +53,9 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
-          <div className="link-group-2">
+          {/* <div className="link-group-2">
             <h3 className="link-group-title">Legal</h3>
             <ul>
               <li>
@@ -73,7 +74,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="social-link-group">
             <h3 className="link-group-title">Stay in touch</h3>
@@ -81,16 +82,16 @@ const Footer = () => {
               hello@troperial.com
             </a>
             <div className="social-icons-group">
-              <a href="/twitter">
+              <a href="/">
                 <img src={twitter} alt="twitter" />
               </a>
-              <a href="/facebook">
+              <a href="/">
                 <img src={facebook} alt="facebiook" />
               </a>
-              <a href="/linkedin">
+              <a href="/">
                 <img src={linkedin} alt="linkedin" />
               </a>
-              <a href="/instagram">
+              <a href="https://www.instagram.com/troperial.fx/">
                 <img src={instagram} alt="instagram" />
               </a>
             </div>
@@ -98,8 +99,9 @@ const Footer = () => {
 
           <div className="logo-group">
             <img src={logo} alt="troperial" />
-            <p>&copy; Copyright 2020 Troperial Technologies</p>
-            <p>LLC. All rights reserved</p>
+            <p>&copy; Copyright 2020</p>
+            <p>Troperial Technologies LLC.</p>
+            <p>All rights reserved</p>
           </div>
         </div>
       </section>

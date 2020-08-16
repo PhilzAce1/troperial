@@ -189,6 +189,7 @@ export const sendAccountDetail = async (
     authorId: authorId,
     isListing: false,
     isAccountDetail: true,
+    phoneNumber: data.phoneNumber ? data.phoneNumber : 'none',
     accountNumber: data.accountNumber ? data.accountNumber : 'none',
     accountName: data.accountName ? data.accountName : 'none',
 

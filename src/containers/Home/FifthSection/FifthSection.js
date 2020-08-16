@@ -9,10 +9,9 @@ const FifthSection = () => {
       <div className="header">
         <h1>The Latest market news</h1>
         <p>
-          Get the latest and hottest market news about currency and
-          other things on Troperial
+        Want to know what’s happening in the market?
         </p>
-        <Link className="get-learn-more" to="/news">
+        <Link className="get-learn-more" to="/">
           Learn More
         </Link>
       </div>

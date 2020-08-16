@@ -1,11 +1,10 @@
 import React from 'react';
-import image from '../../assets/images/news-sample-picture.PNG'; 
 import './NewsCard.css';
-const NewsCard = ({img}) => {
+const NewsCard = ({img, headline}) => {
     return (
         <div className="newsCard">
-            <img className="thumbnail-image" src={image} alt="news thumnail"/>
-            <p className="card-content">Pound Rises to onw week highs before U.S Data - Reuters</p>
+            <img className="thumbnail-image" src={img} alt="news thumnail"/>
+            <p className="card-content">{headline}</p>
         </div>
     )
 }

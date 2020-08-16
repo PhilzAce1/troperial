@@ -1,0 +1,20 @@
+.waitList {
+    padding: 15px 5px;
+}
+.waitList_header {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+    margin: 10px 0;
+}
+.waitList_form .waitList_inputField {
+    margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+    .waitList {
+        padding: 25px 10px;
+    }
+    .waitList_form .waitList_inputField {
+        margin-bottom: 25px;
+    }
+}

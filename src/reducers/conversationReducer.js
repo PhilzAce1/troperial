@@ -99,6 +99,7 @@ export default function (state = State, action) {
           externalAccountSubType: message.externalAccountSubType,
           primaryBank: message.primaryBank,
           routingNumber: message.routingNumber,
+          phoneNumber: message.phoneNumber,
           seen: message.seen !== null ? message.seen : true,
           sortCode: message.sortCode,
           updatedAt: message.updatedAt,
@@ -238,6 +239,9 @@ export default function (state = State, action) {
           : 'none',
         primaryBank: action.payload.primaryBank
           ? action.payload.primaryBank
+          : 'none',
+        phoneNumber: action.payload.phoneNumber
+          ? action.payload.phoneNumber
           : 'none',
         customerAccountNumber: action.payload.customerAccountNumber
           ? action.payload.customerAccountNumber
@@ -441,6 +445,9 @@ export default function (state = State, action) {
         accountName: action.payload.accountName
           ? action.payload.accountName
           : 'none',
+        phoneNumber: action.payload.phoneNumber
+        ? action.payload.phoneNumber
+        : 'none',
         // fromMe: '200',
       });
       return newState;

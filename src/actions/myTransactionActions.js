@@ -62,14 +62,14 @@ import {
 
   export const editMyTransaction = (data) => async (dispatch) => {
     const authToken = localStorage.getItem('authToken');
-    const {accountId, transactionId, sourceAmount, destinationAmount, prefferedRate} = data;
+    const {accountId, transactionId, sourceAmount, destinationAmount, preferredExchangeRate} = data;
     try {
       const response = await axios.patch(
         `https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transactionId}`,
         {
           sourceAmount,
           destinationAmount,
-          prefferedExchangeRate: prefferedRate
+         preferredExchangeRate
         },
       {
         headers: {
@@ -77,8 +77,7 @@ import {
         },
       });
       console.log(response);
-
-      toast.success('Your listing has been successfully updated!!')
+      toast.success('Your listing has been successfully updated!!');
      dispatch(getMyTransactions());
       console.log(data)
     } catch(e) {

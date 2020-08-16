@@ -65,7 +65,7 @@ export const createTransaction = (data) => async (dispatch) => {
         },
       );
       console.log(response.data);
-      dispatch(getMyTransactions)
+      dispatch(getMyTransactions())
       dispatch(setStep(CONFIRM_POST_LISTING))
       dispatch(setLoading(false));
     } catch (e) {

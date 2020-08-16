@@ -54,12 +54,10 @@ position: relative;
         }
         .landing__page--main {
             width: 80%;
-
         }
         .landing__page--intro {
             margin-top: 50px;
         }
-
         .landing__page--intro .moneyBagIcon {
             width: 40px;
         }
@@ -77,14 +75,9 @@ position: relative;
 @media (min-width: 1200px){
     .landing__page-header {
         position: relative;
-        height: 80vh;
         }
         .lightblue-overlay {
-            width: 100%;
-            height: 64vh;
-            background: var(--troperial-dim-blue);
-            position: absolute;
-            z-index: -1;
+            height: 530px;
         }
         .landing__page--main {
             margin-top: 80px;
@@ -93,12 +86,9 @@ position: relative;
             justify-content: space-between;
         }
         .landing__page--intro {
-
             margin-top: 20px;
-            text-align: left;
-            
+            text-align: left; 
         }
-
         .landing__page--intro .moneyBagIcon {
             width: 40px;
             top: 1px;
@@ -107,19 +97,18 @@ position: relative;
             font-size:3.5rem;
             margin-bottom: 10px;
         }
-
         .landing__page--intro p{
-            width:68%;
+            width:100%;
             margin: 0 0;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         .landing__page--Trade-container {
-            margin-top: 10px;
+            width: 535px;
         }
         .landing__page--Trade-container .postTrade__card {
-
-            width: 90%;
+            width: 100%;
             margin-left: auto;
+
         }
 }
 @media (min-width: 1800px){

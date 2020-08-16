@@ -63,8 +63,7 @@ const SignUp = () => {
             <span className="troperial-green">Troperial</span> Account
           </h2>
           <p>
-            Create an account to gain access to a quick &amp; secure
-            way to exchange currencies.
+          Create an account and gain access to the best platform for trading fx
           </p>
           {authError && (
             <CustomAlert
@@ -161,7 +160,7 @@ const SignUp = () => {
 
         <ContentContainer>
           <p className="custom-cta">
-            already got an account? <Link to="/signin">Sign In</Link>
+          Already have an account? <Link to="/signin">Sign In</Link>
           </p>
         </ContentContainer>
       </OnboardingFormContainer>
@@ -173,8 +172,8 @@ const SignUp = () => {
       <div>
         <OnboardingNotification
           notificationIcon={notificationIcon}
-          title="Check your email!"
-          message="We sent you a link, Click the link on the email we sent to you to verify your account, if you don't see the mail then please wait for it for a few minutes or check your Spam and come back here to click Sign in."
+          title="You've got mail!"
+          message="Click on the link in your email to verify your email address"
         >
           <Link to="/signin" style={{ textDecoration: 'none' }}>
             <CustomButton loading={false}>Sign In</CustomButton>

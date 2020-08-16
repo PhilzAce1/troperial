@@ -25,7 +25,7 @@ const UpdateProfile = ({ createUser }) => {
       <div className="backdrop__form">
         <div className="backdrop__profile-heading">
           <img src={profileImg} alt="update profile" />
-          <h2>Update Your profile to post your first listing</h2>
+          <h2>Update your profile to post your first listing</h2>
         </div>
         <div className="backdrop__form--grid-input">
           <div>
