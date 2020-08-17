@@ -50,12 +50,12 @@ const ListingsFilters = ({
             id="listings"
             onChange={(e) => listSizeHandler(e.target.value)}
           >
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+            <option value="5">10</option>
+            <option value="6">9</option>
+            <option value="7">8</option>
+            <option value="8">7</option>
+            <option value="9">6</option>
+            <option value="10">5</option>
           </select>
         </form>
       </div>

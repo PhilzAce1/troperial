@@ -47,9 +47,14 @@
     box-sizing: border-box;
     cursor: pointer;
 }
+.edit__btn:disabled,.delete__btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 .show__matches__btn, .edit__btn {
     color: var(--troperial-blue);
 }
+
 .delete__btn  {
  color: var(--danger-red-icon);
 }
