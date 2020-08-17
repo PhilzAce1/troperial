@@ -110,10 +110,11 @@ const TableContent = ({
                 <button
                   className="edit__btn"
                   onClick={handleEditTransaction}
+                  disabled = {status === 'UNLISTED'}
                 >
                   Edit
                 </button>
-                <button className="delete__btn" onClick={onClick}>
+                <button className="delete__btn" onClick={onClick} disabled= {status === 'UNLISTED'}>
                   Unlist
                 </button>
               </div>

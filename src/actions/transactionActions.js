@@ -150,6 +150,9 @@ export const getTransactions = (page = 1, size = 10) => async (
 ) => {
   dispatch(setLoading(true));
   const authToken = localStorage.getItem('authToken');
+  const currentUserInfo = await Auth.currentUserInfo();
+  // let personId = currentUserInfo.attributes['custom:personId'];
+  let accountId = currentUserInfo.attributes['custom:accountId'];
   page = page - 1;
   try {
     const response = await axios.get(
@@ -157,6 +160,7 @@ export const getTransactions = (page = 1, size = 10) => async (
       {
         headers: {
           Authorization: authToken,
+          X_Account_Id: accountId
         },
       },
     );
