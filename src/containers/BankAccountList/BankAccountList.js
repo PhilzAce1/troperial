@@ -26,7 +26,7 @@ const BankAccountList = ({
     getAccount(accountId);
   }, [getAccount, accountId]);
   const renderList = (accounts) => {
-    function testOnClick(params) {
+    function sendBankList(params) {
       addNewAccountDetails(params);
       sendAccountDetail(
         conversation.selectedConversation.id,
@@ -71,7 +71,7 @@ const BankAccountList = ({
           })}
           <CustomButton
             loading={false}
-            onClickHandler={() => testOnClick(details)}
+            onClickHandler={() => sendBankList(details)}
             disabled={!chosen}
           >
             Send Bank Details

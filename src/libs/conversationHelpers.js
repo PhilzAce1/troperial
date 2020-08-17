@@ -2,7 +2,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 import {
   listUsers,
   createUser as CreateUser,
-  // createConversation,
   createConvo,
   createMessage as CreateMessage,
   getConvo,
@@ -11,9 +10,6 @@ import {
   updateMessage,
 } from './graphql';
 export const createUser = async (username, personId = null) => {
-  // TODO createCurrent User should be different from createUser
-  // make api request with the id and username to see if user exist
-
   let newUser = username;
   if (/^@/.test(newUser)) {
     newUser = newUser.replace('@', '');
@@ -144,6 +140,7 @@ export const createMessage = async (
     rate,
     need,
   };
+  console.log(messageData);
   try {
     const newMessage = await API.graphql(
       graphqlOperation(CreateMessage, { input: messageData }),
@@ -212,6 +209,8 @@ export const sendAccountDetail = async (
     rate: 'none',
     need: 'none',
   };
+  console.log(messageData);
+
   try {
     await API.graphql(
       graphqlOperation(CreateMessage, { input: messageData }),

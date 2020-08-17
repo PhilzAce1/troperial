@@ -66,6 +66,7 @@ export const onCreateMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       accountName
       currency
@@ -122,6 +123,7 @@ export const onUpdateMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       accountName
       currency
@@ -168,6 +170,7 @@ export const onCreateConversation = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency
@@ -230,6 +233,7 @@ export const onCreateUser = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency
@@ -280,6 +284,7 @@ export const onUpdateUser = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency
@@ -330,6 +335,7 @@ export const onDeleteUser = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency

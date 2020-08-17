@@ -76,6 +76,7 @@ export const createMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       currency
       accountName
@@ -214,6 +215,7 @@ export const getConvo = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           accountName
           userId
           currency
@@ -261,6 +263,8 @@ export const onCreateMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
+
       userId
       accountName
       currency
@@ -395,6 +399,7 @@ export const updateMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       currency
       seen

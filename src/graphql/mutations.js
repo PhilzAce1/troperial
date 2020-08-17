@@ -34,6 +34,7 @@ export const createUser = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency
@@ -63,45 +64,46 @@ export const updateUser = /* GraphQL */ `
       id
       personId
       username
-      # conversations {
-      #   items {
-      #     id
-      #     convoLinkUserId
-      #     convoLinkConversationId
-      #     createdAt
-      #     updatedAt
-      #   }
-      #   nextToken
-      # }
-      # messages {
-      #   items {
-      #     id
-      #     authorId
-      #     isListing
-      #     isAccountDetail
-      #     accountNumber
-      #     bvnNumber
-      #     primaryBank
-      #     customerAccountNumber
-      #     sortCode
-      #     routingNumber
-      #     externalAccountSubType
-      #     zelleEmail
-      #     userId
-      #     accountName
-      #     currency
-      #     seen
-      #     by
-      #     have
-      #     rate
-      #     need
-      #     content
-      #     messageConversationId
-      #     createdAt
-      #     updatedAt
-      #   }
-      #   nextToken
-      # }
+      conversations {
+        items {
+          id
+          convoLinkUserId
+          convoLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          authorId
+          isListing
+          isAccountDetail
+          accountNumber
+          bvnNumber
+          primaryBank
+          customerAccountNumber
+          sortCode
+          routingNumber
+          externalAccountSubType
+          zelleEmail
+          phoneNumber
+          userId
+          accountName
+          currency
+          seen
+          by
+          have
+          rate
+          need
+          content
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -140,6 +142,7 @@ export const deleteUser = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency
@@ -181,6 +184,7 @@ export const createConvo = /* GraphQL */ `
           routingNumber
           externalAccountSubType
           zelleEmail
+          phoneNumber
           userId
           accountName
           currency
@@ -244,6 +248,7 @@ export const createMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       accountName
       currency
@@ -303,6 +308,7 @@ export const updateMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       accountName
       currency
@@ -362,6 +368,7 @@ export const deleteMessage = /* GraphQL */ `
       routingNumber
       externalAccountSubType
       zelleEmail
+      phoneNumber
       userId
       accountName
       currency

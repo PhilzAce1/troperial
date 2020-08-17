@@ -109,9 +109,6 @@ const ChatMessageView = ({
     loadMessages,
     selectedConversation.messages.length,
     conversation.conversations,
-    // conversation,
-    // updateSeen,
-    // state,
   ]);
   let messageList;
   if (messages && messages.length > 0) {
@@ -183,6 +180,11 @@ const ChatMessageView = ({
                 message.currency === 'none' || !message.currency
                   ? null
                   : message.currency
+              }
+              phoneNumber={
+                message.phoneNumber === 'none' || !message.phoneNumber
+                  ? null
+                  : message.phoneNumber
               }
               accountName={
                 message.accountName === 'none' || !message.accountName

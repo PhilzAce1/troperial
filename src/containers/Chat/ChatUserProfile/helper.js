@@ -38,7 +38,7 @@ const userExist = async (data) => {
 
     const userData = items[0];
     if (!userData.personId) {
-      console.log("Person ID is unavailable");
+      console.log('Person ID is unavailable');
       return {
         success: false,
         data: {
@@ -77,7 +77,6 @@ const makeApiCall = async (id) => {
       },
     );
     const { data: userData } = user;
-    console.log(user)
     return {
       success: true,
       data: {

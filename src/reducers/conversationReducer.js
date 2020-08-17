@@ -86,6 +86,7 @@ export default function (state = State, action) {
       }
       convo.messageLoaded = true;
       convo.messages = [];
+      console.log(action.payload.messages);
       if (action.payload.messages.length < 0) return newState;
       action.payload.messages.forEach((message) => {
         convo.messages.push({
@@ -252,11 +253,15 @@ export default function (state = State, action) {
         routingNumber: action.payload.routingNumber
           ? action.payload.routingNumber
           : 'none',
+
         externalAccountSubType: action.payload.externalAccountSubType
           ? action.payload.externalAccountSubType
           : 'none',
         zelleEmail: action.payload.zelleEmail
           ? action.payload.zelleEmail
+          : 'none',
+        phoneNumber: action.payload.phoneNumber
+          ? action.payload.phoneNumber
           : 'none',
         userId: action.payload.userId
           ? action.payload.userId
@@ -436,6 +441,9 @@ export default function (state = State, action) {
         zelleEmail: action.payload.zelleEmail
           ? action.payload.zelleEmail
           : 'none',
+        phoneNumber: action.payload.phoneNumber
+          ? action.payload.phoneNumber
+          : 'none',
         userId: action.payload.userId
           ? action.payload.userId
           : 'none',
@@ -446,8 +454,8 @@ export default function (state = State, action) {
           ? action.payload.accountName
           : 'none',
         phoneNumber: action.payload.phoneNumber
-        ? action.payload.phoneNumber
-        : 'none',
+          ? action.payload.phoneNumber
+          : 'none',
         // fromMe: '200',
       });
       return newState;

@@ -74,8 +74,8 @@ const ChatInput = ({
           conversation.user.id,
           listing.by,
           listing.have,
-          listing.need,
           listing.rate,
+          listing.need,
         );
         scrollToBottom();
         if (msg.newMessage.data.createMessage.createdAt) {
