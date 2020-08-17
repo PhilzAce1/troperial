@@ -19,6 +19,7 @@ const TableContent = ({
   handleMessage,
   handleBackDrop,
   handleEditTransaction,
+  handleRemoveTrustedTrader,
   myTransaction
 }) => {
   return (
@@ -45,7 +46,10 @@ const TableContent = ({
           </div>
           <div>
             <p className="tableContent__mobile-title">Action</p>
-            <p className="tableContent__table-value">{action}</p>
+            <button className="delete__btn" onClick={handleRemoveTrustedTrader}>
+                  remove
+                </button>
+            {/* <SendMessageBtn/> */}
           </div>
         </div>
       ) : (
@@ -106,15 +110,15 @@ const TableContent = ({
                 <button
                   className="edit__btn"
                   onClick={handleEditTransaction}
+                  disabled = {status === 'UNLISTED'}
                 >
                   Edit
                 </button>
-                <button className="delete__btn" onClick={onClick}>
+                <button className="delete__btn" onClick={onClick} disabled= {status === 'UNLISTED'}>
                   Unlist
                 </button>
               </div>
             ) : null}
-
             {userListings === true ? null : (
               <SendMessageBtn
                 have={have}

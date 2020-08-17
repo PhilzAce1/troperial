@@ -7,7 +7,7 @@
 }
 .backdrop__content-container {
     width: 90%;
-    margin: 0 auto;
+	margin: 0 auto;
 }
 .mobile__close-btn-container {
 	margin-top: 60px;
@@ -30,6 +30,7 @@
 	.backdrop__background {
 		width: 60%;
 		cursor: pointer;
+		/* transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955); */
     }
     .backdrop__content-container {
 		height: 100vh;
@@ -37,6 +38,7 @@
 		max-width: 40%;
 		background: #fff;
 		top: 0;
+		/* transition: all 5s cubic-bezier(0.455, 0.03, 0.515, 0.955); */
     }
     .mobile__close-btn-container {
         display: none

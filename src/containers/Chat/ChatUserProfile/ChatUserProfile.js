@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import Avatar from 'react-avatar';
-
+import axios from 'axios'
 import updater from './helper';
 import './ChatUserProfile.css';
 import { updateUserProfile } from '../../../actions/conversationActions';
+import {toast, ToastContainer} from 'react-toastify'
 // import dp from '../../../assets/images/profile-picture.png';
 // import { updateUserDetails } from '../../../actions/authActions';
 const ChatUserProfile = ({
@@ -14,8 +15,32 @@ const ChatUserProfile = ({
   updateUserProfile,
   userProfileDetails,
   selectedConversation,
+  listing,
+  personId,
+  accountId
 }) => {
   const [loading, setLoading] = useState(false);
+
+
+  const addTrustedTrader = async () => {
+    const authToken = localStorage.getItem('authToken');
+    console.log(selectedConversation.chatUserProfile.data.personId, selectedConversation.chatUserProfile.data.accountId, selectedConversation.chatUserProfile.data.username)
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/${personId}/add`, {
+        traderPersonId: selectedConversation.chatUserProfile.data.personId,
+        traderAccountId: selectedConversation.chatUserProfile.data.accountId,
+        traderPersonAlias:  selectedConversation.chatUserProfile.data.username,
+      }, {
+        headers: {
+          Authorization: authToken,
+        },
+      });
+      toast.success(`${selectedConversation.chatUserProfile.data.username} has been successfully added to your trusted traders.`)
+    } catch (e) {
+      console.log(e)
+      toast.success(`Please try again!`)
+    }
+  }
   async function getDetails() {
     if (
       selectedConversation &&
@@ -94,6 +119,7 @@ const ChatUserProfile = ({
     selectedConversation.chatUserProfile.userProfileLoaded
   ) {
     return (
+      <>
       <section className="user__profile">
         {/* <img
           className="user__profile-temporary-dp"
@@ -122,7 +148,7 @@ const ChatUserProfile = ({
         <p className="user__profile-trade-count">
           {tradeCount} successful trades
         </p>
-        <button className="user__profile-trusted-trader-btn">
+          <button className="user__profile-trusted-trader-btn" onClick={() => addTrustedTrader()}>
           Mark as trusted trader
         </button>
 
@@ -132,6 +158,7 @@ const ChatUserProfile = ({
           Report @{username}
         </button>
       </section>
+      </>
     );
   }
   return <section className="user__profile"></section>;
@@ -142,7 +169,11 @@ ChatUserProfile.defaultProps = {
 };
 const mapStateToProps = (state) => {
   return {
+    // accountId: state.conversation.selectedConversation.listing.transaction.accountId,
+    listing: state.conversation.selectedConversation.listing,
     userProfileDetails: state.conversation.chatUserProfile,
+    personId: state.auth.personId,
+    accountId: state.auth.accountId
   };
 };
 const mapDispatchToProps = (dispatch) => {

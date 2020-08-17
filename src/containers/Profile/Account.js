@@ -77,7 +77,7 @@ const Account = ({
         <div className="grid-item input-grid">
           <div>
           {errors.firstname?.type === 'required' && (
-              <InputError>Your first name is required</InputError>
+              <InputError>First name is required</InputError>
           )}
             {errors.firstname?.type === 'pattern' && (
               <InputError>First name should consist of only alphabets</InputError>
@@ -98,7 +98,7 @@ const Account = ({
           </div>
           <div>
           {errors.lastname?.type === 'required' && (
-              <InputError>Your last name is required</InputError>
+              <InputError>last name is required</InputError>
             )}
             {errors.lastname?.type === 'pattern' && (
               <InputError>Last name should consist of only alphabets</InputError>
@@ -160,7 +160,7 @@ const Account = ({
         </div>
         <div className="grid-item">
         {errors.phone?.type === 'required' && (
-          <InputError>Your Phone number is required</InputError>
+          <InputError>Phone number is required</InputError>
         )}
            {errors.phone?.type === 'pattern' && (
                 <InputError>

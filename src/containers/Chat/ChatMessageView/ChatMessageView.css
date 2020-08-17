@@ -2,11 +2,11 @@
     flex: 0 0 auto;
     width: 100%;
     background: var(--chat-feed);
-    height: 93vh;
-     display: flex;
+    height: 100vh;
+    display: flex;
     overflow-y: hidden; 
     overflow-x: hidden;
- flex-direction: column;
+    flex-direction: column;
     justify-content: space-between;
 }
 .message__view--header {

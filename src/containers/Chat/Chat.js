@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Auth } from 'aws-amplify';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
+import {ToastContainer} from 'react-toastify'
 import ChatMessageView from './ChatMessageView/ChatMessageView';
 import ChatUserProfile from './ChatUserProfile/ChatUserProfile';
 import {
@@ -111,6 +112,7 @@ const Chat = ({
 
   return (
     <Fragment>
+      <ToastContainer/>
       <NavBar page="Messages" icon="icon-messages" />
       {showBankAccountList ? (
         <BankAccountList

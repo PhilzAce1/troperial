@@ -5,7 +5,10 @@ import {
     GET_MY_TRANSACTIONS,
     SET_USER_TOTAL_LISTING,
     SET_EDIT_TRANSACTION,
-    SET_DELETE_TRANSACTION_ID
+    SET_DELETE_TRANSACTION_ID,
+    SET_DELETE_TRUSTED_TRADER_ID,
+    GET_TRUSTED_TRADERS,
+    SET_LOADING_TRUSTED_TRADERS
   } from './types';
   import axios from 'axios';
   import { toast } from 'react-toastify';
@@ -16,6 +19,27 @@ import {
   
   export const notifyUser = (message) => async (dispatch) =>
     dispatch({ type: NOTIFY_USER, payload: message });
+export const getTrustedTraders = (accountId, personId) => async (dispatch) => {
+      const authToken = localStorage.getItem('authToken');
+      dispatch(setLoadingTrustedTraders(true))
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/${personId}`,   {
+          headers: {
+            Authorization: authToken,
+          },
+        });
+         console.log(response.data)
+        dispatch({
+          type: GET_TRUSTED_TRADERS,
+          payload: response.data
+        })
+        dispatch(setLoadingTrustedTraders(false))
+      } catch (e) {
+        console.log(e)
+        setLoading(false)
+        dispatch(setLoadingTrustedTraders(false))
+      }
+    }
   export const getMyTransactions = () => async (
     dispatch,
   ) => {
@@ -25,7 +49,7 @@ import {
       const currentUserInfo = await Auth.currentUserInfo();
       let accountId = currentUserInfo.attributes['custom:accountId'];
       const response = await axios.get(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions`,
+        `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions`,
       {
         headers: {
           Authorization: authToken,
@@ -55,6 +79,13 @@ import {
        payload: data
      })
    }
+   export const setDeleteTrustedTradersId = (data) => (dispatch) => {
+     console.log(data)
+     dispatch({
+       type: SET_DELETE_TRUSTED_TRADER_ID,
+       payload: data
+     })
+   }
 
    export const deleteTransaction = (data) => {
       
@@ -65,7 +96,7 @@ import {
     const {accountId, transactionId, sourceAmount, destinationAmount, preferredExchangeRate} = data;
     try {
       const response = await axios.patch(
-        `https://transactions.api.troperial.com/accounts/${accountId}/transactions/${transactionId}`,
+        `${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/transactions/${transactionId}`,
         {
           sourceAmount,
           destinationAmount,
@@ -89,6 +120,12 @@ import {
   export const setLoading = (loading) => {
     return {
       type: SET_LOADING,
+      payload: loading,
+    };
+  };
+  export const setLoadingTrustedTraders = (loading) => {
+    return {
+      type: SET_LOADING_TRUSTED_TRADERS,
       payload: loading,
     };
   };

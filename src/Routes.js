@@ -23,14 +23,13 @@ import { getAllRates } from './actions/transactionActions';
 
 const Routes = ({ checkUserProfile, getAllRates }) => {
   const callBack = useCallback(() => {
-    refreshToken();
+    // refreshToken();
     setInterval(refreshToken, 1800000);
  }, [])
   useEffect(() => {
     callBack()
     checkUserProfile();
     getAllRates()
-  
   }, [checkUserProfile, callBack, getAllRates]);
   const refreshToken = async () =>  {
     try {

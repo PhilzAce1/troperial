@@ -23,8 +23,9 @@ import InputError from '../components/InputError/InputError';
 import {connect} from 'react-redux';
 
 import {checkUserProfile} from '../actions/authActions';
+import { getTransactions } from '../actions/transactionActions';
 
-const SignIn = ({checkUserProfile}) => {
+const SignIn = ({checkUserProfile, getTransactions}) => {
   useEffect(() => {}, []);
   const { register, handleSubmit, errors } = useForm();
   const { userHasAuthenticated } = useContext(AppContext);
@@ -39,7 +40,8 @@ const SignIn = ({checkUserProfile}) => {
       userHasAuthenticated(true);
       const idToken = await Auth.currentSession();
       localStorage.setItem('authToken', idToken.idToken.jwtToken);
-      console.log(idToken.idToken.jwtToken)
+      console.log(idToken.idToken.jwtToken);
+      getTransactions();
     } catch (e) {
       setAuthError(e.message);
       setIsLoading(false);
@@ -60,7 +62,7 @@ const SignIn = ({checkUserProfile}) => {
               <span className="troperial-green">Troperial</span>
             </h2>
             <p>
-            Enter your email address and password
+            Enter email address and password
             </p>
             {authError && (
               <CustomAlert
@@ -73,11 +75,11 @@ const SignIn = ({checkUserProfile}) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 {errors.email?.type === 'required' && (
-                  <InputError>Your email is required</InputError>
+                  <InputError>email is required</InputError>
                 )}
                 {errors.email?.type === 'pattern' && (
                   <InputError>
-                    Please provide a valid email address
+                    Provide a valid email address
                   </InputError>
                 )}
                 <CustomInput
@@ -95,7 +97,7 @@ const SignIn = ({checkUserProfile}) => {
 
               <div>
                 {errors.password?.type === 'required' && (
-                  <InputError>Your password is required</InputError>
+                  <InputError>Password is required</InputError>
                 )}
                 <CustomInput
                   showError={errors.password ? true : false}
@@ -131,4 +133,5 @@ const SignIn = ({checkUserProfile}) => {
 
 export default connect(null, {
   checkUserProfile,
+  getTransactions
 })(SignIn);

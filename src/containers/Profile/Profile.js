@@ -25,6 +25,7 @@ const Profile = () => {
   const [fetched, setFetched] = useState(false);
   const [controlView, setControlView] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [showDeleteTrustedTraders, setShowDeleteTrustedTraders] = useState(false);
   const [showBackDrop, setShowBackDrop] = useState(false);
   const [defaultValues, setDefaultValues] = useState({
     firstname: '',
@@ -43,7 +44,7 @@ const Profile = () => {
         return null;
       }
       const user = await axios.get(
-        `https://persons.api.troperial.com/persons/${personId}`,
+        `${process.env.REACT_APP_PERSONS_API}/persons/${personId}`,
       {
         headers: {
           Authorization: authToken,
@@ -78,6 +79,10 @@ const Profile = () => {
     setShowDelete(!showDelete);
     setControlView(!controlView);
   };
+  const handleDeleteTrustedTradersModal = () => {
+    setShowDeleteTrustedTraders(!showDeleteTrustedTraders);
+    setControlView(!controlView);
+  };
   const handleEditBackDrop = () => {
     setControlView(!controlView);
      setShowEditBackDrop(!showEditBackDrop)
@@ -86,12 +91,15 @@ const Profile = () => {
   return (
     <Container showBackDrop={controlView}>
       <NavBar page="Profile" icon="icon-profile" />
-            {showBackDrop ? (
+      {showBackDrop ? (
         <BackDrop renderBankAccoutForm={true} handleBackDrop={handleBackDrop} />
       ) : null}
       {showDelete ? (
         <DeleteModal handleClose={handleDeleteModal} />
-      ) : null}
+      ) : null }
+      {showDeleteTrustedTraders ? (
+        <DeleteModal handleClose={handleDeleteTrustedTradersModal} deleteTrustedTraders={true}/>
+      ) : null }
         {showEditBackDrop ? (
         <EditBackDrop handleEditBackDrop={handleEditBackDrop} />
       ) : null}
@@ -136,7 +144,7 @@ const Profile = () => {
             </TabPanel>
             <TabPanel>
               <PaddedContainer padding="0 25px 25px 25px">
-                <TrustedTraders />
+                <TrustedTraders handleDeleteTrustedTradersModal={handleDeleteTrustedTradersModal}/>
               </PaddedContainer>
             </TabPanel>
           </Tabs>
