@@ -34,11 +34,11 @@ const userExist = async (data) => {
       }),
     );
     if (items.length <= 0)
-      return { success: false, data: { id: 'user do not exist' } };
+      return { success: false, data: { id: 'user does not exist' } };
 
     const userData = items[0];
     if (!userData.personId) {
-      console.log("the person's Id is not showing o ");
+      console.log("Person ID is unavailable");
       return {
         success: false,
         data: {
@@ -77,6 +77,7 @@ const makeApiCall = async (id) => {
       },
     );
     const { data: userData } = user;
+    console.log(user)
     return {
       success: true,
       data: {
@@ -84,6 +85,9 @@ const makeApiCall = async (id) => {
         lastName: userData.lastName,
         emailId: userData.emailAddresses[0].emailId,
         email: userData.emailAddresses[0].email,
+        accountId: userData.accountId,
+        personId: userData.personId,
+        verified: userData.verified,
         username: userData.userAlias,
       },
     };

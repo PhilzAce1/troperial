@@ -3,36 +3,20 @@ import verifyIcon from '../../assets/images/troperial-verified.PNG';
 import TableHead from '../../components/TableHead/TableHead';
 import TableContent from '../../components/TableContent/TableContent';
 import {connect} from 'react-redux';
-import axios from 'axios';
-const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) => {
-  const [trustedTraders, setTrustedTraders] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const getTrustedTraders = async () => {
-    const authToken = localStorage.getItem('authToken');
-    setLoading(true)
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/${personId}`,   {
-        headers: {
-          Authorization: authToken,
-        },
-      });
-       console.log(response.data)
-
-       setTrustedTraders(response.data);
-       setLoading(false);
-    } catch (e) {
-      console.log(e)
-      setLoading(false)
-    }
+import { setDeleteTrustedTradersId, getTrustedTraders } from '../../actions/myTransactionActions';
+const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId, setDeleteTrustedTradersId, getTrustedTraders, trustedTraders, loadingTrustedTraders}) => {
+  const handleRemoveTrustedTrader = (accountId, personId, userAlias) => {
+    console.log(accountId, personId)
+    setDeleteTrustedTradersId({accountId, personId, userAlias});
+    handleDeleteTrustedTradersModal();
   }
 
   useEffect(() => {
-    getTrustedTraders();
+    getTrustedTraders(accountId, personId);
   }, [])
 
 
-    if(loading) {
+    if(loadingTrustedTraders) {
       return <p>Loading...</p>
     }
   return (
@@ -50,13 +34,14 @@ const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) 
        {trustedTraders.length === 0 ? <p>You have no trusted Trader</p> : (
           <div className="table-container">
           <TableHead trustedTraders={true} />
-            <TableContent
-              trustedTraders={true}
-              action="buy"
-              username="Runo"
-              totalTransactions={21}
-              handleDeleteTrustedTradersModal={handleDeleteTrustedTradersModal}
-            />
+          {trustedTraders.map(trader => (
+             <TableContent
+             trustedTraders={true}
+             username={trader.traderPersonAlias}
+             totalTransactions={"---"}
+             handleRemoveTrustedTrader={() => handleRemoveTrustedTrader(trader.traderAccountId, trader.traderPersonId, trader.traderPersonAlias)}
+           />
+          ))}
           </div>
        )}
       </div>
@@ -65,6 +50,8 @@ const TrustedTraders = ({handleDeleteTrustedTradersModal, accountId, personId}) 
 };
 const mapStateToProps = (state) => ({
   accountId: state.auth.accountId,
-  personId: state.auth.personId
+  personId: state.auth.personId,
+  loadingTrustedTraders: state.myTransaction.loadingTrustedTraders,
+  trustedTraders: state.myTransaction.trustedTraders
 })
-export default connect(mapStateToProps, null)(TrustedTraders);
+export default connect(mapStateToProps, {setDeleteTrustedTradersId, getTrustedTraders })(TrustedTraders);

@@ -19,7 +19,7 @@ const TableContent = ({
   handleMessage,
   handleBackDrop,
   handleEditTransaction,
-  handleDeleteTrustedTradersModal,
+  handleRemoveTrustedTrader,
   myTransaction
 }) => {
   return (
@@ -46,8 +46,10 @@ const TableContent = ({
           </div>
           <div>
             <p className="tableContent__mobile-title">Action</p>
-            <p className="tableContent__table-value" onClick={handleDeleteTrustedTradersModal}>remove</p>
-            <SendMessageBtn/>
+            <button className="delete__btn" onClick={handleRemoveTrustedTrader}>
+                  remove
+                </button>
+            {/* <SendMessageBtn/> */}
           </div>
         </div>
       ) : (

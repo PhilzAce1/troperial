@@ -4,7 +4,6 @@
     background: var(--chat-feed);
     height: 100vh;
     display: flex;
-    z-index: 10000000000000000000;
     overflow-y: hidden; 
     overflow-x: hidden;
     flex-direction: column;

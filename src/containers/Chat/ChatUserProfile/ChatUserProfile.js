@@ -6,6 +6,7 @@ import axios from 'axios'
 import updater from './helper';
 import './ChatUserProfile.css';
 import { updateUserProfile } from '../../../actions/conversationActions';
+import {toast, ToastContainer} from 'react-toastify'
 // import dp from '../../../assets/images/profile-picture.png';
 // import { updateUserDetails } from '../../../actions/authActions';
 const ChatUserProfile = ({
@@ -23,21 +24,21 @@ const ChatUserProfile = ({
 
   const addTrustedTrader = async () => {
     const authToken = localStorage.getItem('authToken');
-    console.log( selectedConversation.listing.transaction.personId, selectedConversation.listing.transaction.accountId,  selectedConversation.chatUserProfile.data.username)
+    console.log(selectedConversation.chatUserProfile.data.personId, selectedConversation.chatUserProfile.data.accountId, selectedConversation.chatUserProfile.data.username)
     try {
       const response = await axios.post(`${process.env.REACT_APP_TRANSACTIONS_API}/accounts/${accountId}/traderprofile/${personId}/add`, {
-        traderPersonId: selectedConversation.listing.transaction.personId,
-        traderAccountId: selectedConversation.listing.transaction.accountId,
+        traderPersonId: selectedConversation.chatUserProfile.data.personId,
+        traderAccountId: selectedConversation.chatUserProfile.data.accountId,
         traderPersonAlias:  selectedConversation.chatUserProfile.data.username,
       }, {
         headers: {
           Authorization: authToken,
         },
       });
-      alert('Successfully added to your trusted traders')
+      toast.success(`${selectedConversation.chatUserProfile.data.username} has been successfully added to your trusted traders.`)
     } catch (e) {
       console.log(e)
-      alert('unsuccessful')
+      toast.success(`Please try again!`)
     }
   }
   async function getDetails() {
@@ -118,6 +119,7 @@ const ChatUserProfile = ({
     selectedConversation.chatUserProfile.userProfileLoaded
   ) {
     return (
+      <>
       <section className="user__profile">
         {/* <img
           className="user__profile-temporary-dp"
@@ -146,11 +148,9 @@ const ChatUserProfile = ({
         <p className="user__profile-trade-count">
           {tradeCount} successful trades
         </p>
-       {Object.keys(selectedConversation.listing).length !== 0  ? (
           <button className="user__profile-trusted-trader-btn" onClick={() => addTrustedTrader()}>
           Mark as trusted trader
         </button>
-       ) : null}
 
         <div className="user__profile-horizontal-line"></div>
         {/* <p className="user__profile-join-date">Joined 2 months ago</p> */}
@@ -158,6 +158,7 @@ const ChatUserProfile = ({
           Report @{username}
         </button>
       </section>
+      </>
     );
   }
   return <section className="user__profile"></section>;

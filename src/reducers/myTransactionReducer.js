@@ -5,7 +5,10 @@ import {
     NOTIFY_USER,
     SET_USER_TOTAL_LISTING,
     SET_EDIT_TRANSACTION,
-    SET_DELETE_TRANSACTION_ID
+    SET_DELETE_TRANSACTION_ID,
+    SET_DELETE_TRUSTED_TRADER_ID ,
+    GET_TRUSTED_TRADERS,
+    SET_LOADING_TRUSTED_TRADERS
   } from '../actions/types';
   const initialState = {
     deleteTransactionId:'',
@@ -21,7 +24,10 @@ import {
     personId:'',
     accountId:'',
     preferredExchangeRate: '',
-    privateListing: false
+    privateListing: false,
+    deleteTrustedTradersIds: {},
+    trustedTraders: [],
+    loadingTrustedTraders: false
   };
   export default function (state = initialState, action) {
     switch (action.type) {
@@ -43,6 +49,21 @@ import {
         return {
           ...state,
           deleteTransactionId: action.payload,
+        };
+      case GET_TRUSTED_TRADERS:
+        return {
+          ...state,
+          trustedTraders: action.payload,
+        };
+      case SET_LOADING_TRUSTED_TRADERS:
+        return {
+          ...state,
+          loadingTrustedTraders: action.payload 
+        };
+      case SET_DELETE_TRUSTED_TRADER_ID :
+        return {
+          ...state,
+          deleteTrustedTradersIds: action.payload,
         };
       case APPLY_MY_FILTER:
         return {
