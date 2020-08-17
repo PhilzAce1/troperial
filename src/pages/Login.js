@@ -40,7 +40,6 @@ const SignIn = ({checkUserProfile, getTransactions}) => {
       userHasAuthenticated(true);
       const idToken = await Auth.currentSession();
       localStorage.setItem('authToken', idToken.idToken.jwtToken);
-      console.log(idToken.idToken.jwtToken);
       getTransactions();
     } catch (e) {
       setAuthError(e.message);
